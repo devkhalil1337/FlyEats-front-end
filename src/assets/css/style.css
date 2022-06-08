@@ -2454,7 +2454,7 @@ header {
 }
 
 section.landing-three-pics {
-    background: url(images/wood-591631_1920.jpg) center center/cover
+    background: url("src/assets/images/wood-591631_1920.jpg") center center/cover
 }
 
 .poweredby {
