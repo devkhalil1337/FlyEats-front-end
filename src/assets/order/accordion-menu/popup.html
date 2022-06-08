@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="popup/magnific-popup.min.css">
+    <link rel="stylesheet" href="popup/popup-style.css">
+</head>
+<body>
+        <h3>Magnific Popup CSS3-based animation effects</h3>
+        <div class="links">
+          <h4>Text-based:</h4>
+          <ul id="inline-popups">
+            <li><a href="#test-popup" data-effect="mfp-zoom-in">Zoom</a></li>
+            <li><a href="#test-popup" data-effect="mfp-newspaper">Newspaper</a></li>
+            <li><a href="#test-popup" data-effect="mfp-move-horizontal">Horizontal move</a></li>
+            <li><a href="#test-popup" data-effect="mfp-move-from-top">Move from top</a></li>
+            <li><a href="#test-popup" data-effect="mfp-3d-unfold">3d unfold</a></li>
+            <li><a href="#test-popup" data-effect="mfp-zoom-out">Zoom-out</a></li>
+          </ul>
+          
+          <a href="#test-popup" class="hinge">Popup with "hinge" close effect</a> (based on animate.css)
+        </div>
+        
+        
+        <!-- Popup itself -->
+        <div id="test-popup" class="white-popup mfp-with-anim mfp-hide">You may put any HTML here. This is dummy copy. It is not meant to be read. It has been placed here solely to demonstrate the look and feel of finished, typeset text. Only for show. He who searches for meaning here will be sorely disappointed.</div>
+
+        <script src="js/jquery-2.1.4.js"></script>
+        <script src="popup/jquery.magnific-popup.min.js"></script>
+        <script>
+            // Inline popups
+            $('#inline-popups').magnificPopup({
+            delegate: 'a',
+            removalDelay: 500, //delay removal by X to allow out-animation
+            callbacks: {
+                beforeOpen: function() {
+                this.st.mainClass = this.st.el.attr('data-effect');
+                }
+            },
+            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+            });
+
+
+            // Image popups
+            $('#image-popups').magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            removalDelay: 500, //delay removal by X to allow out-animation
+            callbacks: {
+                beforeOpen: function() {
+                // just a hack that adds mfp-anim class to markup 
+                this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+                this.st.mainClass = this.st.el.attr('data-effect');
+                }
+            },
+            closeOnContentClick: true,
+            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+            });
+
+
+            // Hinge effect popup
+            $('a.hinge').magnificPopup({
+            mainClass: 'mfp-with-fade',
+            removalDelay: 1000, //delay removal by X to allow out-animation
+            callbacks: {
+                beforeClose: function() {
+                    this.content.addClass('hinge');
+                }, 
+                close: function() {
+                    this.content.removeClass('hinge'); 
+                }
+            },
+            midClick: true
+            });
+
+        </script>
+</body>
+</html>

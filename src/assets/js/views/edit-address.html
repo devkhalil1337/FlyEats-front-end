@@ -1,0 +1,198 @@
+
+
+<section class="content myaccount-page">
+
+        <div class="hidden-menu">
+
+            <ul>
+
+                <li><button id="show-cat" type="button" class="menubtn left">Sidebar</button></li>
+
+            </ul>
+
+        </div>
+
+        <div id="content_wrapper" class="wrapperz" style="padding: 1.5em 0; margin-bottom: 2em;">
+
+            <div class="row">
+
+                <aside id="catbar" class="cols col-3 sidebar addheight">
+
+                    <div class="sticky">
+
+                        <span id="closecat" class="close-cat"><span class="icon-close"></span></span>
+
+                        <h3>My Stuff</h3>
+
+                        <ul>
+
+                            <li><a href ng-click="getRecentOrders();">Orders</a></li>
+
+                            <!-- <li><a href="past-orders.html">Past Orders</a></li> -->
+
+                            <li><a href ng-click="ChangePage('myprofile');">Profile</a></li>
+                            <li><a href ng-click="ChangePage('myrewards');">Rewards</a></li>
+
+                            <li class="active"><a href ng-click="getMyAddresses();">Addresses</a></li>
+
+                        </ul>
+
+                    </div>
+
+                </aside>
+
+                <div class="cols col-9 content addheight">
+
+                    <div class="row sub-heading">
+
+                        <div class="cols col-6">
+
+                            <h3>Edit Address</h3>
+
+                        </div>
+
+                        <div class="cols col-6 btn-group text-right">
+
+                            <!-- <a href class="extra-btns" ng-click="ChangePage('myprofile');">Edit Profile</a>
+
+                            |
+
+                            <a href  class="extra-btns" ng-click="getMyAddresses();">Addresses</a> -->
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="clearfix"><br></div>
+
+                    <form class="cols col-12 addaddress-form" name="SignInForm" novalidate>
+
+                            <div class="row">
+
+                                <div class="form-group cols col-6 floats">
+
+                                    <label>House Number*</label>
+
+                                    <input name="" class="form-control" type="text" ng-model="addAddressObj.houseNumber" number-Letters-Only ng-required="true">
+
+                                </div>
+
+                                <div class="form-group cols col-6 floats">
+
+                                    <label>Street</label>
+
+                                    <input name="" class="form-control" type="text" ng-model="addAddressObj.streetNumber"  number-Letters-Only>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group cols col-6 floats" ng-if="false">
+
+                                    <label>Town*</label>
+
+                                    <input name="" class="form-control" type="text" ng-model="addAddressObj.town"  letters-Only>
+
+                                </div>
+
+                                <div class="form-group cols col-6 floats">
+
+                                    <label>City/Town*</label>
+
+                                    <input name="" class="form-control" type="text" ng-model="addAddressObj.city" ng-required="true" letters-Only>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group cols col-6 floats">
+
+                                    <label>Postcode*</label>
+
+                                    <input name="" class="form-control" type="text" ng-model="addAddressObj.postalCode" ng-required="true"  zip-Code-Validation>
+
+                                </div>
+
+                                <div class="form-group cols col-6 floats">
+
+                                    <label>Country</label>
+
+                                    <input name="" class="form-control" type="text" ng-model="addAddressObj.country" ng-required="true" value="United Kingdom" ng-disabled="true">
+
+                                </div>
+
+                            </div>
+
+                            <!-- <div class="form-group cols col-12 floats">
+
+                                <label>Address*</label>
+
+                                <input name="" class="form-control" type="text" ng-model="address" ng-required="true" number-Letters-Only>
+
+                            </div> -->
+
+                            <div class="row">
+
+                                <div class="form-group radio-group cols col-12 floats" ng-show="false">
+
+                                    <label>Order Type*</label>
+
+                                    <div class="clearfix"></div>
+
+                                    <label for="default"><input id="default" name="addressType" value="default" type="radio" ng-model="addAddressObj.addressType"> Default</label>
+
+                                    <label for="others"><input id="others" name="addressType" value="other"  type="radio" ng-model="addAddressObj.addressType"> Others</label>
+
+                                </div>
+
+                            </div>
+
+                            <div class="clearfix"><br></div>
+
+                            
+
+                            <!-- <div class="form-group cols col-6 floats submit-btn">
+
+                                <button type="submit" class="btn cancel" ng-click="ChangePage('myaddress');">Cancel</button>                                    
+
+                            </div>
+
+                            <div class="form-group cols col-6 floats submit-btn">
+
+                                <button type="submit" class="btn" ng-click="addNewAddress(houseNumber,street,postalCode,address,addressType,city);" ng-disabled="SignInForm.$invalid">Save</button>                                    
+
+                            </div> -->
+
+        
+
+                            <div class="row">
+
+                                <div class="form-group cols col-12 floats submit-btn text-right">   
+
+                                        <!-- addNewAddress(houseNumber,street,postalCode,address,addressType,city); -->
+
+                                    <button type="submit" class="btn  green-btn" ng-click="editAddress(addAddressObj);" ng-disabled="SignInForm.$invalid">Update</button> 
+
+                                    <button type="submit" class="btn cancel" ng-click="ChangePage('myaddress');" style="margin-right: 1em;">Cancel</button>                                   
+
+                                </div>
+
+                            </div>
+
+                            
+
+                        </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>

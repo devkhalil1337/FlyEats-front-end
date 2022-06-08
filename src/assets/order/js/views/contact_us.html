@@ -1,0 +1,209 @@
+<style>
+
+        .content .wrapperz {
+
+            -webkit-border-radius: 0 0 20px 20px;
+
+        border-radius: 0 0 20px 20px;
+
+        }
+
+        .p-tb2{
+
+            padding: 2em 0;
+
+        }
+
+        .p-tb3{
+
+            padding: 3em 0;
+
+        }
+
+        .p-tb4{
+
+            padding: 4em 0;
+
+        }
+
+        .contact_form label {
+
+            display: block;
+
+            color: black;
+
+            margin-bottom: 0.6em;
+
+        }
+
+        .contact_form .form-item{
+
+            font-family: 'Hind Vadodara', sans-serif;
+
+            margin-bottom: 1em;
+
+
+
+        }
+
+        .contact_form input,
+
+        .contact_form textarea {
+
+            width: 100%;
+
+            padding: 0.5em 1em;
+
+            border: solid 1px lightgray;
+
+            border-radius: 4px;
+
+        }
+
+        .btn {
+
+            background: #007bff;
+
+            border: 2px solid #007bff;
+
+            border-radius: 10px;
+
+            padding: 12px 45px;
+
+            cursor: pointer;
+
+            color: #ffffff;
+
+        }
+
+        
+
+        .contact_form textarea{
+
+            height: 200px;
+
+        }
+
+        .contact-btn{
+
+            width: 300px;
+
+            font-family: 'Hind Vadodara', sans-serif;
+
+        }
+
+        .item-center{
+
+            float: unset;
+
+            margin: auto;
+
+        }
+
+        .first_footer {
+
+            padding: 3em 0;
+
+            border-top: 2px solid lightgrey;
+
+            margin-top: 1.5em;
+
+        }
+
+        /* .contactform.ng-invalid.ng-touched{
+
+            border: red;
+
+        } */
+
+    </style>
+
+<section class="content contact-section">
+
+    <div class="wrapperz p-tb4">
+
+        <div class="row">
+
+            <div class="cols col-8 item-center">
+
+                <form class="contact_form" novalidate>
+
+                    <div class="row">
+
+                        <div class="cols col-4">
+
+                            <div class="form-item">
+
+                                <label>Name*</label>
+
+                                <input type="text" class="contactform" name="name" id="name" ng-model="contactUs.name" ng-required="true">
+
+                            </div>
+
+                        </div>
+
+                        <div class="cols col-4">
+
+                            <div class="form-item">
+
+                                <label>Phone*</label>
+
+                                <input type="text" class="contactform" name="phone" id="phone" ng-model="contactUs.phoneNumber" ng-required="true">
+
+                            </div>
+
+                        </div>
+
+                        <div class="cols col-4">
+
+                            <div class="form-item">
+
+                                <label>Email*</label>
+
+                                <input type="email" class="contactform" name="email" id="email" ng-model="contactUs.email" ng-required="true">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="cols col-12">
+
+                            <div class="form-item">
+
+                                <label>Message*</label>
+
+                                <textarea name="message" rows="5" id="message" ng-model="contactUs.message" ng-required="true"></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="cols col-12">
+
+                            <div class="form-item text-center">
+
+                                <button type="button" class="btn green-btn contact-btn" ng-disabled="contact_form.$invalid" ng-click="sendEmail(contactUs)">Submit</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

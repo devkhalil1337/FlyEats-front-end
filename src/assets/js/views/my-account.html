@@ -1,0 +1,200 @@
+<style>
+
+
+
+</style>
+
+<section class="content myaccount-page">
+
+    <div class="hidden-menu">
+
+        <ul>
+
+            <li><button id="show-cat" type="button" class="menubtn left">Sidebar</button></li>
+
+        </ul>
+
+    </div>
+
+    <div id="content_wrapper" class="wrapperz desktop" style="padding: 1.5em 0;margin-bottom: 2em;">
+
+        <div class="row">
+
+            <aside id="catbar" class="cols col-3 sidebar addheight">
+
+                <div class="sticky">
+
+                    <span id="closecat" class="close-cat"><span class="icon-close"></span></span>
+
+                    <h3>My Stuff</h3>
+
+                    <ul>
+
+                        <li class="active"><a href ng-click="getRecentOrders();">Orders</a></li>
+
+                        <!-- <li><a href="past-orders.html">Past Orders</a></li> -->
+
+                        <li><a href ng-click="ChangePage('myprofile');">Profile</a></li>
+                        <li><a href ng-click="ChangePage('myrewards');">Rewards</a></li>
+
+                        <li><a href ng-click="getMyAddresses();">Addresses</a></li>
+
+                    </ul>
+
+                </div>
+
+            </aside>
+
+            <div class="cols col-9 content addheight">
+
+                <div class="row sub-heading">
+
+                    <div class="cols col-6">
+
+                        <h3>Orders</h3>
+
+                    </div>
+
+                    <div class="cols col-6 btn-group text-right">
+
+                        <!-- <a href="#" class="extra-btns active">Edit Profile</a>
+
+                        <a href="#" class="extra-btns">Addresses</a>
+
+                        <a href="#" class="extra-btns">Favourites</a> -->
+
+                    </div>
+
+                </div>
+
+                <div class="clearfix"><br></div>
+
+                
+
+                <div class="resp-table">
+
+                    <table class="orders-table">
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Order no</th>
+
+                            <th>Order Date</th>
+
+                            <th>Order Invoice</th>
+
+                            <th>Total</th>
+
+                            <th>Status</th>
+
+                            <th>Details</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr ng-repeat="recent in recentOrders" style="font-family: 'Hind Vadodara', sans-serif" >
+
+                                <td>{{$index + 1}}</td>
+
+                                <td>{{recent.Recvorder_datetime}}</td>
+
+                                <td>{{recent.Recvorder_InvoiceNo}}</td>
+
+                                <td>£{{recent.Recvorder_Totalamount | number:2}}</td>
+
+                                <td ng-bind="(recent.Recvorder_status == 'Rejected' || recent.Recvorder_status == 'cancelled') ? 'Rejected': (recent.Recvorder_status == 'delivered') ? 'completed' : recent.Recvorder_status">{{recent.Recvorder_status | capitalize}}</td>
+
+                                <td><a href class="reorder" ng-click="getRecentOrdersDetails(recent);">Order Details</a></td>
+
+                            </tr>
+
+                            <!-- <tr>
+
+                                <td>12 Sep 2018</td>
+
+                                <td>350101</td>
+
+                                <td>1</td>
+
+                                <td>864</td>
+
+                                <td>Delivered</td>
+
+                                <td><a href="#" class="reorder">Reorder</a></td>
+
+                            </tr> -->
+
+                        </tbody>
+
+                    </table>
+
+
+
+                </div>
+
+                <div class="notfound" ng-if="recentOrders.length == 0">
+
+                    You have not made an order yet.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="mobile">
+
+        <div class="row sub-heading">
+
+            <div class="cols col-6">
+
+                <h3>Orders</h3>
+
+            </div>
+
+            <div class="cols col-6 btn-group text-right">
+
+                <!-- <a href="#" class="extra-btns active">Edit Profile</a>
+
+                <a href="#" class="extra-btns">Addresses</a>
+
+                <a href="#" class="extra-btns">Favourites</a> -->
+
+            </div>
+
+        </div>
+
+        <div class="clearfix"><br></div>
+
+        <div class="ordersItem" ng-repeat="recent in recentOrders" ng-click="getRecentOrdersDetails(recent);">
+
+            <p>{{$index + 1}}</p>
+
+            <p>{{recent.Recvorder_datetime}}</p>
+
+            <p>{{recent.Recvorder_InvoiceNo}}</p>
+
+            <p>£{{recent.Recvorder_Totalamount | number:2}}</p>
+
+            <p>{{recent.Recvorder_status | capitalize}}</p>
+
+            <!-- <p><a href class="reorder" ng-click="getRecentOrdersDetails(recent);">Order Details</a></p> -->
+
+        </div>
+
+        <div class="notfound" ng-if="recentOrders.length == 0" style="min-height: 300px; margin-bottom: 20px;">
+
+            You have not made an order yet.
+
+        </div>
+
+    </div>
+
+</section>

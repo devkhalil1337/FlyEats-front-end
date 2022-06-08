@@ -1,0 +1,119 @@
+<section class="content ">
+
+    <div id="content_wrapper" class="wrapperz">
+
+        <div class="row">
+
+            <div class="cols col-12 login">
+
+                <div class="cols col-6 card nofloat">
+
+                    <article class="card-body">
+
+                        <h4 class="card-title mb-4 mt-1">Sign up</h4>
+
+                        <form name="SignInForm" novalidate>
+
+                            <div class="form-group cols col-6 floats">
+
+                                <label>First Name*</label>
+
+                                <input name="" class="form-control" type="text" ng-model="firstname" ng-required="true" letters-Only>
+
+                            </div>
+
+                            <div class="form-group cols col-6 floats">
+
+                                <label>Last Name*</label>
+
+                                <input name="" class="form-control" type="text" ng-model="lastname" ng-required="true" letters-Only>
+
+                            </div>
+
+                            <div class="form-group cols col-6 floats">
+
+                                <label>Mobile*</label>
+
+                                <input name="" class="form-control" type="text" ng-model="number" ng-required="true" numbers-only>
+
+                            </div>
+
+                            <div class="form-group cols col-6 floats">
+
+                                <label>Email*</label>
+
+                                <input name="" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" type="email" ng-model="email" ng-required="true">
+
+                            </div>
+
+                            <!-- <div class="form-group cols col-6 floats">
+
+                                <label>Password</label>
+
+                                <input name="" class="form-control" type="password" ng-model="password" ng-required="true">
+
+                            </div>
+
+                            <div class="form-group cols col-6">
+
+                                <label>Zip Code</label>
+
+                                <input name="" class="form-control" type="text" ng-model="zipcode" ng-required="false" zip-Code-Validation>
+
+                            </div>
+
+                            <div class="form-group cols col-6">
+
+                                <label>City</label>
+
+                                <input name="" class="form-control" type="text" ng-model="city" ng-required="false" letters-Only>
+
+                            </div> -->
+
+                            <!-- <div class="form-group cols col-12">
+
+                                    <label>Mobile Number</label>
+
+                                    <input input name="" class="form-control" type="text" ng-model="number" ng-required="true" numbers-only>
+
+                            </div> -->
+
+                            <div class="form-group cols col-12">
+
+                                    <label>Password*</label>
+
+                                    <input name="" class="form-control" type="password" ng-model="password" ng-required="true">
+
+                            </div> <!-- form-group// -->  
+
+                            <div id="mydivz" style="color:#f00; text-align:center; padding:5px; font-size:12px;margin-bottom: 10px;" ng-show="singUpError.length > 0">
+
+                                    {{singUpError}}
+
+                            </div>
+
+                            <div class="form-group cols col-12 submit-btn">
+
+                                <button type="submit" class="btn green-btn" ng-click="SignUp(firstname,lastname,password,email,number);" ng-disabled="SignInForm.$invalid"> Sign up  </button>                                    
+
+                            </div> <!-- form-group// -->
+
+                            <div class="clearfix"></div>
+
+                        </form>
+
+                        <p style="text-align: center;font-family: 'Hind Vadodara', sans-serif;color:black">Already have an account? <a href ng-click="ChangePage('login')">Log in</a></p>
+
+                        <div class="clearfix"></div>
+
+                    </article>
+
+                </div> <!-- card.// -->           
+
+            </div>                
+
+        </div>
+
+    </div>
+
+</section>

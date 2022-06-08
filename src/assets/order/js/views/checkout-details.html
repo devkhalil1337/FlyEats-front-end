@@ -1,0 +1,749 @@
+<style>
+    .modifiers {
+        border-top: 0px solid #707070;
+        margin-top: 3px;
+    }
+    .selected {
+        border-top: 2px solid #707070;
+        display: block;
+    }
+    .selected label {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #cacaca;
+        background: #edf5ff;
+    }
+    .selected label span {
+        display: inline-block;
+        background: green;
+        color: white;
+        padding: 10px;
+    }
+    /* added 2 Jan 2018 */
+    .checkout-page .body {
+        background: #fff;
+    }
+    .sub-heading h3 {
+        color: #707070;
+        font-size: 18px;
+        font-weight: 550;
+        padding: 15px 15px 15px 0;
+    }
+    .sub-sub-heading h4 {
+        color: #707070;
+        font-size: 15px;
+        font-weight: 550;
+        padding: 15px 15px 15px 0;
+        line-height: 1;
+        margin: 0;
+    }
+    .default-address,
+    .pmethod {
+        display: none;
+    }
+    .address-wrapper h4 {
+        color: #707070;
+        margin-top: 10px;
+    }
+    .control-btns {
+        color: #707070;
+        display: inline-block;
+        padding: 0px 6px;
+    }
+    label.address-wrapper {
+        display: block;
+        clear: both;
+        padding: 10px;
+        margin-bottom: 25px;
+        border: 0px solid gray;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    .address-wrapper::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    input[type=radio]:checked~label {
+        border: 0px solid #006FC4;
+        -webkit-box-shadow: 0 1px 4px 0 #006FC4;
+        box-shadow: 0 1px 4px 0 #006FC4;
+    }
+    .submit-btn .btn {
+        display: inline-block;
+        width: unset;
+    }
+    #add-address,
+    #edit-detail,
+    #card_delivery {
+        display: none;
+    }
+    .pdetails {
+        list-style-type: none;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .pdetails li {
+        color: #707070;
+        line-height: 1.5;
+    }
+    .payment_details_btns {
+        margin: 1.5em 0;
+    }
+    .payment_details {
+        text-align: center;
+    }
+    .payment_icons {
+        height: 60px;
+        margin: auto;
+    }
+    .extra-btns span,
+    .control-btns span {
+        color: #007bff;
+    }
+    #card_delivery .form-horizontal {
+        width: 350px;
+        margin: 1em auto;
+    }
+    #card_delivery .form-horizontal label {
+        width: 100%;
+        display: block;
+        padding-bottom: 10px;
+        color:black;
+        /* color: #A7A7A7; */
+    }
+    #card_delivery .form-horizontal input[type=text],
+    #card_delivery .form-horizontal input[type=password] {
+        width: 100%;
+        padding: 5px 10px;
+        border: 1px solid #A7A7A7;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        font-size: 18px;
+        color: #A7A7A7;
+    }
+    #card_delivery .form-horizontal ::placeholder {
+        /* vertical-align: baseline; */
+        font-size: 12px;
+        color: #A7A7A7;
+    }
+    #card_delivery .form-horizontal select {
+        width: 48%;
+        padding: 10px 10px 10px 2px;
+        border: 1px solid #A7A7A7;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        color: #A7A7A7;
+    }
+    #card_delivery .form-horizontal .submit-btn .btn {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+    #card_delivery .radio-group label {
+        display: inline-block;
+    }
+    .submit-btn.final-btn {
+        padding: .5em 0 2em 0;
+    }
+    .submit-btn.final-btn .btn {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+    .hide-desktop{
+        display: none;
+    }
+    @media only screen and (max-width: 694px){
+        .hide-desktop{
+            display: block;
+        }
+        #cart-bar .hide-desktop.sub-heading h3{
+            display: block !important;
+        }
+        aside.cart-bar {
+            display: block;
+            position: unset;
+            top: unset;
+            right: unset;
+            width: 100%;
+            height: unset;
+            overflow: hidden;
+            transition: 1s;
+        }
+    }
+
+    .card-margins {
+        margin: 10px 0px 15px 0px;
+    }
+
+    input,
+    .StripeElement {
+        background: #fff;
+        padding: 0px 10px;
+        border: 1px solid lightgrey;
+        border-radius: .2rem;
+        font-size: 15px;
+        font-weight: 300;
+        font-family: 'Helvetica Neue';
+    }
+    @media only screen and (max-width: 768px) {
+        .mr-4p {
+            margin-right: 4%
+        }
+    }
+</style>
+<section class="content checkout-page">
+    {{ setPaymentOption(); }}
+    {{getDiscount()}}
+    <div id="content_wrapper" class="wrapperz">
+        <div class="row">
+            <div class="cols col-9 body">
+                <div class="row" ng-show="OrderTypeVar == 'Delivery'">
+                    <div class="cols col-12">
+                        <div class="row sub-heading">
+                            <div class="cols col-6">
+                                <h3>Delivery Details</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="address-list" ng-show="OrderTypeVar == 'Delivery'">
+                    <div class="row">
+                        <div class="cols col-12">
+                            <div class="row sub-sub-heading">
+                                <div class="cols col-6">
+                                    <h4>Delivery Addresses</h4>
+                                </div>
+                                <div class="cols col-6 btn-group text-right">
+                                    <a href="javascript:void(0)" id="toggle" ng-model="addressIcons.isNewAddress" class="extra-btns active"
+                                        ng-click="addAddress();"><span class="icon-plus-square"></span> Add New Address</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="cols col-6" id="" ng-repeat="ma in myAddresses" ng-click="selectAddress(ma);"
+                            ng-show="ma.isDisplay" ng-if="!ma.hasUserDeletedAddress">
+                            <input type="radio" id="address_0{{$index + 1}}" class="default-address"
+                                name="default-address" ng-checked="ma.isDefault">
+                            <label class="address-wrapper" for="address_0{{$index + 1}}">
+                                <div class="row">
+                                    <div class="cols col-6 fontSet" style="padding-left: 0px;font-size:16px ">
+                                        <h4 style="margin: 0px;" ng-show='ma.custAddressType == "default"'>Main</h4>
+                                        <h4 style="margin: 0px;" ng-show='ma.custAddressType == "other"'>Other {{ma.sort}}</h4>
+                                        <!-- <h4 style="margin: 0px;">{{ma.custAddressType | capitalize}}</h4> -->
+                                    </div>
+                                    <div class="cols col-6 text-right" style="padding-right: 0px;">
+                                        <a href class="control-btns" ng-click="editAnAddress(ma);"><span
+                                                class="icon-edit"></span></a> <a href class="control-btns"
+                                            ng-click="deleteCustomerAddress(ma)" ;><span
+                                                class="icon-trash-2"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-12">
+                                        <h4 class="fontSet">{{ma.custHouseNumber}} {{ma.custStreetNumber}} {{ma.custCity}} {{ma.custPostalCode}} {{ma.custAddress}} </h4>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="add-address">
+                    <div class="row">
+                        <div class="cols col-12">
+                            <div class="row sub-sub-heading">
+                                <div class="cols col-6">
+                                    <h4>Add New Addresses</h4>
+                                </div>
+                                <div class="cols col-6 btn-group text-right">
+                                    <a href="javascript:void(0)" id="cancel_toggle" class="extra-btns active" ng-bind="addressIcons.isNewAddress? 'Cancel New':'Cancel Update'"><span
+                                            class="icon-times-circle"></span> Cancel Update</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="cols col-12">
+                        <div class="row">
+                            <div class="form-group cols col-6 floats">
+                                <label>Floor/unit*</label>
+                                <input name="" class="form-control" type="text" ng-model="addAddressObj.houseNumber"
+                                    number-Letters-Only ng-required="true" >
+                            </div>
+                            <div class="form-group cols col-6 floats">
+                                <label>Street</label>
+                                <input name="" class="form-control" type="text" ng-model="addAddressObj.streetNumber"
+                                    number-Letters-Only>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group cols col-6 floats" ng-if="false">
+                                <label>Town*</label>
+                                <input name="" class="form-control" type="text" ng-model="addAddressObj.town"
+                                    number-Letters-Only>
+                            </div>
+                            <div class="form-group cols col-6 floats">
+                                <label>City/Town*</label>
+                                <input name="" class="form-control" type="text" ng-model="addAddressObj.city"
+                                    ng-required="true" letters-Only>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group cols col-6 floats">
+                                <label>Postal Code*</label>
+                                <input name="" class="form-control" type="text" ng-model="addAddressObj.postalCode"
+                                    ng-required="true" zip-Code-Validation>
+                            </div>
+                            <div class="form-group cols col-6 floats">
+                                <label>Country</label>
+                                <input name="" class="form-control" type="text" ng-model="addAddressObj.country"
+                                    ng-required="true" ng-disabled="true">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group cols col-12 floats">
+                            <label>Address*</label>
+                            <input name="" class="form-control" type="text" ng-model="addAddressObj.town" ng-required="true" number-Letters-Only>
+                        </div> -->
+                        <div class="clearfix"><br></div>
+                        <div class="form-group cols col-12 text-center submit-btn">
+                            <button type="submit" class="btn green-btn"
+                                ng-click="addNewAddress(addAddressObj);" ng-bind="addressIcons.isNewAddress? 'Save':'Update'">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="detail-list" ng-if="OrderTypeVar == 'Collection'">
+                    <div class="row">
+                        <div class="cols col-12">
+                            <div class="row sub-heading">
+                                <div class="cols col-6">
+                                    <h3>Business Details</h3>
+                                </div>
+                                <!-- <div class="cols col-6 btn-group text-right">
+                                    <a href="javascript:void(0)" id="toggle_edit" class="extra-btns"><span class="icon-edit"></span> Edit</a>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="cols col-12">
+                                    <ul class="pdetails">
+                                        <li>{{restaurantName | capitalize}}</li>
+                                        <li>{{restaurantAddress | capitalize}}</li>
+                                        <li>{{restaurantPhoneNumber}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="detail-list" ng-if="OrderTypeVar == 'TableOrder'">
+                    <div class="row">
+                        <div class="cols col-12">
+                            <div class="row sub-heading">
+                                <div class="cols col-6">
+                                    <h3>Order Details</h3>
+                                </div>
+                                <!-- <div class="cols col-6 btn-group text-right">
+                                    <a href="javascript:void(0)" id="toggle_edit" class="extra-btns"><span class="icon-edit"></span> Edit</a>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="cols col-12">
+                                    <ul class="pdetails">
+                                        <!-- <li>{{restaurantName | capitalize}}</li>
+                                        <li>{{restaurantAddress | capitalize}}</li>
+                                        <li>{{restaurantPhoneNumber}}</li> -->
+                                        <li style="font-weight: 600;">
+                                            {{ getOrderType(); }} Dine-in table#  <span style="color: #f37522">{{ orderTypeData.table }}<span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="detail-list">
+                    <div class="row">
+                        <div class="cols col-12">
+                            <div class="row sub-heading">
+                                <div class="cols col-6">
+                                    <h3>Personal Details</h3>
+                                </div>
+                                <div class="cols col-6 text-right">
+                                    <a href="javascript:void(0)" id="toggle_edit" class="extra-btns"><span
+                                            class="icon-edit"></span> Edit</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="cols col-12">
+                                    <ul class="pdetails">
+                                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            {{firstName | capitalize}} {{lastName | capitalize}}</li>
+                                        <li><i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                            {{userEmail | capitalize}}</li>
+                                        <li><i class="fa fa-phone" aria-hidden="true"></i> {{number}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="edit-detail">
+                    <div class="row">
+                        <div class="cols col-12">
+                            <div class="row sub-heading">
+                                <div class="cols col-6">
+                                    <h3>Edit Personal Details</h3>
+                                </div>
+                                <div class="cols col-6 btn-group text-right">
+                                    <a href="javascript:void(0)" id="cancel_edit" class="extra-btns"><span
+                                            class="icon-times-circle"></span> cancel</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="cols col-12">
+                                    <form class="cols col-5" style="margin: 2em auto; float: unset;">
+                                        <div class="form-group cols col-12 floats">
+                                            <label>First Name</label>
+                                            <input name="" class="form-control" type="text" ng-model="firstName"
+                                                letters-Only>
+                                        </div>
+                                        <div class="form-group cols col-12 floats">
+                                            <label>Last Name</label>
+                                            <input name="" class="form-control" type="text" ng-model="lastName"
+                                                letters-Only>
+                                        </div>
+                                        <div class="form-group cols col-12 floats">
+                                            <label>Email</label>
+                                            <input name="" class="form-control" type="email" ng-model="userEmail">
+                                        </div>
+                                        <div class="form-group cols col-12 floats">
+                                            <label>Password</label>
+                                            <input name="" class="form-control" type="password" ng-model="password">
+                                        </div>
+                                        <div class="clearfix"><br></div>
+                                        <div class="form-group cols col-12 floats submit-btn">
+                                            <button type="submit" class="btn green-btn"
+                                                ng-click="updateProfile(firstName,lastName,userEmail,password);">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                        <div class="cols col-12 submit-btn final-btn">
+                            <button type="submit" class="btn green-btn" ng-click="testValidation(cardNumber,month,year,ccv,postalcode);">Pay now</button>
+                        </div>
+                    </div> -->
+            </div>
+            <aside id="cartbar" class="cols col-3 cart-bar">
+                <div id="cart-bar" class="sticky">
+                    <span id="closecart" class="close-cart"><span class="icon-close"></span></span>
+                    <div class="row sub-heading hide-desktop">
+                        <div class="cols col-6">
+                            <h3>Cart Details</h3>
+                        </div>
+                    </div>
+                    <div class="cart-details">
+                        <ul>
+                            <li ng-repeat="products in Products track by $index">
+                                <div class="row">
+                                    <div class="col items fontSet">
+                                        <span
+                                            ng-if="FilterSimpleProducts(products)">{{products.MenuItem | capitalize | limitTo : 25}}</span>
+                                        <ul class="modifiers" ng-if="FilterModifierProducts(products)">
+                                            <!-- ({{products.OnlineTax | number: 2}}) -->
+                                            <li>{{products.MenuItem | capitalize | limitTo : 25}} </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col price fontSet">
+                                        {{restaurantObject.Currency}}{{products.price | number: 2}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li ng-show="!selectedVoucher">
+                                <a id="js-apply-promo" href><span class="icon-price-tags"></span> I have a promo
+                                    code</a>
+                                <div id="js-promo-box" class="promo-box" style="display:none">
+                                    <!-- id="myInput" -->
+                                    <!-- onclick="document.getElementById('myInput').value = ''" -->
+                                    <input type="text" name="CouponCode" placeholder="Discount Code"
+                                        ng-model="CouponCode" value="{{CouponCode}}">
+                                    <button ng-click="HaveCoupon(CouponCode);" ng-disabled="disableCouponButton"><span
+                                            class="icon-checkmark"></span></button>
+                                </div>
+                            </li>
+                            <li ng-show="!VoucherDiscount && !selectedVoucher" style="color: #000; text-align: center;">
+                                OR
+                            </li>
+                            <li ng-show="!VoucherDiscount">
+                                <a id="js-apply-voucher" href><span class="icon-price-tags" style="color: #17a2b8;"></span> I have a Voucher</a>
+                                <div id="js-voucher-box" style="margin-top: 7%; display: none;">
+                                    <div>
+                                        <div ng-if="isLoyalty && availableVouchers.length" style="color: #000;">
+                                            <select style="width: 80%; height: 30px;" ng-model="selectedVoucher" ng-change="changeVoucher(selectedVoucher)">
+                                                <option
+                                                ng-repeat="rule in availableVouchers"
+                                                value="{{ rule }}"
+                                                >
+                                                    {{ rule.VoucherType == 'Amount' ? '£' : '' }} {{ rule.VoucherValue }} {{ rule.VoucherType == 'Percentage' ? '%' : '' }} OFF 
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div ng-if="availablePoints" style="color: #000;">
+                                    Available Points: {{ availablePoints }}<br />
+                                    <a href="" style="color: blue; cursor: pointer; font-size: 13px;" ng-click="ChangePage('myrewards');getRewardPoints();">Get Vouchers</a>
+                                </div>
+                                <div ng-if="selectedVoucher" style="color: #000;">
+                                    {{ selectedVoucher.VoucherType == 'Amount' ? '£' : '' }} {{ selectedVoucher.VoucherValue }} {{ selectedVoucher.VoucherType == 'Percentage' ? '%' : '' }} OFF 
+                                    <a style="color: red; cursor: pointer" ng-click="removeVoucher()">Remove</a>
+                                </div>
+                            </li>
+                            <br>
+                            <!-- <hr> -->
+                            <li class="total-row ">
+                                <div class="row">
+                                    <div class="col items fontSet">
+                                        Sub Total
+                                    </div>
+                                    <div class="col price fontSet">
+                                        {{restaurantObject.Currency}}{{subTotalAmount | number:2}}
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="!discountedPrice && VoucherDiscount">
+                                    <div class="col items fontSet">
+                                        Voucher
+                                    </div>
+                                    <div class="col price fontSet">
+                                        {{restaurantObject.Currency}}{{VoucherDiscount | number:2}}
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="hideText && DeliveryCharges">
+                                    <div class="col items fontSet">
+                                        Delivery fee
+                                    </div>
+                                    <div class="col price fontSet">
+                                        {{restaurantObject.Currency}}{{DeliveryCharges | number:2}}
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="discountedPrice">
+                                    <div class="col items fontSet">
+                                        Voucher
+                                    </div>
+                                    <div class="col price fontSet">
+                                        -{{restaurantObject.Currency}}{{discountedPrice | number:2}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col items fontSet">
+                                        Total
+                                    </div>
+                                    <div class="col price fontSet">
+                                        {{restaurantObject.Currency}}{{TotalAmount | number:2}}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clearfix"><br><br></div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="row">
+            <div class="cols col-9 body">
+                <div id="detail-list">
+                    <div class="row">
+                        <div class="cols col-12">
+                            <div class="row sub-heading">
+                                <div class="cols col-6">
+                                    <h3>Special Notes</h3>
+                                </div>
+                                <!-- <div class="cols col-6 btn-group text-right">
+                                        <a href="javascript:void(0)" id="toggle_edit" class="extra-btns"><span class="icon-edit"></span> Edit</a>
+                                    </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="cols col-12">
+                                    <div class="pdetails">
+                                        <textarea name="specialNotes" ng-model="specialNotes.text" id="specialNotes"
+                                            cols="30" rows="5" placeholder="Add speical notes here"></textarea>
+                                    </div>
+                                    <!-- <ul class="pdetails">
+                                            <li>{{firstName | capitalize}} {{lastName | capitalize}}</li>
+                                            <li>{{userEmail | capitalize}}</li>
+                                            <li>{{number}}</li>
+                                        </ul> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="row">
+                        <div class="cols col-12">
+                            <div class="row sub-heading">
+                                <div class="cols col-6">
+                                    <h3>Payment</h3>
+                                </div>
+                            </div>
+                            <div class="row  payment_details_btns">
+                                <div class="cols col-6" ng-if="isPaymentAvailable('cash')">
+                                    <input type="radio" id="method_011" class="pmethod" ng-model="paymentmethod"  value="Cash" checked="checked">
+                                    <label class="address-wrapper payment_details" for="method_01" ng-click="paymentMethod('Cash')">
+                                        <div class="row">
+                                            <div class="col col-12">
+                                                <img src="images/money-icon.svg" class="payment_icons" alt="">
+                                                <h4 style="margin-left:-3%;">
+                                                    {{OrderTypeVar == 'Collection' ? 'Pay On Collection' : OrderTypeVar == 'Delivery' ? 'Cash on Delivery' : 'Pay Later'}}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="cols col-6" ng-if="isPaymentAvailable('card') && public_key">
+                                    <input type="radio" id="method_021" class="pmethod" ng-model="paymentmethod" value="Card">
+                                    <label class="address-wrapper payment_details" for="method_02"  ng-click="paymentMethod('Card');">
+                                        <div class="row">
+                                            <div class="col col-12">
+                                                <img src="images/card-icon.svg" class="payment_icons" alt="">
+                                                <h4>Credit / Debit Card</h4>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="cash_delivery" ng-if="paymentmethod == 'Cash'">
+                                <div class="row">
+                                    <div class="cols col-12">
+                                        <p>
+                                            {{OrderTypeVar == 'Collection' ? 'Pay On Collection' : OrderTypeVar == 'Delivery' ? 'Cash on Delivery' : 'Pay Later'}}
+                                            <br />
+                                            {{OrderTypeVar == 'Collection' ? 'Simply pay when collecting the order' : OrderTypeVar == 'Delivery' ? 'Simply pay the driver, when he delivers the food to your door step' : ''}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="cols col-12">
+                                        <br />
+                                        <p>By Making this purchase you agree to our Terms and conditions.</p>
+                                    </div>
+                                </div> -->
+                                <div class="row">
+                                    <div class="cols col-12 submit-btn final-btn">
+                                        <button type="submit" class="btn green-btn" ng-click="completeOrder();">
+                                            {{OrderTypeVar == 'TableOrder'? 'Proceed' : 'Order Now'}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="card_delivery" ng-show="paymentmethod == 'Card'" style="display:block">
+                                <div class="row">
+                                    <div class="cols col-12">
+                                        <div class="row sub-heading">
+                                            <div class="cols col-6">
+                                                <h3>Add your Card Details</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row payment_details_btns">
+                                    <div class="cols col-12">
+                                        <div >
+                                            <!-- <div id="stripe-card-element"> -->
+                                                <!-- A Stripe Element will be inserted here. -->
+                                            <!-- </div> -->
+                                            <div class="row">
+                                                <div class="cols col-12">
+                                                    <label style="color: dimgrey;">Card Number</label>
+                                                    <div class="card-margins" id="stripe-card-no"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="mr-4p cols col-6">
+                                                    <label style="color: dimgrey;">Card Expiry</label>
+                                                    <div style="margin-top: 10px;" id="stripe-card-expiry"></div>
+                                                </div>
+                                                <div class="cols col-6">
+                                                    <label style="color: dimgrey;">3-Digit Code</label>
+                                                    <div style="margin-top: 10px;" id="stripe-card-cvc"></div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="form-group radio-group cols col-12 floats">
+                                                    <div class="clearfix"><br></div>
+                                                    <div class="clearfix"></div>
+                                                    <label for="default" style="color: red;"> {{paymentError}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="cols col-12">
+                                        <br />
+                                        <p>By Making this purchase you agree to our Terms and conditions.</p>
+                                    </div>
+                                </div> -->
+                                <div class="row">
+                                    <div class="cols col-12 submit-btn final-btn">
+                                        <!-- this is the real one -->
+                                        <button ng-if="!disablePyament" type="button" class="btn  green-btn"
+                                            ng-click="addCardDetails(cardNumber,month,year,ccv,postalcode);">Pay now</button>
+                                        <button ng-if="disablePyament" type="button" class="btn" style="background-color: #d8d8d8 !important; color: #000"
+                                            ng-click="">PROCESSING PLEASE WAIT</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    // Voucher Hide and display
+    $("#js-apply-promo").click(function () {
+        // $("#address-list").fadeOut(500);
+        console.log('clicked')
+        $("#js-promo-box").toggle();
+    });
+    $("#js-apply-voucher").click(function () {
+        // $("#address-list").fadeOut(500);
+        $("#js-voucher-box").toggle();
+    });
+    $("#js-apply-promo2").click(function () {
+        $("#js-promo-box2").toggle();
+    });
+    // address details edit toggle
+    $("#toggle").click(function () {
+        $("#address-list").fadeOut(500);
+        $("#add-address").fadeIn(500);
+    });
+    $("#cancel_toggle").click(function () {
+        $("#add-address").fadeOut(500);
+        $("#address-list").fadeIn(500);
+    });
+    // personal details edit toggle
+    $("#toggle_edit").click(function () {
+        $("#detail-list").fadeOut(100)
+        $("#edit-detail").fadeIn(500);
+    });
+    $("#cancel_edit").click(function () {
+        $("#edit-detail").fadeOut(100);
+        $("#detail-list").fadeIn(500);
+    });
+    // $('input[type=radio].pmethod').click(function () {
+    //     $("#cash_delivery").slideToggle();
+    //     $("#card_delivery").slideToggle();
+    // });
+</script>
+<!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> -->

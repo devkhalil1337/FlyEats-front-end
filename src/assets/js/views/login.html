@@ -1,0 +1,298 @@
+<style>
+    .my-custom-input {
+        width: 90%;
+        margin-left: 5%;
+        font-size: 40px;
+        margin-bottom: 5%;
+        border-radius: 10px;
+    }
+
+    .margin-left {
+        margin-left: 5%;
+        margin-bottom: 10%;
+    }
+
+    .text-label {
+        background-color: #000;
+        border-radius: 10px;
+        color: #fff;
+        padding: 12% 20% 12% 20%;
+    }
+
+    h4, h5 {
+        color: #000;
+    }
+
+    @media only screen and (max-width: 768px) {
+        [class*="custom-col cols col-"] {
+            width: 33.33% !important;
+        }
+
+        .my-custom-input {
+            font-size: 27px;
+        }
+    }
+
+    /* style added by Yaser 15-02-2020 */
+    .white-popup h3 {
+        text-align: center;
+    }
+
+    .button_wrapper {
+        margin: 13px 0;
+    }
+
+    .popup-btn {
+        /* border: 2px solid #908d8d;
+        color: #908d8d; */
+        margin: 5px auto;
+        width: 100%;
+        font-weight: bold;
+    }
+
+    .popup-btn:hover,
+    .popup-btn:focus {
+        border-color: #002366 !important;
+        color: #002366 !important;
+    }
+
+    /* changes done on 29-01-2021 */
+    .content .wrapperz {
+        box-shadow: unset;
+        border-radius: unset;
+        position: relative;
+        padding: 20px;
+    }
+    .login {
+        padding: 10px 0;
+        text-align: center;
+    }
+    .inner_wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .form_inner_wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 420px;
+        border: 0px solid;
+        min-height: 350px;
+        align-items: self-start;
+        justify-content: center;
+        text-align: left;
+        box-shadow: none;
+    }
+    .form_inner_wrapper.first-child{
+        margin-right: 20px;
+        box-shadow: 7px 0 10px -8px #888;
+        padding: 0 25px;
+    }
+    .form_inner_wrapper .form-control {
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #a7a7a7;
+        padding: 10px;
+        line-height: 1;
+        font-size: 16px;
+    }
+    .form_inner_wrapper .input_wrapper {
+        width: 95%;
+        margin: 5px auto;
+    }
+    
+    .form_inner_wrapper .actions{
+        font-family: 'Hind Vadodara', sans-serif;
+        color:black;
+        font-size: 14px;
+    }
+    .form_inner_wrapper .btn {
+        width: 70%;
+        padding: 8px 25px;
+        font-size: 16px;
+    }
+    .form_inner_wrapper.second-child {
+        justify-content: flex-start;
+        padding-top: 64px;
+        padding-left: 25px;
+    }
+    .form_inner_wrapper.second-child .btn{
+        margin-top: 58px;
+    }
+    .btn-wrapper {
+        text-align: right;
+    }
+    .hide-desktop{
+        display: none;
+    }
+
+    .btn-outline {
+        background: transparent !important;
+        border: 2px solid #44c767 !important;
+        font-weight: bold;
+    }
+    .btn-outline.green{
+        color: #44c767 !important;
+    }
+    @media only screen and (max-width: 600px) {
+        .inner_wrapper {
+            flex-direction: column;
+        }
+        .form_inner_wrapper {
+            width: 100%;
+            min-height: unset;
+        }
+        .form_inner_wrapper.first-child {
+            margin-right: 0;
+            box-shadow: none;
+        }
+        
+        .btn-wrapper {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .form_inner_wrapper .input_wrapper {
+            width: 100%;
+        }
+        .second-child{
+            display: none;
+        }
+        .hide-desktop{
+            display: block;
+        }
+    }
+</style>
+<section class="content">
+
+    <div id="content_wrapper" class="wrapperz">
+
+        <div class="row">
+
+            <div class="cols col-12 login">
+
+                <article class="card-body">
+                    <h4 class="card-title mb-4 mt-1">Please Sign in</h4>
+
+                    <form>
+                    <div class="inner_wrapper">
+                        <div class="form_wrapper">
+                            <div class="form_inner_wrapper first-child" 
+                            ng-style="{'margin-right': !isGuestModule || (Products.length && (getTotalBill() >= MinOrderAmount || OrderTypeVar !== 'Delivery')) ? 'none' : '', 'box-shadow': !isGuestModule || !(Products.length && (getTotalBill() >= MinOrderAmount || OrderTypeVar !== 'Delivery')) ? 'none' : ''}">
+                                <div id="mydivz" style="color:#f00; text-align:center; padding:5px; font-size:12px;margin-bottom: 10px;" ng-show="loginError.length > 0">
+
+                                    {{loginError}}
+    
+                                </div>
+                                <div class="input_wrapper">
+                                    <h5>Returning Customer</h5>
+                                </div>
+                                <div class="input_wrapper">
+                                    <input name="phone" class="form-control" placeholder="Your Phone Number" ng-model="username"  type="text" maxlength="12" ng-required="true" required="required">
+                                </div>
+                                <div class="input_wrapper">
+                                    <input name="password" class="form-control" ng-model="password"  placeholder="Password" type="password" maxlength="12" ng-required="true" required="required">
+                                </div>
+                                <div class="input_wrapper">
+                                    <div class="row">
+                                        <div class="cols col-6" style="padding-left: 0; padding-right: 0;">
+                                            <p class="actions">
+                                                <a href="" ng-click="ChangePage('reset-password')">Forget password? </a></p>
+                                            <p class="actions">
+                                                Don't have an account?
+                                                <br />
+                                                <a href="" ng-click="ChangePage('signup')">Sign up</a>
+                                            </p>
+                                        </div>
+                                        <div class="cols col-6 btn-wrapper" style="padding-left: 0; padding-right: 0;">
+                                            <button type="submit" ng-click="UserLogin(username,password)" ng-disabled="SignInForm.$invalid" class="btn green-btn">Sign In</button>
+                                        </div>
+                                    </div>
+                                    <div class="hide-desktop" ng-show="isGuestModule && Products.length && (getTotalBill() >= MinOrderAmount || OrderTypeVar !== 'Delivery')">
+                                        <div class="row">
+                                            <div class="cols col-12 text-center">
+                                                <p>or</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="cols col-12 btn-wrapper" style="margin-top: 0">
+                                                <button ng-click="ChangePage('checkout-details')"
+                                                ng-disabled="!Products.length && !(getTotalBill() >= MinOrderAmount || OrderTypeVar !== 'Delivery')" class="btn btn-outline green">Continue as Guest</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form_wrapper" ng-show="isGuestModule && Products.length && (getTotalBill() >= MinOrderAmount || OrderTypeVar !== 'Delivery')">
+                            <div class="form_inner_wrapper second-child">
+                                <h4>Guest Checkout</h4>
+                                <p>Proceed to checkout as a guest.</p>
+                                <div class="input_wrapper">
+                                    <div class="row">
+                                        <div class="cols col-5" style="padding-left: 0; padding-right: 0;">
+                                            .
+                                        </div>
+                                        <div class="cols col-7 btn-wrapper" style="padding-left: 0; padding-right: 30px; margin-top: 0">
+                                            <button ng-click="ChangePage('checkout-details')"
+                                            ng-disabled="!Products.length && !(getTotalBill() >= MinOrderAmount || OrderTypeVar !== 'Delivery')" class="btn green-btn" style="width: 100%;">Continue as Guest</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                    <!-- <form name="SignInForm" novalidate=""
+                        class="ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength">
+
+                        <div class="form-group">
+
+                            <label>Phone Number</label>
+
+                            <input name=""
+                                class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength"
+                                placeholder="Number" numbers-only="" type="text" ng-model="username"
+                                maxlength="12" ng-required="true" required="required">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Password</label>
+
+                            <input
+                                class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+                                placeholder="******" type="password" ng-model="password"
+                                ng-required="true" required="required">
+
+                        </div>
+
+                        <div id="mydivz"
+                            style="color:#f00; text-align:center; padding:5px; font-size:12px;margin-bottom: 10px;"
+                            ng-show="loginError.length > 0" class="ng-binding ng-hide">
+                        </div>
+                        <div class="form-group submit-btn">
+                            <button type="submit" class="btn green-btn"
+                                ng-click="UserLogin(username,password)"
+                                ng-disabled="SignInForm.$invalid" disabled="disabled"> Login </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                    <p style="text-align: center;font-family: 'Hind Vadodara', sans-serif;color:black">
+                        <a href="" ng-click="ChangePage('reset-password')">Forget password? </a></p>
+                    <p style="text-align: center;font-family: 'Hind Vadodara', sans-serif;color:black">
+                        Don't have an account? <a href="" ng-click="ChangePage('signup')">Sign up</a>
+                    </p> -->
+                    <div class="clearfix"></div>
+
+                </article>
+
+            </div>              
+
+        </div>
+
+    </div>
+
+</section>

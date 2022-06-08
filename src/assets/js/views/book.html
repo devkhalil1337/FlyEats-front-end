@@ -1,0 +1,202 @@
+<style>
+    form {
+        margin: 50px auto;
+        font-weight: 400;
+    }
+
+    form h1 {
+        font-size: 1.5em;
+        color: #2c3e50;
+        text-rendering: optimizeLegibility;
+    }
+
+    form label {
+        display: block;
+        margin-bottom: 5px;
+        color: #000000;
+    }
+
+    form input,
+    form select,
+    form textarea {
+        font-size: 15px;
+        border: none;
+        outline: none;
+        width: 100%;
+        color: #2c3e50;
+        background: #ffffff;
+        padding: 1em;
+        border: 1px solid lightgray;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -moz-border-radius: none;
+        -webkit-border-radius: none;
+        border-radius: none;
+    }
+
+    form input:focus,
+    form select:focus,
+    form textarea:focus {
+        -moz-box-shadow: #2c3e50 0 0 0 2px inset;
+        -webkit-box-shadow: #2c3e50 0 0 0 2px inset;
+        box-shadow: #2c3e50 0 0 0 2px inset;
+    }
+
+    form textarea {
+        max-width: 100%;
+        min-height: 5.625em;
+        max-height: 12.5em;
+        width: 100%;
+    }
+
+    form input[type=submit] {
+        width: 50%;
+        background: #27ae60;
+        color: #ffffff;
+    }
+
+    form input[type=submit]:focus {
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    form input[type=submit]:active {
+        background: #229955;
+    }
+
+    @media (max-width: 30em) {
+        form input[type=submit] {
+            width: 100%;
+        }
+    }
+
+    form fieldset {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        border: none;
+        margin: 0.75em 0 0.75em 0;
+    }
+
+    .white-text {
+        color: #ffffff !important;
+    }
+
+    .white-text .side-img i {
+        border-top: 1px solid #ffffff;
+    }
+
+    .book-table {
+        background-size: cover;
+        background-position: bottom center;
+        position: relative;
+        z-index: 0;
+    }
+
+    /* .book-table::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: -1;
+    } */
+
+    .book-table form {
+        z-index: 1;
+    }
+    .book-table form input,
+    .book-table form textarea{
+        border-radius: 5px;
+    }
+    .book-table form input[type=submit] {
+        width: 220px;
+    }
+
+    @media only screen and (max-width:600px) {
+        .wrapperz{
+            padding: 0 10px;
+        }
+        .book-table form label {
+            padding-left: 0;
+            margin-bottom: 10px;
+        }        
+        .book-table form input[type=submit] {
+            width: 100%;
+        }
+    }
+</style>
+<section class="book-table p-3m">
+    <div class="wrapperz">
+        <div class="row">
+            <div class="cols col-12 text-center">
+                <h2 class="section-title">
+                    <span class="side-img left-side-img"><i></i><i></i><i></i></span>
+                    Book a table
+                    <span class="side-img right-side-img"><i></i><i></i><i></i></span>
+                </h2>
+                <p>Make a Table Reservation.</p>
+            </div>
+        </div>
+        <div><br></div>
+        <form id="form">
+            <div class="row">
+                <div class="cols col-6">
+                    <fieldset>
+                        <label for="name">Name</label>
+                        <input class="floatlabel" id="name" name="name" ng-model="bookingForm.name" type="text" placeholder="Your Full Name"
+                            required />
+                    </fieldset>
+                    <fieldset>
+                        <label for="email">Email</label>
+                        <input class="floatlabel" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name="email" type="email" ng-model="bookingForm.email" placeholder="Your Contact Email"
+                            required />
+                    </fieldset>
+                    <fieldset>
+                        <label for="phone">Phone</label>
+                        <input class="floatlabel" id="phone" numbers-only name="phone" type="tel" ng-model="bookingForm.phone" placeholder="Your Contact Number"
+                            required />
+                    </fieldset>
+                </div>
+                <div class="cols col-6">
+                    <fieldset>
+                        <label for="date">Date</label>
+                        <input class="floatlabel calander" id="datepicker" name="date" type="date" ng-model="bookingForm.date"
+                            placeholder="Reservation Date" required />
+                    </fieldset>
+                    <fieldset>
+                        <label for="time">Time</label>
+                        <input class="floatlabel time" id="time" name="time" type="time" ng-model="bookingForm.time" placeholder="Reservation Time"
+                            required />
+
+                    </fieldset>
+                    <fieldset>
+                        <label for="guests">No. of Guests</label>
+                        <input class="floatlabel" id="guests" name="guests" type="number" ng-model="bookingForm.guest"
+                            placeholder="Total No. of Guests" required />
+                    </fieldset>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="cols col-12">
+                    <label for="phone">Message</label>
+                    <textarea class="floatlabel" placeholder="Message for Management" ng-model="bookingForm.message"></textarea>
+
+                    <!-- <fieldset style="text-align: center;">
+                        <input ng-click="sendEmail(bookingForm)" type="submit" value="Submit" />
+                    </fieldset> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="cols col-12" style="padding-top: 15px;text-align: center;">
+                    <input ng-click="sendEmail(bookingForm)" type="submit" value="Submit" />
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
