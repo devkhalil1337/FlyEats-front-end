@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl:"https://www.oows2.jempos.com/Service.asmx/",
+  compId:30
 };
 
 /*

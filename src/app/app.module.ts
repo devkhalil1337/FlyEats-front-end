@@ -7,7 +7,7 @@ import { HomeComponent } from './module/home/home.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { OrderComponent } from './module/order/order.component';
 import { LoginComponent } from './module/login/login.component';
-
+import { HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +18,8 @@ import { LoginComponent } from './module/login/login.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

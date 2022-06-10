@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Business } from 'src/app/modals/business.modal';
 
 @Component({
   selector: 'app-navigation',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+
+  @Input("businessData") businessInput: Business
+
 
   constructor() { }
 
