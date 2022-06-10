@@ -1,0 +1,404 @@
+<section class="content">
+    <div id="content_wrapper" class="wrapperz itemList">
+      <div class="row">
+        <aside id="catbar" class="cols col-3 sidebar addheight" style="float: left;">
+          <div class="sticky-slidebar-left">
+            <span id="closecat" class="close-cat"><span class="icon-times-circle"></span></span>
+            <!-- <h3>Categories</h3> -->
+            <ul>
+              <li  class="fontSet"><a href >
+                Category name
+                </a>
+              </li>
+            </ul>
+          </div>
+        </aside>
+        <div class="cols col-6 body addheight">
+          <div class="hidden-menu">
+            <ul>
+              <li><button id="show-cat" type="button" class="menubtn left">Categories</button></li>
+              <li><button id="show-cart" type="button" class="menubtn right">Cart product length</button></li>
+            </ul>
+          </div>
+          <ul id="inline-popups" class="cd-accordion-menu animated">
+            <li class="has-children cat-wrapper" >
+              <input type="checkbox" name ="group" id="group" checked >
+              <label for="group" class="fontSet">root name</label>
+              <ul>
+                <li  class="fontSet">
+                  <div class="item-details" ng-if="mi.check">
+                    <span id="loadingCart" class="loading-cart"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span>
+                    <div class="row">
+                      <div class="col-one">
+                        <strong>item name</strong>
+                      </div>
+                      <div class="col-two">
+                        <h4 style="
+                          font-family: 'Hind Vadodara', sans-serif;
+                          font-size: 14px;
+                          " ng-if="mi.price"
+                          ng-class="'ml-20': mi.originalPrice, 'ml-20-plus': !mi.originalPrice">
+                          <span ng-if="mi.originalPrice" style="font-size: 13px;color:grey;text-decoration: line-through;">
+                          currenty plus price
+                          </span>
+                          <span>
+                          &nbsp;currenty plus price
+                          </span>
+                        </h4>
+                        <h4 style="
+                          font-family: 'Hind Vadodara', sans-serif;
+                          font-size: 11px;
+                          font-style: italic;
+                          " ng-if="!mi.price">Choose Option</h4>
+                      </div>
+                      <div class="col-three">
+                        <a href><span class="icon-plus-square-o" style="color: rgb(23 185 134)" ng-click="AddToCart(mi);"></span></a>
+                      </div>
+                    </div>
+                    <div class="des-row">
+                      <!-- ng-if="mi.MenuItem_Detail.length > 0" -->
+                      <p>MenuItem_Detail </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <!-- cd-accordion-menu -->                    
+        </div>
+        <aside id="cartbar" class="cols col-3 cart-bar" style="float: right;">
+          <div class="sticky-slidebar-right">
+            <div class="message2">
+              <div class="dcart_alergy_message">
+                <!-- <div><i class="fa fa-info-circle" aria-hidden="true"></i></div> -->
+                <div style="padding-left: 1rem;">
+                  <p><a class="inlinelink" ng-click="openAllergyPopup();"><i class="fa fa-info-circle" aria-hidden="true"></i> Click here if you or someone you're ordering for has a food allergy or intolerance</a></p>
+                </div>
+              </div>
+              <br>
+              <div ng-if="!isCustomOpeningTime">
+                <p ng-if="RestaurtantTime.openTime !== RestaurtantTime.closeTime">We're open today from RestaurtantTime.openTime - RestaurtantTime.closeTime </p>
+                <p ng-if="RestaurtantTime.openTime === RestaurtantTime.closeTime">We are closed today.</p>
+              </div>
+              <div class="dcart_timing" ng-if="isCustomOpeningTime">
+                <div><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                <div style="padding-left: 1rem;text-align: left;">
+                  <p ng-if="!isTodayOpen();">We are closed today.</p>
+                  <p style="font-weight: bold;" ng-if="!!isTodayOpen()">We're open today from</p>
+                  <ng-container class="dcart_timing_p" ng-repeat="item in isTodayOpen(); track by $index">
+                    <span ng-if="$index !== 0">,<br /></span>
+                    item.openTime  -  item.closeTime 
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div id="cart-bar" class="sticky-slidebar-right-">
+              <span id="closecart" class="close-cart"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+              <!-- <a href class="alergies" ng-click="openAllergyPopup();">You or someone you're ordering for has a food allergy or intolerance, click here</a> -->
+              <div class="options two">
+                <ul class="order_type_wrapper">
+                  <li style="color: #000;font-weight: 600;width: 100%;">
+                    getOrderType(); orderTypeData.name == 'TableOrder'? 'Dine-in table# ' + orderTypeData.table : orderTypeData.name 
+                    <!--  orderTypeData.name?OrderType(orderTypeData.name):''  -->
+                  </li>
+                  <li ng-if="!(onlyDelivery || onlyCollection)">
+                    <a class="inlinelink order_type_change_btn" ng-click="openTableOptions()">change</a>
+                  </li>
+                  <!-- <li><a class="inlinelink" style="font-size: 11px;" ng-click="openTableOptions()">change</a></li> -->
+                  <!-- <li><input type="radio" id="order-type-one" name="order-type" ng-model="ordertype" value="Delivery" checked><label for="order-type-one" ng-click="OrderType('Delivery')" > Delivery </label></li> -->
+                  <!-- <li><input type="radio" id="order-type-two" name="order-type" ng-model="ordertype" value="Collection"><label for="order-type-two" ng-click="OrderType('Collection')"> Collection</label></li>
+                    <li><input type="radio" id="order-type-three" name="order-type" ng-model="ordertype" value="TableOrder"><label for="order-type-three" ng-click="OrderType('TableOrder')"> Table Order</label></li> -->
+                </ul>
+              </div>
+              <div class="options">
+                <div id="mydivz"  class="fontSet" style="color:#535353; text-align:center; padding:5px; font-size:14px;margin-bottom: 10px;margin-top: 15px;">
+                  <!-- asdasd minimumorderamountleft amount left to reach the minimum order amount -->
+                  orderTypeDiscountLabel(); 
+                </div>
+                <div id="mydivz" class="fontSet" style="color:#535353; text-align:center; padding:5px; font-size:14px;margin-bottom: 0px;margin-top: 15px;" ng-show="isCartEmpty">
+                  <!-- asdasd minimumorderamountleft amount left to reach the minimum order amount -->
+                  Your cart is empty
+                </div>
+              </div>
+              <div class="cart-details">
+                <h3 ng-show="!isCartEmpty">Cart</h3>
+                <ul>
+                  <li ng-repeat = "products in Products track by $index">
+                    <div class="row">
+                      <div class="col remove" >
+                        <span class="icon-minus-square" ng-click="removeProduct(products);" ng-if="FilterSimpleProducts(products)"></span>
+                        <span class="icon-minus-square" ng-click="" style="color:white" ng-if="!FilterSimpleProducts(products)"></span>
+                        <input class="qty" type="text" value="products.quantity" min="1" readonly>
+                        <!-- <span class="icon-plus-square" ng-click="addqty(products);" ng-if="FilterSimpleProducts(products)"></span> -->
+                      </div>
+                      <div class="col items" >
+                        <span ng-if="FilterSimpleProducts(products)" class="fontSet">products.MenuItem | capitalize | limitTo : 25</span>
+                        <ul class="modifiers" ng-if="FilterModifierProducts(products)">
+                          <li class="modifierfont">
+                            <span>
+                            products.MenuItem | capitalize | limitTo : 25
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col price">
+                        <span class="fontSet"> restaurantObject.Currencyproducts.price | number: 2</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="total-row">
+                    <div class="row" ng-show="hideText && DeliveryCharges">
+                      <div class="col items fontSet " >
+                        Delivery fee
+                      </div>
+                      <div class="col price fontSet ">
+                        restaurantObject.CurrencyDeliveryCharges | number:2
+                      </div>
+                    </div>
+                    <div class="row" ng-show="!isCartEmpty" ng-if="discountedPrice">
+                      <div class="col items fontSet ">
+                        Sub Total
+                      </div>
+                      <div class="col price fontSet ">
+                        restaurantObject.CurrencysubTotalAmount | number:2
+                      </div>
+                    </div>
+                    <div class="row" ng-show="!isCartEmpty" ng-if="discountedPrice">
+                      <div class="col items fontSet ">
+                        Discount
+                      </div>
+                      <div class="col price fontSet ">
+                        -restaurantObject.CurrencydiscountedPrice | number:2
+                      </div>
+                    </div>
+                    <div class="row" ng-show="!isCartEmpty">
+                      <div class="col items fontSet ">
+                        Total
+                      </div>
+                      <div class="col price fontSet ">
+                        restaurantObject.CurrencyTotalAmount | number:2
+                      </div>
+                    </div>
+                  </li>
+                  <li class="g-total-row fontSet" ng-show="hideText" >
+                    <div class="row" >
+                      <div class="col items fontSet">
+                        <span>Minimum Order</span> 
+                      </div>
+                      <div class="col price fontSet">
+                        restaurantObject.CurrencyMinOrderAmount | number:2
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+                <a href class="checkout-cart" ng-click="openCart();" ng-disabled = "IsPreccedButtonDisable" ng-class="'diabled-class': IsPreccedButtonDisable" >Proceed</a>
+                <div class="clearfix"><br></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+  <!-- <div id="test-popup-table" class="white-popup mfp-with-anim mfp-hide selectionProductfont" ng-show="showSelectionModifierPopup">
+    <h3>Please add your Table No.</h3>
+    <input class="my-custom-input" name="tableNo" placeholder="Please enter your Table No."/>
+    <p>
+    <div class="row margin-left">
+      <div class="custom-col cols col-4">
+        <span class="text-label">1</span>
+      </div>
+      <div class="custom-col cols col-4">
+        <span class="text-label">2</span>
+      </div>
+      <div class="custom-col cols col-4">
+        <span class="text-label">3</span>
+      </div>
+    </div>
+    <div class="row margin-left">
+      <div class="custom-col cols col-4">
+        <span class="text-label">4</span>
+      </div>
+      <div class="custom-col cols col-4">
+        <span class="text-label">5</span>
+      </div>
+      <div class="custom-col cols col-4">
+        <span class="text-label">6</span>
+      </div>
+    </div>
+    <div class="row margin-left">
+      <div class="custom-col cols col-4">
+        <span class="text-label">7</span>
+      </div>
+      <div class="custom-col cols col-4">
+        <span class="text-label">8</span>
+      </div>
+      <div class="custom-col cols col-4">
+        <span class="text-label">9</span>
+      </div>
+    </div>
+    <div class="row margin-left">
+      <div class="custom-col cols col-4">
+        <span class="text-label">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="custom-col cols col-4">
+        <span class="text-label">0</span>
+      </div>
+      <div class="custom-col cols col-4">
+        <span class="text-label">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+    </p>
+  </div> -->
+  
+  <div id="test-popup" class="white-popup mfp-with-anim mfp-hide selectionProductfont" ng-show="showSelectionModifierPopup">
+    <h3>ModiferHeadName</h3>
+    <p ng-if="ModiferProductDetails.length != 0">ModiferProductDetails</p>
+    <div id="selected_items" class="selected selectionfont">
+      <label ng-repeat = "md in DisplayModifiersArr"><span class='icon-checkmark'></span> md.MenuItem_Name</label>
+    </div>
+    <div id="selections_IndexCount+1" class="modifiers pan pan-1 selectionfont" ng-repeat="selections in Selections" ng-show="IndexCount == $index">
+      <h4>selections.Name</h4>
+      <ul>
+        <li ng-repeat= "modifiers in modifierProducts | filter: SelectionID:selections.SelectionID" class="fontSet">
+          <input id="optionmodifiers.Modifier_IDselections.SelectionID" class="Selec_option_one " name="optionmodifiers.Modifier_IDselections.SelectionID" type="checkbox" value="Extra Hot">
+          <!-- modifiers.Online_Tax | number:2  -->
+          <label for="optionmodifiers.Modifier_IDselections.SelectionID" ng-click="AddSelectionProducts(selections,modifiers,modifiers.checked)" ng-model="modifiers.checked" >modifiers.MenuItem_Name
+          <span>restaurantObject.Currencymodifiers.MenuItem_Price | number:2</span></label>
+        </li>
+      </ul>
+    </div>
+    <div class="row btn-row" style="padding-top: 1.5em;">
+      <div class="cols" style="width: 50%;">
+        <button type="button" class="skip-btn" ng-click="skipSelection();" ng-show ="isButtonDisable">Skip</button>
+      </div>
+      <div class="cols total" style="width: 50%;">
+        <button type="button" ng-show="!disableAddToBasket" class="add-modifiers" ng-click="AddModifierProductIntoCart();UpdateAmount();">Add to Basket</button>
+      </div>
+    </div>
+  </div>
+  <script src="accordion-menu/popup/jquery.magnific-popup.min.js"></script>
+  <script src="accordion-menu/js/main.js"></script>
+  <script>
+    //includeHTML();
+    
+  </script>
+  <script>
+    // $('.sticky-slidebar-right').css('z-index', '-1');
+    
+    $('.modifiers input').click(function() {
+    
+        var min_length = $(this).parents('.modifiers').attr("min-validate");
+    
+        var max_length = $(this).parents('.modifiers').attr("max-validate");
+    
+        alert(min_length + " " + max_length);
+    
+        
+    
+        // console.log(min_length,max_length)
+    
+        // console.log($(this).parents('.modifiers').find('input:checked').length)
+    
+    
+    
+            if ($(this).parents('.modifiers').find('input:checked').length >= max_length) {
+    
+    
+    
+                $(this).parents('.modifiers').find(':checkbox:not(:checked)').prop("disabled", true);
+    
+                $(this).parents('.modifiers').hide().next('.modifiers').show();
+    
+    
+    
+                $("#selected_items").html("");
+    
+                $('.modifiers input[type="checkbox"]').each(function(index, value) {
+    
+                    if (this.checked) {
+    
+                        //console.log(this.value)
+    
+                        $("#selected_items").append("<label><span class='icon-checkmark'></span> "+this.value+"</label>");
+    
+                    }
+    
+                });
+    
+    
+    
+            }
+    
+            else {
+    
+                $(this).parents('.modifiers').find(':checkbox').prop("disabled", false);
+    
+            }
+    
+        });             
+    
+        setTimeout(function(){ 
+    
+        var stickyslidebarleft = new StickySidebar('.sticky-slidebar-left', {
+    
+    topSpacing: 20,
+    
+    bottomSpacing: 40,
+    
+    containerSelector: '#content_wrapper',
+    
+            innerWrapperSelector: '.sidebar__inner',
+    
+            resizeSensor: true
+    
+        });
+    
+        
+    
+        var stickyslidebarright = new StickySidebar('.sticky-slidebar-right', {
+    
+    topSpacing: 20,
+    
+    bottomSpacing: 20,
+    
+    containerSelector: '#content_wrapper',
+    
+            innerWrapperSelector: '.sidebar__inner',
+    
+            resizeSensor: true
+    
+        });
+    
+        
+    
+    }, 2000);
+    
+    $(function() {
+    
+        $('.col-three').click(function() {
+    
+            alert('click');
+    
+            var stickyslidebarrightrebind = new StickySidebar('.sticky-slidebar-right', {
+    
+                topSpacing: 20,
+    
+                bottomSpacing: 20,
+    
+                containerSelector: '#content_wrapper',
+    
+                innerWrapperSelector: '.sidebar__inner'
+    
+            });
+    
+        });
+    
+    });      
+    
+  </script>

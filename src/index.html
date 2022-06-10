@@ -20,7 +20,6 @@
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
     <link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <!-- table order pop up css -->
     <style>
         /* design June 2021 start */
         :root{
@@ -649,9 +648,9 @@
     </style>
 </head>
 <body ng-controller="IndexPageController">
+    <app-root></app-root>
 
-    <!-- table order pop up html -->
-    <div id="popup-options" style="width: 300px" class="white-popup mfp-with-anim mfp-hide selectionProductfont"
+    <!-- <div id="popup-options" style="width: 300px" class="white-popup mfp-with-anim mfp-hide selectionProductfont"
         ng-show="showSelectionModifierPopup">
         <h3>Please Select</h3>
         <div class="row">
@@ -666,10 +665,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- table order pop up html -->
-    <div id="test-popup-table" class="white-popup mfp-with-anim mfp-hide selectionProductfont"
+    <!-- <div id="test-popup-table" class="white-popup mfp-with-anim mfp-hide selectionProductfont"
         ng-show="showSelectionModifierPopup">
         <h3>Enter Table No.</h3>
         <div class="calculator">
@@ -679,12 +677,6 @@
             <input type="text" onkeypress="return false;" ondrop="return false;" onpaste="return false;" class="input"
                 value="{{tableNo}}">
             <div class="buttons">
-                <!-- <div class="operators">
-                    <div>+</div>
-                    <div>-</div>
-                    <div>&times;</div>
-                    <div>&divide;</div>
-                </div> -->
                 <div class="leftPanel">
                     <div class="numbers">
                         <div ng-click="setTableNo('1')">1</div>
@@ -706,66 +698,10 @@
                         <div ng-click="setTableNo('0')">0</div>
                         <div class="ok-btn" ng-click="selectedOrderType('TableOrder')">OK</div>
                     </div>
-                    <!-- <div class="numbers">
-                        <div>0</div>
-                        <div>--</div>
-                        <div id="clear">C</div>
-                    </div> -->
+                  
                 </div>
-                <!-- <div class="equal" id="result">&#x2190;</div> -->
             </div>
         </div>
-        <!-- <input class="my-custom-input" name="tableNo" placeholder="Please enter your Table No."/>
-    <p>
-        <div class="row margin-left">
-            <div class="custom-col cols col-4">
-                <span class="text-label">1</span>
-            </div>
-            <div class="custom-col cols col-4">
-                <span class="text-label">2</span>
-            </div>
-            <div class="custom-col cols col-4">
-                <span class="text-label">3</span>
-            </div>
-        </div>
-        <div class="row margin-left">
-            <div class="custom-col cols col-4">
-                <span class="text-label">4</span>
-            </div>
-            <div class="custom-col cols col-4">
-                <span class="text-label">5</span>
-            </div>
-            <div class="custom-col cols col-4">
-                <span class="text-label">6</span>
-            </div>
-        </div>
-        <div class="row margin-left">
-            <div class="custom-col cols col-4">
-                <span class="text-label">7</span>
-            </div>
-            <div class="custom-col cols col-4">
-                <span class="text-label">8</span>
-            </div>
-            <div class="custom-col cols col-4">
-                <span class="text-label">9</span>
-            </div>
-        </div>
-        <div class="row margin-left">
-            <div class="custom-col cols col-4">
-                <span class="text-label">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </span>
-            </div>
-            <div class="custom-col cols col-4">
-                <span class="text-label">0</span>
-            </div>
-            <div class="custom-col cols col-4">
-                <span class="text-label">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                </span>
-            </div>
-        </div>
-    </p> -->
     </div>
     <div class="statusbar-overlay"></div>
     <div class="panel-overlay"></div>
@@ -774,22 +710,18 @@
         <div class="container">
             <p>{{sdiscount.message}} use <span class="bold-text">{{sdiscount.couponCode}}</span> get <span
                     class="bold-text">{{sdiscount.discount}}% Discount</span></p>
-            <!-- onclick="myFunction()"  -->
             <button type="button" class="close" id="close_notificaiton" ng-click="closeDiscountBar();">
                 <span aria-hidden="true" style="font-size:20px">×</span>
             </button>
         </div>
-    </div>
-    <!-- Loader Divs -->
-    <div id="overlay">
+    </div> -->
+    <!-- <div id="overlay">
         <div class="spinner">
             <div class="double-bounce1"></div>
             <div class="double-bounce2"></div>
         </div>
-        <!-- <div id="loader"></div> -->
     </div>
     <div class="views">
-        <!-- || (Pages.currentPage == '/checkout-details') -->
         <div class="mobile sticky-cart-bar">
             <button class="mobile-cart-btn"
                 ng-if="(cartProducts.numberOfProducts != 0) && (currentPage !== 'checkout-details')"
@@ -1098,11 +1030,6 @@
                 .fintro.time-col strong {
                     font-weight: 600;
                 }
-                /* .fintro .day-span {
-                    display: inline-block;
-                    width: 40px;
-                    position: relative;
-                } */
                 .fintro.social img {
                     width: 90%;
                 }
@@ -1117,11 +1044,6 @@
                 li.citem {
                     margin-left: 0px;
                 }
-                /* li.clocation:before,
-                li.cphone:before,
-                li.cemail:before {
-                    content: unset;
-                } */
                 .contact_info li {
                     font-family: 'Noto Sans', sans-serif !important;
                     color: #515050;
@@ -1140,7 +1062,6 @@
                     line-height: 35px;
                     text-align: center;
                     float: left;
-                    /* margin-left: -1.5em; */
                     border: 0px solid #000;
                     background: #fff;
                     width: 25px;
@@ -1269,9 +1190,7 @@
                     class="fa fa-chevron-up" aria-hidden="true"></i></button>
 
 
-            <!-- The Modal -->
             <div id="myModal" class="modal">
-                <!-- Modal content -->
                 <div class="modal-content">
                     <span class="close" ng-click="closeAllergyPopup();">&times;</span>
                     <h3 class="allergyHeading">Do you have a food allergy?</h3>
@@ -1282,26 +1201,14 @@
                 </div>
             </div>
 
-            <!-- The Modal -->
             <div id="alertModal" class="alert-modal">
-                <!-- Modal content -->
                 <div class="alert-modal-content">
                     <span class="alert-close" ng-click="closeAllergyPopup();">&times;</span>
                     <strong>{{alertMessage}}</strong>
                 </div>
             </div>
 
-
-            <footer>
-                <div class="wrapperz">
-                    <div class="row">
-                        <div class="cols col-12 copyright">
-                            <p>Powered by <a href="#" onclick="JeMWeb()">JeM Point of Sale</a></p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
-    </div>
+    </div> -->
 </body>
 </html>
