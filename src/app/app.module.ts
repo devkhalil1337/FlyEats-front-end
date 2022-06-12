@@ -8,13 +8,15 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
 import { OrderComponent } from './module/order/order.component';
 import { LoginComponent } from './module/login/login.component';
 import { HttpClientModule} from '@angular/common/http';
+import { ItemsFilterPipe } from './Pips/itemsFilterPipe';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavigationComponent,
     OrderComponent,
-    LoginComponent
+    LoginComponent,
+    ItemsFilterPipe
   ],
   imports: [
     BrowserModule,

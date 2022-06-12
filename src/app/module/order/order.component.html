@@ -6,8 +6,8 @@
             <span id="closecat" class="close-cat"><span class="icon-times-circle"></span></span>
             <!-- <h3>Categories</h3> -->
             <ul>
-              <li  class="fontSet"><a href >
-                Category name
+              <li *ngFor="let cate of categoryList" class="fontSet"><a href >
+                {{cate?.RootCatName}}
                 </a>
               </li>
             </ul>
@@ -21,28 +21,26 @@
             </ul>
           </div>
           <ul id="inline-popups" class="cd-accordion-menu animated">
-            <li class="has-children cat-wrapper" >
-              <input type="checkbox" name ="group" id="group" checked >
-              <label for="group" class="fontSet">root name</label>
+            <li class="has-children cat-wrapper" *ngFor="let cate of categoryList;let i = index" id="anchor{{i}}"> 
+              <input type="checkbox" name ="group{{i}}" id="group{{i}}" checked >
+              <label for="group{{i}}" class="fontSet">{{cate.RootCatName}}</label>
               <ul>
-                <li  class="fontSet">
-                  <div class="item-details" ng-if="mi.check">
+                <li  *ngFor="let item of ItemsList | itemFilter:cate.RootCatID;let i = index" ng-repeat = "mi in menuItems | filter: {RootCatID: cate.RootCatID}" class="fontSet">
+                  <div class="item-details" ng-if="mi.check" >
                     <span id="loadingCart" class="loading-cart"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span>
                     <div class="row">
                       <div class="col-one">
-                        <strong>item name</strong>
+                        <strong>{{item.MenuItem}}</strong>
                       </div>
                       <div class="col-two">
-                        <h4 style="
-                          font-family: 'Hind Vadodara', sans-serif;
-                          font-size: 14px;
-                          " ng-if="mi.price"
-                          ng-class="'ml-20': mi.originalPrice, 'ml-20-plus': !mi.originalPrice">
+                        <h4 style="font-family: 'Hind Vadodara', sans-serif;font-size: 14px;" 
+                          ng-if="item.price"
+                          [ngClass]="{'ml-20':  item.originalPrice,'ml-20-plus': !item.originalPrice}">
                           <span ng-if="mi.originalPrice" style="font-size: 13px;color:grey;text-decoration: line-through;">
-                          currenty plus price
+                           {{item.originalPrice | number : '1.0-2'}}
                           </span>
                           <span>
-                          &nbsp;currenty plus price
+                            &nbsp;{{item.price | number : '1.0-2'}}
                           </span>
                         </h4>
                         <h4 style="
@@ -52,12 +50,12 @@
                           " ng-if="!mi.price">Choose Option</h4>
                       </div>
                       <div class="col-three">
-                        <a href><span class="icon-plus-square-o" style="color: rgb(23 185 134)" ng-click="AddToCart(mi);"></span></a>
+                        <a href><span class="icon-plus-square-o" style="color: rgb(23 185 134)" (click)="addToCart(item)"></span></a>
                       </div>
                     </div>
                     <div class="des-row">
                       <!-- ng-if="mi.MenuItem_Detail.length > 0" -->
-                      <p>MenuItem_Detail </p>
+                      <p>{{item.MenuItem_Detail}}</p>
                     </div>
                   </div>
                 </li>
@@ -192,7 +190,7 @@
                   </li>
                 </ul>
                 <div class="clearfix"></div>
-                <a href class="checkout-cart" ng-click="openCart();" ng-disabled = "IsPreccedButtonDisable" ng-class="'diabled-class': IsPreccedButtonDisable" >Proceed</a>
+                <a href class="checkout-cart">Proceed</a>
                 <div class="clearfix"><br></div>
               </div>
             </div>
@@ -256,11 +254,12 @@
     </p>
   </div> -->
   
-  <div id="test-popup" class="white-popup mfp-with-anim mfp-hide selectionProductfont" ng-show="showSelectionModifierPopup">
-    <h3>ModiferHeadName</h3>
-    <p ng-if="ModiferProductDetails.length != 0">ModiferProductDetails</p>
+  <div id="test-popup" class="white-popup mfp-with-anim mfp-hide selectionProductfont">
+    <h3>{{modifierItem?.Name}}</h3>
+    <p ng-if="ModiferProductDetails.length != 0">{{modifierItem?.Detail}}</p>
     <div id="selected_items" class="selected selectionfont">
-      <label ng-repeat = "md in DisplayModifiersArr"><span class='icon-checkmark'></span> md.MenuItem_Name</label>
+      <label ng-repeat = "md in DisplayModifiersArr" *ngFor="let md of modifierItem">
+        <span class='icon-checkmark'></span> {{md.MenuItem_Name}}</label>
     </div>
     <div id="selections_IndexCount+1" class="modifiers pan pan-1 selectionfont" ng-repeat="selections in Selections" ng-show="IndexCount == $index">
       <h4>selections.Name</h4>
