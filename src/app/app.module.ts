@@ -9,6 +9,7 @@ import { NavigationComponent } from './modules/navigation/navigation.component';
 import { ProductsComponent } from './modules/products/products.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { RegisterComponent } from './modules/register/register.component';
+import { LoginComponent } from './modules/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { RegisterComponent } from './modules/register/register.component';
     NavigationComponent,
     ProductsComponent,
     ContactComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
