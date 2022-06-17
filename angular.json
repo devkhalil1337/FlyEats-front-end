@@ -30,34 +30,22 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/accordion-menu/css/reset.css",
-              "src/assets/accordion-menu/css/style.css",
-              "src/assets/accordion-menu/popup/magnific-popup.min.css",
-              "src/assets/accordion-menu/popup/popup-style.css",
-              "src/assets/js/slick/slick/slick.css",
-              "src/assets/js/slick/slick/slick-theme.css",
-              "src/assets/accordion-menu/css/custom.css",
-              "src/assets/css/loader.css",
-              "src/assets/css/style.css",
-              "src/assets/css/new-nav.css"
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/font-awesome.min.css",
+              "src/assets/css/animsition.min.css",
+              "src/assets/css/animate.css",
+              "src/assets/css/style.css"
             ],
             "scripts": [
-              "src/assets/accordion-menu/js/modernizr.js",
-              "src/assets/js/jquery-2.1.4.js",
-              "src/assets/js/jquery.magnific-popup.min.js",
-              "src/assets/js/jquery-ui.js",
-              "src/assets/js/framework7.min.js",
-              "src/assets/js/sticky-sidebar.js",
-              "src/assets/js/crypto.js",
-              "src/assets/js/angular.min.js",
-              "src/assets/js/utils.js",
-              "src/assets/js/moment.js",
-              "src/assets/js/all.min.js",
-              "src/assets/js/slick/slick/slick.min.js",
-              "src/assets/accordion-menu/popup/jquery.magnific-popup.min.js",
-              "src/assets/js/main.js",
-              "src/assets/js/dropdown.js"
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/tether.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/animsition.min.js",
+              "src/assets/js/bootstrap-slider.min.js",
+              "src/assets/js/jquery.isotope.min.js",
+              "src/assets/js/headroom.js",
+              "src/assets/js/foodpicky.min.js"
+
             ]
           },
           "configurations": {

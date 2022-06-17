@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="MyApp">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -11,1204 +11,581 @@
     <meta name="format-detection" content="telephone=yes">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta property="og:title" content="Turmeric Kitchen @ 65" />
-    <meta property="og:description" content="we have the highly qualified and experienced chefs that ensure that the quality of food served to the guests is up to the standards to uphold the market reputation that we have against other places. Our skilled chefs have the most vivid knowledge about cooking the best traditional south Indian food by bringing in the customary ways and techniques to prepare the scrumptious meals." />
-    <meta property="og:image" content="http://turmerickitchen65.co.uk/images/ogImage.jpg"/>
-    <title ng-bind="restaurantObject.restaurantName"></title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
-    <link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <style>
-        /* design June 2021 start */
-        :root{
-            --new-primary-color: #f6c737;
-        }
-        /* design June 2021 end */
-        .my-custom-input {
-            width: 90%;
-            margin-left: 5%;
-            font-size: 40px;
-            margin-bottom: 5%;
-            border-radius: 10px;
-        }
-
-        .margin-left {
-            margin-left: 5%;
-            margin-bottom: 10%;
-        }
-
-        .text-label {
-            background-color: #000;
-            border-radius: 10px;
-            color: #fff;
-            padding: 12% 20% 12% 20%;
-        }
-
-        /* The container <div> - needed to position the dropdown content */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 2;
-        }
-        
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        
-        /* Change color of dropdown links on hover */
-        .dropdown-content a:hover {background-color: #f1f1f1}
-
-        .ui-timepicker-list li {
-            padding: 10px 0 3px 0px;
-            cursor: pointer;
-            white-space: nowrap;
-            color: #000;
-            list-style: none;
-            margin: 0;
-            text-align: center;
-            /* width: 100%; */
-        }
-        .ui-timepicker-list ul {
-            width: 100%;
-        }
-        .ui-timepicker-wrapper {
-            overflow-y: auto;
-            font-size: 1.3rem;
-            max-height: 150px;
-            width: 11.0em;
-            background: #fff;
-            border: 1px solid #ddd;
-            -webkit-box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
-            -moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-            box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
-            outline: none;
-            z-index: 10052;
-            margin: 0;
-        }
-
-        @media only screen and (max-width: 768px) {
-            [class*="custom-col cols col-"] {
-                width: 33.33% !important;
-            }
-
-            .my-custom-input {
-                font-size: 27px;
-            }
-
-            .options.two form {
-                margin: unset;
-            }
-        }
-
-        /* style added by Yaser 15-02-2020 */
-        .white-popup h3 {
-            text-align: center;
-        }
-
-        .button_wrapper {
-            margin: 13px 0;
-        }
-
-        .popup-btn {
-            /* border: 2px solid #f37522; */
-            color: #ffffff;
-            margin: 5px auto;
-            width: 100%;
-            font-weight: bold;
-        }
-
-        .popup-btn:hover,
-        .popup-btn:focus {
-            border-color: var(--new-primary-color) !important;
-            color: var(--new-primary-color) !important;
-        }
-
-        /* calculator css */
-
-        .calculator {
-            padding: 20px;
-            -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            border-radius: 1px;
-        }
-
-        .calculator .input {
-            border: 1px solid #ddd;
-            border-radius: 1px;
-            height: 60px;
-            padding-right: 15px;
-            padding-top: 10px;
-            text-align: center;
-            /* margin-right: 6px; */
-            font-size: 2.5rem;
-            overflow-x: auto;
-            transition: all .2s ease-in-out;
-            width: 98.5%;
-        }
-
-        .calculator .input:hover {
-            border: 1px solid #bbb;
-            -webkit-box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-        }
-
-        #test-popup-table {
-            width: 390px;
-        }
-
-        .calculator .buttons {
-            text-align: center;
-        }
-
-        .calculator .operators {}
-
-        .calculator .operators div {
-            display: inline-block;
-            border: 1px solid #bbb;
-            border-radius: 1px;
-            width: 80px;
-            text-align: center;
-            padding: 10px;
-            margin: 20px 4px 10px 0;
-            cursor: pointer;
-            background-color: #ddd;
-            transition: border-color .2s ease-in-out, background-color .2s, box-shadow .2s;
-        }
-
-        .calculator .operators div:hover {
-            background-color: #ddd;
-            -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            border-color: #aaa;
-        }
-
-        .calculator .operators div:active {
-            font-weight: bold;
-        }
-
-        .calculator .leftPanel {
-            /* display: inline-block; */
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .calculator .numbers div {
-            display: inline-block;
-            border: 1px solid #ddd;
-            border-radius: 1px;
-            width: 95%;
-            text-align: center;
-            padding: 23px 10px;
-            font-size: 20px;
-            margin: 10px 5px 0 0;
-            cursor: pointer;
-            background-color: #f9f9f9;
-            transition: border-color .2s ease-in-out, background-color .2s, box-shadow .2s;
-        }
-
-        @media only screen and (max-width: 400px) {
-            #test-popup-table {
-                width: auto;
-            }
-        }
-
-        .calculator .numbers div:hover {
-            background-color: #f1f1f1;
-            -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            border-color: #bbb;
-        }
-
-        .calculator .numbers div:active {
-            font-weight: bold;
-        }
-
-        .calculator div.equal {
-            display: inline-block;
-            border: 1px solid var(--new-primary-color);
-            border-radius: 1px;
-            width: 17%;
-            text-align: center;
-            padding: 96px 10px;
-            margin: 10px 6px 10px 0;
-            vertical-align: top;
-            cursor: pointer;
-            color: #FFF;
-            background-color: var(--new-primary-color);
-            transition: all .2s ease-in-out;
-            font-size: 28px;
-            line-height: 1;
-        }
-
-        .calculator div.equal:hover {
-            background-color: #307CF9;
-            -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            border-color: #1857BB;
-        }
-
-        .calculator div.equal:active {
-            font-weight: bold;
-        }
-
-        .calculator .ok-btn {
-            background-color: var(--new-primary-color) !important;
-            border-color: var(--new-primary-color);
-            color: #FFFFFF;
-        }
-
-        .calculator .ok-btn:hover {
-            -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-            background-color: var(--new-primary-color) !important;
-            border-color: var(--new-primary-color);
-        }
-
-        .dcart_alergy_message {
-            background: rgba(246, 199, 55, .2);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: .5rem 1rem;
-            -webkit-box-shadow: 1px 1px 5px 0 rgba(156, 156, 156, 0.2);
-            box-shadow: 1px 1px 5px 0 rgba(156, 156, 156, 0.2);
-        }
-
-        .dcart_alergy_message p {
-            color: var(--new-primary-color);
-        }
-
-        .dcart_alergy_message i {
-            color: var(--new-primary-color)
-        }
-
-        .dcart_alergy_message p a {
-            color: var(--new-primary-color);
-            text-decoration: none;
-        }
-
-        .dcart_alergy_message p a:hover {
-            color: var(--new-primary-color);
-            text-decoration: underline;
-        }
-
-        .dcart_timing {
-            background: rgba(233, 233, 233, 20%);
-            display: flex;
-            align-items: center;
-            padding: .5rem 1rem;
-            -webkit-box-shadow: 1px 1px 5px 0 rgba(156, 156, 156, 0.2);
-            box-shadow: 1px 1px 5px 0 rgba(156, 156, 156, 0.2);
-        }
-
-        .dcart_timing .dcart_timing_p,
-        .dcart_timing p {
-            color: #939392;
-            font-size: .8em;
-            line-height: 1.4;
-            text-align: left !important;
-        }
-
-        .dcart_timing i {
-            color: #939392;
-        }
-
-        .order_type_wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .order_type_wrapper li {
-            text-align: left !important;
-        }
-
-        .order_type_wrapper li:last-child {
-            text-align: right !important;
-        }
-
-        .order_type_change_btn {
-            font-size: 11px;
-            padding: 5px 10px;
-            background: rgba(246, 199, 55, .2);
-            color: var(--new-primary-color);
-            border-radius: 25px;
-        }
-
-        /* design June 2021 */
-        
-        @media only screen and (min-width: 768px) {
-            .navbar .menu li a {
-                font-weight: 550;
-                color: #626161;
-            }
-            .navbar .menu li a.active {
-                border-bottom: 2px solid var(--new-primary-color);
-                color: var(--new-primary-color);
-            }
-            .navbar .menu li a.hover {
-                border-bottom: 2px solid var(--new-primary-color) !important;
-                color: var(--new-primary-color) !important;
-            }
-        }
-        .notificaiton {
-            padding: 6px 15px;
-            background-color: var(--new-primary-color);
-        }
-        .notificaiton p{
-            color: #fff;
-        }
-        .notificaiton .close {
-            top: 0;
-        }
-        .slider-btn {
-            background: var(--new-primary-color);
-            border: 2px solid var(--new-primary-color);
-        }
-        .slider-btn{
-            color: #fff;
-        }
-        .design-04{}
-        .design-04.header-new{
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-        .design-04.header-new .header-new-left,
-        .design-04.header-new .header-new-center,
-        .design-04.header-new .header-new-right {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            height: 100px;
-            border: 0px solid black;
-        }
-        .design-04.header-new .header-new-right-menu{
-            list-style: none;
-            text-align: right;
-            width: 100%;
-        }
-        .design-04.header-new .header-new-right-menu li{
-            list-style: none;
-            display: inline-block;
-            padding-left: 5px;
-        }
-        .design-04.header-new .menu-icon-wrapper{
-            display: none !important;
-        }
-        .design-04.header-new .account-button,
-        .design-04.header-new .cart-button{
-            border: none;
-            background: #E6E6E6;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .design-04.header-new .account-button:hover,
-        .design-04.header-new .cart-button:hover{
-            opacity: .5;
-        }
-        .design-04.header-new .cart-button span{
-            position: absolute;
-            top: -10px;
-            right: -5px;
-            background: gray;
-            color: #fff;
-            border-radius: 30px;
-            padding: 3px;
-            width: 24px;
-            height: 24px;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-        .design-04.header-new .account-button svg,
-        .design-04.header-new .cart-button svg,
-        .design-04.header-new .cart-button svg,
-        .design-04.header-new .header-new-left svg{
-            stroke:#000;
-            width: 38%;
-            height: auto;
-        }
-
-
-        .online-button{
-            border: none;
-            background: var(--new-primary-color);
-            border-radius: 30px;
-            padding: 15px 20px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-transform: uppercase;
-            font-size: 15px;
-            cursor: pointer;
-        }
-        .online-button:hover{
-            opacity: .5;
-        }
-        .design-04.header-new .header-new-left{
-            display: flex;
-            align-items: center;
-        }
-        .design-04.header-new .header-new-left svg{
-            stroke:#000;
-            width: 30px;
-            height: auto;
-            height: auto;
-            margin-right: 8px;
-        }
-        .design-04.header-new .header-new-left-phone-text{
-            color:#707070;
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-        .design-04.header-new .menu-icon{
-            border: none;
-            background: transparent;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .menu-icon {
-            position: unset;
-        }
-        .new-menu-row .menu {
-            display: flex;
-            align-items: center;
-            justify-content: center !important;
-        }
-        /* media queries */
-        .new-menu-row .menu li {
-            display: inline-block;
-            padding: 5px 15px;
-        }
-        /* @media only screen and (min-width: 768){
-            .new-menu-row .menu {
-                display: unset !important;
-            }
-            .left-nav {
-                display: unset !important;
-            }
-            .menu,
-            .new-menu-row .menu {
-                display: flex;
-                align-items: center;
-                justify-content: center !important;
-            }
-            .design-04.header-new .menu .left-nav {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        } */
-        @media only screen and (max-width: 1024){
-            .design-04.header-new .menu-icon-wrapper,
-            .design-04.header-new .online-button-wrapper{
-                display: none !important;
-            }
-            .design-04.header-new .menu-brand {
-                height: 85px;
-            }
-            .new-menu-row .menu {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        }
-        @media only screen and (max-width: 768px){
-            .design-04.header-new .header-new-row {
-                display: flex;
-                width: 100%;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .design-04.header-new .header-new-row::after{
-                display: none;
-            }
-            .design-04.header-new .header-new-row [class*="cols col-"]{
-                width: unset;
-                display: inline-flex;
-            }
-            .design-04.header-new .online-button-wrapper{
-                display: none !important;
-            }
-        }
-        @media only screen and (max-width: 600px){
-            .design-04.header-new .menu-icon-wrapper{
-                display: inline-block !important;
-            }
-            .design-04.header-new .menu-icon-wrapper .menu-icon{
-                position: unset;
-                font-size: 30px;
-            }
-            .design-04.header-new .header-new-row{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .design-04.header-new .header-new-row [class*="cols col-"]{
-                width: unset;
-                display: inline-flex;
-                padding: 0;
-            }
-            .design-04.header-new .header-new-left,
-            .design-04.header-new .online-button-wrapper{
-                display: none !important;
-            }
-            .new-menu-row .menu {
-                display: flex;
-                align-items: baseline;
-                justify-content: center !important;
-                flex-direction: column;
-                width: 100%;
-            }
-            .new-menu-row .menu li{
-                display: block;
-                width: 100%;
-            }
-        }
-        @media only screen and (max-width: 360px){
-            .design-04.header-new .account-button,
-            .design-04.header-new .cart-button {
-                width: 38px;
-                height: 38px;
-            }
-            .design-04.header-new .menu-icon {
-                width: 38px;
-                height: 38px;
-                font-size: 25px;
-            }
-        }
-
-        .jem-pop-nav, .jem-pop-minute-nav {
-            display: none;
-        }
-
-        .jem-pop-nav ul {
-            border: 1px solid lightgrey;
-            position: absolute;
-            background: #fff;
-        }
-
-        .jem-pop-minute-nav ul {
-            border: 1px solid lightgrey;
-            position: absolute;
-            background: #fff;
-        }
-        
-        .jem-pop-nav ul li {
-            color: #000;
-            padding: 1rem 4rem;
-        }
-
-        .jem-pop-minute-nav ul li {
-            color: #000;
-            padding: 1rem 4rem;
-        }
-
-        .jem-pop-nav ul li:hover {
-            background: var(--new-primary-color);
-            color: #fff;
-            cursor: pointer;
-        }
-        .jem-pop-minute-nav ul li:hover {
-            background: var(--new-primary-color);
-            color: #fff;
-            cursor: pointer;
-        }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#">
+    <title>Starter Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- <link href="assets/css/animsition.min.css" rel="stylesheet"> -->
+    <!-- <link href="assets/css/animate.css" rel="stylesheet"> -->
+    <!-- Custom styles for this template -->
+    <!-- <link href="assets/css/style.css" rel="stylesheet">  -->
 </head>
-<body ng-controller="IndexPageController">
+<body>
     <app-root></app-root>
 
-    <!-- <div id="popup-options" style="width: 300px" class="white-popup mfp-with-anim mfp-hide selectionProductfont"
-        ng-show="showSelectionModifierPopup">
-        <h3>Please Select</h3>
-        <div class="row">
-            <div class="cols col-12">
-                <div class="button_wrapper">
-                    <button ng-if="isOptionAvailable('deliveryOrder')" type="button" class="slider-btn popup-btn"
-                        ng-click="selectedOrderType('Delivery')">Delivery Order</button>
-                    <button ng-if="isOptionAvailable('collectionOrder')" type="button" class="slider-btn popup-btn"
-                        ng-click="selectedOrderType('Collection')">Collection Order</button>
-                    <button ng-if="isOptionAvailable('tableOrder')" type="button" ng-click="openTableOrder();"
-                        class="slider-btn popup-btn">Table Order</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
-    <!-- <div id="test-popup-table" class="white-popup mfp-with-anim mfp-hide selectionProductfont"
-        ng-show="showSelectionModifierPopup">
-        <h3>Enter Table No.</h3>
-        <div class="calculator">
-            <div style="text-align: center; color: red; margin-bottom: 1%;">
-                {{tableNoError}}
-            </div>
-            <input type="text" onkeypress="return false;" ondrop="return false;" onpaste="return false;" class="input"
-                value="{{tableNo}}">
-            <div class="buttons">
-                <div class="leftPanel">
-                    <div class="numbers">
-                        <div ng-click="setTableNo('1')">1</div>
-                        <div ng-click="setTableNo('4')">4</div>
-                        <div ng-click="setTableNo('7')">7</div>
-                    </div>
-                    <div class="numbers">
-                        <div ng-click="setTableNo('2')">2</div>
-                        <div ng-click="setTableNo('5')">5</div>
-                        <div ng-click="setTableNo('8')">8</div>
-                    </div>
-                    <div class="numbers">
-                        <div ng-click="setTableNo('3')">3</div>
-                        <div ng-click="setTableNo('6')">6</div>
-                        <div ng-click="setTableNo('9')">9</div>
-                    </div>
-                    <div class="numbers">
-                        <div ng-click="removeSingleChar()">&#x2190;</div>
-                        <div ng-click="setTableNo('0')">0</div>
-                        <div class="ok-btn" ng-click="selectedOrderType('TableOrder')">OK</div>
-                    </div>
-                  
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="statusbar-overlay"></div>
-    <div class="panel-overlay"></div>
-    <div ng-init="EnableDiscountBar();" id="notificaiton" class="notificaiton height" style=""
-        ng-repeat="sdiscount in specialDiscount" ng-if="sdiscount.isCouponActive && discountbar">
-        <div class="container">
-            <p>{{sdiscount.message}} use <span class="bold-text">{{sdiscount.couponCode}}</span> get <span
-                    class="bold-text">{{sdiscount.discount}}% Discount</span></p>
-            <button type="button" class="close" id="close_notificaiton" ng-click="closeDiscountBar();">
-                <span aria-hidden="true" style="font-size:20px">×</span>
-            </button>
-        </div>
-    </div> -->
-    <!-- <div id="overlay">
-        <div class="spinner">
-            <div class="double-bounce1"></div>
-            <div class="double-bounce2"></div>
-        </div>
-    </div>
-    <div class="views">
-        <div class="mobile sticky-cart-bar">
-            <button class="mobile-cart-btn"
-                ng-if="(cartProducts.numberOfProducts != 0) && (currentPage !== 'checkout-details')"
-                ng-click="viewMobileCart();" id="showCart">
-                <span class="cart-icon">
-                    <span class="qty ng-binding" ng-bind="(cartProducts.numberOfProducts)"></span>
-                    <i class="fa fa-cart-plus"></i>
-                </span>
-                <span>View Cart</span>
-                <span ng-bind="(restaurantObject.Currency) + (cartProducts.totalAmount | number:2)"></span>
-            </button>
-        </div>
-        <div id="mCartbar" class="mobile-cart">
-            <div class="mobile-cart-bar text-right">
-                <span id="closeCart" class="closemMenu"><img src="assets/images/close.svg" alt=""></span>
-            </div>
-            <div class="mcart-details">
-                <div class="message2">
-                    <div class="dcart_alergy_message">
-                        <div>
-                            <p><a class="inlinelink" ng-click="openAllergyPopup();"><i class="fa fa-info-circle" aria-hidden="true"></i> Click here if you or someone you're
-                                    ordering for has a food allergy or intolerance</a></p>
-                        </div>
-                    </div>
-                    <br>
-                    <div ng-if="!isCustomOpeningTime">
-                        <p ng-if="RestaurtantTime.openTime !== RestaurtantTime.closeTime">We're open today from
-                            {{RestaurtantTime.openTime}} - {{RestaurtantTime.closeTime}} </p>
-                        <p ng-if="RestaurtantTime.openTime === RestaurtantTime.closeTime">We are closed today.</p>
-                    </div>
-                    <div class="dcart_timing" ng-if="isCustomOpeningTime">
-                        <div><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-                        <div style="padding-left: 1rem;text-align: left;">
-                            <p ng-if="!isTodayOpen();">We are closed today.</p>
-                            <p style="font-weight: bold;">We're open today from</p>
-                            <ng-container class="dcart_timing_p" ng-repeat="item in isTodayOpen(); track by $index">
-                                <span ng-if="$index !== 0">,<br /></span>
-                                {{ item.openTime }} - {{ item.closeTime }}
-                            </ng-container>
-                        </div>
+    <div class="site-wrapper animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
+        <!--header starts-->
+        <header id="header" class="header-scroll top-header headrom">
+            <!-- .navbar -->
+            <nav class="navbar navbar-dark">
+                <div class="container">
+                    <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#mainNavbarCollapse">&#9776;</button>
+                    <a class="navbar-brand" href="index-2.html"> <img class="img-rounded" src="assets/images/food-picky-logo.png" alt=""> </a>
+                    <div class="collapse navbar-toggleable-md  float-lg-right" id="mainNavbarCollapse">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item"> <a class="nav-link active" href="index-2.html">Home <span class="sr-only">(current)</span></a> </li>
+                            <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Food</a>
+                                <div class="dropdown-menu"> <a class="dropdown-item" href="food_results.html">Food results</a> <a class="dropdown-item" href="map_results.html">Map results</a></div>
+                            </li>
+                            <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Restaurants</a>
+                                <div class="dropdown-menu"> <a class="dropdown-item" href="restaurants.html">Search results</a> <a class="dropdown-item" href="profile.html">Profile page</a></div>
+                            </li>
+                            <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                <div class="dropdown-menu"> <a class="dropdown-item" href="pricing.html">Pricing</a> <a class="dropdown-item" href="contact.html">Contact</a> <a class="dropdown-item" href="submition.html">Submit restaurant</a> <a class="dropdown-item" href="registration.html">Registration</a>
+                                    <div class="dropdown-divider"></div> <a class="dropdown-item" href="checkout.html">Checkout</a> </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="mcart">
-                    <div class=" options two">
-                        <form>
-                            <ul class="order_type_wrapper">
-                                <li style="color: #000;font-weight: 600;width: 100%;">
-                                    {{ getOrderType(); orderTypeData.name == 'TableOrder'? 'Dine-in table# ' + orderTypeData.table : orderTypeData.name }}
-                                </li>
-                                <li ng-if="!(onlyDelivery || onlyCollection)">
-                                    <a class="inlinelink order_type_change_btn" style="font-size: 11px;"
-                                        ng-click="openTableOptions()">change</a>
-                                </li>
-                            </ul>
+            </nav>
+            <!-- /.navbar -->
+        </header>
+        <!-- banner part starts -->
+        <section class="hero bg-image" data-image-src="assets/images/image01.jpg">
+            <div class="hero-inner">
+                <div class="container text-center hero-text font-white">
+                    <h1>Order Delivery & Take-Out </h1>
+                    <h5 class="font-white space-xs">Find restaurants, specials, and coupons for free</h5>
+                    <div class="banner-form">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label class="sr-only" for="exampleInputAmount">I would like to eat....</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-lg" id="exampleInputAmount" placeholder="I would like to eat...."> </div>
+                            </div>
+                            <button onclick="location.href='restaurants.html'" type="button" class="btn theme-btn btn-lg">Search food</button>
                         </form>
                     </div>
-                    <div class="options">
-                        <div id="mydivz" class="fontSet"
-                            style="color:#535353; text-align:center; padding:5px; font-size:14px;margin-bottom: 10px;margin-top: 15px;"
-                            ng-show="isBillGreaterThanMinimumAmount">
-                            Spend {{restaurantObject.Currency}}{{minimumorderamountleft | number:2}} more for delivery
-                        </div>
-                        <div id="mydivz" class="fontSet"
-                            style="color:#535353; text-align:center; padding:5px; font-size:14px;margin-bottom: 0px;margin-top: 15px;"
-                            ng-show="isCartEmpty">
-                            Your cart is empty!
+                    <div class="steps">
+                        <div class="step-item step1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 483 483" width="512" height="512">
+                                <g fill="#FFF">
+                                    <path d="M467.006 177.92c-.055-1.573-.469-3.321-1.233-4.755L407.006 62.877V10.5c0-5.799-4.701-10.5-10.5-10.5h-310c-5.799 0-10.5 4.701-10.5 10.5v52.375L17.228 173.164a10.476 10.476 0 0 0-1.22 4.938h-.014V472.5c0 5.799 4.701 10.5 10.5 10.5h430.012c5.799 0 10.5-4.701 10.5-10.5V177.92zM282.379 76l18.007 91.602H182.583L200.445 76h81.934zm19.391 112.602c-4.964 29.003-30.096 51.143-60.281 51.143-30.173 0-55.295-22.139-60.258-51.143H301.77zm143.331 0c-4.96 29.003-30.075 51.143-60.237 51.143-30.185 0-55.317-22.139-60.281-51.143h120.518zm-123.314-21L303.78 76h86.423l48.81 91.602H321.787zM97.006 55V21h289v34h-289zm-4.198 21h86.243l-17.863 91.602h-117.2L92.808 76zm65.582 112.602c-5.028 28.475-30.113 50.19-60.229 50.19s-55.201-21.715-60.23-50.19H158.39zM300 462H183V306h117v156zm21 0V295.5c0-5.799-4.701-10.5-10.5-10.5h-138c-5.799 0-10.5 4.701-10.5 10.5V462H36.994V232.743a82.558 82.558 0 0 0 3.101 3.255c15.485 15.344 36.106 23.794 58.065 23.794s42.58-8.45 58.065-23.794a81.625 81.625 0 0 0 13.525-17.672c14.067 25.281 40.944 42.418 71.737 42.418 30.752 0 57.597-17.081 71.688-42.294 14.091 25.213 40.936 42.294 71.688 42.294 24.262 0 46.092-10.645 61.143-27.528V462H321z"></path>
+                                    <path d="M202.494 386h22c5.799 0 10.5-4.701 10.5-10.5s-4.701-10.5-10.5-10.5h-22c-5.799 0-10.5 4.701-10.5 10.5s4.701 10.5 10.5 10.5z"></path>
+                                </g>
+                            </svg>
+                            <h4><span>1. </span>Choose Location</h4> </div>
+                        <!-- end:Step -->
+                        <div class="step-item step2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewbox="0 0 380.721 380.721">
+                                <g fill="#FFF">
+                                    <path d="M58.727 281.236c.32-5.217.657-10.457 1.319-15.709 1.261-12.525 3.974-25.05 6.733-37.296a543.51 543.51 0 0 1 5.449-17.997c2.463-5.729 4.868-11.433 7.25-17.01 5.438-10.898 11.491-21.07 18.724-29.593 1.737-2.19 3.427-4.328 5.095-6.46 1.912-1.894 3.805-3.747 5.676-5.588 3.863-3.509 7.221-7.273 11.107-10.091 7.686-5.711 14.529-11.137 21.477-14.506 6.698-3.724 12.455-6.982 17.631-8.812 10.125-4.084 15.883-6.141 15.883-6.141s-4.915 3.893-13.502 10.207c-4.449 2.917-9.114 7.488-14.721 12.147-5.803 4.461-11.107 10.84-17.358 16.992-3.149 3.114-5.588 7.064-8.551 10.684-1.452 1.83-2.928 3.712-4.427 5.6a1225.858 1225.858 0 0 1-3.84 6.286c-5.537 8.208-9.673 17.858-13.995 27.664-1.748 5.1-3.566 10.283-5.391 15.534a371.593 371.593 0 0 1-4.16 16.476c-2.266 11.271-4.502 22.761-5.438 34.612-.68 4.287-1.022 8.633-1.383 12.979 94 .023 166.775.069 268.589.069.337-4.462.534-8.97.534-13.536 0-85.746-62.509-156.352-142.875-165.705 5.17-4.869 8.436-11.758 8.436-19.433-.023-14.692-11.921-26.612-26.631-26.612-14.715 0-26.652 11.92-26.652 26.642 0 7.668 3.265 14.558 8.464 19.426-80.396 9.353-142.869 79.96-142.869 165.706 0 4.543.168 9.027.5 13.467 9.935-.002 19.526-.002 28.926-.002zM0 291.135h380.721v33.59H0z" /> </g>
+                            </svg>
+                            <h4><span>2. </span>Order Food</h4> </div>
+                        <!-- end:Step -->
+                        <div class="step-item step3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewbox="0 0 612.001 612">
+                                <path d="M604.131 440.17h-19.12V333.237c0-12.512-3.776-24.787-10.78-35.173l-47.92-70.975a62.99 62.99 0 0 0-52.169-27.698h-74.28c-8.734 0-15.737 7.082-15.737 15.738v225.043h-121.65c11.567 9.992 19.514 23.92 21.796 39.658H412.53c4.563-31.238 31.475-55.396 63.972-55.396 32.498 0 59.33 24.158 63.895 55.396h63.735c4.328 0 7.869-3.541 7.869-7.869V448.04c-.001-4.327-3.541-7.87-7.87-7.87zM525.76 312.227h-98.044a7.842 7.842 0 0 1-7.868-7.869v-54.372c0-4.328 3.541-7.869 7.868-7.869h59.724c2.597 0 4.957 1.259 6.452 3.305l38.32 54.451c3.619 5.194-.079 12.354-6.452 12.354zM476.502 440.17c-27.068 0-48.943 21.953-48.943 49.021 0 26.99 21.875 48.943 48.943 48.943 26.989 0 48.943-21.953 48.943-48.943 0-27.066-21.954-49.021-48.943-49.021zm0 73.495c-13.535 0-24.472-11.016-24.472-24.471 0-13.535 10.937-24.473 24.472-24.473 13.533 0 24.472 10.938 24.472 24.473 0 13.455-10.938 24.471-24.472 24.471zM68.434 440.17c-4.328 0-7.869 3.543-7.869 7.869v23.922c0 4.328 3.541 7.869 7.869 7.869h87.971c2.282-15.738 10.229-29.666 21.718-39.658H68.434v-.002zm151.864 0c-26.989 0-48.943 21.953-48.943 49.021 0 26.99 21.954 48.943 48.943 48.943 27.068 0 48.943-21.953 48.943-48.943.001-27.066-21.874-49.021-48.943-49.021zm0 73.495c-13.534 0-24.471-11.016-24.471-24.471 0-13.535 10.937-24.473 24.471-24.473s24.472 10.938 24.472 24.473c0 13.455-10.938 24.471-24.472 24.471zm117.716-363.06h-91.198c4.485 13.298 6.846 27.54 6.846 42.255 0 74.28-60.431 134.711-134.711 134.711-13.535 0-26.675-2.045-39.029-5.744v86.949c0 4.328 3.541 7.869 7.869 7.869h265.96c4.329 0 7.869-3.541 7.869-7.869V174.211c-.001-13.062-10.545-23.606-23.606-23.606zM118.969 73.866C53.264 73.866 0 127.129 0 192.834s53.264 118.969 118.969 118.969 118.97-53.264 118.97-118.969-53.265-118.968-118.97-118.968zm0 210.864c-50.752 0-91.896-41.143-91.896-91.896s41.144-91.896 91.896-91.896c50.753 0 91.896 41.144 91.896 91.896 0 50.753-41.143 91.896-91.896 91.896zm35.097-72.488c-1.014 0-2.052-.131-3.082-.407L112.641 201.5a11.808 11.808 0 0 1-8.729-11.396v-59.015c0-6.516 5.287-11.803 11.803-11.803 6.516 0 11.803 5.287 11.803 11.803v49.971l29.614 7.983c6.294 1.698 10.02 8.177 8.322 14.469-1.421 5.264-6.185 8.73-11.388 8.73z" fill="#FFF" /> </svg>
+                            <h4><span>3. </span>Delivery or take out</h4> </div>
+                        <!-- end:Step -->
+                    </div>
+                    <!-- end:Steps -->
+                </div>
+            </div>
+            <!--end:Hero inner -->
+        </section>
+        <!-- banner part ends -->
+        <!-- location match part starts -->
+        <div class="location-match text-xs-center">
+            <div class="container"> <span>356 restaurants matched your location: <span class="primary-color">New York, NY -</span> </span>
+            </div>
+        </div>
+        <!-- location match part ends -->
+        <!-- Popular block starts -->
+        <section class="popular">
+            <div class="container">
+                <div class="title text-xs-center m-b-30">
+                    <h2>Popular This Month In Your City</h2>
+                    <p class="lead">The easiest way to your favourite food</p>
+                </div>
+                <div class="row">
+                    <!-- Each popular food item starts -->
+                    <div class="col-xs-12 col-sm-6 col-md-4 food-item">
+                        <div class="food-item-wrap">
+                            <div class="figure-wrap bg-image" data-image-src="assets/images/food1.jpg">
+                                <div class="distance"><i class="fa fa-pin"></i>1240m</div>
+                                <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+                                <div class="review pull-right"><a href="#">198 reviews</a> </div>
+                            </div>
+                            <div class="content">
+                                <h5><a href="profile.html">The South"s Best Fried Chicken</a></h5>
+                                <div class="product-name">Fried Chicken with cheese</div>
+                                <div class="price-btn-block"> <span class="price">$ 15,99</span> <a href="#" class="btn theme-btn-dash pull-right">Order Now</a> </div>
+                            </div>
+                            <div class="restaurant-block">
+                                <div class="left">
+                                    <a class="pull-left" href="profile.html"> <img src="assets/images/logo1.png" alt="Restaurant logo" /> </a>
+                                    <div class="pull-left right-text"> <a href="#">Chicken Restaurant</a> <span>68 5th Avenue New York</span> </div>
+                                </div>
+                                <div class="right-like-part pull-right"> <i class="fa fa-heart-o"></i> <span>48</span> </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="cart-details">
-                        <h3 ng-show="!isCartEmpty">Cart</h3>
-                        <ul>
-                            <li ng-repeat="products in Products track by $index">
-                                <div class="row">
-                                    <div class="col remove">
-                                        <span class="icon-minus-square" ng-click="removeProduct(products);"
-                                            ng-if="FilterSimpleProducts(products)"></span>
-                                        <input class="qty" type="text" value="{{products.quantity}}" min="1" readonly>
-                                    </div>
-                                    <div class="col items">
-                                        <span ng-if="FilterSimpleProducts(products)"
-                                            class="fontSet">{{products.MenuItem | capitalize | limitTo : 25}}</span>
-                                        <ul class="modifiers" ng-if="FilterModifierProducts(products)">
-                                            <li class="modifierfont">
-                                                <span>
-                                                    {{products.MenuItem | capitalize | limitTo : 25}}
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col price">
-                                        <span class="fontSet">
-                                            {{restaurantObject.Currency}}{{products.price | number: 2}}</span>
-                                    </div>
+                    <!-- Each popular food item starts -->
+                    <!-- Each popular food item starts -->
+                    <div class="col-xs-12 col-sm-6 col-md-4 food-item">
+                        <div class="food-item-wrap">
+                            <div class="figure-wrap bg-image" data-image-src="assets/images/food2.jpg">
+                                <div class="distance"><i class="fa fa-pin"></i>1240m</div>
+                                <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+                                <div class="review pull-right"><a href="#">198 reviews</a> </div>
+                            </div>
+                            <div class="content">
+                                <h5><a href="profile.html">The South"s Best Fried Chicken</a></h5>
+                                <div class="product-name">Fried Chicken with cheese</div>
+                                <div class="price-btn-block"> <span class="price">$ 18,49</span> <a href="#" class="btn theme-btn-dash pull-right">Order Now</a> </div>
+                            </div>
+                            <div class="restaurant-block">
+                                <div class="left">
+                                    <a class="pull-left" href="profile.html"> <img src="assets/images/logo2.png" alt="Restaurant logo" /> </a>
+                                    <div class="pull-left right-text"> <a href="#">Chicken Restaurant</a> <span>68 5th Avenue New York</span> </div>
                                 </div>
-                            </li>
-                            <li class="total-row">
-                                <div class="row" ng-show="hideText && DeliveryCharges">
-                                    <div class="col items fontSet">
-                                        Delivery fee
-                                    </div>
-                                    <div class="col price fontSet">
-                                        {{restaurantObject.Currency}}{{DeliveryCharges | number:2}}
-                                    </div>
+                                <div class="right-like-part pull-right"> <i class="fa fa-heart-o"></i> <span>48</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Each popular food item starts -->
+                    <!-- Each popular food item starts -->
+                    <div class="col-xs-12 col-sm-6 col-md-4 food-item">
+                        <div class="food-item-wrap">
+                            <div class="figure-wrap bg-image" data-image-src="assets/images/food3.jpg">
+                                <div class="distance"><i class="fa fa-pin"></i>1240m</div>
+                                <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+                                <div class="review pull-right"><a href="#">198 reviews</a> </div>
+                            </div>
+                            <div class="content">
+                                <h5><a href="profile.html">The South"s Best Fried Chicken</a></h5>
+                                <div class="product-name">Fried Chicken with cheese</div>
+                                <div class="price-btn-block"> <span class="price">$ 21,19</span> <a href="#" class="btn theme-btn-dash pull-right">Order Now</a> </div>
+                            </div>
+                            <div class="restaurant-block">
+                                <div class="left">
+                                    <a class="pull-left" href="profile.html"> <img src="assets/images/logo3.png" alt="Restaurant logo" /> </a>
+                                    <div class="pull-left right-text"> <a href="#">Chicken Restaurant</a> <span>68 5th Avenue New York</span> </div>
                                 </div>
-                                <div class="row" ng-show="!isCartEmpty" ng-if="discountedPrice">                                        
-                                    <div class="col items fontSet ">
-                                        Discount
+                                <div class="right-like-part pull-right"> <i class="fa fa-heart-o"></i> <span>48</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Each popular food item starts -->
+                </div>
+            </div>
+        </section>
+        <!-- Popular block ends -->
+        <!-- How it works block starts -->
+        <section class="how-it-works">
+            <div class="container">
+                <div class="text-xs-center">
+                    <h2>Easy 3 Step Order</h2>
+                    <!-- 3 block sections starts -->
+                    <div class="row how-it-works-solution">
+                        <div class="col-xs-12 col-sm-12 col-md-4 how-it-works-steps white-txt col1">
+                            <div class="how-it-works-wrap">
+                                <div class="step step-1">
+                                    <div class="icon" data-step="1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 483 483" width="512" height="512">
+                                            <g fill="#FFF">
+                                                <path d="M467.006 177.92c-.055-1.573-.469-3.321-1.233-4.755L407.006 62.877V10.5c0-5.799-4.701-10.5-10.5-10.5h-310c-5.799 0-10.5 4.701-10.5 10.5v52.375L17.228 173.164a10.476 10.476 0 0 0-1.22 4.938h-.014V472.5c0 5.799 4.701 10.5 10.5 10.5h430.012c5.799 0 10.5-4.701 10.5-10.5V177.92zM282.379 76l18.007 91.602H182.583L200.445 76h81.934zm19.391 112.602c-4.964 29.003-30.096 51.143-60.281 51.143-30.173 0-55.295-22.139-60.258-51.143H301.77zm143.331 0c-4.96 29.003-30.075 51.143-60.237 51.143-30.185 0-55.317-22.139-60.281-51.143h120.518zm-123.314-21L303.78 76h86.423l48.81 91.602H321.787zM97.006 55V21h289v34h-289zm-4.198 21h86.243l-17.863 91.602h-117.2L92.808 76zm65.582 112.602c-5.028 28.475-30.113 50.19-60.229 50.19s-55.201-21.715-60.23-50.19H158.39zM300 462H183V306h117v156zm21 0V295.5c0-5.799-4.701-10.5-10.5-10.5h-138c-5.799 0-10.5 4.701-10.5 10.5V462H36.994V232.743a82.558 82.558 0 0 0 3.101 3.255c15.485 15.344 36.106 23.794 58.065 23.794s42.58-8.45 58.065-23.794a81.625 81.625 0 0 0 13.525-17.672c14.067 25.281 40.944 42.418 71.737 42.418 30.752 0 57.597-17.081 71.688-42.294 14.091 25.213 40.936 42.294 71.688 42.294 24.262 0 46.092-10.645 61.143-27.528V462H321z" />
+                                                <path d="M202.494 386h22c5.799 0 10.5-4.701 10.5-10.5s-4.701-10.5-10.5-10.5h-22c-5.799 0-10.5 4.701-10.5 10.5s4.701 10.5 10.5 10.5z" /> </g>
+                                        </svg>
                                     </div>
-                                    <div class="col price fontSet ">
-                                        -{{restaurantObject.Currency}}{{discountedPrice | number:2}}
-                                    </div>
+                                    <h3>Choose a restaurant</h3>
+                                    <p>We"ve got your covered with menus from over 345 delivery restaurants online.</p>
                                 </div>
-                                <div class="row" ng-show="!isCartEmpty">
-                                    <div class="col items fontSet">
-                                        Total
-                                    </div>
-                                    <div class="col price fontSet">
-                                        {{restaurantObject.Currency}}{{TotalAmount | number:2}}
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 how-it-works-steps white-txt col2">
+                            <div class="step step-2">
+                                <div class="icon" data-step="2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewbox="0 0 380.721 380.721">
+                                        <g fill="#FFF">
+                                            <path d="M58.727 281.236c.32-5.217.657-10.457 1.319-15.709 1.261-12.525 3.974-25.05 6.733-37.296a543.51 543.51 0 0 1 5.449-17.997c2.463-5.729 4.868-11.433 7.25-17.01 5.438-10.898 11.491-21.07 18.724-29.593 1.737-2.19 3.427-4.328 5.095-6.46 1.912-1.894 3.805-3.747 5.676-5.588 3.863-3.509 7.221-7.273 11.107-10.091 7.686-5.711 14.529-11.137 21.477-14.506 6.698-3.724 12.455-6.982 17.631-8.812 10.125-4.084 15.883-6.141 15.883-6.141s-4.915 3.893-13.502 10.207c-4.449 2.917-9.114 7.488-14.721 12.147-5.803 4.461-11.107 10.84-17.358 16.992-3.149 3.114-5.588 7.064-8.551 10.684-1.452 1.83-2.928 3.712-4.427 5.6a1225.858 1225.858 0 0 1-3.84 6.286c-5.537 8.208-9.673 17.858-13.995 27.664-1.748 5.1-3.566 10.283-5.391 15.534a371.593 371.593 0 0 1-4.16 16.476c-2.266 11.271-4.502 22.761-5.438 34.612-.68 4.287-1.022 8.633-1.383 12.979 94 .023 166.775.069 268.589.069.337-4.462.534-8.97.534-13.536 0-85.746-62.509-156.352-142.875-165.705 5.17-4.869 8.436-11.758 8.436-19.433-.023-14.692-11.921-26.612-26.631-26.612-14.715 0-26.652 11.92-26.652 26.642 0 7.668 3.265 14.558 8.464 19.426-80.396 9.353-142.869 79.96-142.869 165.706 0 4.543.168 9.027.5 13.467 9.935-.002 19.526-.002 28.926-.002zM0 291.135h380.721v33.59H0z" /> </g>
+                                    </svg>
                                 </div>
-                            </li>
-                            <li class="g-total-row" ng-show="hideText">
-                                <div class="row">
-                                    <div class="col items fontSet">
-                                        Minimum Order
-                                    </div>
-                                    <div class="col price fontSet">
-                                        {{restaurantObject.Currency}}{{MinOrderAmount | number:2}}
-                                    </div>
+                                <h3>Choose a tasty dish</h3>
+                                <p>We"ve got your covered with menus from over 345 delivery restaurants online.</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 how-it-works-steps white-txt col3">
+                            <div class="step step-3">
+                                <div class="icon" data-step="3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewbox="0 0 612.001 612">
+                                        <path d="M604.131 440.17h-19.12V333.237c0-12.512-3.776-24.787-10.78-35.173l-47.92-70.975a62.99 62.99 0 0 0-52.169-27.698h-74.28c-8.734 0-15.737 7.082-15.737 15.738v225.043h-121.65c11.567 9.992 19.514 23.92 21.796 39.658H412.53c4.563-31.238 31.475-55.396 63.972-55.396 32.498 0 59.33 24.158 63.895 55.396h63.735c4.328 0 7.869-3.541 7.869-7.869V448.04c-.001-4.327-3.541-7.87-7.87-7.87zM525.76 312.227h-98.044a7.842 7.842 0 0 1-7.868-7.869v-54.372c0-4.328 3.541-7.869 7.868-7.869h59.724c2.597 0 4.957 1.259 6.452 3.305l38.32 54.451c3.619 5.194-.079 12.354-6.452 12.354zM476.502 440.17c-27.068 0-48.943 21.953-48.943 49.021 0 26.99 21.875 48.943 48.943 48.943 26.989 0 48.943-21.953 48.943-48.943 0-27.066-21.954-49.021-48.943-49.021zm0 73.495c-13.535 0-24.472-11.016-24.472-24.471 0-13.535 10.937-24.473 24.472-24.473 13.533 0 24.472 10.938 24.472 24.473 0 13.455-10.938 24.471-24.472 24.471zM68.434 440.17c-4.328 0-7.869 3.543-7.869 7.869v23.922c0 4.328 3.541 7.869 7.869 7.869h87.971c2.282-15.738 10.229-29.666 21.718-39.658H68.434v-.002zm151.864 0c-26.989 0-48.943 21.953-48.943 49.021 0 26.99 21.954 48.943 48.943 48.943 27.068 0 48.943-21.953 48.943-48.943.001-27.066-21.874-49.021-48.943-49.021zm0 73.495c-13.534 0-24.471-11.016-24.471-24.471 0-13.535 10.937-24.473 24.471-24.473s24.472 10.938 24.472 24.473c0 13.455-10.938 24.471-24.472 24.471zm117.716-363.06h-91.198c4.485 13.298 6.846 27.54 6.846 42.255 0 74.28-60.431 134.711-134.711 134.711-13.535 0-26.675-2.045-39.029-5.744v86.949c0 4.328 3.541 7.869 7.869 7.869h265.96c4.329 0 7.869-3.541 7.869-7.869V174.211c-.001-13.062-10.545-23.606-23.606-23.606zM118.969 73.866C53.264 73.866 0 127.129 0 192.834s53.264 118.969 118.969 118.969 118.97-53.264 118.97-118.969-53.265-118.968-118.97-118.968zm0 210.864c-50.752 0-91.896-41.143-91.896-91.896s41.144-91.896 91.896-91.896c50.753 0 91.896 41.144 91.896 91.896 0 50.753-41.143 91.896-91.896 91.896zm35.097-72.488c-1.014 0-2.052-.131-3.082-.407L112.641 201.5a11.808 11.808 0 0 1-8.729-11.396v-59.015c0-6.516 5.287-11.803 11.803-11.803 6.516 0 11.803 5.287 11.803 11.803v49.971l29.614 7.983c6.294 1.698 10.02 8.177 8.322 14.469-1.421 5.264-6.185 8.73-11.388 8.73z" fill="#FFF" /> </svg>
                                 </div>
-                            </li>
-
-                        </ul>
-                        <div class="clearfix"><br></div>
-                        <a href class="checkout-cart" ng-click="openCart();" ng-disabled="IsPreccedButtonDisable"
-                            ng-class="{'diabled-class': IsPreccedButtonDisable}">Proceed</a>
-                        <div class="clearfix"></div>
+                                <h3>Pick up or Delivery</h3>
+                                <p>Get your food delivered! And enjoy your meal! Pay online on pickup or delivery</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3 block sections ends -->
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <p class="pay-info">Pay by Cash on delivery , Card or Paypal</p>
                     </div>
                 </div>
             </div>
-
-        </div>
-        <div class="view view-main">
-            <div id="external_js2"></div>
-            <header class="design-04 header-new">
-                <div class="wrapperz">
-                    <div class="row header-new-row">
-                        <div class="cols col-4 header-new-left">
-                            <span class="header-new-left-phone-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="44.321" height="44.404" viewBox="0 0 44.321 44.404"><defs><style>.a{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:3px;}</style></defs><path class="a" d="M44.485,34v6.232a4.155,4.155,0,0,1-4.529,4.155,41.113,41.113,0,0,1-17.928-6.378A40.51,40.51,0,0,1,9.562,25.54,41.113,41.113,0,0,1,3.185,7.529,4.155,4.155,0,0,1,7.319,3h6.232a4.155,4.155,0,0,1,4.155,3.573,26.674,26.674,0,0,0,1.454,5.838,4.155,4.155,0,0,1-.935,4.383l-2.638,2.638A33.239,33.239,0,0,0,28.052,31.9l2.638-2.638a4.155,4.155,0,0,1,4.383-.935,26.675,26.675,0,0,0,5.838,1.454A4.155,4.155,0,0,1,44.485,34Z" transform="translate(-1.666 -1.5)"/></svg> </span><span class="header-new-left-phone-text">{{restaurantObject.phoneNumber}}</span>
-                        </div>
-                        <div class="cols col-4 header-new-center text-center">
-                            <img src="{{restaurantObject.LogoPath + CompIcon}}" class="menu-brand" alt="" ng-click="ChangePage('home');changeClass('home');">
-                        </div>
-                        <div class="cols col-4 header-new-right text-right">
-                            <ul class="header-new-right-menu">
-                                <li>
-                                    <div class="dropdown">
-                                        <button id="dropdowninput" ng-click="firstName.length == 0 ? ChangePage('login') : ''" for="dropdowninput" class="account-button"><svg xmlns="http://www.w3.org/2000/svg" width="27" height="30" viewBox="0 0 27 30"><defs><style>.a{fill:none; stroke-linecap:round;stroke-linejoin:round;stroke-width:3px;}</style></defs><g transform="translate(-4.5 -3)"><path class="a" d="M30,31.5v-3a6,6,0,0,0-6-6H12a6,6,0,0,0-6,6v3"/><path class="a" d="M24,10.5a6,6,0,1,1-6-6A6,6,0,0,1,24,10.5Z"/></g></svg></button>
-                                        <div class="dropdown-content sub-menu" ng-show="firstName.length != 0">
-                                            <a href ng-click="getRecentOrders();">Orders</a>
-                                            <a href ng-click="ChangePage('myprofile');">Profile</a>
-                                            <a ng-if="isLoyalty" href ng-click="ChangePage('myrewards');getRewardPoints();">Rewards <span class="rew_points">{{ availablePoints }}</span></a>
-                                            <a href ng-click="logout();">Logout</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <button class="cart-button" ng-if="(cartProducts.numberOfProducts != 0) && (currentPage !== 'checkout-details')"
-                                    ng-click="viewMobileCart();" id="showCart"><span ng-bind="(cartProducts.numberOfProducts)">11 </span><svg xmlns="http://www.w3.org/2000/svg" width="32.94" height="31.58" viewBox="0 0 32.94 31.58"><defs><style>.a{fill:none; stroke-linecap:round;stroke-linejoin:round;stroke-width:3px;}</style></defs><path class="a" d="M14.722,31.361A1.361,1.361,0,1,1,13.361,30,1.361,1.361,0,0,1,14.722,31.361Z" transform="translate(-0.973 -2.642)"/><path class="a" d="M31.222,31.361A1.361,1.361,0,1,1,29.861,30,1.361,1.361,0,0,1,31.222,31.361Z" transform="translate(-2.503 -2.642)"/><path class="a" d="M1.5,1.5H6.944l3.647,18.223a2.722,2.722,0,0,0,2.722,2.191H26.541a2.722,2.722,0,0,0,2.722-2.191L31.44,8.3H8.3"/></svg></button>
-                                </li>
-                                <li class="menu-icon-wrapper"><button class="menu-icon" id="mobileMenu">&#9776;</button></li>
-                                <li class="online-button-wrapper"><button class="online-button" ng-click="openTableOptions();">Order Online</button></li>
-                            </ul>
-                        </div>
+        </section>
+        <!-- How it works block ends -->
+        <!-- Featured restaurants starts -->
+        <section class="featured-restaurants">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="title-block pull-left">
+                            <h4>Featured restaurants</h4> </div>
                     </div>
-                </div>
-                <div class="wrapperz">
-                    <div class="row">
-                        <div class="col col-12 new-menu-row">
-                            <nav class="navbar">
-                                <ul class="menu">
-                                    <li><a href="" class="{{Pages.home}}" ng-click="ChangePage('home');changeClass('home');">Home</a></li>
-                                    <li><a href="" class="{{Pages.gallery}}" ng-click="ChangePage('gallery');changeClass('gallery');">Gallery</a></li>
-                                    <li><a href="" class="{{Pages.about}}" ng-click="ChangePage('about');changeClass('about');">About</a></li>
-                                    <li><a href="" class="{{Pages.menu}}" ng-click="ChangePage('menu');changeClass('menu');">Menu</a></li>
-                                    <li><a href="" class="{{Pages.tastingMenu}}" ng-click="ChangePage('tasting-menu');changeClass('tastingMenu');">Tasting Menu</a></li>
-                                    <li ng-if="isOptionAvailable('deliveryOrder')"><a class="{{Pages.delivery}}" href="" ng-click="selectedOrderType('Delivery')">Delivery</a></li>
-                                    <li ng-if="isOptionAvailable('collectionOrder')"><a class="{{Pages.collection}}" href="" ng-click="selectedOrderType('Collection')">Collection</a></li>
-                                    <li ng-if="isOptionAvailable('tableOrder')"><a class="{{Pages.table}}" href="" ng-click="openTableOrder();">Table</a></li>
-                                    <li><a class="{{Pages.book}}" href="" ng-click="ChangePage('book');changeClass('book');">Book</a></li>
-                                    <li><a class="{{Pages.news}}" href="" ng-click="ChangePage('news');changeClass('news');">News</a></li>
-                                    <li><a class="{{Pages.contactUs}}" href="" ng-click="contactUsPage();changeClass('contactUs');">Contact</a></li>
+                    <div class="col-sm-8">
+                        <!-- restaurants filter nav starts -->
+                        <div class="restaurants-filter pull-right">
+                            <nav class="primary pull-left">
+                                <ul>
+                                    <li><a href="#" class="selected" data-filter="*">Grill</a> </li>
+                                    <li><a href="#" data-filter=".pizza">Pizza</a> </li>
+                                    <li><a href="#" data-filter=".pasta">Pasta</a> </li>
+                                    <li><a href="#" data-filter=".thaifood">thai food</a> </li>
+                                    <li><a href="#" data-filter=".fish">fish</a> </li>
                                 </ul>
                             </nav>
                         </div>
+                        <!-- restaurants filter nav ends -->
                     </div>
                 </div>
-            </header>
-            <div id="catbar" class="mobile-menu">
-                <span id="closecat" class="closemMenu"><img src="assets/images/close.svg" alt=""></span>
-                <div class="mobile-menu-wrapper">
-                    <ul class="slideMenu">
-                        <li ng-if="firstName.length != 0"><a href ng-click="getRecentOrders();" class="mlink-item"><i
-                                    class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                Orders</a></li>
-                        <li ng-if="firstName.length != 0"><a href ng-click="ChangePage('myprofile');"
-                                class="mlink-item"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                                Profile</a></li>
-                        <li ng-if="firstName.length != 0"><a href ng-click="ChangePage('myrewards');"
-                                class="mlink-item"><i class="fa fa-ticket" aria-hidden="true"></i>
-                                Rewards</a></li>
-                        <li ng-if="firstName.length != 0"><a href ng-click="getMyAddresses();" class="mlink-item"><i
-                                    class="fa fa-map-marker" aria-hidden="true"></i>
-                                Addresses</a></li>
-                        <li ng-if="firstName.length != 0"><a href ng-click="logout();" class="mlink-item"><i
-                                    class="fa fa-sign-out" aria-hidden="true"></i>
-                                Logout</a></li>
-                        <li ng-if="firstName.length == 0">
-                            <a href ng-click="ChangePage('login');" class="mlink-item"><span
-                                    class="icon-sign-in"></span> Login</a></li>
-                        <li ng-if="firstName.length == 0">
-                            <a href ng-click="ChangePage('signup');" class="mlink-item"><span
-                                    class="icon-user-add"></span> Sign up</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="hero-section2">
-                <h3 class="">Ready to Order?</h3>
-            </div>
-            <div class="message">
-                <div class="wrapperz">
-                    <div class="row">
-                        <div class="cols col-6">
-                            <p>You or someone you're ordering for has a food allergy or intolerance</p>
-                        </div>
-                        <div class="cols col-6 text-right"><a href class="btn" ng-click="openAllergyPopup();">Click
-                                Here</a></div>
-                    </div>
-                </div>
-            </div>
-            <ng-view></ng-view>
-            <div id="pre-popup-time" class="white-popup mfp-with-anim mfp-hide selectionProductfont">
-                <h3 style="border-bottom: 2px solid #ddd;">Select Pre-order Timing</h3>
+                <!-- restaurants listing starts -->
                 <div class="row">
-                    <div class="cols col-12 text-center">
-                        <p style="font-size: 16px; text-align: center;color: #000; font-weight: normal;">Sorry, We're currently closed and will open at 05:30 PM</p>
+                    <div class="restaurant-listing">
+                        <div class="col-xs-12 col-sm-12 col-md-6 single-restaurant grill fish thaifood pizza">
+                            <div class="restaurant-wrap">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3 col-md-12 col-lg-3 text-xs-center">
+                                        <a class="restaurant-logo" href="#"> <img src="assets/images/big-logo7.jpg" alt="Restaurant logo"> </a>
+                                    </div>
+                                    <!--end:col -->
+                                    <div class="col-xs-12 col-sm-9 col-md-12 col-lg-9">
+                                        <h5><a href="profile.html">Maenaam Thai Restaurant</a></h5> <span>Burgers, American, Sandwiches, Fast Food, BBQ</span>
+                                        <div class="bottom-part">
+                                            <div class="cost"><i class="fa fa-check"></i> Min $ 10,00</div>
+                                            <div class="mins"><i class="fa fa-motorcycle"></i> 30 min</div>
+                                            <div class="ratings"> <span>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </span> (122) </div>
+                                        </div>
+                                    </div>
+                                    <!-- end:col -->
+                                </div>
+                                <!-- end:row -->
+                            </div>
+                            <!--end:Restaurant wrap -->
+                        </div>
+                        <!--end: col -->
+                        <div class="col-xs-12 col-sm-12 col-md-6 single-restaurant grill fish pasta thaifood">
+                            <div class="restaurant-wrap">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3 col-md-12 col-lg-3 text-xs-center">
+                                        <a class="restaurant-logo" href="#"> <img src="assets/images/logo-plate.png" alt="Restaurant logo"> </a>
+                                    </div>
+                                    <!--end:col -->
+                                    <div class="col-xs-12 col-sm-9 col-md-12 col-lg-9">
+                                        <h5><a href="profile.html">Maenaam Thai Restaurant</a></h5> <span>Burgers, American, Sandwiches, Fast Food, BBQ</span>
+                                        <div class="bottom-part">
+                                            <div class="cost"><i class="fa fa-check"></i> Min $ 10,00</div>
+                                            <div class="mins"><i class="fa fa-motorcycle"></i> 30 min</div>
+                                            <div class="ratings"> <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </span> (122) </div>
+                                        </div>
+                                    </div>
+                                    <!-- end:col -->
+                                </div>
+                                <!-- end:row -->
+                            </div>
+                            <!--end:Restaurant wrap -->
+                        </div>
+                        <!--end: col -->
+                        <div class="col-xs-12 col-sm-12 col-md-6 single-restaurant grill thaifood pasta pizza">
+                            <div class="restaurant-wrap">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3 col-md-12 col-lg-3 text-xs-center">
+                                        <a class="restaurant-logo" href="#"> <img src="assets/images/big-logo8.png" alt="Restaurant logo"> </a>
+                                    </div>
+                                    <!--end:col -->
+                                    <div class="col-xs-12 col-sm-9 col-md-12 col-lg-9">
+                                        <h5><a href="profile.html">Maenaam Thai Restaurant</a></h5> <span>Burgers, American, Sandwiches, Fast Food, BBQ</span>
+                                        <div class="bottom-part">
+                                            <div class="cost"><i class="fa fa-check"></i> Min $ 10,00</div>
+                                            <div class="mins"><i class="fa fa-motorcycle"></i> 30 min</div>
+                                            <div class="ratings"> <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </span> (122) </div>
+                                        </div>
+                                    </div>
+                                    <!-- end:col -->
+                                </div>
+                                <!-- end:row -->
+                            </div>
+                            <!--end:Restaurant wrap -->
+                        </div>
+                        <!--end: col -->
+                        <div class="col-xs-12 col-sm-12 col-md-6 single-restaurant thaifood fish pasta">
+                            <div class="restaurant-wrap">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3 col-md-12 col-lg-3 text-xs-center">
+                                        <a class="restaurant-logo" href="#"> <img src="assets/images/big-logo4.png" alt="Restaurant logo"> </a>
+                                    </div>
+                                    <!--end:col -->
+                                    <div class="col-xs-12 col-sm-9 col-md-12 col-lg-9">
+                                        <h5><a href="profile.html">Maenaam Thai Restaurant</a></h5> <span>Burgers, American, Sandwiches, Fast Food, BBQ</span>
+                                        <div class="bottom-part">
+                                            <div class="cost"><i class="fa fa-check"></i> Min $ 10,00</div>
+                                            <div class="mins"><i class="fa fa-motorcycle"></i> 30 min</div>
+                                            <div class="ratings"> <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </span> (122) </div>
+                                        </div>
+                                    </div>
+                                    <!-- end:col -->
+                                </div>
+                                <!-- end:row -->
+                            </div>
+                            <!--end:Restaurant wrap -->
+                        </div>
+                        <!--end: col -->
+                        <div class="col-xs-12 col-sm-12 col-md-6 single-restaurant grill fish thaifood pasta pizza">
+                            <div class="restaurant-wrap">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3 col-md-12 col-lg-3 text-xs-center">
+                                        <a class="restaurant-logo" href="#"> <img src="assets/images/big-logo3.png" alt="Restaurant logo"> </a>
+                                    </div>
+                                    <!--end:col -->
+                                    <div class="col-xs-12 col-sm-9 col-md-12 col-lg-9">
+                                        <h5><a href="profile.html">Maenaam Thai Restaurant</a></h5> <span>Burgers, American, Sandwiches, Fast Food, BBQ</span>
+                                        <div class="bottom-part">
+                                            <div class="cost"><i class="fa fa-check"></i> Min $ 10,00</div>
+                                            <div class="mins"><i class="fa fa-motorcycle"></i> 30 min</div>
+                                            <div class="ratings"> <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </span> (122) </div>
+                                        </div>
+                                    </div>
+                                    <!-- end:col -->
+                                </div>
+                                <!-- end:row -->
+                            </div>
+                            <!--end:Restaurant wrap -->
+                        </div>
+                        <!--end: col -->
+                        <div class="col-xs-12 col-sm-12 col-md-6 single-restaurant grill pasta pizza">
+                            <div class="restaurant-wrap">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3 col-md-12 col-lg-3 text-xs-center">
+                                        <a class="restaurant-logo" href="#"> <img src="assets/images/big-logo2.png" alt="Restaurant logo"> </a>
+                                    </div>
+                                    <!--end:col -->
+                                    <div class="col-xs-12 col-sm-9 col-md-12 col-lg-9">
+                                        <h5><a href="profile.html">Maenaam Thai Restaurant</a></h5> <span>Burgers, American, Sandwiches, Fast Food, BBQ</span>
+                                        <div class="bottom-part">
+                                            <div class="cost"><i class="fa fa-check"></i> Min $ 10,00</div>
+                                            <div class="mins"><i class="fa fa-motorcycle"></i> 30 min</div>
+                                            <div class="ratings"> <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </span> (122) </div>
+                                        </div>
+                                    </div>
+                                    <!-- end:col -->
+                                </div>
+                                <!-- end:row -->
+                            </div>
+                            <!--end:Restaurant wrap -->
+                        </div>
+                        <!--end: col -->
                     </div>
                 </div>
-                <div style="padding: 0rem 1rem 2rem 1rem">
-                    <div class="row">
-                        <div class="cols col-8" style="float: none; margin: 5px auto;">
-                            <div class="row">
-                                <div class="form-group cols col-12">
-                                    <label>Date*</label>
-                                    <input id="prePopDates" for="prePopDates" onclick="openPopDates(event)" type="text" class="form-control" ng-model="preTimings.currentDate" readonly />
-                                    <div class="jem-pop-nav">
-                                        <ul ng-click="setPreDate()">
-                                            <ng-container ng-repeat="obj in preDate track by $index">
-                                                <li ng-click="setPreDate(obj)" role="button">
-                                                    {{obj}}
-                                                </li>
-                                            </ng-container>
-                                        </ul>
-                                    </div>
-                                </div>
+                <!-- restaurants listing ends -->
+                <!-- add restaurant starts -->
+                <section class="add-restaurants">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3 add-title">
+                                <h4>Add Your Restaurant</h4> </div>
+                            <div class="col-xs-12 col-sm-5 join-text">
+                                <p>Join the thousands of other restaurants who benefit from having their menus on <a href="#"><strong> FoodPicky directory</strong></a> </p>
                             </div>
-                            <div class="row">
-                                <div class="form-group cols col-6">
-                                    <label>Hours*</label>
-                                    <input class="form-control timepicker" onkeydown="return false;" />
-                                </div>
-                                <div class="form-group cols col-6">
-                                    <label>Minutes*</label>
-                                    <input id="prePopMinutes" for="prePopMinutes" ng-disabled="disablePreMinutes" onclick="openPopMinutes(event)" type="text" class="form-control" ng-model="preTimings.minutes" readonly />
-                                    <div class="jem-pop-minute-nav">
-                                        <ul>
-                                            <ng-container ng-repeat="obj in preMinutes track by $index">
-                                                <li ng-click="preTimings.minutes = obj.name" role="button">
-                                                    {{obj.name}}
-                                                </li>
-                                            </ng-container>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col-xs-12 col-sm-4 join-btn text-xs-right"><a href="#" class="btn theme-btn btn-lg">I‘m restaurant</a> </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group cols col-6 text-center" style="float: none; margin: 5px auto;">
-                            <button class="btn green-btn" ng-click="proccedToPreOrdering()">Ok</button>
+                </section>
+                <!-- add restaurant ends -->
+            </div>
+        </section>
+        <!-- Featured restaurants ends -->
+        <section class="app-section">
+            <div class="app-wrap">
+                <div class="container">
+                    <div class="row text-img-block text-xs-left">
+                        <div class="container">
+                            <div class="col-xs-12 col-sm-5 right-image text-center">
+                                <figure> <img src="assets/images/app.png" alt="Right Image" class="img-fluid"> </figure>
+                            </div>
+                            <div class="col-xs-12 col-sm-7 left-text">
+                                <h3>The Best Food Delivery App</h3>
+                                <p>Now you can make food happen pretty much wherever you are thanks to the free easy-to-use Food Delivery &amp; Takeout App.</p>
+                                <div class="social-btns">
+                                    <a href="#" class="app-btn apple-button clearfix">
+                                        <div class="pull-left"><i class="fa fa-apple"></i> </div>
+                                        <div class="pull-right"> <span class="text">Available on the</span> <span class="text-2">App Store</span> </div>
+                                    </a>
+                                    <a href="#" class="app-btn android-button clearfix">
+                                        <div class="pull-left"><i class="fa fa-android"></i> </div>
+                                        <div class="pull-right"> <span class="text">Available on the</span> <span class="text-2">Play store</span> </div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <style>
-                .fintro {
-                    margin-top: 10px;
-                }
-                .fintro.time-col p {
-                    line-height: 1.4 !important;
-                    color: #515050;
-                    font-size: 95%;
-                }
-                .fintro.time-col strong {
-                    font-weight: 600;
-                }
-                .fintro.social img {
-                    width: 90%;
-                }
-                .first_footer .fintro h3 {
-                    font-family: 'Crimson Text', serif;
-                    color: var(--new-primary-color);
-                    font-weight: bold;
-                }
-                .first_footer .fintro h3::after{
-                    width: 55px;
-                }
-                li.citem {
-                    margin-left: 0px;
-                }
-                .contact_info li {
-                    font-family: 'Noto Sans', sans-serif !important;
-                    color: #515050;
-                    line-height: 1.4;
-                    font-size: 14px;
-                    font-weight: 600;
-                    margin-bottom: 0;
-                    display: flex;
-                    align-items: center;
-                }                
-                li.citem:before {
-                    content: '\f006';
-                    font-family: FontAwesome;
-                    color: #000;
-                    font-size: 15px;
-                    line-height: 35px;
-                    text-align: center;
-                    float: left;
-                    border: 0px solid #000;
-                    background: #fff;
-                    width: 25px;
-                    height: 25px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: unset;
-                }
-                li.clocation:before {
-                    content: '\f041'
-                }
-                li.cphone:before {
-                    content: '\f095'
-                }
-                li.cemail:before {
-                    content: '\f0e0';
-                }
-                .fintro.time-col p {
-                    font-family: 'Noto Sans', sans-serif !important;
-                    line-height: 1.4 !important;
-                    color: #515050;
-                    font-size: 95%;
-                }
-                .fintro p.strong {
-                    font-family: 'Noto Sans', sans-serif !important;
-                    color: #005092;
-                    font-weight: bold;
-                }
-                .fintro.social img {
-                    width: 70%;
-                    margin-top: 15px;
-                }
-                footer {
-                    all: unset;
-                    background: #434242 !important;
-                    padding: 10px 0;
-                    display: block;
-                    color: #fff;
-                }
-                footer p {
-                    font-family: 'Noto Sans', sans-serif !important;
-                    font-size: 12px;
-                    color: #fff;
-                    padding: 12px 0;
-                    margin: auto;
-                    width: unset;
-                }
-                .fintro .time-row {
-                    display: flex;
-                    line-height: 1.45;
-                    border: 0px solid lightgray;
-                }
-                .fintro .day-span{
-                    display: inline-block !important;
-                    width: 15% !important;
-                    position: relative;
-                    border: 0px solid lightblue;
-                }
-                .fintro .day-span::after {
-                    /* content: ":"; */
-                    position: absolute;
-                    right: 0;
-                }
-                .fintro .time-span{
-                    display: inline-block;
-                    padding-left: 5px;
-                    width: 80%;
-                    border: 0px solid lightblue;
-                }
-                span.time-span span {
-                    display: block;
-                    text-align: left;
-                }
-            </style>
-
-            <div class="first_footer">
-                <div class="wrapperz">
+        </section>
+        <!-- start: FOOTER -->
+        <footer class="footer">
+            <div class="container">
+                <!-- top footer statrs -->
+                <div class="row top-footer">
+                    <div class="col-xs-12 col-sm-3 footer-logo-block color-gray">
+                        <a href="#"> <img src="assets/images/food-picky-logo.png" alt="Footer logo"> </a> <span>Order Delivery &amp; Take-Out </span> </div>
+                    <div class="col-xs-12 col-sm-2 about color-gray">
+                        <h5>About Us</h5>
+                        <ul>
+                            <li><a href="#">About us</a> </li>
+                            <li><a href="#">History</a> </li>
+                            <li><a href="#">Our Team</a> </li>
+                            <li><a href="#">We are hiring</a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 how-it-works-links color-gray">
+                        <h5>How it Works</h5>
+                        <ul>
+                            <li><a href="#">Enter your location</a> </li>
+                            <li><a href="#">Choose restaurant</a> </li>
+                            <li><a href="#">Choose meal</a> </li>
+                            <li><a href="#">Pay via credit card</a> </li>
+                            <li><a href="#">Wait for delivery</a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 pages color-gray">
+                        <h5>Pages</h5>
+                        <ul>
+                            <li><a href="#">Search results page</a> </li>
+                            <li><a href="#">User Sing Up Page</a> </li>
+                            <li><a href="#">Pricing page</a> </li>
+                            <li><a href="#">Make order</a> </li>
+                            <li><a href="#">Add to cart</a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-3 popular-locations color-gray">
+                        <h5>Popular locations</h5>
+                        <ul>
+                            <li><a href="#">Sarajevo</a> </li>
+                            <li><a href="#">Split</a> </li>
+                            <li><a href="#">Tuzla</a> </li>
+                            <li><a href="#">Sibenik</a> </li>
+                            <li><a href="#">Zagreb</a> </li>
+                            <li><a href="#">Brcko</a> </li>
+                            <li><a href="#">Beograd</a> </li>
+                            <li><a href="#">New York</a> </li>
+                            <li><a href="#">Gradacac</a> </li>
+                            <li><a href="#">Los Angeles</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- top footer ends -->
+                <!-- bottom footer statrs -->
+                <div class="bottom-footer">
                     <div class="row">
-                        <div class="cols col-4 fintro">
-                            <h3>Contact us</h3>
-                            <div>
-                                <ul class="contact_info">
-                                    <li class="citem clocation"><span>{{restaurantObject.restaurantAddress}}</span></li>
-                                    <li class="citem cphone"><span>{{restaurantObject.phoneNumber}}</span></li>
-                                    <li class="citem cemail"><span>{{restaurantObject.email}}</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cols col-4 fintro social m-2b">
-                            <h3>Follow us on</h3>
-                            <ul class="list-inline social-links">
-                                <li> <a href="#" onclick="WebRedirect('')" class="btn-social facebook-btn"
-                                        target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a> </li>
-                                <li> <a href="#" class="btn-social pinterest-btn" onclick="WebRedirect('')"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i></a> </li>
+                        <div class="col-xs-12 col-sm-3 payment-options color-gray">
+                            <h5>Payment Options</h5>
+                            <ul>
+                                <li>
+                                    <a href="#"> <img src="assets/images/paypal.png" alt="Paypal"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="assets/images/mastercard.png" alt="Mastercard"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="assets/images/maestro.png" alt="Maestro"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="assets/images/stripe.png" alt="Stripe"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="assets/images/bitcoin.png" alt="Bitcoin"> </a>
+                                </li>
                             </ul>
-                            <div class="clearfix"><br><br></div>
-                            <p class="strong">Payments Accepted</p> <img src="assets/images/pay_by_cards.jpg" alt="">
                         </div>
-                        <div class="cols col-4 fintro time-col">
-                            <h3>Timings</h3>
-                            <p ng-hide="isCustomOpeningTime" ng-repeat="item in businessCalendar.data">
-                                <span class="day-span"><strong>{{ item.day.substring(0, 3) }}</strong></span>
-                                <span ng-if="!isRestClose(item)">{{ item.openTime }} To {{ item.closeTime }}</span>
-                                <span ng-if="isRestClose(item)">Closed Today</span>
-                            </p>
-                            <p ng-show="isCustomOpeningTime">
-                                <div class="custom-row"  ng-repeat="(key, value) in customOpeningTime">
-                                    <div class="custom-column"  style="flex: 0.5%;">
-                                        <span class="day-span" style="font-weight: bold;color:#605E5E;">{{ key.substring(0, 3) + ':' }}</span>
-                                    </div>
-                                    <div class="custom-column">
-                                        <span class="restaurnt-time" ng-if="!value.length">Closed Today</span>
-                                        <p ng-repeat="item in value track by $index" class="restaurnt-time" >
-                                            {{ item.openTime }} To {{ item.closeTime }}
-                                        </p>
-                                      </div>
-                                </div>
-                            </p>
+                        <div class="col-xs-12 col-sm-4 address color-gray">
+                            <h5>Address</h5>
+                            <p>Concept design of oline food order and deliveye,planned as restaurant directory</p>
+                            <h5>Phone: <a href="tel:+080000012222">080 000012 222</a></h5> </div>
+                        <div class="col-xs-12 col-sm-5 additional-info color-gray">
+                            <h5>Addition informations</h5>
+                            <p>Join the thousands of other restaurants who benefit from having their menus on TakeOff</p>
                         </div>
                     </div>
                 </div>
+                <!-- bottom footer ends -->
             </div>
-            <button onclick="topFunction()" id="myBtn" title="Go to top" ng-show="topButtonShow"><i
-                    class="fa fa-chevron-up" aria-hidden="true"></i></button>
+        </footer>
+        <!-- end:Footer -->
+    </div>
+    <!--/end:Site wrapper -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/tether.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/animsition.min.js"></script>
+    <script src="assets/js/bootstrap-slider.min.js"></script>
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <script src="assets/js/headroom.js"></script>
+    <script src="assets/js/foodpicky.min.js"></script> -->
 
-
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" ng-click="closeAllergyPopup();">&times;</span>
-                    <h3 class="allergyHeading">Do you have a food allergy?</h3>
-                    <p class="allergyDescription text-center">if you have a food alergy or intolerance (or someone
-                        you're ordering
-                        for has), phone the restaurant on <br>
-                        <strong>{{restaurantPhoneNumber}}</strong></p>
-                </div>
-            </div>
-
-            <div id="alertModal" class="alert-modal">
-                <div class="alert-modal-content">
-                    <span class="alert-close" ng-click="closeAllergyPopup();">&times;</span>
-                    <strong>{{alertMessage}}</strong>
-                </div>
-            </div>
-
-        </div>
-    </div> -->
 </body>
 </html>
