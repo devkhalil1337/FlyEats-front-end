@@ -8,6 +8,7 @@ import { FooterComponent } from './modules/footer/footer.component';
 import { NavigationComponent } from './modules/navigation/navigation.component';
 import { ProductsComponent } from './modules/products/products.component';
 import { ContactComponent } from './modules/contact/contact.component';
+import { RegisterComponent } from './modules/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +16,8 @@ import { ContactComponent } from './modules/contact/contact.component';
     FooterComponent,
     NavigationComponent,
     ProductsComponent,
-    ContactComponent
+    ContactComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
