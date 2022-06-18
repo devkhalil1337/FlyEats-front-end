@@ -1,0 +1,63 @@
+<div class="page-wrapper">
+    <!-- start: Inner page hero -->
+    <section class="bg-image space-md"  style="background:url('assets/images/image01.jpg')" data-image-src="assets/images/image01.jpg">
+        <div class="profile">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4  col-lg-4 profile-img">
+                        <h1 class="font-white">{{selectedTab}}</h1> </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end:Inner page hero -->
+    <!-- <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a routerLink="/" class="active">Home</a></li>
+                <li>{{selectedTab}}</li>
+            </ul>
+        </div>
+    </div> -->
+    <section class="contact-page inner-page">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="my-orders-tab" data-toggle="tab" (click)="selectedTab = 'My Orders'" name="my-orders"  role="tab" aria-controls="my-orders" aria-selected="true">My Orders</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" role="tab" (click)="selectedTab = 'My Profile'" name="Profile" aria-controls="profile" aria-selected="false">Profile</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane " [class.active]="selectedTab =='My Orders'" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Order Number</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>123-re-2321</td>
+                            <td>$50</td>
+                            <td>18 April 2022</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>5483-be-2321</td>
+                            <td>$34</td>
+                            <td>16 April 2022</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+                <!-- <div class="tab-pane " [class.active]="selectedTab =='My Profile'" id="profile" role="tabpanel" aria-labelledby="profile-tab">..this is profile.</div> -->
+              </div>
+        </div>
+    </section>
+</div>
