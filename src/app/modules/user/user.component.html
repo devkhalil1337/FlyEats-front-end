@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-4  col-lg-4 profile-img">
-                        <h1 class="font-white">{{selectedTab}}</h1> </div>
+                        <h1 class="font-white">My {{selectedTab | titlecase}}</h1> </div>
                 </div>
             </div>
         </div>
@@ -23,14 +23,14 @@
         <div class="container">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="my-orders-tab" data-toggle="tab" (click)="selectedTab = 'My Orders'" name="my-orders"  role="tab" aria-controls="my-orders" aria-selected="true">My Orders</a>
+                  <a class="nav-link"  [class.active]="selectedTab =='orders'" id="my-orders-tab" data-toggle="tab" (click)="onSelectedTab('orders')" name="my-orders"  role="tab" aria-controls="my-orders" aria-selected="true">Orders</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" role="tab" (click)="selectedTab = 'My Profile'" name="Profile" aria-controls="profile" aria-selected="false">Profile</a>
+                  <a class="nav-link"  [class.active]="selectedTab =='profile'"id="profile-tab" data-toggle="tab" role="tab" (click)="onSelectedTab('profile')" name="Profile" aria-controls="profile" aria-selected="false">Profile</a>
                 </li>
               </ul>
               <div class="tab-content" id="myTabContent">
-                <div class="tab-pane " [class.active]="selectedTab =='My Orders'" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="tab-pane " [class.active]="selectedTab =='orders'" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <table class="table table-striped">
                         <thead>
                           <tr>
@@ -56,7 +56,45 @@
                         </tbody>
                       </table>
                 </div>
-                <!-- <div class="tab-pane " [class.active]="selectedTab =='My Profile'" id="profile" role="tabpanel" aria-labelledby="profile-tab">..this is profile.</div> -->
+                <div class="tab-pane " [class.active]="selectedTab =='profile'" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                  <div class="widget">
+                    <div class="widget-body">
+                       <form>
+                          <div class="row">
+                             <div class="form-group col-sm-6">
+                                <label for="firstName">First Name</label>
+                                <input class="form-control" type="text" placeholder="First Name" id="firstName"> 
+                             </div>
+                             <div class="form-group col-sm-6">
+                                <label for="lastName">Last Name</label>
+                                <input class="form-control" type="text" placeholder="Last Name" id="lastName"> 
+                             </div>
+                             <div class="form-group col-sm-6">
+                                <label for="emailAddress">Email address</label>
+                                <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email"> 
+                             </div>
+                             <div class="form-group col-sm-6">
+                                <label for="example-tel-input-3">Phone number</label>
+                                <input class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input-3" readonly /> 
+                             </div>
+                             <div class="form-group col-sm-6">
+                                <label for="Password">Password</label>
+                                <input type="password" class="form-control" id="Password" placeholder="Password"> 
+                             </div>
+                          </div>
+                         
+                          <div class="row ">
+                             <div class="col-sm-12">
+                                <p class="update-profile-btn"> <a href="#" class="btn theme-btn">Save</a> </p>
+                             </div>
+                          </div>
+                       </form>
+                    </div>
+                    <!-- end: Widget -->
+                 </div>
+
+                </div>
               </div>
         </div>
     </section>

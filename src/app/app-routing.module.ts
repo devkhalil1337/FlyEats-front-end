@@ -27,7 +27,7 @@ const routes: Routes = [{
   component: LoginComponent
 },
 {
-  path: 'user',
+  path: 'user/:view-type',
   component: UserComponent
 }
 ];
