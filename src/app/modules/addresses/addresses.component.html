@@ -15,6 +15,10 @@
       <app-user [selectedTab]="'addresses'"></app-user>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane active" id="addresses-tab" role="tabpanel" aria-labelledby="addresses-tab">
+                <div class="widget-body">
+                  <p class="Add-profile-btn"> <a routerLink="/user/address/add" class="btn theme-btn">Add Address</a> </p>
+                </div>
+    
           <table class="table table-striped">
             <thead>
               <tr>
@@ -24,15 +28,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>123-re-2321</td>
-                <td><i class="fa fa-pencil" aria-hidden="true"></i> | <i class="fa fa-remove" aria-hidden="true"></i></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>5483-be-2321</td>
-                <td><i class="fa fa-pencil" aria-hidden="true"></i> | <i class="fa fa-remove" aria-hidden="true"></i></td>
+              <tr *ngFor="let addr of addressesList;index as i">
+                <th scope="row">{{i+1}}</th>
+                <td>{{addr.address + ' ' + addr.city + ' ' + addr.zipCode}}</td>
+                <td><a routerLink="/user/address/add" [queryParams]="{ id : addr.id }"><i class="fa fa-pencil" aria-hidden="true"></i></a> | <a routerLink="/user/addresses" [queryParams]="{ id : addr.id }"><i class="fa fa-remove" aria-hidden="true"></i></a></td>
               </tr>
             </tbody>
           </table>

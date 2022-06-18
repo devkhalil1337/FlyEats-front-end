@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { address } from 'src/app/mock-api/address';
 
 @Component({
   selector: 'app-addresses',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddressesComponent implements OnInit {
 
-  constructor() { }
+
+  addressesList:any
+
+  constructor() {
+    this.addressesList = address
+   }
 
   ngOnInit(): void {
   }

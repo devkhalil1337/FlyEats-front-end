@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { OrdersComponent } from './modules/orders/orders.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { AddressesComponent } from './modules/addresses/addresses.component';
+import { AddEditAddressComponent } from './modules/add-edit-address/add-edit-address.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { AddressesComponent } from './modules/addresses/addresses.component';
     UserComponent,
     OrdersComponent,
     ProfileComponent,
-    AddressesComponent
+    AddressesComponent,
+    AddEditAddressComponent
   ],
   imports: [
     BrowserModule,
