@@ -12,6 +12,9 @@ import { RegisterComponent } from './modules/register/register.component';
 import { LoginComponent } from './modules/login/login.component';
 import { UserComponent } from './modules/user/user.component';
 import { FormsModule } from '@angular/forms';
+import { OrdersComponent } from './modules/orders/orders.component';
+import { ProfileComponent } from './modules/profile/profile.component';
+import { AddressesComponent } from './modules/addresses/addresses.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,10 @@ import { FormsModule } from '@angular/forms';
     ContactComponent,
     RegisterComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
+    OrdersComponent,
+    ProfileComponent,
+    AddressesComponent
   ],
   imports: [
     BrowserModule,

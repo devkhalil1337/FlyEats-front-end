@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -8,12 +8,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  selectedTab = "";
-
+  @Input("selectedTab") selectedTab : string
+  @Output("OnChangeSelectedTab") OnChangeSelectedTab = new EventEmitter();
   constructor(private _activatedRoute: ActivatedRoute, private router: Router) {
-    _activatedRoute.params.subscribe(params => {
-      this.selectedTab = params['view-type'];
-    });
    }
 
   ngOnInit(): void {
@@ -21,7 +18,8 @@ export class UserComponent implements OnInit {
 
 
   onSelectedTab(route:string){
-    this.router.navigate(['user/'+route])
+    this.router.navigate(['user/'+route]);
+    this.OnChangeSelectedTab.emit(route);
   }
 
 

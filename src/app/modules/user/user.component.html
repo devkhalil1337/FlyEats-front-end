@@ -1,101 +1,97 @@
-<div class="page-wrapper">
-    <!-- start: Inner page hero -->
-    <section class="bg-image space-md"  style="background:url('assets/images/image01.jpg')" data-image-src="assets/images/image01.jpg">
-        <div class="profile">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4  col-lg-4 profile-img">
-                        <h1 class="font-white">My {{selectedTab | titlecase}}</h1> </div>
-                </div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link"  [class.active]="selectedTab =='orders'" id="my-orders-tab" data-toggle="tab" (click)="onSelectedTab('orders')" name="my-orders"  role="tab" aria-controls="my-orders" aria-selected="true">Orders</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  [class.active]="selectedTab =='profile'"id="profile-tab" data-toggle="tab" role="tab" (click)="onSelectedTab('profile')" name="Profile" aria-controls="profile" aria-selected="false">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  [class.active]="selectedTab =='addresses'"id="addresses-tab" data-toggle="tab" role="tab" (click)="onSelectedTab('addresses')" name="addresses" aria-controls="addresses" aria-selected="false">Address</a>
+  </li>
+</ul>
+<!-- <div class="tab-content" id="myTabContent">
+  <div class="tab-pane " [class.active]="selectedTab =='orders'" id="my-orders-tab" role="tabpanel" aria-labelledby="home-tab">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Order Number</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>123-re-2321</td>
+          <td>$50</td>
+          <td>18 April 2022</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>5483-be-2321</td>
+          <td>$34</td>
+          <td>16 April 2022</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane " [class.active]="selectedTab =='profile'" id="profile-tab" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="widget">
+      <div class="widget-body">
+        <form>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="firstName">First Name</label>
+              <input class="form-control" type="text" placeholder="First Name" id="firstName"> 
             </div>
-        </div>
-    </section>
-    <!-- end:Inner page hero -->
-    <!-- <div class="breadcrumb">
-        <div class="container">
-            <ul>
-                <li><a routerLink="/" class="active">Home</a></li>
-                <li>{{selectedTab}}</li>
-            </ul>
-        </div>
-    </div> -->
-    <section class="contact-page inner-page">
-        <div class="container">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link"  [class.active]="selectedTab =='orders'" id="my-orders-tab" data-toggle="tab" (click)="onSelectedTab('orders')" name="my-orders"  role="tab" aria-controls="my-orders" aria-selected="true">Orders</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link"  [class.active]="selectedTab =='profile'"id="profile-tab" data-toggle="tab" role="tab" (click)="onSelectedTab('profile')" name="Profile" aria-controls="profile" aria-selected="false">Profile</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane " [class.active]="selectedTab =='orders'" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Order Number</th>
-                            <th scope="col">Total Price</th>
-                            <th scope="col">Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>123-re-2321</td>
-                            <td>$50</td>
-                            <td>18 April 2022</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>5483-be-2321</td>
-                            <td>$34</td>
-                            <td>16 April 2022</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-                <div class="tab-pane " [class.active]="selectedTab =='profile'" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-                  <div class="widget">
-                    <div class="widget-body">
-                       <form>
-                          <div class="row">
-                             <div class="form-group col-sm-6">
-                                <label for="firstName">First Name</label>
-                                <input class="form-control" type="text" placeholder="First Name" id="firstName"> 
-                             </div>
-                             <div class="form-group col-sm-6">
-                                <label for="lastName">Last Name</label>
-                                <input class="form-control" type="text" placeholder="Last Name" id="lastName"> 
-                             </div>
-                             <div class="form-group col-sm-6">
-                                <label for="emailAddress">Email address</label>
-                                <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email"> 
-                             </div>
-                             <div class="form-group col-sm-6">
-                                <label for="example-tel-input-3">Phone number</label>
-                                <input class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input-3" readonly /> 
-                             </div>
-                             <div class="form-group col-sm-6">
-                                <label for="Password">Password</label>
-                                <input type="password" class="form-control" id="Password" placeholder="Password"> 
-                             </div>
-                          </div>
-                         
-                          <div class="row ">
-                             <div class="col-sm-12">
-                                <p class="update-profile-btn"> <a href="#" class="btn theme-btn">Save</a> </p>
-                             </div>
-                          </div>
-                       </form>
-                    </div>
-                    <!-- end: Widget -->
-                 </div>
-
-                </div>
-              </div>
-        </div>
-    </section>
-</div>
+            <div class="form-group col-sm-6">
+              <label for="lastName">Last Name</label>
+              <input class="form-control" type="text" placeholder="Last Name" id="lastName"> 
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="emailAddress">Email address</label>
+              <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email"> 
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="example-tel-input-3">Phone number</label>
+              <input class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input-3" readonly /> 
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="Password">Password</label>
+              <input type="password" class="form-control" id="Password" placeholder="Password"> 
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-sm-12">
+              <p class="update-profile-btn"> <a href="#" class="btn theme-btn">Save</a> </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane" [class.active]="selectedTab =='addresses'" id="addresses-tab" role="tabpanel" aria-labelledby="addresses-tab">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Address</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>123-re-2321</td>
+          <td><i class="fa fa-pencil" aria-hidden="true"></i> | <i class="fa fa-remove" aria-hidden="true"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>5483-be-2321</td>
+          <td><i class="fa fa-pencil" aria-hidden="true"></i> | <i class="fa fa-remove" aria-hidden="true"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

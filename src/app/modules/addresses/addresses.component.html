@@ -1,0 +1,43 @@
+<div class="page-wrapper">
+  <section class="bg-image space-md"  style="background:url('assets/images/image01.jpg')" data-image-src="assets/images/image01.jpg">
+    <div class="profile">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4  col-lg-4 profile-img">
+            <h1 class="font-white">My Addresses</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="contact-page inner-page">
+    <div class="container">
+      <app-user [selectedTab]="'addresses'"></app-user>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane active" id="addresses-tab" role="tabpanel" aria-labelledby="addresses-tab">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Address</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>123-re-2321</td>
+                <td><i class="fa fa-pencil" aria-hidden="true"></i> | <i class="fa fa-remove" aria-hidden="true"></i></td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>5483-be-2321</td>
+                <td><i class="fa fa-pencil" aria-hidden="true"></i> | <i class="fa fa-remove" aria-hidden="true"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

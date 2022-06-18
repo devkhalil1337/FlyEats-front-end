@@ -1,0 +1,56 @@
+<div class="page-wrapper">
+  <section class="bg-image space-md"  style="background:url('assets/images/image01.jpg')" data-image-src="assets/images/image01.jpg">
+    <div class="profile">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4  col-lg-4 profile-img">
+            <h1 class="font-white">My Profile</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="contact-page inner-page">
+    <div class="container">
+      <app-user [selectedTab]="'profile'"></app-user>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane active" id="profile-tab" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="widget">
+            <div class="widget-body">
+              <form>
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <label for="firstName">First Name</label>
+                    <input class="form-control" type="text" placeholder="First Name" id="firstName"> 
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="lastName">Last Name</label>
+                    <input class="form-control" type="text" placeholder="Last Name" id="lastName"> 
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="emailAddress">Email address</label>
+                    <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email"> 
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="example-tel-input-3">Phone number</label>
+                    <input class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input-3" readonly /> 
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="Password">Password</label>
+                    <input type="password" class="form-control" id="Password" placeholder="Password"> 
+                  </div>
+                </div>
+                <div class="row ">
+                  <div class="col-sm-12">
+                    <p class="update-profile-btn"> <a href="#" class="btn theme-btn">Save</a> </p>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- end: Widget -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
