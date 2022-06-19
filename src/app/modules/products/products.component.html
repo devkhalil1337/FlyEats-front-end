@@ -72,7 +72,7 @@
              </div>
         
           </div>
-          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6">
+          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-5">
              <div class="menu-widget m-b-30" *ngFor="let cate of categorylist;index as i">
                 <div class="widget-heading">
                    <h3 class="widget-title text-dark">
@@ -92,7 +92,7 @@
                             </div>
                             <!-- end:Logo -->
                             <div class="rest-descr">
-                               <h6><a href="#">{{item.itemName}} {{cate.id}}</a></h6>
+                               <h6><a href="#">{{item.itemName}}</a></h6>
                                <p> {{item.description}}</p>
                             </div>
                             <!-- end:Description -->
@@ -108,7 +108,7 @@
              </div>
           </div>
           <!-- end:Bar -->
-          <div class="col-xs-12 col-md-12 col-lg-3">
+          <div class="col-xs-12 col-md-12 col-lg-4">
              <div class="sidebar-wrap">
                 <div class="widget widget-cart">
                    <div class="widget-heading">
@@ -119,25 +119,23 @@
                    </div>
                    <div class="order-row bg-white">
                       <div class="widget-body">
-                         <div class="title-row">Pizza Quatro Stagione <a href="#"><i class="fa fa-trash pull-right"></i></a></div>
-                         <div class="form-group row no-gutter">
-                            <div class="col-xs-8">
-                               <select class="form-control b-r-0" id="exampleSelect1">
-                                  <option>Size SM</option>
-                                  <option>Size LG</option>
-                                  <option>Size XL</option>
-                               </select>
-                            </div>
-                            <div class="col-xs-4">
-                               <input class="form-control" type="number" value="2" id="example-number-input"> 
-                            </div>
-                         </div>
+                         <div class="title-row">
+                           <span class="fa fa-times pull-left quantity"> 1</span>
+                           Pizza Quatro Stagione 
+                           <span class="pull-right"> $15</span>
+                           <a href="#"><i class="fa fa-trash pull-right mr-1"></i></a>
+                        </div>
                       </div>
                    </div>
                    <div class="order-row">
                       <div class="widget-body">
-                         <div class="title-row">Carlsberg Beer <a href="#"><i class="fa fa-trash pull-right"></i></a></div>
-                         <div class="form-group row no-gutter">
+                        <div class="title-row">
+                           <span class="fa fa-times pull-left quantity"> 1</span>
+                           Carlsberg Beer 
+                           <span class="pull-right"> $15</span>
+                           <a href="#"><i class="fa fa-trash pull-right mr-1"></i></a>
+                        </div>
+                         <!-- <div class="form-group row no-gutter">
                             <div class="col-xs-8">
                                <select class="form-control b-r-0">
                                   <option>Size SM</option>
@@ -148,7 +146,7 @@
                             <div class="col-xs-4">
                                <input class="form-control" value="4" id="quant-input"> 
                             </div>
-                         </div>
+                         </div> -->
                       </div>
                    </div>
                    <!-- end:Order row -->
