@@ -18,6 +18,7 @@ import { AddressesComponent } from './modules/addresses/addresses.component';
 import { AddEditAddressComponent } from './modules/add-edit-address/add-edit-address.component';
 import { OrderDetailsComponent } from './modules/order-details/order-details.component';
 import { CheckoutComponent } from './modules/checkout/checkout.component';
+import { FilterMenuPipe } from './pipes/filter-menu.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { CheckoutComponent } from './modules/checkout/checkout.component';
     AddressesComponent,
     AddEditAddressComponent,
     OrderDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    FilterMenuPipe
   ],
   imports: [
     BrowserModule,
