@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { orders } from 'src/app/mock-api/orders';
 
 @Component({
   selector: 'app-orders',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor() { }
+  ordersList:any[]
+
+  constructor() {
+    this.ordersList = orders;
+   }
 
   ngOnInit(): void {
   }

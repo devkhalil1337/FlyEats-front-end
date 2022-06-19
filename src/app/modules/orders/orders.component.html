@@ -15,30 +15,28 @@
       <app-user [selectedTab]="'orders'"></app-user>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane active" id="orders-tab" role="tabpanel" aria-labelledby="orders-tab">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Order Number</th>
-                <th scope="col">Total Price</th>
-                <th scope="col">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>123-re-2321</td>
-                <td>$50</td>
-                <td>18 April 2022</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>5483-be-2321</td>
-                <td>$34</td>
-                <td>16 April 2022</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Order Number</th>
+                  <th scope="col">Total Price</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of ordersList; index as i">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{order.orderNumber}}</td>
+                  <td>{{order.totalAmount}}</td>
+                  <td>{{order.date}}</td>
+                  <td><a [routerLink]="['/user/orders/',order.id]"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { AddressesComponent } from './modules/addresses/addresses.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
+import { OrderDetailsComponent } from './modules/order-details/order-details.component';
 import { OrdersComponent } from './modules/orders/orders.component';
 import { ProductsComponent } from './modules/products/products.component';
 import { ProfileComponent } from './modules/profile/profile.component';
@@ -33,6 +34,10 @@ const routes: Routes = [{
 {
   path: 'user/orders',
   component: OrdersComponent
+},
+{
+  path: 'user/orders/:id',
+  component: OrderDetailsComponent
 },
 {
   path: 'user/profile',

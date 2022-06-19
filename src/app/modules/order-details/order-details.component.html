@@ -1,0 +1,48 @@
+<div class="page-wrapper">
+    <section class="bg-image space-md"  style="background:url('assets/images/image01.jpg')" data-image-src="assets/images/image01.jpg">
+      <div class="profile">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4  col-lg-4 profile-img">
+              <h1 class="font-white">My Orders</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="breadcrumb">
+        <div class="container">
+          <ul>
+            <li><a routerLink="/" class="active">Home</a></li>
+            <li><a routerLink="/user/orders">Orders</a></li>
+            <li>Order Details</li>
+          </ul>
+        </div>
+      </div>
+    <section class="contact-page inner-page">
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th scope="col">Item</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <tr *ngFor="let order of orderDetails.items">
+                        <td>{{order.itemName}}</td>
+                        <td>{{order.quantity}}</td>
+                        <td>${{order.price}}</td>
+                        <td>${{order.quantity*order.price}}</td>
+                    </tr>
+                </tbody>
+              </table>
+              <div class="widget-body">
+                <p class="order-price"> <a routerLink="/user/address/add" class="btn theme-btn">Total Price: ${{orderDetails.meta.totalPrice}}</a> </p>
+              </div>
+
+        </div>
+    </section>
+</div>
