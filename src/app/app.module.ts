@@ -17,6 +17,7 @@ import { ProfileComponent } from './modules/profile/profile.component';
 import { AddressesComponent } from './modules/addresses/addresses.component';
 import { AddEditAddressComponent } from './modules/add-edit-address/add-edit-address.component';
 import { OrderDetailsComponent } from './modules/order-details/order-details.component';
+import { CheckoutComponent } from './modules/checkout/checkout.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { OrderDetailsComponent } from './modules/order-details/order-details.com
     ProfileComponent,
     AddressesComponent,
     AddEditAddressComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

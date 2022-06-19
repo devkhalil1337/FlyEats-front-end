@@ -1,0 +1,118 @@
+<div class="page-wrapper">
+    <div class="top-links">
+        <div class="container">
+            <ul class="row links">
+                <li class="col-xs-12 col-sm-3 link-item active"><span>1</span><a routerLink="/">Choose Your Location</a></li>
+                <li class="col-xs-12 col-sm-3 link-item active"><span>2</span><a routerLink="/products">Pick Your favorite food</a></li>
+                <li class="col-xs-12 col-sm-3 link-item" routerLinkActive="active"><span>3</span><a routerLink="/checkout">Order and Pay online</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container m-t-30">
+        <div class="widget clearfix">
+            <!-- /widget heading -->
+            <div class="widget-heading">
+                <h3 class="widget-title text-dark">
+                                Cart summary
+                            </h3>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-body">
+                <form method="post" action="#">
+                    <div class="row">
+                        <div class="col-sm-6 margin-b-30">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                      <th scope="col">Item</th>
+                                      <th scope="col">Quantity</th>
+                                      <th scope="col">Price</th>
+                                      <th scope="col">Total</th>
+                                    </tr>
+                                  </thead>
+                                <tbody>
+                                    <tr *ngFor="let order of orderDetails.items">
+                                        <td>{{order.itemName}}</td>
+                                        <td>{{order.quantity}}</td>
+                                        <td>${{order.price}}</td>
+                                        <td>${{order.quantity*order.price}}</td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="cart-totals margin-b-20">
+                                <div class="cart-totals-title">
+                                    <h4>Cart Summary</h4> </div>
+                                <div class="cart-totals-fields">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Cart Subtotal</td>
+                                                <td>$29.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>VAT</td>
+                                                <td>$5.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shipping &amp; Handling</td>
+                                                <td>$2.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-color"><strong>Total</strong></td>
+                                                <td class="text-color"><strong>${{orderDetails.meta.totalPrice}}</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--cart summary-->
+                            <div class="payment-option">
+                                <ul class=" list-unstyled">
+                                    <li>
+                                        <label class="custom-control custom-radio  m-b-20">
+                                            <input id="radioStacked1" name="radio-stacked" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Payment on delivery</span>
+                                            <br> <span>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span> </label>
+                                    </li>
+                                    <li>
+                                        <label class="custom-control custom-radio  m-b-10">
+                                            <input name="radio-stacked" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Paypal <img src="images/paypal.jpg" alt="" width="90"></span> </label>
+                                    </li>
+                                </ul>
+                                <p class="text-xs-center"> <a href="#" class="btn btn-outline-success btn-block">Pay now</a> </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <section class="app-section">
+        <div class="app-wrap">
+            <div class="container">
+                <div class="row text-img-block text-xs-left">
+                    <div class="container">
+                        <div class="col-xs-12 col-sm-6  right-image text-center">
+                            <figure> <img src="assets/images/app.png" alt="Right Image"> </figure>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 left-text">
+                            <h3>The Best Food Delivery App</h3>
+                            <p>Now you can make food happen pretty much wherever you are thanks to the free easy-to-use Food Delivery &amp; Takeout App.</p>
+                            <div class="social-btns">
+                                <a href="#" class="app-btn apple-button clearfix">
+                                    <div class="pull-left"><i class="fa fa-apple"></i> </div>
+                                    <div class="pull-right"> <span class="text">Available on the</span> <span class="text-2">App Store</span> </div>
+                                </a>
+                                <a href="#" class="app-btn android-button clearfix">
+                                    <div class="pull-left"><i class="fa fa-android"></i> </div>
+                                    <div class="pull-right"> <span class="text">Available on the</span> <span class="text-2">Play store</span> </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

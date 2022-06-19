@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddEditAddressComponent } from './modules/add-edit-address/add-edit-address.component';
 import { AddressesComponent } from './modules/addresses/addresses.component';
+import { CheckoutComponent } from './modules/checkout/checkout.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
@@ -50,6 +51,10 @@ const routes: Routes = [{
 {
   path: 'user/address/add',
   component: AddEditAddressComponent
+},
+{
+  path: 'checkout',
+  component: CheckoutComponent
 },
 ];
 
