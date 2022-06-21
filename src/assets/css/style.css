@@ -2729,3 +2729,9 @@ a[aria-expanded=false] .fa-angle-down {
     padding: 0 5px;
     color: #3a3e47;
 }
+
+.modal-dialog {
+    transform: translate(0, -50%);
+    top: 20%;
+    margin: 0 auto;
+}

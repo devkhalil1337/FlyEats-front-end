@@ -98,7 +98,7 @@
                             <!-- end:Description -->
                          </div>
                          <!-- end:col -->
-                         <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ {{item.price}}</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
+                         <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ {{item.price}}</span> <a (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" >&#43;</a> </div>
                       </div>
                       <!-- end:row -->
                    </div>
@@ -117,13 +117,13 @@
                       </h3>
                       <div class="clearfix"></div>
                    </div>
-                   <div class="order-row bg-white">
+                   <div class="order-row bg-white" *ngFor="let product of cartProductsList">
                       <div class="widget-body">
-                         <div class="title-row">
-                           <span class="fa fa-times pull-left quantity"> 1</span>
-                           Pizza Quatro Stagione 
-                           <span class="pull-right"> $15</span>
-                           <a href="#"><i class="fa fa-trash pull-right mr-1"></i></a>
+                         <div class="title-row" >
+                           <span class="fa fa-times pull-left quantity"> {{product.quantity}}</span>
+                           <span class="product-name" >{{product.itemName}}</span>
+                           <span class="pull-right"> ${{product.price}}</span>
+                           <a (click)="openModal(template,product)"><i class="fa fa-trash pull-right mr-1"></i></a>
                         </div>
                       </div>
                    </div>
@@ -349,3 +349,50 @@
        </div>
     </div>
  </div>
+
+
+ <ng-template #template> 
+   <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onModalDismiss()"> <span aria-hidden="true"  (click)="onModalDismiss()">&times;</span> </button>
+      <div class="modal-body cart-addon">
+         <div class="food-item white">
+            <div class="row">
+               <div class="col-xs-12 col-sm-10 col-lg-10">
+                  <div class="item-img pull-left">
+                     <a class="restaurant-logo pull-left" href="#"><img src="assets/images/pepsi.png" alt="Food logo"></a>
+                  </div>
+                  <div class="rest-descr">
+                     <h6 class="product-title">{{selectedProduct.itemName}}</h6>
+                  </div>
+               </div>
+            </div>
+         <!-- end:Food item -->
+         <div class="form-group row cart-actions">
+            <div class="col-xs-12 col-sm-12 col-lg-12 text-xs-center"> 
+               <span class="price">$ {{selectedProduct.itemPrice}}</span>
+            </div>
+         </div>
+         <div class="form-group row cart-actions">
+            <div class="btn-group">
+               <div class="col-xs-4 col-sm-2 col-lg-4">
+                  <span class="minus-action" (click)="onQuantityUpdate('decrease');"><i class="fa fa-minus theme-btn"></i></span>
+               </div>
+               <div class="col-xs-4 col-sm-2 col-lg-4">
+                  <span class="quantity">{{selectedProduct.quantity}}</span>
+               </div>
+               <div class="col-xs-4 col-sm-2 col-lg-4">
+                  <span class="plus-action" (click)="onQuantityUpdate('increase');"><i class="fa fa-plus theme-btn"></i></span>
+               </div>
+            </div>
+         </div>
+         </div>
+
+      </div>
+      <div class="modal-footer">
+         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onModalDismiss()" >Close</button> -->
+         <button type="button" class="btn theme-btn w-100" (click)="OnAddToCart();">
+            <span  class="pull-left">Add to cart</span> 
+            <span class="pull-right">{{selectedProduct.itemPrice * selectedProduct.quantity | number : '1.0-2'}}</span></button>
+      </div>
+   </div>
+ </ng-template>

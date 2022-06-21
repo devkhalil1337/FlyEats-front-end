@@ -5,3 +5,16 @@
 .order-row .title-row a i {
     margin-top: 5px;
 }
+
+.product-title{
+    margin-top: 18px;
+}
+
+.cart-actions{
+    text-align: center;
+}
+
+.quantity{
+    font-weight: 600;
+    color: #25282b;
+}
