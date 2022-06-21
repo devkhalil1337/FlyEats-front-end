@@ -117,7 +117,20 @@
                       </h3>
                       <div class="clearfix"></div>
                    </div>
-                   <div class="order-row bg-white" *ngFor="let product of cartProductsList">
+                   <div class="widget-body">
+                     <div class="price-wrap text-xs-center">
+                        <div class="panel">
+                           <div class="panel-heading">
+                             <h4 class="panel-title">
+                               <a (click)="openAllergyModal(allergyPop)"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                 Click here if you or someone you are ordering for has a food allergy
+                              </a>
+                             </h4>
+                           </div>
+                         </div>
+                     </div>
+                  </div>
+                   <div class="order-row" [class.bg-white]="i%2 != 0" *ngFor="let product of cartProductsList;index as i">
                       <div class="widget-body">
                          <div class="title-row" >
                            <span class="fa fa-times pull-left quantity"> {{product.quantity}}</span>
@@ -127,29 +140,6 @@
                         </div>
                       </div>
                    </div>
-                   <div class="order-row">
-                      <div class="widget-body">
-                        <div class="title-row">
-                           <span class="fa fa-times pull-left quantity"> 1</span>
-                           Carlsberg Beer 
-                           <span class="pull-right"> $15</span>
-                           <a href="#"><i class="fa fa-trash pull-right mr-1"></i></a>
-                        </div>
-                         <!-- <div class="form-group row no-gutter">
-                            <div class="col-xs-8">
-                               <select class="form-control b-r-0">
-                                  <option>Size SM</option>
-                                  <option>Size LG</option>
-                                  <option>Size XL</option>
-                               </select>
-                            </div>
-                            <div class="col-xs-4">
-                               <input class="form-control" value="4" id="quant-input"> 
-                            </div>
-                         </div> -->
-                      </div>
-                   </div>
-                   <!-- end:Order row -->
                    <div class="widget-delivery clearfix">
                       <form>
                          <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
@@ -396,3 +386,19 @@
       </div>
    </div>
  </ng-template>
+
+ <ng-template #allergyPop>
+   <div class="modal-content">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onModalDismiss()"><span aria-hidden="true" (click)="onModalDismiss()">&times;</span></button>
+     <div class="modal-header allergy-header">
+       Do you have a food allergy?
+     </div>
+     <div class="modal-body">If you have a food allergy or intolerance (or someone you're ordering for has), phone the restaurant on <strong>xxxx</strong> . Do not order if you cannot get the allergy information you need.</div>
+     <div class="modal-footer">
+       <button type="button" class="btn theme-btn w-100" (click)="onModalDismiss();">
+         Close
+       </button>
+     </div>
+   </div>
+ </ng-template>
+ 

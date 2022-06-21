@@ -57,8 +57,7 @@ export class ProductsComponent implements OnInit {
  }
 
  openModal(template: any, product:any) {
-   console.log(product);
-  this.selectedProduct = new Product(product);
+ this.selectedProduct = new Product(product);
  this.modelRef =  this.modalService.open(template,{
     size:'sm',
     windowClass:'modal-holder in',
@@ -66,6 +65,14 @@ export class ProductsComponent implements OnInit {
     modalDialogClass:'modal-dialog-centered'
   });
 }
+
+openAllergyModal(template: any) {
+  this.modelRef =  this.modalService.open(template,{
+     windowClass:'modal-holder in',
+     backdropClass:'in',
+     modalDialogClass:'modal-dialog-centered'
+   });
+ }
 
 onModalAction(results:any){
   console.log(results)

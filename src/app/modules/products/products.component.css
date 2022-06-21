@@ -18,3 +18,12 @@
     font-weight: 600;
     color: #25282b;
 }
+
+.panel{
+    cursor: pointer;
+}
+
+.allergy-header{
+    font-weight: bold;
+    text-align: center;
+}
