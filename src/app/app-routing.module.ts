@@ -4,6 +4,7 @@ import { AddEditAddressComponent } from './modules/add-edit-address/add-edit-add
 import { AddressesComponent } from './modules/addresses/addresses.component';
 import { CheckoutComponent } from './modules/checkout/checkout.component';
 import { ContactComponent } from './modules/contact/contact.component';
+import { GalleryComponent } from './modules/gallery/gallery.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { OrderDetailsComponent } from './modules/order-details/order-details.component';
@@ -55,6 +56,10 @@ const routes: Routes = [{
 {
   path: 'checkout',
   component: CheckoutComponent
+},
+{
+  path: 'gallery',
+  component: GalleryComponent
 },
 ];
 

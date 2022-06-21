@@ -211,6 +211,14 @@ hr {
     color: #fff
 }
 
+.theme-text {
+    color: #f30;
+}
+.theme-text-font {
+    font-size: 3.25rem;
+    font-weight: 800;
+}
+
 .theme-btn-dash {
     border: 2px dashed #f30;
     background-color: transparent;

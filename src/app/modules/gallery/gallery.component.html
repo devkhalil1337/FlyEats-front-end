@@ -1,0 +1,51 @@
+<div class="page-wrapper">
+    <!-- start: Inner page hero -->
+    <section class="bg-image space-md" style="background: url('assets/images/image01.jpg');" data-image-src="assets/images/image01.jpg">
+      <div class="profile">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 col-lg-4 profile-img">
+              <h1 class="font-white">Gallery</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end:Inner page hero -->
+    <div class="breadcrumb">
+      <div class="container">
+        <ul>
+          <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+          <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
+        </ul>
+      </div>
+    </div>
+    <section class="restaurants-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-7 col-md-8 col-lg-12">
+            <div class="inner-page-hero bg-image space-md">
+            <div class="container text-xs-center m-b-20">
+               <h1 class="theme-text theme-text-font">A Quick Look at Us</h1>
+               <p class="font-black">Find restaurants, specials, and coupons for free</p>
+            </div>
+         </div>
+            <div class="row">
+              <!-- Each popular food item starts -->
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 food-item"  *ngFor="let image of galleryList">
+                <div class="food-item-wrap">
+                  <div class="figure-wrap bg-image" [ngStyle]="{'background': 'url(assets/images/' + image + ')'}" [attr.data-image-src]="'assets/images/'+image">
+                    <div class="distance"><i class="fa fa-pin"></i>1240m </div>
+                    <div class="rating pull-left"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i></div>
+                    <div class="review pull-right"><a href="#">198 reviews</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end:right row -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

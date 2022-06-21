@@ -19,6 +19,7 @@ import { AddEditAddressComponent } from './modules/add-edit-address/add-edit-add
 import { OrderDetailsComponent } from './modules/order-details/order-details.component';
 import { CheckoutComponent } from './modules/checkout/checkout.component';
 import { FilterMenuPipe } from './pipes/filter-menu.pipe';
+import { GalleryComponent } from './modules/gallery/gallery.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { FilterMenuPipe } from './pipes/filter-menu.pipe';
     AddEditAddressComponent,
     OrderDetailsComponent,
     CheckoutComponent,
-    FilterMenuPipe
+    FilterMenuPipe,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
