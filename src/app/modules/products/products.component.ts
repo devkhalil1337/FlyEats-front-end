@@ -12,7 +12,7 @@ import { CartService } from 'src/app/shared/cart.service';
 export class ProductsComponent implements OnInit {
 
 
-  cartProductsList:any[];
+  cartProductsList:any;
 
   selectedProduct:any
 
@@ -33,9 +33,8 @@ export class ProductsComponent implements OnInit {
 
 
   OnAddToCart(){
-    console.log(this.selectedProduct);
     this.cartProductsList = this.cartService.onCartUpdate(this.cartProductsList,this.selectedProduct);
-    console.log(this.cartProductsList);
+    this.onModalDismiss();
   }
 
   onQuantityUpdate(type:string){
@@ -47,6 +46,10 @@ export class ProductsComponent implements OnInit {
         this.cartService.onQuantityDecrease(this.selectedProduct);
         break;
     }
+  }
+
+  onRemoveProduct(productId:number){
+    this.cartProductsList = this.cartService.onRemoveProduct(this.cartProductsList,productId);
   }
 
 

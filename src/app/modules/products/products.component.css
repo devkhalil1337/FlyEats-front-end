@@ -19,7 +19,7 @@
     color: #25282b;
 }
 
-.panel{
+.panel,.product-name{
     cursor: pointer;
 }
 

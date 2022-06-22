@@ -18,21 +18,29 @@ export class CartService {
     return product.quantity > 1 ? product.quantity-- : 1;
   }
 
+  onRemoveProduct(CartArr:any[] = [],cartId:number){
+    return CartArr = CartArr.filter(elm => elm.cartId != cartId);
+  }
+
 
   onCartUpdate(CartArr:any[] = [],product:any){
     if(!CartArr || CartArr.length == 0){
       product.cartId = 1;
       CartArr.push(product);
-    }
-
-    CartArr.forEach((elm,index) =>{
-      if(elm.cartId == product.cartId){
-        elm.quantity = product.quantity;
+    }else{
+      let isNewProduct = false;
+      let index = CartArr.findIndex(elm => elm.cartId == product.cartId);
+      if(index != -1){
+        CartArr[index].quantity = product.quantity;
+        isNewProduct = false;
+      }else{
+        isNewProduct = true;
       }
-    })
-
-
-
+      if(isNewProduct){
+        product.cartId = CartArr.length+1;
+        CartArr.push(product);
+      }
+      }
     return CartArr;
   }
 
