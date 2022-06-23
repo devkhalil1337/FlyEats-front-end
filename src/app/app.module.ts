@@ -12,14 +12,15 @@ import { RegisterComponent } from './modules/register/register.component';
 import { LoginComponent } from './modules/login/login.component';
 import { UserComponent } from './modules/user/user.component';
 import { FormsModule } from '@angular/forms';
-import { OrdersComponent } from './modules/orders/orders.component';
-import { ProfileComponent } from './modules/profile/profile.component';
-import { AddressesComponent } from './modules/addresses/addresses.component';
-import { AddEditAddressComponent } from './modules/add-edit-address/add-edit-address.component';
+import { OrdersComponent } from './user/orders/orders.component';
+import { AddEditAddressComponent } from './user/add-edit-address/add-edit-address.component';
 import { OrderDetailsComponent } from './modules/order-details/order-details.component';
-import { CheckoutComponent } from './modules/checkout/checkout.component';
+import { CheckoutComponent } from './user/checkout/checkout.component';
 import { FilterMenuPipe } from './pipes/filter-menu.pipe';
 import { GalleryComponent } from './modules/gallery/gallery.component';
+import { UserModule } from './user/user.module';
+import { AddressesComponent } from './user/addresses/addresses.component';
+import { ProfileComponent } from './user/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,8 +32,8 @@ import { GalleryComponent } from './modules/gallery/gallery.component';
     RegisterComponent,
     LoginComponent,
     UserComponent,
-    OrdersComponent,
     ProfileComponent,
+    OrdersComponent,
     AddressesComponent,
     AddEditAddressComponent,
     OrderDetailsComponent,
@@ -43,9 +44,10 @@ import { GalleryComponent } from './modules/gallery/gallery.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    UserModule
   ],
-  providers: [],
+  providers: [NavigationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
