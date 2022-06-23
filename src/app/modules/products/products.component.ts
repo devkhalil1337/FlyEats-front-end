@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { categories } from 'src/app/mock-api/category-data';
 import { products } from 'src/app/mock-api/product-data';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from 'src/app/filters/cart-product.filter';
 import { CartService } from 'src/app/shared/cart.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -63,8 +63,8 @@ export class ProductsComponent implements OnInit {
  this.selectedProduct = new Product(product);
  this.modelRef =  this.modalService.open(template,{
     size:'sm',
-    windowClass:'modal-holder in',
     backdropClass:'in',
+    windowClass:'modal-holder in',
     modalDialogClass:'modal-dialog-centered'
   });
 }

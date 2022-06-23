@@ -2743,3 +2743,7 @@ a[aria-expanded=false] .fa-angle-down {
     top: 20%;
     margin: 0 auto;
 }
+
+.modal-backdrop{
+    z-index: 0 !important;
+}
