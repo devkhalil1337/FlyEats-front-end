@@ -15,38 +15,32 @@
              <div class="col-md-8">
                 <div class="widget">
                    <div class="widget-body">
-                      <form>
+                      <form #registerForm = "ngForm">
                          <div class="row">
                             <div class="form-group col-sm-6">
-                               <label for="firstName">First Name</label>
-                               <input class="form-control" type="text" placeholder="First Name" id="firstName"> 
-                            </div>
-                            <div class="form-group col-sm-6">
-                               <label for="lastName">Last Name</label>
-                               <input class="form-control" type="text" placeholder="Last Name" id="lastName"> 
+                               <label for="firstName">Full Name</label>
+                               <input class="form-control" type="text" placeholder="Full Name" id="firstName" name="firstName" [(ngModel)]="firstName" required> 
                             </div>
                             <div class="form-group col-sm-6">
                                <label for="emailAddress">Email address</label>
-                               <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email"> 
-                               <small id="emailHelp" class="form-text text-muted">We"ll never share your email with anyone else.</small> 
+                               <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" name="emailAddress" [(ngModel)]="emailAddress" required> 
+                               <!-- <small id="emailHelp" class="form-text text-muted">We"ll never share your email with anyone else.</small>  -->
                             </div>
                             <div class="form-group col-sm-6">
-                               <label for="example-tel-input-3">Phone number</label>
-                               <input class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input-3"> <small class="form-text text-muted">We"ll never share your email with anyone else.</small> 
+                               <label for="phoneNumber">Phone number</label>
+                               <input class="form-control" type="tel" placeholder="+445555555" minlength="10" id="phoneNumber" name="phoneNumber" [(ngModel)]="phoneNumber" required> 
+                               <!-- <small class="form-text text-muted">We"ll never share your email with anyone else.</small>  -->
                             </div>
                             <div class="form-group col-sm-6">
-                               <label for="Password">Password</label>
-                               <input type="password" class="form-control" id="Password" placeholder="Password"> 
-                            </div>
-                            <div class="form-group col-sm-6">
-                               <label for="exampleInputPassword2">Repeat password</label>
-                               <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"> 
+                               <label for="password">Password</label>
+                               <input type="password" class="form-control" id="password" minlength="6" placeholder="password" name="password" [(ngModel)]="password" required> 
                             </div>
                          </div>
-                        
+                         <span class="error text-danger" *ngIf="error">{{error.message}}</span>
                          <div class="row ">
-                            <div class="col-sm-12">
-                               <p class="register-btn"> <a href="#" class="btn theme-btn">Register</a> </p>
+                            <div class="col-sm-12 register-btn ">
+                              <button class="btn theme-btn" name="login" (click)="onSignup();" [disabled]="registerForm.invalid">Register </button>
+                               <!-- <p class="register-btn"> <a (click)="onSignup();" class="btn theme-btn" [disabled]="registerForm.invalid" >Register</a> </p> -->
                             </div>
                          </div>
                       </form>

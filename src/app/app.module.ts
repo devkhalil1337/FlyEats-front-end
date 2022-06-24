@@ -21,6 +21,8 @@ import { GalleryComponent } from './modules/gallery/gallery.component';
 import { UserModule } from './user/user.module';
 import { AddressesComponent } from './user/addresses/addresses.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,8 @@ import { ProfileComponent } from './user/profile/profile.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    UserModule
+    UserModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [NavigationComponent],
   bootstrap: [AppComponent]

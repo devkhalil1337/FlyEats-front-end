@@ -20,9 +20,6 @@ export interface User {
 })
 export class AuthService {
   userData: any; // Save logged in user data
-
-  isVerifyEmail:boolean = false;
-  error:any;
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -38,7 +35,6 @@ export class AuthService {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
-      this.error = null;
     });
   }
   // Sign in with email/password
@@ -52,8 +48,7 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        this.error = error;
-        // window.alert(error.message);
+        window.alert(error.message);
       });
   }
   // Sign up with email/password
@@ -61,13 +56,11 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SignIn(email,password);
-        // this.SendVerificationMail();
+        this.SendVerificationMail();
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        this.error = error;
-        // window.alert(error.message);
+        window.alert(error.message);
       });
   }
   // Send email verfificaiton when new user sign up
@@ -75,8 +68,7 @@ export class AuthService {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        this.isVerifyEmail = true;
-        this.router.navigate(['login']);
+        this.router.navigate(['verify-email-address']);
       });
   }
   // Reset Forggot password
@@ -93,12 +85,7 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null //&& user.emailVerified !== false ? true : false;
-  }
-
-  get userDisplayname(){
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.providerData && user.providerData[0] && user.providerData[0].displayName !== null ? user.providerData[0].displayName : user.providerData[0].email;
+    return user !== null && user.emailVerified !== false ? true : false;
   }
   // Sign in with Google
   GoogleAuth() {
@@ -142,7 +129,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['login']);
+      this.router.navigate(['sign-in']);
     });
   }
 }

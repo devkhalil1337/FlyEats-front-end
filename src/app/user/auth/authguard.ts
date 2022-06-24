@@ -20,8 +20,8 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     // let role = route.data.role as 'admin' | 'user';
 
-    const currentUser = this.authService.getCurrentUser();
-    if (!currentUser) {
+    const currentUser = this.authService.isLoggedIn;
+    if (currentUser) {
       return true;
     }
     this._router.navigate(['login'])

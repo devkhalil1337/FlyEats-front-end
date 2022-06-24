@@ -9,22 +9,23 @@
                         <img src="assets/images/login.png" alt="" class="img-fluid">
                     </div>
                    <div class="widget-body">
-                      <form>
+                      <form #loginForm = "ngForm">
                          <div class="row">
                             <div class="form-group col-sm-6">
-                               <label for="emailAddress">Email address / Phone Number</label>
-                               <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email / Phone Number"> 
+                               <label for="username">Email address / Phone Number</label>
+                               <input type="text" class="form-control" id="username" name="username" placeholder="Enter email / Phone Number" [(ngModel)]="userName" required> 
                             </div>
                             <div class="form-group col-sm-6">
-                               <label for="Password">Password</label>
-                               <input type="password" class="form-control" id="Password" placeholder="Password"> 
+                               <label for="password">Password</label>
+                               <input type="password" class="form-control" id="password" name="password" placeholder="password" [(ngModel)]="password" required> 
                             </div>
                          </div>
+                         <span class="error text-danger" *ngIf="error">{{error.message}}</span>
                          <div class="row">
                             <div class="form-group col-sm-12 login-btn gap-2">
                                <div class="btn-group" data-toggle="buttons">
                                    <button class="btn theme-btn mr-2 mb-2" name="register" routerLink="/register" > Register </button>
-                                   <button class="btn theme-btn" name="login"> Login </button>
+                                   <button class="btn theme-btn" name="login" (click)="login();" [disabled]="loginForm.invalid">Login </button>
                                </div>
                             </div>
                          </div>
