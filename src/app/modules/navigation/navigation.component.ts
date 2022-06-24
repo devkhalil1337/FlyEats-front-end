@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomService } from 'src/app/shared/custom.service';
 import { AuthService } from 'src/app/user/auth/auth.service';
 
 @Component({
@@ -16,14 +17,16 @@ export class NavigationComponent implements OnInit {
     return this.authService.userDisplayname
   }
   
-  
-  
-  constructor(private authService:AuthService) { 
-    console.log("logggied",this.authService.isLoggedIn)
+  get isMobile(){
+    return this.customService.isMobile();
   }
+  
+  
+  constructor(private authService:AuthService,private customService:CustomService) {}
 
   ngOnInit(): void {
   }
+  
   
   onSignOut(){
     this.authService.SignOut();
