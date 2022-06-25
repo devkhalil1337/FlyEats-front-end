@@ -10,6 +10,7 @@ import { OrderDetailsComponent } from '../order-details/order-details.component'
 import { GalleryComponent } from '../gallery/gallery.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { MenuComponent } from '../menu/menu.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,9 @@ const routes: Routes = [
   }, {
     path: 'contact-us',
     component: ContactComponent
+  }, {
+    path: 'menu',
+    component: MenuComponent
   }, {
     path: 'register',
     component: RegisterComponent
