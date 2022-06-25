@@ -10,42 +10,24 @@ import { RegisterComponent } from './modules/register/register.component';
 import { UserComponent } from './modules/user/user.component';
 import { AuthGuard } from './user/auth/authguard';
 const routes: Routes = [{
-  path: '',
-  component: HomeComponent
-},
-{
-  path: 'products',
-  component: ProductsComponent
-},
-{
-  path: 'contact-us',
-  component: ContactComponent
-},
-{
-  path: 'register',
-  component: RegisterComponent
-},
-{
-  path: 'login',
-  component: LoginComponent
-},
-{
-  path: 'user/orders/:id',
-  component: OrderDetailsComponent
-},
-{
-  path: 'gallery',
-  component: GalleryComponent
-},
-{
-  path: '',
-  canActivate: [AuthGuard],
-  loadChildren: () =>
-    import('./user/user.module').then(
-      (m) => m.UserModule
-    ),
-},
-];
+	path: "",
+	redirectTo: "home",
+	pathMatch: "full"
+}, {
+	path: 'home',
+	component: HomeComponent
+}, {
+	path: '',
+	canActivate: [AuthGuard],
+	loadChildren: () =>
+		import('./user/user.module').then(
+			(m) => m.UserModule),
+}, {
+	path: '',
+	loadChildren: () =>
+		import('./modules/core/core.module').then(
+			(m) => m.CoreModule),
+}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
