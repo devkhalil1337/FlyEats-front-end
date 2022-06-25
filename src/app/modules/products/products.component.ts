@@ -4,6 +4,7 @@ import { products } from 'src/app/mock-api/product-data';
 import { Product } from 'src/app/filters/cart-product.filter';
 import { CartService } from 'src/app/shared/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LocalStorageService } from 'src/app/shared/local-storage.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -11,6 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProductsComponent implements OnInit {
 
+  businessInfo:any;
 
   cartProductsList:any;
 
@@ -19,8 +21,9 @@ export class ProductsComponent implements OnInit {
   categorylist:any[]
   menulist:any[]
   modelRef:any;
-  constructor(private modalService: NgbModal, private cartService:CartService) { 
-
+  constructor(private modalService: NgbModal, private cartService:CartService,
+    private localStorageServcice:LocalStorageService) { 
+    this.businessInfo = this.localStorageServcice.getBusinessDetails();
     this.categorylist = categories
     this.menulist = products
 

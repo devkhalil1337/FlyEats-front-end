@@ -23,6 +23,7 @@ import { AddressesComponent } from './user/addresses/addresses.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { AngularFireModule } from '@angular/fire/compat';
     AppRoutingModule,
     FormsModule,
     UserModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    HttpClientModule
   ],
   providers: [NavigationComponent],
   bootstrap: [AppComponent]
