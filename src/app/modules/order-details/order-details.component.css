@@ -1,3 +1,8 @@
 .order-price{
     text-align: right;
+    color: #fff;
+}
+.theme-btn{
+    width: 8rem;
+    text-align: center;
 }

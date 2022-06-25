@@ -1,3 +1,7 @@
 .sendMessage{
     text-align: right;
 }
+
+.container{
+    overflow: auto;
+}

@@ -2742,6 +2742,7 @@ a[aria-expanded=false] .fa-angle-down {
     transform: translate(0, -50%);
     top: 20%;
     margin: 0 auto;
+    width: 90%;
 }
 
 .modal-backdrop{
