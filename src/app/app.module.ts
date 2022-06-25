@@ -15,7 +15,6 @@ import { OrdersComponent } from './user/orders/orders.component';
 import { AddEditAddressComponent } from './user/add-edit-address/add-edit-address.component';
 import { OrderDetailsComponent } from './modules/order-details/order-details.component';
 import { CheckoutComponent } from './user/checkout/checkout.component';
-import { FilterMenuPipe } from './pipes/filter-menu.pipe';
 import { GalleryComponent } from './modules/gallery/gallery.component';
 import { UserModule } from './user/user.module';
 import { AddressesComponent } from './user/addresses/addresses.component';
@@ -24,6 +23,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './modules/core/core.module';
+import { SharedModule } from './modules/shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +39,6 @@ import { CoreModule } from './modules/core/core.module';
     AddEditAddressComponent,
     OrderDetailsComponent,
     CheckoutComponent,
-    FilterMenuPipe,
     GalleryComponent
   ],
   imports: [
@@ -47,6 +46,7 @@ import { CoreModule } from './modules/core/core.module';
     AppRoutingModule,
     FormsModule,
     CoreModule,
+    SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule
   ],

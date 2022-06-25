@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { categories } from 'src/app/mock-api/category-data';
 import { products } from 'src/app/mock-api/product-data';
 import { Product } from 'src/app/filters/cart-product.filter';
-import { CartService } from 'src/app/shared/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LocalStorageService } from 'src/app/shared/local-storage.service';
+import { CartService } from '../shared/cart.service';
+import { LocalStorageService } from '../shared/local-storage.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
