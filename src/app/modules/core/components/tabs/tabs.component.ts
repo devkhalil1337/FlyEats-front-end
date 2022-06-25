@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-tabs',
+  templateUrl: './tabs.component.html',
+  styleUrls: ['./tabs.component.css']
 })
-export class UserComponent implements OnInit {
+export class TabsComponent implements OnInit {
 
   @Input("selectedTab") selectedTab : string
   @Output("OnChangeSelectedTab") OnChangeSelectedTab = new EventEmitter();

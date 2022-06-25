@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from './footer/footer.component';
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from '../home/home.component';
 import { ProductsComponent } from '../products/products.component';
 import { ContactComponent } from '../contact/contact.component';
 import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
 import { OrderDetailsComponent } from '../order-details/order-details.component';
 import { GalleryComponent } from '../gallery/gallery.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 const routes: Routes = [
   {
@@ -39,12 +39,13 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     FooterComponent,
-    NavigationComponent
+    NavigationComponent,
+    TabsComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
   ],
-  exports:[FooterComponent,NavigationComponent,RouterModule]
+  exports:[FooterComponent,NavigationComponent,RouterModule,TabsComponent]
 })
 export class CoreModule { }
