@@ -6,7 +6,6 @@ import { ProductsComponent } from '../products/products.component';
 import { ContactComponent } from '../contact/contact.component';
 import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
-import { OrderDetailsComponent } from '../order-details/order-details.component';
 import { GalleryComponent } from '../gallery/gallery.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TabsComponent } from './components/tabs/tabs.component';
@@ -32,9 +31,6 @@ const routes: Routes = [
   }, {
     path: 'login',
     component: LoginComponent
-  }, {
-    path: 'user/orders/:id',
-    component: OrderDetailsComponent
   }, {
     path: 'gallery',
     component: GalleryComponent

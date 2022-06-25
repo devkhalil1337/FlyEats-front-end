@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AddressesComponent } from './addresses/addresses.component';
 import { AddEditAddressComponent } from './add-edit-address/add-edit-address.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderDetailsComponent } from '../modules/order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: "orders",
         component: OrdersComponent,
+      },
+      {
+        path: 'orders/:id',
+        component: OrderDetailsComponent
       },
       {
         path: "profile",
