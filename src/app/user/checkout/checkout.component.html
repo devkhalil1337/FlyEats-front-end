@@ -21,25 +21,49 @@
                 <form method="post" action="#">
                     <div class="row">
                         <div class="col-sm-6 margin-b-30">
-                            <table class="table table-striped">
-                                <thead>
+                            <div class="card p-1">
+                              <div class="card-title">
+                                <div>
+                                    <span>Delivery</span>
+                                    <span class="pull-right"><a href=""><i class="fa fa-plus"></i> Add address</a></span>
+                                </div>
+                             </div>
+                              <div class="card-body p-1" style="overflow: auto;">
+                                <div class="col-sm-10">
+                                    <label class="custom-control custom-radio">
+                                      <input id="mixed0" name="cat" type="radio" class="custom-control-input" value="0" checked>
+                                      <span class="custom-control-indicator"></span>
+                                      <span class="custom-control-description text-color">
+                                        <strong>Home</strong>
+                                        <p>PE6 1GA 38 Roker Terrace LANGTOFT</p>
+                                      </span>
+                                    </label>
+                                </div>
+                              </div>
+                                  <div class="mt-2">
+                                    <a href="">View saved address</a>
+                                </div>
+                            </div>
+                            
+                                <table class="table table-striped">
+                                    <thead>
                                     <tr>
-                                      <th scope="col">Item</th>
-                                      <th scope="col">Quantity</th>
-                                      <th scope="col">Price</th>
-                                      <th scope="col">Total</th>
+                                        <th scope="col">Item</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Total</th>
                                     </tr>
-                                  </thead>
-                                <tbody>
+                                    </thead>
+                                    <tbody>
                                     <tr *ngFor="let order of orderDetails.items">
                                         <td>{{order.itemName}}</td>
                                         <td>{{order.quantity}}</td>
                                         <td>${{order.price}}</td>
                                         <td>${{order.quantity*order.price}}</td>
                                     </tr>
-                                </tbody>
-                              </table>
-                        </div>
+                                    </tbody>
+                                </table>
+                          </div>
                         <div class="col-sm-6">
                             <div class="cart-totals margin-b-20">
                                 <div class="cart-totals-title">
