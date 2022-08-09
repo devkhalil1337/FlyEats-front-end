@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl:"https://www.oows2.jempos.com/Service.asmx/",
+  apiUrl:"http://flyeats.somee.com/api/",
   compId:30,
   firebaseConfig:{
     apiKey: "AIzaSyAFJ1cWCztUV4GsoKi4ViLsFfSJn64pahE",

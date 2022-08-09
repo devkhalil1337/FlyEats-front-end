@@ -64,7 +64,7 @@
                       <i class="fa fa-cutlery pull-right"></i> 
                    </div>
                    <ul>
-                      <li *ngFor="let cate of categorylist;index as i"><a (click)="onScroll('#target-'+cate.id)" class="scroll active">{{cate.itemName}}</a></li>
+                      <li *ngFor="let cate of categorylist;index as i"><a (click)="onScroll('#target-'+cate.categoryId)" class="scroll active">{{cate.categoryName}}</a></li>
                    </ul>
                    <div class="clearfix"></div>
                 </div>
@@ -76,29 +76,29 @@
              <div class="menu-widget m-b-30" *ngFor="let cate of categorylist;index as i">
                 <div class="widget-heading">
                    <h3 class="widget-title text-dark">
-                     {{cate.itemName}} <a class="btn btn-link pull-right" (click)="cate.isOpen = !cate.isOpen " data-toggle="collapse" href="#{{cate.itemName}}" [attr.aria-expanded]="!cate.isOpen">
+                     {{cate.categoryName}} <a class="btn btn-link pull-right" (click)="cate.isOpen = !cate.isOpen " data-toggle="collapse" href="#{{cate.categoryName}}" [attr.aria-expanded]="!cate.isOpen">
                       <i class="fa fa-angle-right pull-right"></i>
                       <i class="fa fa-angle-down pull-right"></i>
                       </a>
                    </h3>
                    <div class="clearfix"></div>
                 </div>
-                <div class="collapse in" [class.in]="!cate.isOpen"  id="target-{{cate.id}}">
-                   <div class="food-item" [class.white]="i%2 == 0" *ngFor="let item of menulist | filterMenu:cate.id; index as i">
+                <div class="collapse in" [class.in]="!cate.isOpen"  id="target-{{cate.categoryId}}">
+                   <div class="food-item" [class.white]="i%2 == 0" *ngFor="let item of menulist | filterMenu:cate.categoryId; index as i">
                       <div class="row">
                          <div class="col-xs-12 col-sm-12 col-lg-8">
                             <div class="rest-logo pull-left">
-                               <a class="restaurant-logo pull-left" href="#"><img [src]="item.image" alt="Food logo"></a>
+                               <a class="restaurant-logo pull-left" href="#"><img [src]="item.productImage" alt="Food logo"></a>
                             </div>
                             <!-- end:Logo -->
                             <div class="rest-descr">
-                               <h6><a href="#">{{item.itemName}}</a></h6>
-                               <p> {{item.description}}</p>
+                               <h6><a href="#">{{item.productName}}</a></h6>
+                               <p> {{item.productDescription}}</p>
                             </div>
                             <!-- end:Description -->
                          </div>
                          <!-- end:col -->
-                         <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ {{item.itemPrice}}</span> <a (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" >&#43;</a> </div>
+                         <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ {{item.productDeliveryPrice}}</span> <a (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" >&#43;</a> </div>
                       </div>
                       <!-- end:row -->
                    </div>
@@ -135,9 +135,9 @@
                          <div class="title-row" >
                            <a (click)="openModal(template,product)">
                               <span class="fa fa-times pull-left quantity"> {{product.quantity}}</span>
-                              <span class="product-name" >{{product.itemName}}</span>
+                              <span class="product-name" >{{product.productName}}</span>
                            </a>
-                           <span class="pull-right"> ${{product.itemPrice}}</span>
+                           <span class="pull-right"> ${{product.productDeliveryPrice}}</span>
                            <a (click)="onRemoveProduct(product.cartId);"><i class="fa fa-trash pull-right mr-1"></i></a>
                         </div>
                       </div>
@@ -211,14 +211,14 @@
                      <a class="restaurant-logo pull-left" href="#"><img src="assets/images/pepsi.png" alt="Food logo"></a>
                   </div>
                   <div class="rest-descr">
-                     <h6 class="product-title">{{selectedProduct.itemName}}</h6>
+                     <h6 class="product-title">{{selectedProduct.productName}}</h6>
                   </div>
                </div>
             </div>
          <!-- end:Food item -->
          <div class="form-group row cart-actions">
             <div class="col-xs-12 col-sm-12 col-lg-12 text-xs-center"> 
-               <span class="price">$ {{selectedProduct.itemPrice}}</span>
+               <span class="price">$ {{selectedProduct.productDeliveryPrice}}</span>
             </div>
          </div>
          <div class="form-group row cart-actions">
@@ -241,7 +241,7 @@
          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onModalDismiss()" >Close</button> -->
          <button type="button" class="btn theme-btn w-100" (click)="OnAddToCart();">
             <span  class="pull-left">Add to cart</span> 
-            <span class="pull-right">{{selectedProduct.itemPrice * selectedProduct.quantity | number : '1.0-2'}}</span></button>
+            <span class="pull-right">{{selectedProduct.productDeliveryPrice * selectedProduct.quantity | number : '1.0-2'}}</span></button>
       </div>
    </div>
  </ng-template>

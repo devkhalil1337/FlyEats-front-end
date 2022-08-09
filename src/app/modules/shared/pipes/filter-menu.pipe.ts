@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterMenuPipe implements PipeTransform {
 
   transform(itemsArr: any, categoryId: number) {
-    let results = itemsArr.filter((elm:any) => elm.cateId == categoryId);
+    let results = itemsArr?.filter((elm:any) => elm.categoryId == categoryId);
     return results ? results : null;
   }
 

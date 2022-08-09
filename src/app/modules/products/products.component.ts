@@ -5,6 +5,8 @@ import { Product } from 'src/app/filters/cart-product.filter';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from '../shared/cart.service';
 import { LocalStorageService } from '../shared/local-storage.service';
+import { ProductsService } from './products.service';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -22,16 +24,25 @@ export class ProductsComponent implements OnInit {
   menulist:any[]
   modelRef:any;
   constructor(private modalService: NgbModal, private cartService:CartService,
-    private localStorageServcice:LocalStorageService) { 
+    private localStorageServcice:LocalStorageService,
+    private productService:ProductsService) { 
     this.businessInfo = this.localStorageServcice.getBusinessDetails();
     this.categorylist = categories
-    this.menulist = products
-
+      this.getUnitSubscribe();
   }
 
   ngOnInit(): void {
   }
 
+
+  getUnitSubscribe(){
+    forkJoin(this.productService.getProductsList(), 
+      this.productService.getCategoriesList())
+     .subscribe(([productResponse, categoryResponse]) => {
+      this.categorylist =  categoryResponse
+      this.menulist = productResponse;    
+     });
+  }
 
 
 
