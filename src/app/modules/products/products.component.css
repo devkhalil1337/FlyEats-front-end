@@ -27,3 +27,6 @@
     font-weight: bold;
     text-align: center;
 }
+.plus-action,.minus-action{
+    cursor: pointer;
+}

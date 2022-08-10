@@ -27,4 +27,12 @@ export class ProductsService {
       return response && response.filter((elm:any) => elm.active) || [];
     }));
   }
+
+
+  getSelections(selections:Array<number>){
+    return this.apiService.request("post","Selections/GetMultipleSelectionsById",selections).pipe(map((response:any) => {
+      return response || [];
+    }));
+  }
+
 }

@@ -924,7 +924,7 @@ hr {
 }
 
 .cart-addon .food-item .item-img img {
-    max-width: 70px;
+    max-width: 100%;
 }
 
 .cart-addon .food-item .rest-descr {

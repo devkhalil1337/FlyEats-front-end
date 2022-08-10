@@ -75,6 +75,12 @@ export class ProductsComponent implements OnInit {
 
  openModal(template: any, product:any) {
  this.selectedProduct = new Product(product);
+ if(product.selectionId && product.selectionId.length > 0){
+  this.productService.getSelections(product.selectionId).subscribe(response => {
+    console.log(response);
+  })
+ }
+
  this.modelRef =  this.modalService.open(template,{
     size:'sm',
     backdropClass:'in',
