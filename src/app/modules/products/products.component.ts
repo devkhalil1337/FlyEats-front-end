@@ -7,6 +7,7 @@ import { CartService } from '../shared/cart.service';
 import { LocalStorageService } from '../shared/local-storage.service';
 import { ProductsService } from './products.service';
 import { forkJoin } from 'rxjs';
+import { Category } from 'src/app/models/category.model';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -20,15 +21,14 @@ export class ProductsComponent implements OnInit {
 
   selectedProduct:any
 
-  categorylist:any[]
-  menulist:any[]
+  categorylist:Array<Category> = [];
+  menulist:any[] = [];
   modelRef:any;
   constructor(private modalService: NgbModal, private cartService:CartService,
     private localStorageServcice:LocalStorageService,
     private productService:ProductsService) { 
     this.businessInfo = this.localStorageServcice.getBusinessDetails();
-    this.categorylist = categories
-      this.getUnitSubscribe();
+    this.getUnitSubscribe();
   }
 
   ngOnInit(): void {
@@ -36,10 +36,13 @@ export class ProductsComponent implements OnInit {
 
 
   getUnitSubscribe(){
-    forkJoin(this.productService.getProductsList(), 
-      this.productService.getCategoriesList())
-     .subscribe(([productResponse, categoryResponse]) => {
-      this.categorylist =  categoryResponse
+    forkJoin(
+      
+      this.productService.getProductsList(), 
+      this.productService.getCategoriesList()
+      
+      ).subscribe(([productResponse, categoryResponse]) => {
+      this.categorylist = categoryResponse
       this.menulist = productResponse;    
      });
   }

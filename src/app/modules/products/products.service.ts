@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Category } from 'src/app/models/category.model';
 import { ApiService } from '../shared/api.service';
-import { imagesPathUrl } from '../shared/config.service';
+import { BusinessId, imagesPathUrl } from '../shared/config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ProductsService {
 
 
   getProductsList(){
-    return this.apiService.request("get","Products/GetAllProducts?businessId=0").pipe(map((response:any) => {
+    return this.apiService.request("get",`Products/GetAllProducts?businessId=${BusinessId}`).pipe(map((response:any) => {
       return response && response.map((elm:any) =>{
         return {
           ...elm,
@@ -23,7 +24,7 @@ export class ProductsService {
   }
 
   getCategoriesList(){
-    return this.apiService.request("get","Categories/GetAllCategories?businessId=0").pipe(map((response:any) => {
+    return this.apiService.request("get",`Categories/GetAllCategories?businessId=${BusinessId}`).pipe(map((response:Array<Category>) => {
       return response && response.filter((elm:any) => elm.active) || [];
     }));
   }

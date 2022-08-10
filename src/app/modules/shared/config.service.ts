@@ -16,3 +16,5 @@ export class ConfigService {
 
 
 export const imagesPathUrl = environment.imagesPathUrl
+
+export const BusinessId = environment.BusinessId;
