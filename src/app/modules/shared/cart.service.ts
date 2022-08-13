@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Product } from 'src/app/filters/cart-product.filter';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +9,11 @@ export class CartService {
 
 
 
-  onQuantityIncrease(product:Product){
+  onQuantityIncrease(product:any){
     return product.quantity > 0 ? product.quantity++ : 1;
   }
 
-  onQuantityDecrease(product:Product){
+  onQuantityDecrease(product:any){
     return product.quantity > 1 ? product.quantity-- : 1;
   }
 
