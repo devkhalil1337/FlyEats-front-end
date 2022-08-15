@@ -20,5 +20,7 @@ export class Product{
 	businessId: number;
 	isDeleted: boolean;
 	active: boolean;
-    quantity?:number = 0;
+    quantity?:number;
+	productImageUrl?:string;
+	isItemsExists?:boolean;
 }

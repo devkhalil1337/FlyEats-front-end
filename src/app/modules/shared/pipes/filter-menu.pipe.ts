@@ -1,12 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Product } from 'src/app/filters/prodect.model';
 
 @Pipe({
   name: 'filterMenu'
 })
 export class FilterMenuPipe implements PipeTransform {
 
-  transform(itemsArr: any, categoryId: number) {
-    let results = itemsArr?.filter((elm:any) => elm.categoryId == categoryId);
+  transform(itemsArr: Product[], categoryId: number) {
+    let results = itemsArr?.filter((elm:Product) => elm.categoryId == categoryId);
     return results ? results : null;
   }
 
