@@ -27,7 +27,7 @@
                       <a class="btn btn-small btn-green">Open</a>
                       <p>Burgers, American, Sandwiches, Fast Food, BBQ</p>
                       <ul class="nav nav-inline">
-                         <li class="nav-item"> <a class="nav-link active" href="#"><i class="fa fa-check"></i> Min $ {{businessInfo.MinOrderAmount}}</a> </li>
+                         <li class="nav-item"> <a class="nav-link active" href="#"><i class="fa fa-check"></i> Min $ {{businessInfo.MinOrderAmount | currency:'GBP'}}</a> </li>
                          <li class="nav-item"> <a class="nav-link" href="#"><i class="fa fa-motorcycle"></i> {{businessInfo.DeliveryTime}} min</a> </li>
                          <li class="nav-item ratings">
                             <a class="nav-link" href="#"> <span>
@@ -105,7 +105,7 @@
                             <!-- end:Description -->
                          </div>
                          <!-- end:col -->
-                         <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ {{item.productDeliveryPrice}}</span> <a (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" >&#43;</a> </div>
+                         <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">{{item.productDeliveryPrice | mycurrency}}</span> <a (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" >&#43;</a> </div>
                       </div>
                       <!-- end:row -->
                    </div>
@@ -161,7 +161,7 @@
                               <span class="fa fa-times pull-left quantity"> {{product.quantity}}</span>
                               <span class="product-name" >{{product.productName}}</span>
                            </a>
-                           <span class="pull-right"> ${{product.productDeliveryPrice}}</span>
+                           <span class="pull-right"> {{product.productDeliveryPrice | mycurrency}}</span>
                            <a (click)="onRemoveProduct(product.cartId);"><i class="fa fa-trash pull-right mr-1"></i></a>
                         </div>
                       </div>
@@ -215,7 +215,7 @@
          </div>
          <div class="form-group row cart-actions">
            <div class="col-xs-12 col-sm-12 col-lg-12 text-xs-center"> 
-             <span class="price">$ {{selectedProduct.productDeliveryPrice}}</span>
+             <span class="price">{{selectedProduct.productDeliveryPrice | mycurrency}}</span>
            </div>
          </div>
          <div class="form-group row cart-actions">
@@ -253,7 +253,7 @@
      <div class="modal-footer">
        <button type="button" class="btn theme-btn w-100" (click)="OnAddToCart();">
        <span  class="pull-left">Add to cart</span> 
-       <span class="pull-right">{{selectedProduct.productDeliveryPrice * selectedProduct.quantity | number : '1.0-2'}}</span></button>
+       <span class="pull-right">{{selectedProduct.productDeliveryPrice * selectedProduct.quantity  | mycurrency}}</span></button>
      </div>
    </div>
  </ng-template>

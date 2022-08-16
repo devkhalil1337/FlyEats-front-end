@@ -9,8 +9,10 @@ export class ConfigService {
   constructor() { }
 
 
-
-
+  get selectedCurrency(){
+    const {businessCurrency} = JSON.parse(localStorage.getItem("business") || "USD");
+    return businessCurrency;
+  }
 
 }
 
