@@ -15,4 +15,24 @@ export class LocalStorageService {
     return JSON.parse(localStorage.getItem("business") || '{}')
   }
 
+  setBusinessSettings(business:any){
+    localStorage.setItem("businessSettings",JSON.stringify(business));
+  }
+
+  getBusinessSettings(){
+    return JSON.parse(localStorage.getItem("businessSettings") || '{}')
+  }
+
+  getDeliveryCharges(){
+    const business = JSON.parse(localStorage.getItem("businessSettings") || '{}');
+
+     return business.MinimumOrder || 0;
+  }
+
+  getCartInputs(){
+    return JSON.parse(localStorage.getItem("CartInputs") || '{}');
+  }
+
+
+
 }

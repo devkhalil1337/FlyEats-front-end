@@ -25,5 +25,11 @@ export class AppService {
       })[0] || [];
     }));
   }
+  getBussinessSettings(): Observable<any> {
+    const BusinessId = environment.BusinessId;
+    return this.http.request("get",`Settings/GetSettingsById?BusinessId=${BusinessId}`).pipe(map(response => {
+      return response && response[0] || {}
+    }));
+  }
 
 }

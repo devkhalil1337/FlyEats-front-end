@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Product } from 'src/app/filters/prodect.model';
+import { Product } from 'src/app/filters/product.model';
 
 @Pipe({
   name: 'filterMenu'

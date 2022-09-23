@@ -1,11 +1,28 @@
 import { Injectable } from '@angular/core';
+import { CartItems } from 'src/app/filters/cart-items.model';
+import { Product } from 'src/app/filters/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  constructor() { }
+  cartItems:CartItems;
+
+  get CartItemsLastId(){
+    return this.cartItems.products.length+1;
+  }
+
+
+
+  constructor() { 
+    this.cartItems = new CartItems();
+
+  }
+
+  ngOnChanges(){
+    console.log("Checked",this.cartItems)
+  }
 
 
 
@@ -17,30 +34,52 @@ export class CartService {
     return product.quantity > 1 ? product.quantity-- : 1;
   }
 
-  onRemoveProduct(CartArr:any[] = [],cartId:number){
-    return CartArr = CartArr.filter(elm => elm.cartId != cartId);
+  onRemoveProduct(productId:number){
+    return this.cartItems.products = this.cartItems.products.filter(elm => elm.productId != productId);
   }
 
 
-  onCartUpdate(CartArr:any[] = [],product:any){
-    if(!CartArr || CartArr.length == 0){
-      product.cartId = 1;
-      CartArr.push(product);
-    }else{
+  onCartUpdate(product: Product,selectionProduct?:any) {
+    if(selectionProduct.length > 0)
+      product.selectionChoices = this.extractCheckedModiferProducts(selectionProduct);
+
+
+    if(!this.cartItems || this.cartItems.products.length == 0) {
+      // product.cartId = this.CartItemsLastId;
+      this.cartItems.products.push(product);
+    } else {
       let isNewProduct = false;
-      let index = CartArr.findIndex(elm => elm.cartId == product.cartId);
-      if(index != -1){
-        CartArr[index].quantity = product.quantity;
+      let index = this.cartItems.products.findIndex(elm => elm.productId == product.productId);
+      if(index != -1) {
+        this.cartItems.products[index].quantity = product.quantity;
         isNewProduct = false;
-      }else{
+      } else {
         isNewProduct = true;
       }
-      if(isNewProduct){
-        product.cartId = CartArr.length+1;
-        CartArr.push(product);
+      if(isNewProduct) {
+        // product.cartId = this.CartItemsLastId;
+        this.cartItems.products.push(product);
       }
+    }
+    localStorage.setItem("CartInputs",JSON.stringify(this.cartItems))
+    return this.cartItems.products;
+  }
+
+
+  isProductExists(product:Product){
+    return this.cartItems.products.every(elm =>  {
+      if(elm && elm.selectionChoices && elm.selectionChoices.length > 0){
+        
       }
-    return CartArr;
+    });
+  }
+  
+  extractCheckedModiferProducts(selectionProduct:any){
+    let selections: any[] = [];
+    selectionProduct.forEach((element:any,index:number) => {
+      selections[index] = element.selectionChoices.filter((elm:any) => elm.checked);
+    })
+    return selections[0];
   }
 
 

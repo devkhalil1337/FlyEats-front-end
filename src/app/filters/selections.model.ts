@@ -16,6 +16,7 @@ export class SelectionChoices{
     choicePrice: number;
     choiceSortedBy: number;
     businessId: number;
-    isDeleted: boolean;
-    active: boolean
+    isDeleted?: boolean;
+    active?: boolean 
+    checked?:boolean
 }

@@ -1,3 +1,6 @@
+import { SelectionChoices } from "./selections.model";
+import { Variants } from "./variants.model";
+
 export class Product{
     productId: number;
 	categoryId: number;
@@ -16,11 +19,15 @@ export class Product{
 	productQuantity: number;
 	hasVariations: boolean;
 	featured: boolean;
-	productVariants: [];
+	productVariants: Array<Variants>;
 	businessId: number;
 	isDeleted: boolean;
 	active: boolean;
-    quantity?:number;
+    quantity:number = 1;
 	productImageUrl?:string;
 	isItemsExists?:boolean;
+	selectionChoices?:Array<SelectionChoices>
+
+	constructor(){
+	}
 }

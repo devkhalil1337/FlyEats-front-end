@@ -15,6 +15,9 @@ export class AppComponent {
     this.appService.getBussiness().subscribe(response => {
       this.localStorageService.setBusinessDetails(response);
     })
+    this.appService.getBussinessSettings().subscribe(response => {
+      this.localStorageService.setBusinessSettings(response);
+    })
 
    }
 
