@@ -5,60 +5,58 @@ import { LocalStorageService } from '../shared/local-storage.service';
 import { ProductsService } from './products.service';
 import { forkJoin } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
-import { Selections } from 'src/app/filters/selections.model';
+import { SelectionChoices, Selections } from 'src/app/filters/selections.model';
 import { Product } from 'src/app/filters/product.model';
 import { CartItems } from 'src/app/filters/cart-items.model';
 import { Variants } from 'src/app/filters/variants.model';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
+  businessInfo: any;
+  CartInputs: CartItems;
+  selectedProduct: any;
+  selections: any;
+  categorylist: Array<Category> = [];
+  menulist: any[] = [];
+  modelRef: any;
 
-  businessInfo:any;
-  CartInputs:CartItems;
-  selectedProduct:any
-  selections:any;
-  categorylist:Array<Category> = [];
-  menulist:any[] = [];
-  modelRef:any;
-  
-
-
-  constructor(private modalService: NgbModal, private cartService:CartService,
-    private localStorageServcice:LocalStorageService,
-    private productService:ProductsService) { 
+  constructor(
+    private modalService: NgbModal,
+    private cartService: CartService,
+    private localStorageServcice: LocalStorageService,
+    private productService: ProductsService
+  ) {
     this.businessInfo = this.localStorageServcice.getBusinessDetails();
     this.CartInputs = new CartItems();
     this.getUnitSubscribe();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-
-  getUnitSubscribe(){
+  getUnitSubscribe() {
     forkJoin(
-      this.productService.getProductsList(), 
+      this.productService.getProductsList(),
       this.productService.getCategoriesList()
-      ).subscribe(([productResponse, categoryResponse]) => {
-      this.categorylist = categoryResponse
-      this.menulist = productResponse;    
-     });
+    ).subscribe(([productResponse, categoryResponse]) => {
+      this.categorylist = categoryResponse;
+      this.menulist = productResponse;
+    });
   }
 
-
-
-  OnAddToCart(){
-    this.CartInputs.products = this.cartService.onCartUpdate(this.selectedProduct,this.selections);
+  OnAddToCart() {
+    this.CartInputs.products = this.cartService.onCartUpdate(
+      this.selectedProduct,
+      this.selections
+    );
     this.onModalDismiss();
     this.CartInputs.updateTotalAmount();
-
   }
 
-  onQuantityUpdate(type:string){
-    switch(type){
+  onQuantityUpdate(type: string) {
+    switch (type) {
       case 'increase':
         this.cartService.onQuantityIncrease(this.selectedProduct);
         break;
@@ -68,78 +66,83 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  onRemoveProduct(productId:number){
+  onRemoveProduct(productId: number) {
     this.CartInputs.products = this.cartService.onRemoveProduct(productId);
-    this.CartInputs.updateTotalAmount()
+    this.CartInputs.updateTotalAmount();
   }
-
- 
-
 
   onScroll(elem: string) {
     const element = document.querySelector(elem)!;
-    const y = element.getBoundingClientRect().top + window.pageYOffset
-    window.scrollTo({ top: y, behavior: 'smooth' })
- }
-
- openModal(template: any, product:any) {
-  this.selectedProduct = new Product();
-  this.selectedProduct = {...product};
-  this.selections = new Array<Selections>();
-  if(product.selectionId && product.selectionId.length > 0){
-    this.productService.getSelections(product.selectionId).subscribe(response => {
-      if(this.cartService.isProductExists(this.selectedProduct)){
-
-      }
-          this.selections = response;
-    })
- }
-
- this.modelRef =  this.modalService.open(template,{
-    size:'md',
-    backdropClass:'in',
-    windowClass:'modal-holder in',
-    modalDialogClass:'modal-dialog-centered'
-  });
-}
-
-openAllergyModal(template: any) {
-  this.modelRef =  this.modalService.open(template,{
-     windowClass:'modal-holder in',
-     backdropClass:'in',
-     modalDialogClass:'modal-dialog-centered'
-   });
- }
-
-onModalAction(results:any){
-  console.log(results)
-}
-
-onModalDismiss(){
-  this.modelRef.close()
-}
-
-onItemChange($event:any,choice:any,selection:Selections){
-  choice.checked = $event.target.checked;
-  let selectedChoicesLen = selection.selectionChoices.reduce((acc:any, cur:any) => cur.checked ? ++acc : acc, 0);
-  if(selection.maximumSelection === selectedChoicesLen){
-    selection.selectionChoices.filter((element:any) => {
-      if(!element.checked){
-        element.isChecked = true;
-      }
-    })
-  }else{
-    selection.selectionChoices.filter((element:any) => {
-      if(element.isChecked)
-      element.isChecked = false
-    })
+    const y = element.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
   }
-  console.log(" Value is : ", choice ,"allowed",selection.maximumSelection,selectedChoicesLen);
 
-}
+  openModal(template: any, product: Product) {
+    this.selectedProduct = new Product();
+    this.selectedProduct = { ...product };
+    this.selections = new Array<Selections>();
+    if (product.selectionId && product.selectionId.length > 0) {
+      this.productService
+        .getSelections(product.selectionId)
+        .subscribe((response) => {
+          if (this.cartService.isProductExists(this.selectedProduct)) {
+          }
+          this.selections = response;
+        });
+    }
 
+    this.modelRef = this.modalService.open(template, {
+      size: 'md',
+      backdropClass: 'in',
+      windowClass: 'modal-holder in',
+      modalDialogClass: 'modal-dialog-centered',
+    });
+  }
 
-isAllSelected($event:any,product:any) {
-  product.checked = $event.target.checked;
-}
+  openAllergyModal(template: any) {
+    this.modelRef = this.modalService.open(template, {
+      windowClass: 'modal-holder in',
+      backdropClass: 'in',
+      modalDialogClass: 'modal-dialog-centered',
+    });
+  }
+
+  onModalAction(results: any) {
+    console.log(results);
+  }
+
+  onModalDismiss() {
+    this.modelRef.close();
+  }
+
+  onItemChange($event: any, choice: any, selection: Selections) {
+    choice.checked = $event.target.checked;
+    let selectedChoicesLen = selection.selectionChoices.reduce(
+      (acc: any, cur: any) => (cur.checked ? ++acc : acc),
+      0
+    );
+    if (selection.maximumSelection === selectedChoicesLen) {
+      selection.selectionChoices.filter((element: SelectionChoices) => {
+        if (!element.checked) {
+          element.isChecked = true;
+          this.selectedProduct.productDeliveryPrice += element.choicePrice;
+        }
+      });
+    } else {
+      selection.selectionChoices.filter((element: SelectionChoices) => {
+        if (element.isChecked) {
+          element.isChecked = false;
+          this.selectedProduct.productDeliveryPrice -= element.choicePrice;
+        }
+      });
+    }
+  }
+
+  isAllSelected($event: any, product: Variants) {
+    const variations = this.selectedProduct.productVariants;
+    variations.filter((vari:Variants) => vari.checked = false);
+    product.checked = $event.target.checked;
+    this.selectedProduct.productName = product.variationName;
+    this.selectedProduct.productDeliveryPrice = product.variationPrice;
+  }
 }

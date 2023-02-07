@@ -19,4 +19,5 @@ export class SelectionChoices{
     isDeleted?: boolean;
     active?: boolean 
     checked?:boolean
+    isChecked?:boolean
 }

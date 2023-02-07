@@ -157,21 +157,19 @@
                    <div class="order-row" [class.bg-white]="i%2 != 0" *ngFor="let product of CartInputs.products;index as i">
                       <div class="widget-body">
                          <div class="title-row" >
-                           <a (click)="openModal(template,product)">
+                           <a>
                               <span class="badge badge-dark"> {{product.quantity}} </span>
                               <!-- <span class="fa fa-times pull-left quantity"> {{product.quantity}}</span> -->
                               <span class="product-name"> {{product.productName}} </span>
                            </a>
-                           <span class="pull-right"> {{product.productDeliveryPrice | mycurrency}}</span>
-                           <a (click)="onRemoveProduct(product.productId);"><i class="fa fa-trash pull-right mr-1"></i></a>
-                           <div class="form-group row no-gutter container" *ngIf="product.selectionChoices">
+                           <span class="pull-right"> {{product.productDeliveryPrice*product.quantity | mycurrency}}</span>
+                           <a (click)="onRemoveProduct(product.cartId || 0);"><i class="fa fa-trash pull-right mr-1"></i></a>
+                           <div class="form-group row no-gutter container">
                               <div class="col-xs-8 m-2">
                                  <ul>
-                                    <li *ngFor="let choice of product.selectionChoices;">{{choice.choiceName}}</li>
+                                    <!-- <li *ngFor="let variant of product.productVariants;">{{variant.variationName}}</li> -->
+                                    <!-- <li *ngFor="let choice of product.selectionChoices;">{{choice.choiceName}}</li> -->
                                  </ul>
-                              </div>
-                              <div class="col-xs-4">
-                                 <input class="form-control" type="number" value="2" id="example-number-input"> 
                               </div>
                            </div>
                         </div>
@@ -232,8 +230,6 @@
        <div class="selections" style="padding-bottom: 5rem;" *ngIf="selectedProduct.productVariants.length > 0">
          <div class="shadow border-0 pt-2 ">
            <div class="c-itemSelector-section-heading">
-             <!-- {{productVariant.variationName}} -->
-             <!-- <span class="badge badge-primary badge-pill pull-right"> {{selection.maximumSelection > 0 ? 'Required':''}}</span> -->
              Select One
            </div>
            <ul class="list-group list-group-horizontal-xl mx-auto"  *ngFor="let productVariant of selectedProduct.productVariants;">
@@ -252,7 +248,7 @@
          </div>
        </div>
 
-       <div class="selections" style="padding-top: 5rem;" *ngIf="selections.length > 0">
+       <!-- <div class="selections" style="padding-top: 5rem;" *ngIf="selections.length > 0">
          <div class="shadow border-0 pt-2 " *ngFor="let selection of selections;">
            <div class="c-itemSelector-section-heading">
              {{selection.selectionName}}
@@ -272,7 +268,7 @@
            <div class="card-body">
            </div>
          </div>
-       </div>
+       </div> -->
      </div>
      <div class="modal-footer">
       <div class="form-group row cart-actions">

@@ -77,3 +77,7 @@
     display: flex;
     white-space: nowrap;
 }
+
+.cart-addon{
+    height: 400px;
+}
