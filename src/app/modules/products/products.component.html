@@ -95,7 +95,7 @@
                       <div class="row">
                          <div class="col-xs-12 col-sm-12 col-lg-8">
                             <div class="rest-logo pull-left">
-                               <a class="restaurant-logo pull-left"><img [src]="item.productImageUrl" alt="Food logo"></a>
+                               <!-- <a class="restaurant-logo pull-left"><img [src]="item.productImageUrl" alt="Food logo"></a> -->
                             </div>
                             <!-- end:Logo -->
                             <div class="rest-descr">
@@ -162,13 +162,13 @@
                               <!-- <span class="fa fa-times pull-left quantity"> {{product.quantity}}</span> -->
                               <span class="product-name"> {{product.productName}} </span>
                            </a>
-                           <span class="pull-right"> {{product.productDeliveryPrice*product.quantity | mycurrency}}</span>
+                           <span class="pull-right"> {{product.productPrice*product.quantity | mycurrency}}</span>
                            <a (click)="onRemoveProduct(product.cartId || 0);"><i class="fa fa-trash pull-right mr-1"></i></a>
                            <div class="form-group row no-gutter container">
                               <div class="col-xs-8 m-2">
                                  <ul>
                                     <!-- <li *ngFor="let variant of product.productVariants;">{{variant.variationName}}</li> -->
-                                    <!-- <li *ngFor="let choice of product.selectionChoices;">{{choice.choiceName}}</li> -->
+                                    <li *ngFor="let choice of product.selectionChoices;">{{choice.choiceName}}</li>
                                  </ul>
                               </div>
                            </div>
@@ -237,7 +237,7 @@
                <div class="custom-control custom-radio">
                  <input class="custom-control-input" id="customCheck-{{productVariant.variantId}}" type="radio" name="variant" (change)="isAllSelected($event,productVariant)">
                  <label class="cursor-pointer font-italic d-block custom-control-label c-itemSelector-section-label" for="customCheck-{{productVariant.variantId}}">
-                  {{productVariant.variationName}} {{productVariant.isChecked}}
+                  {{productVariant.variationName}}
                   <span class="badge badge-light pull-right"> {{productVariant.variationPrice | mycurrency}}</span>
                </label>
                </div>
@@ -248,7 +248,7 @@
          </div>
        </div>
 
-       <!-- <div class="selections" style="padding-top: 5rem;" *ngIf="selections.length > 0">
+       <div class="selections" style="padding-top: 5rem;" *ngIf="selections.length > 0">
          <div class="shadow border-0 pt-2 " *ngFor="let selection of selections;">
            <div class="c-itemSelector-section-heading">
              {{selection.selectionName}}
@@ -268,7 +268,7 @@
            <div class="card-body">
            </div>
          </div>
-       </div> -->
+       </div>
      </div>
      <div class="modal-footer">
       <div class="form-group row cart-actions">
@@ -287,7 +287,7 @@
 
        <button type="button" class="btn theme-btn w-100" (click)="OnAddToCart();">
        <span  class="pull-left">Add to cart</span> 
-       <span class="pull-right">{{selectedProduct.productDeliveryPrice * selectedProduct.quantity  | mycurrency}}</span></button>
+       <span class="pull-right">{{(selectedProduct.productPrice ? selectedProduct.productPrice * selectedProduct.quantity:0)  | mycurrency}}</span></button>
      </div>
    </div>
  </ng-template>

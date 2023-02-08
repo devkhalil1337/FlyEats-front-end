@@ -24,23 +24,23 @@ export class CartItems {
   updateTotalAmount() {
     this.totalAmount = 0;
     this.products.forEach((product: Product) => {
-      // if (product.selectionChoices && product.selectionChoices.length > 0) {
-      //   elm.selectionChoices.forEach((choice: SelectionChoices) => {
-      //     if (choice.checked) {
-      //       this.totalAmount += choice.choicePrice;
-      //     }
-      //   });
-      // }
+      if (product.selectionChoices && product.selectionChoices.length > 0) {
+        product.selectionChoices.forEach((choice: SelectionChoices) => {
+          if (choice.checked) {
+            this.totalAmount += choice.choicePrice;
+          }
+        });
+      }
       if (product.productVariants && product.productVariants.length > 0) {
         product.productVariants.forEach((variant: Variants) => {
           if (variant.checked) {
-            this.totalAmount += variant.variationPrice * product.quantity;
+            this.totalAmount += variant.variationPrice;
           }
         });
       }
 
       if(product.productVariants.length == 0){
-        this.totalAmount += product.productDeliveryPrice * product.quantity;
+        this.totalAmount += product.productPrice * product.quantity;
       }
 
     });

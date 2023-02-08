@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartItems } from 'src/app/filters/cart-items.model';
 import { Product } from 'src/app/filters/product.model';
+import { Variants } from 'src/app/filters/variants.model';
 
 @Injectable({
   providedIn: 'root',
@@ -35,9 +36,11 @@ export class CartService {
   }
 
   onCartUpdate(product: Product, selectionProduct?: any) {
-    // if (selectionProduct.length > 0)
-    //   product.selectionChoices =
-    //     this.extractCheckedModiferProducts(selectionProduct);
+    if (selectionProduct.length > 0)
+        product.selectionChoices = this.extractCheckedModiferProducts(selectionProduct);
+    if(product.productVariants.length > 0){
+        product.productVariants = this.extractCheckedVariantProducts(product);
+    }
 
     if (!this.cartItems || this.cartItems.products.length == 0) {
       product.cartId = this.CartItemsLastId;
@@ -82,13 +85,18 @@ export class CartService {
     }
   }
 
-  extractCheckedModiferProducts(selectionProduct: any) {
+ private extractCheckedModiferProducts(selectionProduct: any) {
     let selections: any[] = [];
     selectionProduct.forEach((element: any, index: number) => {
       selections[index] = element.selectionChoices.filter(
         (elm: any) => elm.checked
       );
     });
-    return selections[0];
+    const singleArray = selections.reduce((a, b) => a.concat(b), []);
+    return singleArray;
+  }
+
+  private extractCheckedVariantProducts(VariantProduct: Product) {
+    return VariantProduct.productVariants.filter((veriant:Variants) => veriant.checked);
   }
 }

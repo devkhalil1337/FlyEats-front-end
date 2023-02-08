@@ -18,6 +18,6 @@ export class SelectionChoices{
     businessId: number;
     isDeleted?: boolean;
     active?: boolean 
-    checked?:boolean
-    isChecked?:boolean
+    checked?:boolean = false;
+    isChecked?:boolean;
 }

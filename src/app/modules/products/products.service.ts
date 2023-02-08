@@ -20,6 +20,7 @@ export class ProductsService {
       return response && response.map((elm:Product) =>{
         return {
           ...elm,
+          productPrice:0,
           productImageUrl:elm.productImage ? imagesPathUrl+"/images/"+elm.productImage:null,
         }
       }) || [];

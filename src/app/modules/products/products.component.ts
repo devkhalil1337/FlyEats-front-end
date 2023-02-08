@@ -17,7 +17,7 @@ import { Variants } from 'src/app/filters/variants.model';
 export class ProductsComponent implements OnInit {
   businessInfo: any;
   CartInputs: CartItems;
-  selectedProduct: any;
+  selectedProduct: Product;
   selections: any;
   categorylist: Array<Category> = [];
   menulist: any[] = [];
@@ -79,6 +79,7 @@ export class ProductsComponent implements OnInit {
 
   openModal(template: any, product: Product) {
     this.selectedProduct = new Product();
+    console.log(this.selectedProduct.productPrice)
     this.selectedProduct = { ...product };
     this.selections = new Array<Selections>();
     if (product.selectionId && product.selectionId.length > 0) {
@@ -115,34 +116,47 @@ export class ProductsComponent implements OnInit {
     this.modelRef.close();
   }
 
-  onItemChange($event: any, choice: any, selection: Selections) {
-    choice.checked = $event.target.checked;
-    let selectedChoicesLen = selection.selectionChoices.reduce(
-      (acc: any, cur: any) => (cur.checked ? ++acc : acc),
-      0
-    );
-    if (selection.maximumSelection === selectedChoicesLen) {
-      selection.selectionChoices.filter((element: SelectionChoices) => {
-        if (!element.checked) {
+  onItemChange($event: any, selectedChoice: SelectionChoices, selection: Selections) {
+    selectedChoice.checked = $event.target.checked;
+    let selectedChoicesLen = selection.selectionChoices.reduce((acc: any, cur: SelectionChoices) => (cur.checked ? ++acc : acc), 0);
+    const choices = selection.selectionChoices
+    choices.filter((element: SelectionChoices) => {
+      if(selection.maximumSelection === selectedChoicesLen) {
+        if(!element.checked) {
           element.isChecked = true;
-          this.selectedProduct.productDeliveryPrice += element.choicePrice;
         }
-      });
-    } else {
-      selection.selectionChoices.filter((element: SelectionChoices) => {
-        if (element.isChecked) {
-          element.isChecked = false;
-          this.selectedProduct.productDeliveryPrice -= element.choicePrice;
+      } else if(element.isChecked) {
+        element.isChecked = false;
+      }
+      if(selectedChoice.checked) {
+        if(selectedChoice.choicesId === element.choicesId) {
+          this.selectedProduct.productPrice += element.choicePrice;
         }
-      });
-    }
+      } else if(selectedChoice.checked === false) {
+        if(selectedChoice.choicesId === element.choicesId) {
+          this.selectedProduct.productPrice -= element.choicePrice;
+        }
+      }
+    });
   }
 
-  isAllSelected($event: any, product: Variants) {
+  isAllSelected($event: any, selectedVariant: Variants) {
+    // const checkedVariant = this.selectedProduct.productVariants.find((variant:Variants) => variant.checked);
+    // const price = checkedVariant ? checkedVariant.variationPrice : 0;
+    // if(price > 0){
+    //   this.selectedProduct.productPrice -= price;
+    // }else{
+    //   this.selectedProduct.productPrice = selectedVariant.variationPrice;
+    // }
+    selectedVariant.checked = $event.target.checked;
+    this.selectedProduct.productPrice = selectedVariant.variationPrice;
+    this.selectedProduct.productName = selectedVariant.variationName;
     const variations = this.selectedProduct.productVariants;
-    variations.filter((vari:Variants) => vari.checked = false);
-    product.checked = $event.target.checked;
-    this.selectedProduct.productName = product.variationName;
-    this.selectedProduct.productDeliveryPrice = product.variationPrice;
+    variations.filter((vari:Variants) =>{
+      if(selectedVariant.variantId != vari.variantId)
+        vari.checked = false;
+    });
   }
+
+  
 }

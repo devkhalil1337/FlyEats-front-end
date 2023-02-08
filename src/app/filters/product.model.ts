@@ -28,7 +28,9 @@ export class Product {
   productImageUrl?: string;
   isItemsExists?: boolean;
   selectionChoices: Array<SelectionChoices>;
+  productPrice: number;
   constructor() {
-	this.productName = "";
+	this.productPrice = 0;
   }
+  
 }
