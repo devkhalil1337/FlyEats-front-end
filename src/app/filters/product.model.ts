@@ -29,6 +29,7 @@ export class Product {
   isItemsExists?: boolean;
   selectionChoices: Array<SelectionChoices>;
   productPrice: number;
+  productTotalAmount:number;
   constructor() {
 	this.productPrice = 0;
   }

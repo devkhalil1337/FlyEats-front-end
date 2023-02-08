@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
 import { CartItems } from 'src/app/filters/cart-items.model';
 import { Product } from 'src/app/filters/product.model';
 import { Variants } from 'src/app/filters/variants.model';
@@ -6,7 +6,7 @@ import { Variants } from 'src/app/filters/variants.model';
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService implements OnChanges{
   cartItems: CartItems;
 
   get CartItemsLastId() {
@@ -17,10 +17,11 @@ export class CartService {
     this.cartItems = new CartItems();
   }
 
-  ngOnChanges() {
-    console.log('Checked', this.cartItems);
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(this.cartItems,changes)
+    // changes.prop contains the old and the new value...
   }
-
+  
   onQuantityIncrease(product: any) {
     return product.quantity > 0 ? product.quantity++ : 1;
   }
@@ -65,6 +66,8 @@ export class CartService {
       }
     }
     localStorage.setItem('CartInputs', JSON.stringify(this.cartItems));
+    this.cartItems.updateTotalAmount();
+
     return this.cartItems.products;
   }
 

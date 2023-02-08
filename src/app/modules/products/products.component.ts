@@ -141,13 +141,6 @@ export class ProductsComponent implements OnInit {
   }
 
   isAllSelected($event: any, selectedVariant: Variants) {
-    // const checkedVariant = this.selectedProduct.productVariants.find((variant:Variants) => variant.checked);
-    // const price = checkedVariant ? checkedVariant.variationPrice : 0;
-    // if(price > 0){
-    //   this.selectedProduct.productPrice -= price;
-    // }else{
-    //   this.selectedProduct.productPrice = selectedVariant.variationPrice;
-    // }
     selectedVariant.checked = $event.target.checked;
     this.selectedProduct.productPrice = selectedVariant.variationPrice;
     this.selectedProduct.productName = selectedVariant.variationName;
@@ -156,6 +149,11 @@ export class ProductsComponent implements OnInit {
       if(selectedVariant.variantId != vari.variantId)
         vari.checked = false;
     });
+  }
+
+
+  getProductAmount(product:Product){
+    
   }
 
   

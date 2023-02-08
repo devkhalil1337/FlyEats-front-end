@@ -162,7 +162,7 @@
                               <!-- <span class="fa fa-times pull-left quantity"> {{product.quantity}}</span> -->
                               <span class="product-name"> {{product.productName}} </span>
                            </a>
-                           <span class="pull-right"> {{product.productPrice*product.quantity | mycurrency}}</span>
+                           <span class="pull-right"> {{product.productTotalAmount | mycurrency}}</span>
                            <a (click)="onRemoveProduct(product.cartId || 0);"><i class="fa fa-trash pull-right mr-1"></i></a>
                            <div class="form-group row no-gutter container">
                               <div class="col-xs-8 m-2">
