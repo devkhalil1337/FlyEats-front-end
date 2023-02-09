@@ -18,11 +18,15 @@ export class CartItems implements OnChanges{
     this.selections = new Array<SelectionChoices>();
     // this.getDeliveryCharges();
     // this.updateTotalAmount();
+    this.getProducts();
   }
 
   getProducts() {
-    console.log(this.products);
+    return JSON.parse(localStorage.getItem("CartInputs") || '{}');
+
   }
+
+  
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(this.totalAmount,changes)

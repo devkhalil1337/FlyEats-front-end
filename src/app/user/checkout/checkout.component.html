@@ -55,11 +55,21 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let order of orderDetails.items">
+                                    <!-- <tr *ngFor="let order of orderDetails.items">
                                         <td>{{order.itemName}}</td>
                                         <td>{{order.quantity}}</td>
                                         <td>${{order.price}}</td>
                                         <td>${{order.quantity*order.price}}</td>
+                                    </tr> -->
+                                    <tr *ngFor="let order of CartInputs.products">
+                                        <td>{{order.productName}}
+                                            <tr *ngFor="let selection of order.selectionChoices">
+                                                <td>{{selection.choiceName}}</td>
+                                            </tr>
+                                        </td>
+                                        <td>{{order.quantity}}</td>
+                                        <td>${{order.productDeliveryPrice}}</td>
+                                        <td>${{order.quantity*order.productDeliveryPrice}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -73,7 +83,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>Cart Subtotal</td>
-                                                <td>$29.00</td>
+                                                <td>{{CartInputs.totalAmount | mycurrency}}</td>
                                             </tr>
                                             <tr>
                                                 <td>VAT</td>
