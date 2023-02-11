@@ -4,6 +4,7 @@ import { Product } from 'src/app/filters/product.model';
 import { Variants } from 'src/app/filters/variants.model';
 import { Order } from 'src/app/models/order.model';
 import { OrderDetails } from 'src/app/models/orderDetails.model';
+import { OrderVariants } from 'src/app/models/orderVariants.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -155,13 +156,28 @@ export class CartService implements OnChanges{
       orderDetails.CategoryId = product.categoryId;
       orderDetails.OrderId = orderId;
       orderDetails.ProductComments = "";
-      orderDetails.ProductHaveSelection = false;
+      orderDetails.ProductHaveSelection = product && product.selectionChoices && product.selectionChoices.length > 0;
       orderDetails.ProductId = product.productId;
       orderDetails.ProductName = product.productName;
       orderDetails.ProductPrice = product.productDeliveryPrice;
       orderDetails.ProductQuantity = product.quantity;
       orderDetails.VariantId = product.productVariants && product.productVariants.length > 0 ? product.productVariants[0].variantId : 0;
+      orderDetails.productVariants = this.createOrderVariants(product);
       return orderDetails;
+    })
+  }
+
+  createOrderVariants(product:Product){
+    if(product && !product.selectionChoices)
+      return [];
+    return product.selectionChoices.map((productChoice) => {
+      let variant = new OrderVariants();
+      variant.businessId = product.businessId;
+      variant.choiceName = productChoice.choiceName;
+      variant.choicePrice = productChoice.choicePrice;
+      variant.choicesId = productChoice.choicesId;
+      variant.selectionId = productChoice.selectionId
+      return variant;
     })
   }
 

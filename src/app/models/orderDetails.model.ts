@@ -1,3 +1,5 @@
+import { OrderVariants } from "./orderVariants.model";
+
 export class OrderDetails {
     OrderId:string;
     BusinessId:number;
@@ -9,4 +11,5 @@ export class OrderDetails {
     ProductPrice:number;
     ProductComments:string;
     ProductHaveSelection:boolean;
+    productVariants:OrderVariants[]
 }
