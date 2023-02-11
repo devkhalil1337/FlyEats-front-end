@@ -8,22 +8,23 @@ import { Variants } from './variants.model';
 export class CartItems implements OnChanges{
   cartItemId: number;
   products: Array<Product>;
-  selections: Array<SelectionChoices>;
   totalAmount: number = 0;
   deliveryCharges: number = 0;
   minimumOrder: number = 0;
-  @Input("totalAmount") total = 0;
   constructor() {
     this.products = new Array<Product>();
-    this.selections = new Array<SelectionChoices>();
-    // this.getDeliveryCharges();
-    // this.updateTotalAmount();
-    this.getProducts();
+    const sessionCart = JSON.parse(localStorage.getItem("CartInputs") || '{}');
+    if(Object.getOwnPropertyNames(sessionCart).length > 0 ){
+      this.products = sessionCart.products;
+      this.totalAmount = sessionCart.totalAmount;
+      this.deliveryCharges = sessionCart.deliveryCharges;
+      this.minimumOrder = sessionCart.minimumOrder;
+      this.updateTotalAmount();
+    }
   }
 
   getProducts() {
-    return JSON.parse(localStorage.getItem("CartInputs") || '{}');
-
+    
   }
 
   
@@ -66,7 +67,6 @@ export class CartItems implements OnChanges{
         productAmount += product.productDeliveryPrice * product.quantity;
       }
       product.productTotalAmount = productAmount;
-      this.total = productAmount;
     }
   }
 

@@ -2,6 +2,9 @@ import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
 import { CartItems } from 'src/app/filters/cart-items.model';
 import { Product } from 'src/app/filters/product.model';
 import { Variants } from 'src/app/filters/variants.model';
+import { Order } from 'src/app/models/order.model';
+import { OrderDetails } from 'src/app/models/orderDetails.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +23,10 @@ export class CartService implements OnChanges{
   ngOnChanges(changes: SimpleChanges) {
     console.log(this.cartItems,changes)
     // changes.prop contains the old and the new value...
+  }
+
+  onUpdateAmount(){
+    this.cartItems.updateTotalAmount();
   }
   
   onQuantityIncrease(product: any) {
@@ -102,4 +109,61 @@ export class CartService implements OnChanges{
   private extractCheckedVariantProducts(VariantProduct: Product) {
     return VariantProduct.productVariants.filter((veriant:Variants) => veriant.checked);
   }
+
+  createUniqueString() {
+    const date = new Date();
+    const dateTime = date.getTime();
+    const randomNumber = Math.floor(Math.random() * 10000);
+    const str =  `fly-${dateTime }-${randomNumber}`;
+    return str.substring(0, 20);
+  }
+  
+  CreateOrder(orderId:string):Order{
+    console.log(this.cartItems.products);
+    const order = new Order();
+    order.businessId= environment.BusinessId;
+    order.isDeleted= false;
+    order.active= true;
+    order.customerId= 123;
+    order.orderInvoiceNumber= orderId;
+    order.orderType= "Dine-In";
+    order.orderTableId= 4;
+    order.orderStatus= "In-Progress";
+    order.orderServiceCharges= 10;
+    order.orderDiscount= 20;
+    order.orderVoucherId= 2;
+    order.orderVoucherDiscountAmount= 5;
+    order.orderTotalAmount= this.cartItems.totalAmount;
+    order.orderVatAmount = 0;
+    order.orderVatPercentage= 0;
+    order.vatType= "Regular";
+    order.orderPaymentStatus= "Paid";
+    order.orderPaymentMethod= "Credit Card";
+    order.averageOrderPreprationTime= 30;
+    order.orderComments= "Special Request No onions";
+    order.orderDeliveryTime= 60;
+    order.customerDeliveryId= 987;
+    order.orderCompletedBy= ""
+    console.log(order);
+    return order;
+  }
+
+  CreateOrderDetails(orderId:string):OrderDetails[]{
+    return this.cartItems.products.map((product:Product) => {
+      let orderDetails = new OrderDetails();
+      orderDetails.BusinessId = product.businessId;
+      orderDetails.CategoryId = product.categoryId;
+      orderDetails.OrderId = orderId;
+      orderDetails.ProductComments = "";
+      orderDetails.ProductHaveSelection = false;
+      orderDetails.ProductId = product.productId;
+      orderDetails.ProductName = product.productName;
+      orderDetails.ProductPrice = product.productDeliveryPrice;
+      orderDetails.ProductQuantity = product.quantity;
+      orderDetails.VariantId = product.productVariants && product.productVariants.length > 0 ? product.productVariants[0].variantId : 0;
+      return orderDetails;
+    })
+  }
+
+
 }
