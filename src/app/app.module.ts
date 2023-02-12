@@ -12,7 +12,7 @@ import { LoginComponent } from './modules/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { OrdersComponent } from './user/orders/orders.component';
 import { AddEditAddressComponent } from './user/add-edit-address/add-edit-address.component';
-import { OrderDetailsComponent } from './modules/order-details/order-details.component';
+import { OrderDetailsComponent } from './user/order-details/order-details.component';
 import { CheckoutComponent } from './user/checkout/checkout.component';
 import { GalleryComponent } from './modules/gallery/gallery.component';
 import { AddressesComponent } from './user/addresses/addresses.component';

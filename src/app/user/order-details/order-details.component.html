@@ -31,18 +31,18 @@
                     </tr>
                   </thead>
                 <tbody>
-                    <tr *ngFor="let order of orderDetails.items">
-                        <td>{{order.itemName}}</td>
-                        <td>{{order.quantity}}</td>
-                        <td>${{order.price}}</td>
-                        <td>${{order.quantity*order.price}}</td>
+                    <tr *ngFor="let order of orderDetails">
+                        <td>{{order.productName}}</td>
+                        <td>{{order.productQuantity}}</td>
+                        <td>${{order.productPrice}}</td>
+                        <td>${{order.productQuantity*order.productPrice}}</td>
                     </tr>
                 </tbody>
               </table>
               <div class="widget-body">
-                <p class="order-price"> <a class="btn theme-btn">VAT: ${{orderDetails.meta.totalPrice}}</a> </p>
+                <!-- <p class="order-price"> <a class="btn theme-btn">VAT: ${{orderDetails.meta.totalPrice}}</a> </p>
                 <p class="order-price"> <a class="btn theme-btn">Delivery: ${{orderDetails.meta.totalPrice}}</a> </p>
-                <p class="order-price"> <a class="btn theme-btn">Total Price: ${{orderDetails.meta.totalPrice}}</a> </p>
+                <p class="order-price"> <a class="btn theme-btn">Total Price: ${{orderDetails.meta.totalPrice}}</a> </p> -->
               </div>
 
         </div>
