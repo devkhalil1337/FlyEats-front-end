@@ -32,7 +32,11 @@
                   </thead>
                 <tbody>
                     <tr *ngFor="let order of orderDetails">
-                        <td>{{order.productName}}</td>
+                        <td>{{order.productName}}
+                          <tr *ngFor="let selection of order.productVariants">
+                            <td>{{selection.choiceName}}</td>
+                        </tr>
+                        </td>
                         <td>{{order.productQuantity}}</td>
                         <td>${{order.productPrice}}</td>
                         <td>${{order.productQuantity*order.productPrice}}</td>
