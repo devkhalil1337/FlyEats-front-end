@@ -36,9 +36,13 @@ export class CartService {
   }
 
   onRemoveProduct(productId: number) {
-    return (this.cartItems.products = this.cartItems.products.filter(
+    const session = JSON.parse(localStorage.getItem("CartInputs") || '{}');
+    this.cartItems.products = this.cartItems.products.filter(
       (elm) => elm.cartId != productId
-    ));
+    );
+    session.products = this.cartItems.products;
+    localStorage.setItem("CartInputs",JSON.stringify(session));
+    return this.cartItems.products;
   }
 
   onCartUpdate(product: Product, selectionProduct?: any) {
