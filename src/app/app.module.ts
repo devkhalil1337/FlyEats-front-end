@@ -22,6 +22,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './modules/core/core.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { CartFilterComponent } from './filters/cart-filter/cart-filter.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { SharedModule } from './modules/shared/shared.module';
     AddEditAddressComponent,
     OrderDetailsComponent,
     CheckoutComponent,
-    GalleryComponent
+    GalleryComponent,
+    CartFilterComponent
   ],
   imports: [
     BrowserModule,

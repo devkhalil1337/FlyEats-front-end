@@ -9,6 +9,7 @@ import { SelectionChoices, Selections } from 'src/app/filters/selections.model';
 import { Product } from 'src/app/filters/product.model';
 import { CartItems } from 'src/app/filters/cart-items.model';
 import { Variants } from 'src/app/filters/variants.model';
+import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -30,7 +31,8 @@ export class ProductsComponent implements OnInit {
     private productService: ProductsService
   ) {
     this.businessInfo = this.localStorageServcice.getBusinessDetails();
-    this.CartInputs = new CartItems();
+    // this.CartInputs = new CartItems();
+    // console.log("this.CartInputs",this.CartInputs)
     this.getUnitSubscribe();
   }
 
@@ -156,5 +158,22 @@ export class ProductsComponent implements OnInit {
     
   }
 
+  onOrderTypeChange(orderType:any){
+   switch(orderType.target.value){
+      case OrderTypes.Delivery:
+        this.CartInputs.orderType = OrderTypes.Delivery;
+        break;
+      case OrderTypes.PickUp:
+        this.CartInputs.orderType = OrderTypes.PickUp;
+        break;
+    }
+    
+  }
+
+  onloadPage($event: any){
+    this.CartInputs = new CartItems();
+    this.CartInputs = $event;
+    this.cartService.setCartItems($event);
+  }
   
 }

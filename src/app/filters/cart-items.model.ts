@@ -5,34 +5,17 @@ import { Variants } from './variants.model';
 @Injectable({
   providedIn: 'root',
 })
-export class CartItems implements OnChanges{
+export class CartItems{
   cartItemId: number;
   products: Array<Product>;
   totalAmount: number = 0;
   deliveryCharges: number = 0;
   minimumOrder: number = 0;
-  constructor() {
-    this.products = new Array<Product>();
-    const sessionCart = JSON.parse(localStorage.getItem("CartInputs") || '{}');
-    if(Object.getOwnPropertyNames(sessionCart).length > 0 ){
-      this.products = sessionCart.products;
-      this.totalAmount = sessionCart.totalAmount;
-      this.deliveryCharges = sessionCart.deliveryCharges;
-      this.minimumOrder = sessionCart.minimumOrder;
-      this.updateTotalAmount();
-    }
+  orderType:string = 'Delivery';
+  constructor() { 
+    this.orderType = 'Delivery'
   }
 
-  getProducts() {
-    
-  }
-
-  
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(this.totalAmount,changes)
-    // changes.prop contains the old and the new value...
-  }
 
   getTotalAmount(){
     return this.totalAmount;

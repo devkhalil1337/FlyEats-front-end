@@ -16,8 +16,6 @@ export class CheckoutComponent implements OnInit {
   CartInputs: CartItems;
   constructor(private cartService:CartService, private checkoutService:CheckoutService) { 
     this.CartInputs = new CartItems();
-    this.CartInputs.getProducts();
-    console.log(this.CartInputs);
     this.orderDetails = orderDeatils
   }
 
@@ -33,9 +31,14 @@ export class CheckoutComponent implements OnInit {
       this.checkoutService.onSendOrder(order),
       this.checkoutService.onSendOrderDetails(orderDetails)
     ).subscribe(([orderResponse, OrderDetailsResponse]) => {
-     console.log({orderResponse},{OrderDetailsResponse});
      localStorage.removeItem("CartInputs");
+     this.CartInputs = new CartItems();
     });
+  }
+
+  onloadPage($event?:any){
+    this.CartInputs = $event;
+    this.cartService.setCartItems($event);
   }
 
 }

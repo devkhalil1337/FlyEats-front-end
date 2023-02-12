@@ -10,21 +10,18 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class CartService implements OnChanges{
+export class CartService {
   cartItems: CartItems;
 
   get CartItemsLastId() {
     return this.cartItems.products.length + 1;
   }
 
-  constructor() {
-    this.cartItems = new CartItems();
+  setCartItems(cartItems:any){
+    this.cartItems = cartItems;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(this.cartItems,changes)
-    // changes.prop contains the old and the new value...
-  }
+  constructor() {}
 
   onUpdateAmount(){
     this.cartItems.updateTotalAmount();
@@ -127,7 +124,7 @@ export class CartService implements OnChanges{
     order.active= true;
     order.customerId= 123;
     order.orderInvoiceNumber= orderId;
-    order.orderType= "Dine-In";
+    order.orderType = this.cartItems.orderType;
     order.orderTableId= 4;
     order.orderStatus= "In-Progress";
     order.orderServiceCharges= 10;

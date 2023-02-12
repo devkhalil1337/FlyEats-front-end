@@ -1,4 +1,4 @@
-enum CardinalDirections {
+export enum OrderTypes {
    Delivery = "Delivery",
    PickUp = "PickUp"
 }
