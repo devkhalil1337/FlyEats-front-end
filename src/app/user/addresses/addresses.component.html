@@ -23,6 +23,8 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">Type</th>
+                <th scope="col">Phone Number</th>
                 <th scope="col">Address</th>
                 <th scope="col">Action</th>
               </tr>
@@ -30,8 +32,10 @@
             <tbody>
               <tr *ngFor="let addr of addressesList;index as i">
                 <th scope="row">{{i+1}}</th>
-                <td>{{addr.address + ' ' + addr.city + ' ' + addr.zipCode}}</td>
-                <td><a routerLink="/user/address/add" [queryParams]="{ id : addr.id }"><i class="fa fa-pencil" aria-hidden="true"></i></a> | <a routerLink="/user/addresses" [queryParams]="{ id : addr.id }"><i class="fa fa-remove" aria-hidden="true"></i></a></td>
+                <td>{{addr.addressType}}</td>
+                <td>{{addr.phoneNumber}}</td>
+                <td>{{addr.addressLine1 + ' ' + addr.addressLine2 + ' ' + addr.city + ' ' + addr.zipPostalCode + ' ' + addr.country}}</td>
+                <td><a routerLink="/user/address/add" [queryParams]="{ id : addr.addressId }"><i class="fa fa-pencil" aria-hidden="true"></i></a> | <a style="cursor: pointer;color:red" (click)="onDeleteAddress(addr.addressId)"><i class="fa fa-remove" aria-hidden="true"></i></a></td>
               </tr>
             </tbody>
           </table>
