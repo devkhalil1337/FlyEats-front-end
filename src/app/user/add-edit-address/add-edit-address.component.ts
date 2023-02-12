@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Address } from 'src/app/models/address';
+import { AddressService } from './address.service';
 
 @Component({
   selector: 'app-add-edit-address',
@@ -7,9 +10,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddEditAddressComponent implements OnInit {
 
-  constructor() { }
+  selectedAddressId:string;
+  selectedAddress:Address;
+  constructor(private addressService:AddressService, private activatedRoute: ActivatedRoute,
+    private router: Router) { 
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.selectedAddressId = params['id'];
+      if(this.selectedAddressId)
+        this.getAddressById();
+    });
+    this.selectedAddress = new Address();
+  }
 
   ngOnInit(): void {
+  }
+
+  
+  getAddressById(){
+    this.addressService.getAddressById(this.selectedAddressId).subscribe(response => {
+      console.log(response);
+      this.selectedAddress = response;
+      console.log(this.selectedAddress)
+    })
+  }
+
+  onAddressSave(){
+    if(this.selectedAddressId){
+      this.addressService.EditAddress(this.selectedAddress).subscribe(response => {
+        console.log(response);
+        this.router.navigate(['/user/addresses'])
+      })
+    }else{
+      this.addressService.AddAddress(this.selectedAddress).subscribe(response => {
+        console.log(response);
+        this.router.navigate(['/user/addresses'])
+      })
+    }
   }
 
 }
