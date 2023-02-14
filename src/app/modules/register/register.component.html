@@ -18,22 +18,26 @@
                       <form #registerForm = "ngForm">
                          <div class="row">
                             <div class="form-group col-sm-6">
-                               <label for="firstName">Full Name</label>
-                               <input class="form-control" type="text" placeholder="Full Name" id="firstName" name="firstName" [(ngModel)]="firstName" required> 
+                               <label for="firstName">First Name</label>
+                               <input class="form-control" type="text" placeholder="Full Name" id="firstName" name="firstName" [(ngModel)]="user.firstName" required> 
+                            </div>
+                            <div class="form-group col-sm-6">
+                               <label for="firstName">Last Name</label>
+                               <input class="form-control" type="text" placeholder="Full Name" id="firstName" name="firstName" [(ngModel)]="user.lastName" required> 
                             </div>
                             <div class="form-group col-sm-6">
                                <label for="emailAddress">Email address</label>
-                               <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" name="emailAddress" [(ngModel)]="emailAddress" required> 
+                               <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" name="email" [(ngModel)]="user.email" required> 
                                <!-- <small id="emailHelp" class="form-text text-muted">We"ll never share your email with anyone else.</small>  -->
                             </div>
                             <div class="form-group col-sm-6">
                                <label for="phoneNumber">Phone number</label>
-                               <input class="form-control" type="tel" placeholder="+445555555" minlength="10" id="phoneNumber" name="phoneNumber" [(ngModel)]="phoneNumber" required> 
+                               <input class="form-control" type="tel" placeholder="+445555555" minlength="10" id="phoneNumber" name="phoneNumber" [(ngModel)]="user.phoneNumber" required> 
                                <!-- <small class="form-text text-muted">We"ll never share your email with anyone else.</small>  -->
                             </div>
                             <div class="form-group col-sm-6">
                                <label for="password">Password</label>
-                               <input type="password" class="form-control" id="password" minlength="6" placeholder="password" name="password" [(ngModel)]="password" required> 
+                               <input type="password" class="form-control" id="password" minlength="6" placeholder="password" name="password" [(ngModel)]="user.password" required> 
                             </div>
                          </div>
                          <span class="error text-danger" *ngIf="error">{{error.message}}</span>

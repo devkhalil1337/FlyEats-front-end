@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/user/auth/auth.service';
 import { CustomService } from '../shared/custom.service';
 
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
   emailAddress:string;
   phoneNumber:string;
   password:string;
-
+  user:User;
   get isMobile(){
     return this.customService.isMobile();
   }
@@ -22,14 +23,19 @@ export class RegisterComponent implements OnInit {
     return this.authService.error;
   }
 
-  constructor(private customService:CustomService,private authService:AuthService) { }
+  constructor(private customService:CustomService,private authService:AuthService) { 
+    this.user = new User();
+  }
 
   ngOnInit(): void {
   }
 
 
   onSignup(){
-    this.authService.SignUp(this.emailAddress,this.password);
+    this.authService.SignUp(this.user).subscribe(response => {
+      console.log({response})
+      this.authService.LoginUser(this.user);
+    })
   }
 
 }
