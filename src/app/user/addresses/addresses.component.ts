@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { address } from 'src/app/mock-api/address';
+import { AuthService } from '../auth/auth.service';
 import { AddressesService } from './addresses.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class AddressesComponent implements OnInit {
 
   addressesList:any
 
-  constructor(private addressesService:AddressesService) {
+  constructor(private addressesService:AddressesService,private authService:AuthService) {
     // this.addressesList = address
     this.getAddresses();
    }
@@ -21,7 +22,7 @@ export class AddressesComponent implements OnInit {
   }
 
   getAddresses(){
-    this.addressesService.getActiveAddressesByUserId('1').subscribe(response => {
+    this.addressesService.getActiveAddressesByUserId(this.authService.userId).subscribe(response => {
       console.log({response})
       this.addressesList = response;
     })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'src/app/models/address';
+import { AuthService } from '../auth/auth.service';
 import { AddressService } from './address.service';
 
 @Component({
@@ -13,13 +14,15 @@ export class AddEditAddressComponent implements OnInit {
   selectedAddressId:string;
   selectedAddress:Address;
   constructor(private addressService:AddressService, private activatedRoute: ActivatedRoute,
-    private router: Router) { 
+    private router: Router,
+    private authService:AuthService) { 
     this.activatedRoute.queryParams.subscribe(params => {
       this.selectedAddressId = params['id'];
       if(this.selectedAddressId)
         this.getAddressById();
     });
     this.selectedAddress = new Address();
+    this.selectedAddress.userId = this.authService.userId;
   }
 
   ngOnInit(): void {

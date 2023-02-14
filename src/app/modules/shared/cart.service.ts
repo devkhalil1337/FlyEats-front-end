@@ -5,6 +5,7 @@ import { Variants } from 'src/app/filters/variants.model';
 import { Order } from 'src/app/models/order.model';
 import { OrderDetails } from 'src/app/models/orderDetails.model';
 import { OrderVariants } from 'src/app/models/orderVariants.model';
+import { AuthService } from 'src/app/user/auth/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,7 +22,7 @@ export class CartService {
     this.cartItems = cartItems;
   }
 
-  constructor() {}
+  constructor(private authService:AuthService) {}
 
   onUpdateAmount(){
     this.cartItems.updateTotalAmount();
@@ -126,14 +127,14 @@ export class CartService {
     order.businessId= environment.BusinessId;
     order.isDeleted= false;
     order.active= true;
-    order.customerId= 123;
+    order.customerId =  this.authService.userId;
     order.orderInvoiceNumber= orderId;
     order.orderType = this.cartItems.orderType;
-    order.orderTableId= 4;
+    order.orderTableId = 0;
     order.orderStatus= "In-Progress";
     order.orderServiceCharges= 10;
-    order.orderDiscount= 20;
-    order.orderVoucherId= 2;
+    order.orderDiscount = 20;
+    order.orderVoucherId = 2;
     order.orderVoucherDiscountAmount= 5;
     order.orderTotalAmount= this.cartItems.totalAmount;
     order.orderVatAmount = 0;

@@ -1,3 +1,5 @@
+import { AuthService } from "../user/auth/auth.service";
+
 export class Address {
      active: boolean;
      addressId: number;
@@ -15,7 +17,6 @@ export class Address {
      zipPostalCode: string;
 
      constructor(){
-        this.userId = 1
         this.active = true;
      }
 }
