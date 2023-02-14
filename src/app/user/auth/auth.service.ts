@@ -38,6 +38,10 @@ export class AuthService {
     //   this.error = null;
     // });
   }
+
+  onMyOrders(){
+    this.router.navigate(['user/orders']);
+  }
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return this.afAuth

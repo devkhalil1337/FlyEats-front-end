@@ -121,7 +121,7 @@ export class CartService {
     return str.substring(0, 20);
   }
   
-  CreateOrder(orderId:string):Order{
+  CreateOrder(orderId:string,selectedAddress?:number):Order{
     const order = new Order();
     order.businessId= environment.BusinessId;
     order.isDeleted= false;
@@ -144,7 +144,7 @@ export class CartService {
     order.averageOrderPreprationTime= 30;
     order.orderComments= "Special Request No onions";
     order.orderDeliveryTime= 60;
-    order.customerDeliveryId= 987;
+    order.customerDeliveryId= selectedAddress || 0;
     order.orderCompletedBy= ""
     order.creationDate = this.getDateTime();
     return order;
