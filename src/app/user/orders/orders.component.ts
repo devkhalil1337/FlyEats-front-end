@@ -12,7 +12,6 @@ export class OrdersComponent implements OnInit {
   ordersList:any[]
 
   constructor(private ordersService:OrdersService) {
-    this.ordersList = orders;
     this.onFetchAllOrdersList();
    }
 

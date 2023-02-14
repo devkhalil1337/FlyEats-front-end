@@ -122,7 +122,6 @@ export class CartService {
   }
   
   CreateOrder(orderId:string):Order{
-    console.log(this.cartItems.products);
     const order = new Order();
     order.businessId= environment.BusinessId;
     order.isDeleted= false;
@@ -147,9 +146,11 @@ export class CartService {
     order.orderDeliveryTime= 60;
     order.customerDeliveryId= 987;
     order.orderCompletedBy= ""
-    console.log(order);
+    order.creationDate = this.getDateTime();
     return order;
   }
+
+
 
   CreateOrderDetails(orderId:string):OrderDetails[]{
     return this.cartItems.products.map((product:Product) => {
@@ -181,6 +182,13 @@ export class CartService {
       variant.selectionId = productChoice.selectionId
       return variant;
     })
+  }
+
+
+  private getDateTime():string{
+    let currentDate = new Date();
+    let dateString = currentDate.getFullYear() + "-" + (currentDate.getMonth() + 1).toString().padStart(2, '0') + "-" + currentDate.getDate().toString().padStart(2, '0') + " " + currentDate.getHours().toString().padStart(2, '0') + ":" + currentDate.getMinutes().toString().padStart(2, '0') + ":" + currentDate.getSeconds().toString().padStart(2, '0');
+    return dateString
   }
 
 

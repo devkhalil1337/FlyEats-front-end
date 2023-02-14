@@ -24,7 +24,8 @@ export class Order {
     orderDeliveryTime: number;
     customerDeliveryId: number;
     orderCompletedBy: string;
-    OrderDetails: OrderDetails[]
+    OrderDetails: OrderDetails[];
+    creationDate?: string;
     
     constructor(){}
 }

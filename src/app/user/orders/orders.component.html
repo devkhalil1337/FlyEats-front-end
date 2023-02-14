@@ -21,8 +21,9 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Order Number</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Total Price</th>
-                  <!-- <th scope="col">Date</th> -->
+                  <th scope="col">Date</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -31,7 +32,8 @@
                   <th scope="row">{{i+1}}</th>
                   <td>{{order.orderInvoiceNumber}}</td>
                   <td>{{order.orderTotalAmount}}</td>
-                  <!-- <td>{{order.date}}</td> -->
+                  <td>{{order.orderStatus}}</td>
+                  <td>{{order.creationDate | date:'MMM d, y, h:mm:ss a'}}</td>
                   <td><a [routerLink]="['/user/orders/',order.orderInvoiceNumber]"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                 </tr>
               </tbody>
