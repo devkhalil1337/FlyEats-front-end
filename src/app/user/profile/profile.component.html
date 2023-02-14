@@ -21,28 +21,28 @@
                 <div class="row">
                   <div class="form-group col-sm-6">
                     <label for="firstName">First Name</label>
-                    <input class="form-control" type="text" placeholder="First Name" id="firstName"> 
+                    <input class="form-control" type="text" placeholder="First Name" name="firstName" id="firstName" [(ngModel)]="user.firstName"> 
                   </div>
                   <div class="form-group col-sm-6">
                     <label for="lastName">Last Name</label>
-                    <input class="form-control" type="text" placeholder="Last Name" id="lastName"> 
+                    <input class="form-control" type="text" placeholder="Last Name" name="lastName" id="lastName" [(ngModel)]="user.lastName"> 
                   </div>
                   <div class="form-group col-sm-6">
                     <label for="emailAddress">Email address</label>
-                    <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email"> 
+                    <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp" name="email" placeholder="Enter email" [(ngModel)]="user.email"> 
                   </div>
                   <div class="form-group col-sm-6">
                     <label for="example-tel-input-3">Phone number</label>
-                    <input class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input-3" readonly /> 
+                    <input class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input-3" name="phoneNumber" [(ngModel)]="user.phoneNumber" readonly /> 
                   </div>
                   <div class="form-group col-sm-6">
                     <label for="Password">Password</label>
-                    <input type="password" class="form-control" id="Password" placeholder="Password"> 
+                    <input type="password" class="form-control" id="Password" placeholder="Password" name="password"  [(ngModel)]="user.password"> 
                   </div>
                 </div>
                 <div class="row ">
                   <div class="col-sm-12">
-                    <p class="update-profile-btn"> <a href="#" class="btn theme-btn">Save</a> </p>
+                    <p class="update-profile-btn"> <button (click)="onUpdateProfile()" class="btn theme-btn">Save</button> </p>
                   </div>
                 </div>
               </form>
