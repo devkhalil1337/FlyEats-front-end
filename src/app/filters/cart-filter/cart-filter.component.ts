@@ -13,8 +13,10 @@ export class CartFilterComponent implements OnChanges {
   @Input("CartItems") CartItems: CartItems;
   @Input("products") products: Array<Product>;
   @Input("totalAmount") totalAmount: number = 0;
+  @Input(" totalAmountInclVatDelivery") totalAmountInclVatDelivery: number = 0;
   @Input("deliveryCharges") deliveryCharges: number = 0;
   @Input("minimumOrder") minimumOrder: number = 0;
+  @Input("vat") vat: number = 0;
   @Input("orderType") orderType:string;
   @Output("CartItemsEmit") CartItemsEmit = new EventEmitter();
 
@@ -27,21 +29,37 @@ export class CartFilterComponent implements OnChanges {
       this.totalAmount = sessionCart.totalAmount;
       this.deliveryCharges = sessionCart.deliveryCharges;
       this.minimumOrder = sessionCart.minimumOrder;
+      this.vat = sessionCart.vat;
       this.orderType =  sessionCart.orderType || 'Delivery'
     }
+    this.CartItems = new CartItems();
    }
 
   ngOnInit(): void {
-    this.CartItems = new CartItems();
+    this.getDeliveryCharges();
     this.CartItems.products = this.products;
     this.CartItems.totalAmount = this.totalAmount;
     this.CartItems.deliveryCharges = this.deliveryCharges;
     this.CartItems.minimumOrder = this.minimumOrder;
+    this.CartItems.vat = this.vat;
     this.CartItems.orderType = this.orderType;
-    this.CartItemsEmit.emit(this.CartItems);
     this.CartItems.updateTotalAmount();
+    this.CartItemsEmit.emit(this.CartItems);
     }
 
-  ngOnChanges(changes: SimpleChanges) {}
+
+    
+  private getDeliveryCharges() {
+    const business = JSON.parse(
+      localStorage.getItem('businessSettings') || '{}'
+    );
+    this.deliveryCharges = business.deliveryCharges || 0;
+    this.minimumOrder = business.minimumOrder || 0;
+    this.vat = business.vat || 0;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log({changes})
+  }
 
 }

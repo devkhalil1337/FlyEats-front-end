@@ -20,7 +20,7 @@
              <div class="row">
                 <div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 profile-img">
                    <div class="image-wrap">
-                      <figure><img [src]="businessInfo.productImageUrl" alt="Profile Image"></figure>
+                      <figure><img [src]="businessInfo.businessLogo" alt="Profile Image"></figure>
                    </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 profile-desc">
@@ -193,7 +193,7 @@
                       <div class="price-wrap text-xs-center">
                          <p>SUB TOTAL</p>
                          <h3 class="value"><strong>{{CartInputs.totalAmount | mycurrency}}</strong></h3>
-                         <button routerLink="/checkout" type="button" class="btn theme-btn btn-lg">Checkout</button>
+                         <button routerLink="/checkout" type="button" class="btn theme-btn btn-lg" [disabled]="CartInputs.products.length === 0">Checkout</button>
                       </div>
                    </div>
                 </div>
@@ -253,8 +253,16 @@
        <div class="selections" style="padding-top: 5rem;" *ngIf="selections.length > 0">
          <div class="shadow border-0 pt-2 " *ngFor="let selection of selections;">
            <div class="c-itemSelector-section-heading">
-             {{selection.selectionName}}
-             <span class="badge badge-primary badge-pill pull-right"> {{selection.maximumSelection > 0 ? 'Required':''}}</span>
+             <span class="col-md-6">
+                {{selection.selectionName}}
+               </span>
+               <span class="col-md-6">
+                  <span class="badge badge-primary badge-pill pull-right"> {{selection.maximumSelection > 0 ? 'Required':''}}</span>
+               </span>
+             
+           </div>
+           <div class="c-itemSelector-section-heading">
+             
            </div>
            <ul class="list-group list-group-horizontal-xl mx-auto" *ngFor="let choice of selection.selectionChoices">
              <li class="list-group-item rounded-0"> 

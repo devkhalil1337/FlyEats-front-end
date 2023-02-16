@@ -5,15 +5,16 @@ import { Variants } from './variants.model';
 @Injectable({
   providedIn: 'root',
 })
-export class CartItems{
+export class CartItems {
   cartItemId: number;
   products: Array<Product>;
   totalAmount: number = 0;
+  totalAmountInclVatDelivery: number = 0;
   deliveryCharges: number = 0;
   minimumOrder: number = 0;
-  orderType:string = 'Delivery';
+  vat: number = 0;
+  orderType:string = '';
   constructor() { 
-    this.orderType = 'Delivery'
   }
 
 
@@ -23,6 +24,8 @@ export class CartItems{
 
   updateTotalAmount() {
     this.totalAmount = 0;
+    this.totalAmountInclVatDelivery = 0;
+    console.log("Start Time",this.totalAmount)
     for (let i = 0; i < this.products.length; i++) {
       const product = this.products[i];
       let productAmount = 0;
@@ -30,8 +33,8 @@ export class CartItems{
         for (let j = 0; j < product.selectionChoices.length; j++) {
           const choice = product.selectionChoices[j];
           if (choice.checked) {
-            this.totalAmount += choice.choicePrice;
-            productAmount += choice.choicePrice;
+            this.totalAmount += choice.choicePrice* product.quantity;
+            productAmount += choice.choicePrice* product.quantity;;
           }
         }
       }
@@ -39,8 +42,8 @@ export class CartItems{
         for (let k = 0; k < product.productVariants.length; k++) {
           const variant = product.productVariants[k];
           if (variant.checked) {
-            this.totalAmount += variant.variationPrice;
-            productAmount += variant.variationPrice;
+            this.totalAmount += variant.variationPrice* product.quantity;
+            productAmount += variant.variationPrice* product.quantity;;
           }
         }
       }
@@ -50,14 +53,14 @@ export class CartItems{
         productAmount += product.productDeliveryPrice * product.quantity;
       }
       product.productTotalAmount = productAmount;
+      
     }
+    if(this.orderType == 'Delivery'){
+      this.totalAmountInclVatDelivery += this.deliveryCharges;
+    }
+    this.totalAmountInclVatDelivery += this.totalAmount + this.vat;
+      console.log("End Time",this.totalAmount)
   }
 
 
-  private getDeliveryCharges() {
-    const business = JSON.parse(
-      localStorage.getItem('businessSettings') || '{}'
-    );
-    this.deliveryCharges = business.deliveryCharges || 0;
-  }
 }

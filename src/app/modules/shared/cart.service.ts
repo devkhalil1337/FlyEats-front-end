@@ -18,7 +18,7 @@ export class CartService {
     return this.cartItems.products.length + 1;
   }
 
-  setCartItems(cartItems:any){
+  setCartItems(cartItems:CartItems){
     this.cartItems = cartItems;
   }
 
@@ -123,27 +123,27 @@ export class CartService {
   
   CreateOrder(orderId:string,selectedAddress?:number):Order{
     const order = new Order();
-    order.businessId= environment.BusinessId;
-    order.isDeleted= false;
-    order.active= true;
+    order.businessId = environment.BusinessId;
+    order.isDeleted = false;
+    order.active = true;
     order.customerId =  this.authService.userId;
-    order.orderInvoiceNumber= orderId;
+    order.orderInvoiceNumber = orderId;
     order.orderType = this.cartItems.orderType;
     order.orderTableId = 0;
-    order.orderStatus= "In-Progress";
-    order.orderServiceCharges= 10;
-    order.orderDiscount = 20;
-    order.orderVoucherId = 2;
+    order.orderStatus = "In-Progress";
+    order.orderServiceCharges= 0;
+    order.orderDiscount = 0;
+    order.orderVoucherId = 0;
     order.orderVoucherDiscountAmount= 5;
-    order.orderTotalAmount= this.cartItems.totalAmount;
+    order.orderTotalAmount= this.cartItems.totalAmountInclVatDelivery;
     order.orderVatAmount = 0;
-    order.orderVatPercentage= 0;
+    order.orderVatPercentage = 0;
     order.vatType= "Regular";
     order.orderPaymentStatus= "Paid";
     order.orderPaymentMethod= "Credit Card";
-    order.averageOrderPreprationTime= 30;
-    order.orderComments= "Special Request No onions";
-    order.orderDeliveryTime= 60;
+    order.averageOrderPreprationTime= 0;
+    order.orderComments = "Special Request No onions";
+    order.orderDeliveryTime = 60;
     order.customerDeliveryId= selectedAddress || 0;
     order.orderCompletedBy= ""
     order.creationDate = this.getDateTime();

@@ -54,6 +54,7 @@ export class CheckoutComponent implements OnInit {
 
   onloadPage($event?:any){
     this.CartInputs = $event;
+    console.log({$event})
     this.cartService.setCartItems($event);
   }
 

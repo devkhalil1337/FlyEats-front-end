@@ -21,7 +21,29 @@
       </div>
     <section class="contact-page inner-page">
         <div class="container">
-            <table class="table table-striped">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orderDetails">
+                    <td>{{order.productName}}
+                        <ul>
+                            <li *ngFor="let selection of order.productVariants"> - {{selection.choiceName}}</li>
+                        </ul>
+                    </td>
+                    <td>{{order.productQuantity}}</td>
+                    <td>${{order.productPrice}}</td>
+                    <td>${{order.productQuantity*order.productPrice}}</td>
+                </tr>
+            </tbody>
+          </table>
+            <!-- <table class="table table-striped">
                 <thead>
                     <tr>
                       <th scope="col">Item</th>
@@ -42,7 +64,7 @@
                         <td>${{order.productQuantity*order.productPrice}}</td>
                     </tr>
                 </tbody>
-              </table>
+              </table> -->
               <div class="widget-body">
                 <!-- <p class="order-price"> <a class="btn theme-btn">VAT: ${{orderDetails.meta.totalPrice}}</a> </p>
                 <p class="order-price"> <a class="btn theme-btn">Delivery: ${{orderDetails.meta.totalPrice}}</a> </p>
@@ -52,3 +74,4 @@
         </div>
     </section>
 </div>
+

@@ -27,7 +27,7 @@
                               <div class="card-title">
                                 <div>
                                     <span>Delivery</span>
-                                    <span class="pull-right"><a href=""><i class="fa fa-plus"></i> Add address</a></span>
+                                    <span class="pull-right"><a routerLink="/user/addresses"><i class="fa fa-plus"></i> Add address</a></span>
                                 </div>
                              </div>
                               <div class="card-body p-1"  [ngStyle]="{'border': (selectedAddress === address.addressId) ? '1px solid #f30' : ''}" style="overflow: auto;" *ngFor="let address of addressList;index as i;">
@@ -42,39 +42,31 @@
                                     </label>
                                 </div>
                               </div>
-                                  <div class="mt-2">
-                                    <a href="">View saved address</a>
-                                </div>
                             </div>
                             
                                 <table class="table table-striped">
                                     <thead>
-                                    <tr>
+                                      <tr>
                                         <th scope="col">Item</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Total</th>
-                                    </tr>
+                                      </tr>
                                     </thead>
                                     <tbody>
-                                    <!-- <tr *ngFor="let order of orderDetails.items">
-                                        <td>{{order.itemName}}</td>
-                                        <td>{{order.quantity}}</td>
-                                        <td>${{order.price}}</td>
-                                        <td>${{order.quantity*order.price}}</td>
-                                    </tr> -->
-                                    <tr *ngFor="let order of CartInputs.products">
-                                        <td>{{order.productName}}
-                                            <tr *ngFor="let selection of order.selectionChoices">
-                                                <td>{{selection.choiceName}}</td>
-                                            </tr>
-                                        </td>
-                                        <td>{{order.quantity}}</td>
-                                        <td>${{order.productDeliveryPrice}}</td>
-                                        <td>${{order.quantity*order.productDeliveryPrice}}</td>
-                                    </tr>
+                                        <tr *ngFor="let order of CartInputs.products">
+                                            <td>{{order.productName}}
+                                                <ul>
+                                                    <li *ngFor="let selection of order.selectionChoices"> - {{selection.choiceName}}</li>
+                                                </ul>
+                                            </td>
+                                            <td>{{order.quantity}}</td>
+                                            <td>${{order.productDeliveryPrice}}</td>
+                                            <td>${{order.quantity*order.productDeliveryPrice}}</td>
+                                        </tr>
                                     </tbody>
-                                </table>
+                                  </table>
+                                  
                           </div>
                         <div class="col-sm-6">
                             <div class="cart-totals margin-b-20">
@@ -89,15 +81,15 @@
                                             </tr>
                                             <tr>
                                                 <td>VAT</td>
-                                                <td>$5.00</td>
+                                                <td>{{CartInputs.vat | mycurrency}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>Shipping &amp; Handling</td>
-                                                <td>$2.00</td>
+                                            <tr *ngIf="CartInputs.orderType == 'Delivery'">
+                                                <td>Delivery</td>
+                                                <td>{{CartInputs.deliveryCharges | mycurrency}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-color"><strong>Total</strong></td>
-                                                <td class="text-color"><strong></strong></td>
+                                                <td class="text-color"><strong>{{CartInputs.totalAmountInclVatDelivery | mycurrency}}</strong></td>
                                             </tr>
                                         </tbody>
                                     </table>

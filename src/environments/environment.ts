@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl:"http://localhost:5112/api/",
   imagesPathUrl: "http://flyeats.somee.com",
-  BusinessId:0,
+  BusinessId:1,
   firebaseConfig:{
     apiKey: "AIzaSyAFJ1cWCztUV4GsoKi4ViLsFfSJn64pahE",
   authDomain: "sample-project-a62f1.firebaseapp.com",
