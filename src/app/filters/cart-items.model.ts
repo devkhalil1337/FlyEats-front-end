@@ -14,18 +14,11 @@ export class CartItems {
   minimumOrder: number = 0;
   vat: number = 0;
   orderType:string = '';
-  constructor() { 
-  }
-
-
-  getTotalAmount(){
-    return this.totalAmount;
-  }
+  constructor() { }
 
   updateTotalAmount() {
     this.totalAmount = 0;
     this.totalAmountInclVatDelivery = 0;
-    console.log("Start Time",this.totalAmount)
     for (let i = 0; i < this.products.length; i++) {
       const product = this.products[i];
       let productAmount = 0;
@@ -59,7 +52,6 @@ export class CartItems {
       this.totalAmountInclVatDelivery += this.deliveryCharges;
     }
     this.totalAmountInclVatDelivery += this.totalAmount + this.vat;
-      console.log("End Time",this.totalAmount)
   }
 
 

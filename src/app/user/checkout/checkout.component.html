@@ -23,7 +23,7 @@
                 <form method="post" action="#">
                     <div class="row">
                         <div class="col-sm-6 margin-b-30">
-                            <div class="card p-1">
+                            <div class="card p-1" *ngIf="CartInputs.orderType == 'Delivery'">
                               <div class="card-title">
                                 <div>
                                     <span>Delivery</span>

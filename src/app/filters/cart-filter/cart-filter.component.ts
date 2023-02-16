@@ -13,7 +13,7 @@ export class CartFilterComponent implements OnChanges {
   @Input("CartItems") CartItems: CartItems;
   @Input("products") products: Array<Product>;
   @Input("totalAmount") totalAmount: number = 0;
-  @Input(" totalAmountInclVatDelivery") totalAmountInclVatDelivery: number = 0;
+  @Input("totalAmountInclVatDelivery") totalAmountInclVatDelivery: number = 0;
   @Input("deliveryCharges") deliveryCharges: number = 0;
   @Input("minimumOrder") minimumOrder: number = 0;
   @Input("vat") vat: number = 0;
@@ -22,7 +22,6 @@ export class CartFilterComponent implements OnChanges {
 
   constructor(private cartService:CartService) {
     this.products = new Array<Product>();
-    this.orderType = 'Delivery';
     const sessionCart = JSON.parse(localStorage.getItem("CartInputs") || '{}');
     if(Object.getOwnPropertyNames(sessionCart).length > 0 ){
       this.products = sessionCart.products;

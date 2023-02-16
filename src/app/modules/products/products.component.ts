@@ -162,12 +162,13 @@ export class ProductsComponent implements OnInit {
    switch(orderType.target.value){
       case OrderTypes.Delivery:
         this.CartInputs.orderType = OrderTypes.Delivery;
+        this.cartService.setOrderType(OrderTypes.Delivery);
         break;
       case OrderTypes.PickUp:
         this.CartInputs.orderType = OrderTypes.PickUp;
+        this.cartService.setOrderType(OrderTypes.PickUp);
         break;
     }
-    
   }
 
   onloadPage($event: any){

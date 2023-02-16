@@ -22,6 +22,13 @@ export class CartService {
     this.cartItems = cartItems;
   }
 
+  setOrderType(orderType:string){
+    const session = JSON.parse(localStorage.getItem("CartInputs") || '{}');
+    this.cartItems.orderType = orderType;
+    session.orderType = this.cartItems.orderType;
+    localStorage.setItem("CartInputs",JSON.stringify(session));
+  }
+
   constructor(private authService:AuthService) {}
 
   onUpdateAmount(){
