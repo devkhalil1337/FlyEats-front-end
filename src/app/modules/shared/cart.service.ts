@@ -35,12 +35,14 @@ export class CartService {
     this.cartItems.updateTotalAmount();
   }
   
-  onQuantityIncrease(product: any) {
-    return product.quantity > 0 ? product.quantity++ : 1;
+  onQuantityIncrease(product: Product):void{
+    product.quantity > 0 ? product.quantity++ : 1;
+    product.productPrice = product.productDeliveryPrice;
   }
 
-  onQuantityDecrease(product: any) {
-    return product.quantity > 1 ? product.quantity-- : 1;
+  onQuantityDecrease(product: Product):void {
+    product.quantity > 1 ? product.quantity-- : 1;
+    product.productPrice = product.productDeliveryPrice;
   }
 
   onRemoveProduct(productId: number) {

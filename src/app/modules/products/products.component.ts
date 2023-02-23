@@ -60,10 +60,18 @@ export class ProductsComponent implements OnInit {
   onQuantityUpdate(type: string) {
     switch (type) {
       case 'increase':
-        this.cartService.onQuantityIncrease(this.selectedProduct);
+        this.selectedProduct.quantity > 0 ? this.selectedProduct.quantity++ : 1;
+        this.selectedProduct.productPrice = this.selectedProduct.productDeliveryPrice;
+        this.selectedProduct.productPrice *= this.selectedProduct.quantity;
+        this.getTheSumOfSelectedChoices();
         break;
-      case 'decrease':
-        this.cartService.onQuantityDecrease(this.selectedProduct);
+        case 'decrease':
+          if(this.selectedProduct.quantity == 1)
+            return;
+        this.selectedProduct.quantity > 0 ? this.selectedProduct.quantity-- : 1;
+        this.selectedProduct.productPrice = this.selectedProduct.productDeliveryPrice;
+        this.selectedProduct.productPrice *= this.selectedProduct.quantity;
+        this.getTheSumOfSelectedChoices();
         break;
     }
   }
@@ -151,6 +159,7 @@ export class ProductsComponent implements OnInit {
       if(selectedVariant.variantId != vari.variantId)
         vari.checked = false;
     });
+    this.getTheSumOfSelectedChoices();
   }
 
 
@@ -170,6 +179,22 @@ export class ProductsComponent implements OnInit {
         break;
     }
   }
+
+  private getTheSumOfSelectedChoices(){
+    const checkedChoicesSumAmount = this.selections.reduce((acc:any, curr:any) => {
+      curr.selectionChoices.forEach((choice:SelectionChoices) => {
+        if (choice.checked) {
+          acc += choice.choicePrice;
+        }
+      });
+      return acc;
+    }, 0);
+    console.log({checkedChoicesSumAmount})
+    if(checkedChoicesSumAmount > 0){
+      // this.selectedProduct.productPrice += checkedChoicesSumAmount;
+    }
+  }
+
 
   onloadPage($event: any){
     this.CartInputs = new CartItems();
