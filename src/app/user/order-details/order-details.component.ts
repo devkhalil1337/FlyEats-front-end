@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { forkJoin } from 'rxjs';
 import { orderDeatils } from 'src/app/mock-api/order-details';
 import { OrderDetailsService } from './order-details.service';
 
@@ -11,6 +12,7 @@ import { OrderDetailsService } from './order-details.service';
 export class OrderDetailsComponent implements OnInit {
 
 
+  order:any;
   orderDetails:any;
 
   constructor(
@@ -29,9 +31,15 @@ export class OrderDetailsComponent implements OnInit {
     if(!orderId){
       return;
     }
-    this.orderDetailsService.getOrdersDetails(orderId).subscribe(response => {
-      this.orderDetails = response;
-    })
+    forkJoin(
+      this.orderDetailsService.getOrders(orderId),
+      this.orderDetailsService.getOrdersDetails(orderId)
+    ).subscribe(([orderResponse, orderDetailsResponse]) => {
+      this.order = orderResponse;
+      this.orderDetails = orderDetailsResponse;
+    });
+    // this.orderDetailsService.getOrdersDetails(orderId).subscribe(response => {
+    // })
   }
 
 }

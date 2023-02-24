@@ -12,4 +12,8 @@ export class OrderDetailsService {
   getOrdersDetails(orderId:string){
     return this.apiService.request("get",`OrderDetails/GetProductsById?OrderId=${orderId}`)
   }
+
+  getOrders(orderId:string){
+    return this.apiService.request("get",`Order/GetOrderById?orderId=${orderId}`)
+  }
 }
