@@ -13,4 +13,9 @@ export class OrdersService {
   getOrdersList(){
     return this.apiService.request("get",`Order/GetOrdersByCustomerId?customerId=${this.authService.userId}`)
   }
+
+
+  getOrdersStatus(orderIds:string[]){
+    return this.apiService.request("post",`Order/GetOrderStatusByIds`,orderIds)
+  }
 }

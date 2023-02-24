@@ -34,7 +34,9 @@
               "src/assets/css/font-awesome.min.css",
               "src/assets/css/animsition.min.css",
               "src/assets/css/animate.css",
-              "src/assets/css/style.css"
+              "src/assets/css/style.css",
+              "src/assets/css/ag-grid.css",
+              "src/assets/css/ag-theme-material.css"
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",

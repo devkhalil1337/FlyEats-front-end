@@ -7,6 +7,7 @@ import { AddressesComponent } from './addresses/addresses.component';
 import { AddEditAddressComponent } from './add-edit-address/add-edit-address.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    AgGridModule.withComponents([])
   ],
   exports:[RouterModule],
   providers:[]

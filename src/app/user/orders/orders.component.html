@@ -1,5 +1,6 @@
 <div class="page-wrapper">
-  <section class="bg-image space-md"  style="background:url('assets/images/image01.jpg')" data-image-src="assets/images/image01.jpg">
+  <section class="bg-image space-md" style="background:url('assets/images/image01.jpg')"
+    data-image-src="assets/images/image01.jpg">
     <div class="profile">
       <div class="container">
         <div class="row">
@@ -15,30 +16,9 @@
       <app-tabs [selectedTab]="'orders'"></app-tabs>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane active" id="orders-tab" role="tabpanel" aria-labelledby="orders-tab">
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Order Number</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Total Price</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let order of ordersList; index as i">
-                  <th scope="row">{{i+1}}</th>
-                  <td>{{order.orderInvoiceNumber}}</td>
-                  <td>{{order.orderTotalAmount}}</td>
-                  <td>{{order.orderStatus}}</td>
-                  <td>{{order.creationDate | date:'MMM d, y, h:mm:ss a'}}</td>
-                  <td><a [routerLink]="['/user/orders/',order.orderInvoiceNumber]"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <ag-grid-angular style="width: 100%; height: 500px;" appGridResizer class="ag-theme-material"
+            [gridOptions]="gridOptions">
+          </ag-grid-angular>
         </div>
       </div>
     </div>
