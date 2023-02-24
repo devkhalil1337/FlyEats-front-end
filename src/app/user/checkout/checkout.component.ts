@@ -5,6 +5,7 @@ import { orderDeatils } from 'src/app/mock-api/order-details';
 import { Address } from 'src/app/models/address';
 import { OrderDetails } from 'src/app/models/orderDetails.model';
 import { CartService } from 'src/app/modules/shared/cart.service';
+import { LocalStorageService } from 'src/app/modules/shared/local-storage.service';
 import { AddressesService } from '../addresses/addresses.service';
 import { AuthService } from '../auth/auth.service';
 import { CheckoutService } from './checkout.service';
@@ -18,10 +19,11 @@ export class CheckoutComponent implements OnInit {
   orderDetails:any;
   CartInputs: CartItems;
   addressList:Address[]
-  selectedAddress:number;
+  selectedAddress:number = 0;
   constructor(private cartService:CartService, private checkoutService:CheckoutService,
     private addressesService:AddressesService,
-    private authService:AuthService) { 
+    private authService:AuthService,
+    private localStorageService:LocalStorageService) { 
     this.CartInputs = new CartItems();
     this.addressList = new Array<Address>()
   }
@@ -64,6 +66,10 @@ export class CheckoutComponent implements OnInit {
     },error => {
       console.log({error});
     });
+  }
+
+  get BusinessDetails(){
+    return this.localStorageService.getBusinessDetails();
   }
 
   onloadPage($event?:any){

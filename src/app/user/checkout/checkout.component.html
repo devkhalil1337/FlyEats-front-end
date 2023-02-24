@@ -43,6 +43,34 @@
                                 </div>
                               </div>
                             </div>
+
+                                  <!-- on Collecton -->
+                          <div class="card p-1" *ngIf="CartInputs.orderType == 'PickUp'">
+                            <div class="card-title">
+                              <div>
+                                <span>{{ BusinessDetails.businessName }}</span>
+                              </div>
+                            </div>
+                            <div
+                              class="card-body p-1"
+                              [ngStyle]="{ border: '1px solid #f30' }"
+                              style="overflow: auto"
+                            >
+                              <div class="col-sm-10">
+                                <p>
+                                  {{
+                                    BusinessDetails.businessAddress +
+                                      " " +
+                                      BusinessDetails.businessPostcode +
+                                      " " +
+                                      BusinessDetails.businessCity +
+                                      " " +
+                                      BusinessDetails.businessContact
+                                  }}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
                             
                                 <table class="table table-striped">
                                     <thead>
