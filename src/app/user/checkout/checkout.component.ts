@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
 import { CartItems } from 'src/app/filters/cart-items.model';
 import { orderDeatils } from 'src/app/mock-api/order-details';
 import { Address } from 'src/app/models/address';
@@ -16,14 +17,17 @@ import { CheckoutService } from './checkout.service';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  orderDetails:any;
+  orderDetails: any;
   CartInputs: CartItems;
-  addressList:Address[]
-  selectedAddress:number = 0;
-  constructor(private cartService:CartService, private checkoutService:CheckoutService,
-    private addressesService:AddressesService,
-    private authService:AuthService,
-    private localStorageService:LocalStorageService) { 
+  addressList: Address[]
+  selectedAddress: number = 0;
+
+  selectedMethod: string = PaymentMethods.COD;
+
+  constructor(private cartService: CartService, private checkoutService: CheckoutService,
+    private addressesService: AddressesService,
+    private authService: AuthService,
+    private localStorageService: LocalStorageService) {
     this.CartInputs = new CartItems();
     this.addressList = new Array<Address>()
   }
@@ -39,18 +43,18 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-  onCheckoutClick(){
+  onCheckoutClick() {
     const orderId = this.cartService.createUniqueString()
-    const order = this.cartService.CreateOrder(orderId,this.selectedAddress);
+    const order = this.cartService.CreateOrder(orderId, this.selectedAddress,this.selectedMethod);
     const orderDetails = this.cartService.CreateOrderDetails(orderId);
     forkJoin(
       this.checkoutService.onSendOrder(order),
       this.checkoutService.onSendOrderDetails(orderDetails)
     ).subscribe(([orderResponse, OrderDetailsResponse]) => {
-     localStorage.removeItem("CartInputs");
-     this.CartInputs = new CartItems();
-     this.cartService.setCartItems(this.CartInputs);
-     this.authService.onMyOrders();
+      localStorage.removeItem("CartInputs");
+      this.CartInputs = new CartItems();
+      this.cartService.setCartItems(this.CartInputs);
+      this.authService.onMyOrders();
     });
   }
 
@@ -60,21 +64,21 @@ export class CheckoutComponent implements OnInit {
     this.fieldVisible = !this.fieldVisible;
   }
 
-  onApplyVoucher(){
-    this.checkoutService.onVoucherApply(this.voucherCode,this.authService.userId,this.CartInputs.totalAmount).subscribe(response => {
-      console.log({response});
-    },error => {
-      console.log({error});
+  onApplyVoucher() {
+    this.checkoutService.onVoucherApply(this.voucherCode, this.authService.userId, this.CartInputs.totalAmount).subscribe(response => {
+      console.log({ response });
+    }, error => {
+      console.log({ error });
     });
   }
 
-  get BusinessDetails(){
+  get BusinessDetails() {
     return this.localStorageService.getBusinessDetails();
   }
 
-  onloadPage($event?:any){
+  onloadPage($event?: any) {
     this.CartInputs = $event;
-    console.log({$event})
+    console.log({ $event })
     this.cartService.setCartItems($event);
   }
 

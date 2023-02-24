@@ -1,4 +1,5 @@
 import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
+import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
 import { CartItems } from 'src/app/filters/cart-items.model';
 import { Product } from 'src/app/filters/product.model';
 import { Variants } from 'src/app/filters/variants.model';
@@ -130,7 +131,7 @@ export class CartService {
     return str.substring(0, 20);
   }
   
-  CreateOrder(orderId:string,selectedAddress?:number):Order{
+  CreateOrder(orderId:string,selectedAddress:number,selectedMethod:string):Order{
     const order = new Order();
     order.businessId = environment.BusinessId;
     order.isDeleted = false;
@@ -148,8 +149,8 @@ export class CartService {
     order.orderVatAmount = 0;
     order.orderVatPercentage = 0;
     order.vatType= "Regular";
-    order.orderPaymentStatus= "Paid";
-    order.orderPaymentMethod= "Credit Card";
+    order.orderPaymentStatus = selectedMethod == PaymentMethods.CARD ? 'PAID':'UNPAID';
+    order.orderPaymentMethod= selectedMethod || "Not Selected";
     order.averageOrderPreprationTime= 0;
     order.orderComments = "Special Request No onions";
     order.orderDeliveryTime = 60;

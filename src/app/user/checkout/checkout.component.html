@@ -141,14 +141,20 @@
                             
                                   
                                 <ul class=" list-unstyled">
-                                    <li>
+                                    <!-- <li>
                                         <label class="custom-control custom-radio  m-b-20">
                                             <input id="radioStacked1" name="radio-stacked" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Payment on delivery</span>
                                             <br> <span>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span> </label>
+                                    </li> -->
+                                    <li>
+                                        <label class="custom-control custom-radio  m-b-10">
+                                            <input [(ngModel)]="selectedMethod" value="CARD" name="CARD"  type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> 
+                                            <span class="custom-control-description">Card <img src="images/paypal.jpg" alt="" width="90"></span> </label>
                                     </li>
                                     <li>
                                         <label class="custom-control custom-radio  m-b-10">
-                                            <input name="radio-stacked" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Paypal <img src="images/paypal.jpg" alt="" width="90"></span> </label>
+                                            <input [(ngModel)]="selectedMethod" value="COD" name="COD" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> 
+                                            <span class="custom-control-description">Cash on Delivery</span></label>
                                     </li>
                                 </ul>
                                 <p class="text-xs-center"> <a (click)="onCheckoutClick()" class="btn btn-outline-success btn-block">Pay now</a> </p>
