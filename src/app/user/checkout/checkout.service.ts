@@ -17,5 +17,10 @@ export class CheckoutService {
   onSendOrderDetails(Order:OrderDetails[]){
     return this.apiService.request("post",`OrderDetails/AddNewOrderDetails`,Order);
   }
+  
+  
+  onVoucherApply(voucher:string,userId:number,amount:number){
+    return this.apiService.request("get",`Voucher/CheckVoucherRedemptionEligibility?voucherCode=${voucher}&userId=${userId}&billAmount=${amount}`);
+  }
 
 }

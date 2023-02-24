@@ -88,6 +88,19 @@
                                                 <td>{{CartInputs.deliveryCharges | mycurrency}}</td>
                                             </tr>
                                             <tr>
+                                                <td *ngIf="fieldVisible" >Voucher</td>
+                                                <td *ngIf="!fieldVisible">                                                    
+                                                    <a  style="cursor:pointer;color:#f30" (click)="showField()">Apply Voucher</a>
+                                                </td>
+                                                <td>
+                                                    <div *ngIf="fieldVisible" style="display:flex; align-items:center;">
+                                                      <input type="text" class="form-control" placeholder="Enter some text" name="voucherCode" [(ngModel)]="voucherCode">
+                                                      <a style="cursor:pointer;color:#f30" (click)="fieldVisible = false;">Cancel</a> | 
+                                                      <a style="cursor:pointer;color:#f30" (click)="onApplyVoucher();">Submit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-color"><strong>Total</strong></td>
                                                 <td class="text-color"><strong>{{CartInputs.totalAmountInclVatDelivery | mycurrency}}</strong></td>
                                             </tr>
@@ -97,6 +110,8 @@
                             </div>
                             <!--cart summary-->
                             <div class="payment-option">
+                            
+                                  
                                 <ul class=" list-unstyled">
                                     <li>
                                         <label class="custom-control custom-radio  m-b-20">
@@ -108,7 +123,7 @@
                                             <input name="radio-stacked" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Paypal <img src="images/paypal.jpg" alt="" width="90"></span> </label>
                                     </li>
                                 </ul>
-                                <p class="text-xs-center"> <a  (click)="onCheckoutClick()" class="btn btn-outline-success btn-block">Pay now</a> </p>
+                                <p class="text-xs-center"> <a (click)="onCheckoutClick()" class="btn btn-outline-success btn-block">Pay now</a> </p>
                             </div>
                         </div>
                     </div>

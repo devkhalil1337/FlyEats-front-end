@@ -2,6 +2,7 @@ import { Component, Injectable, Input, OnChanges, SimpleChanges } from '@angular
 import { Product } from './product.model';
 import { SelectionChoices } from './selections.model';
 import { Variants } from './variants.model';
+import { Voucher } from "../models/voucher"
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +15,9 @@ export class CartItems {
   minimumOrder: number = 0;
   vat: number = 0;
   orderType:string = '';
+  voucherAmount:number = 1;
+  isVoucherApplied:boolean = true;
+  voucher:Voucher
   constructor() { }
 
   updateTotalAmount() {
@@ -48,10 +52,22 @@ export class CartItems {
       product.productTotalAmount = productAmount;
       
     }
+    if(this.isVoucherApplied){
+      this.applyVoucherOnTotalAmount();
+    }
+
     if(this.orderType == 'Delivery'){
       this.totalAmountInclVatDelivery += this.deliveryCharges;
     }
+
     this.totalAmountInclVatDelivery += this.totalAmount + this.vat;
+
+  }
+
+  applyVoucherOnTotalAmount(){
+    if(this.voucherAmount > 0){
+      this.totalAmount -= this.voucherAmount;
+    }
   }
 
 

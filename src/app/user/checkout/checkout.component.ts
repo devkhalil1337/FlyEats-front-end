@@ -52,6 +52,20 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  fieldVisible = false;
+  voucherCode: string;
+  showField() {
+    this.fieldVisible = !this.fieldVisible;
+  }
+
+  onApplyVoucher(){
+    this.checkoutService.onVoucherApply(this.voucherCode,this.authService.userId,this.CartInputs.totalAmount).subscribe(response => {
+      console.log({response});
+    },error => {
+      console.log({error});
+    });
+  }
+
   onloadPage($event?:any){
     this.CartInputs = $event;
     console.log({$event})
