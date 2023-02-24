@@ -15,7 +15,7 @@ export class CartItems {
   minimumOrder: number = 0;
   vat: number = 0;
   orderType:string = '';
-  voucherAmount:number = 1;
+  voucherAmount:number = 0;
   isVoucherApplied:boolean = true;
   voucher:Voucher
   constructor() { }
