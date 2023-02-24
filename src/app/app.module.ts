@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './modules/core/core.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { CartFilterComponent } from './filters/cart-filter/cart-filter.component';
+import { RouterlinkrendererComponent } from './shared/components/routerlinkrenderer/routerlinkrenderer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { CartFilterComponent } from './filters/cart-filter/cart-filter.component
     OrderDetailsComponent,
     CheckoutComponent,
     GalleryComponent,
-    CartFilterComponent
+    CartFilterComponent,
+    RouterlinkrendererComponent
   ],
   imports: [
     BrowserModule,

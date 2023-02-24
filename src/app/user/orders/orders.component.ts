@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { LocalStorageService } from 'src/app/modules/shared/local-storage.service';
+import { RouterlinkrendererComponent } from 'src/app/shared/components/routerlinkrenderer/routerlinkrenderer.component';
 
 @Component({
   selector: 'app-orders',
@@ -46,7 +47,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
     valueGetter: (params: any) => Number(params.node?.rowIndex) + 1
   }, {
     headerName: 'Order Number',
-    field: 'orderInvoiceNumber'
+    field: 'orderInvoiceNumber',
+    cellRenderer:RouterlinkrendererComponent
   }, {
     headerName: 'Status',
     field: 'orderStatus'
