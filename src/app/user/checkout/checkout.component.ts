@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
 import { CartItems } from 'src/app/filters/cart-items.model';
@@ -7,6 +7,7 @@ import { Address } from 'src/app/models/address';
 import { OrderDetails } from 'src/app/models/orderDetails.model';
 import { CartService } from 'src/app/modules/shared/cart.service';
 import { LocalStorageService } from 'src/app/modules/shared/local-storage.service';
+import { StripeComponent } from 'src/app/shared/stripe/stripe.component';
 import { AddressesService } from '../addresses/addresses.service';
 import { AuthService } from '../auth/auth.service';
 import { CheckoutService } from './checkout.service';
@@ -21,13 +22,14 @@ export class CheckoutComponent implements OnInit {
   CartInputs: CartItems;
   addressList: Address[]
   selectedAddress: number = 0;
-
+  isLoading:boolean = false;
   selectedMethod: string = PaymentMethods.COD;
-
+  @ViewChild('stripeComponent') stripeComponent: StripeComponent;
   constructor(private cartService: CartService, private checkoutService: CheckoutService,
     private addressesService: AddressesService,
     private authService: AuthService,
-    private localStorageService: LocalStorageService) {
+    private localStorageService: LocalStorageService,
+    private stripe:StripeComponent) {
     this.CartInputs = new CartItems();
     this.addressList = new Array<Address>()
   }
@@ -35,7 +37,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.addressesService.getActiveAddressesByUserId(this.authService.userId).subscribe(response => {
       this.addressList = response;
-    })
+    });
   }
 
   onAddressSelection(index: number) {
@@ -43,18 +45,27 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-  onCheckoutClick() {
+  async onCheckoutClick() {
+    this.isLoading = true;
+    let paymentResponse = {};
+    if(this.selectedMethod == PaymentMethods.CARD){
+      paymentResponse = await this.stripeComponent.submit(this.CartInputs.totalAmountInclVatDelivery);
+    }
     const orderId = this.cartService.createUniqueString()
-    const order = this.cartService.CreateOrder(orderId, this.selectedAddress,this.selectedMethod);
+    const order = this.cartService.CreateOrder(orderId, this.selectedAddress,this.selectedMethod,paymentResponse);
     const orderDetails = this.cartService.CreateOrderDetails(orderId);
     forkJoin(
       this.checkoutService.onSendOrder(order),
       this.checkoutService.onSendOrderDetails(orderDetails)
     ).subscribe(([orderResponse, OrderDetailsResponse]) => {
+      this.isLoading = false;
       localStorage.removeItem("CartInputs");
       this.CartInputs = new CartItems();
       this.cartService.setCartItems(this.CartInputs);
       this.authService.onMyOrders();
+    },(error) => {
+      this.isLoading = false;
+      console.log(error);
     });
   }
 

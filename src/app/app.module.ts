@@ -24,6 +24,7 @@ import { CoreModule } from './modules/core/core.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { CartFilterComponent } from './filters/cart-filter/cart-filter.component';
 import { RouterlinkrendererComponent } from './shared/components/routerlinkrenderer/routerlinkrenderer.component';
+import { StripeComponent } from './shared/stripe/stripe.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { RouterlinkrendererComponent } from './shared/components/routerlinkrende
     CheckoutComponent,
     GalleryComponent,
     CartFilterComponent,
-    RouterlinkrendererComponent
+    RouterlinkrendererComponent,
+    StripeComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,7 @@ import { RouterlinkrendererComponent } from './shared/components/routerlinkrende
     HttpClientModule,
     AgGridModule.withComponents([])
   ],
-  providers: [NavigationComponent],
+  providers: [NavigationComponent,StripeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

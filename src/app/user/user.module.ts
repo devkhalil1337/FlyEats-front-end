@@ -8,6 +8,7 @@ import { AddEditAddressComponent } from './add-edit-address/add-edit-address.com
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { StripeComponent } from '../shared/stripe/stripe.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,6 @@ const routes: Routes = [
     AgGridModule.withComponents([])
   ],
   exports:[RouterModule],
-  providers:[]
+  providers:[StripeComponent]
 })
 export class UserModule { }

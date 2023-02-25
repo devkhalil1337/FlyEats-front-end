@@ -4,9 +4,12 @@
     <div class="top-links">
         <div class="container">
             <ul class="row links">
-                <li class="col-xs-12 col-sm-3 link-item active"><span>1</span><a routerLink="/">Choose Your Location</a></li>
-                <li class="col-xs-12 col-sm-3 link-item active"><span>2</span><a routerLink="/products">Pick Your favorite food</a></li>
-                <li class="col-xs-12 col-sm-3 link-item" routerLinkActive="active"><span>3</span><a routerLink="/checkout">Order and Pay online</a></li>
+                <li class="col-xs-12 col-sm-3 link-item active"><span>1</span><a routerLink="/">Choose Your Location</a>
+                </li>
+                <li class="col-xs-12 col-sm-3 link-item active"><span>2</span><a routerLink="/products">Pick Your
+                        favorite food</a></li>
+                <li class="col-xs-12 col-sm-3 link-item" routerLinkActive="active"><span>3</span><a
+                        routerLink="/checkout">Order and Pay online</a></li>
             </ul>
         </div>
     </div>
@@ -15,8 +18,8 @@
             <!-- /widget heading -->
             <div class="widget-heading">
                 <h3 class="widget-title text-dark">
-                                Cart summary
-                            </h3>
+                    Cart summary
+                </h3>
                 <div class="clearfix"></div>
             </div>
             <div class="widget-body">
@@ -24,82 +27,86 @@
                     <div class="row">
                         <div class="col-sm-6 margin-b-30">
                             <div class="card p-1" *ngIf="CartInputs.orderType == 'Delivery'">
-                              <div class="card-title">
-                                <div>
-                                    <span>Delivery</span>
-                                    <span class="pull-right"><a routerLink="/user/addresses"><i class="fa fa-plus"></i> Add address</a></span>
+                                <div class="card-title">
+                                    <div>
+                                        <span>Delivery</span>
+                                        <span class="pull-right"><a routerLink="/user/addresses"><i
+                                                    class="fa fa-plus"></i> Add address</a></span>
+                                    </div>
                                 </div>
-                             </div>
-                              <div class="card-body p-1"  [ngStyle]="{'border': (selectedAddress === address.addressId) ? '1px solid #f30' : ''}" style="overflow: auto;" *ngFor="let address of addressList;index as i;">
-                                <div class="col-sm-10">
-                                    <label class="custom-control custom-radio">
-                                        <input id="mixed-{{i+1}}" name="cat" type="radio" class="custom-control-input" value="{{i+1}}" (change)="onAddressSelection(address.addressId)">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description text-color">
-                                        <strong>{{address.addressType}}</strong>
-                                        <p>{{address.addressLine1}}</p>
-                                      </span>
-                                    </label>
+                                <div class="card-body p-1"
+                                    [ngStyle]="{'border': (selectedAddress === address.addressId) ? '1px solid #f30' : ''}"
+                                    style="overflow: auto;" *ngFor="let address of addressList;index as i;">
+                                    <div class="col-sm-10">
+                                        <label class="custom-control custom-radio">
+                                            <input id="mixed-{{i+1}}" name="cat" type="radio"
+                                                class="custom-control-input" value="{{i+1}}"
+                                                (change)="onAddressSelection(address.addressId)">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description text-color">
+                                                <strong>{{address.addressType}}</strong>
+                                                <p>{{address.addressLine1}}</p>
+                                            </span>
+                                        </label>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
 
-                                  <!-- on Collecton -->
-                          <div class="card p-1" *ngIf="CartInputs.orderType == 'PickUp'">
-                            <div class="card-title">
-                              <div>
-                                <span>{{ BusinessDetails.businessName }}</span>
-                              </div>
+                            <!-- on Collecton -->
+                            <div class="card p-1" *ngIf="CartInputs.orderType == 'PickUp'">
+                                <div class="card-title">
+                                    <div>
+                                        <span>{{ BusinessDetails.businessName }}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body p-1" [ngStyle]="{ border: '1px solid #f30' }"
+                                    style="overflow: auto">
+                                    <div class="col-sm-10">
+                                        <p>
+                                            {{
+                                            BusinessDetails.businessAddress +
+                                            " " +
+                                            BusinessDetails.businessPostcode +
+                                            " " +
+                                            BusinessDetails.businessCity +
+                                            " " +
+                                            BusinessDetails.businessContact
+                                            }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div
-                              class="card-body p-1"
-                              [ngStyle]="{ border: '1px solid #f30' }"
-                              style="overflow: auto"
-                            >
-                              <div class="col-sm-10">
-                                <p>
-                                  {{
-                                    BusinessDetails.businessAddress +
-                                      " " +
-                                      BusinessDetails.businessPostcode +
-                                      " " +
-                                      BusinessDetails.businessCity +
-                                      " " +
-                                      BusinessDetails.businessContact
-                                  }}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                            
-                                <table class="table table-striped">
-                                    <thead>
-                                      <tr>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
                                         <th scope="col">Item</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Total</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let order of CartInputs.products">
-                                            <td>{{order.productName}}
-                                                <ul>
-                                                    <li *ngFor="let selection of order.selectionChoices"> - {{selection.choiceName}}</li>
-                                                </ul>
-                                            </td>
-                                            <td>{{order.quantity}}</td>
-                                            <td>${{order.productDeliveryPrice}}</td>
-                                            <td>${{order.quantity*order.productDeliveryPrice}}</td>
-                                        </tr>
-                                    </tbody>
-                                  </table>
-                                  
-                          </div>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let order of CartInputs.products">
+                                        <td>{{order.productName}}
+                                            <ul>
+                                                <li *ngFor="let selection of order.selectionChoices"> -
+                                                    {{selection.choiceName}}</li>
+                                            </ul>
+                                        </td>
+                                        <td>{{order.quantity}}</td>
+                                        <td>${{order.productDeliveryPrice}}</td>
+                                        <td>${{order.quantity*order.productDeliveryPrice}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
                         <div class="col-sm-6">
                             <div class="cart-totals margin-b-20">
                                 <div class="cart-totals-title">
-                                    <h4>Cart Summary</h4> </div>
+                                    <h4>Cart Summary</h4>
+                                </div>
                                 <div class="cart-totals-fields">
                                     <table class="table">
                                         <tbody>
@@ -116,21 +123,27 @@
                                                 <td>{{CartInputs.deliveryCharges | mycurrency}}</td>
                                             </tr>
                                             <tr>
-                                                <td *ngIf="fieldVisible" >Voucher</td>
-                                                <td *ngIf="!fieldVisible">                                                    
-                                                    <a  style="cursor:pointer;color:#f30" (click)="showField()">Apply Voucher</a>
+                                                <td *ngIf="fieldVisible">Voucher</td>
+                                                <td *ngIf="!fieldVisible">
+                                                    <a style="cursor:pointer;color:#f30" (click)="showField()">Apply
+                                                        Voucher</a>
                                                 </td>
                                                 <td>
                                                     <div *ngIf="fieldVisible" style="display:flex; align-items:center;">
-                                                      <input type="text" class="form-control" placeholder="Enter some text" name="voucherCode" [(ngModel)]="voucherCode">
-                                                      <a style="cursor:pointer;color:#f30" (click)="fieldVisible = false;">Cancel</a> | 
-                                                      <a style="cursor:pointer;color:#f30" (click)="onApplyVoucher();">Submit</a>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter some text" name="voucherCode"
+                                                            [(ngModel)]="voucherCode">
+                                                        <a style="cursor:pointer;color:#f30"
+                                                            (click)="fieldVisible = false;">Cancel</a> |
+                                                        <a style="cursor:pointer;color:#f30"
+                                                            (click)="onApplyVoucher();">Submit</a>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-color"><strong>Total</strong></td>
-                                                <td class="text-color"><strong>{{CartInputs.totalAmountInclVatDelivery | mycurrency}}</strong></td>
+                                                <td class="text-color"><strong>{{CartInputs.totalAmountInclVatDelivery |
+                                                        mycurrency}}</strong></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -138,26 +151,38 @@
                             </div>
                             <!--cart summary-->
                             <div class="payment-option">
-                            
-                                  
-                                <ul class=" list-unstyled">
-                                    <!-- <li>
-                                        <label class="custom-control custom-radio  m-b-20">
-                                            <input id="radioStacked1" name="radio-stacked" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Payment on delivery</span>
-                                            <br> <span>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span> </label>
-                                    </li> -->
-                                    <li>
-                                        <label class="custom-control custom-radio  m-b-10">
-                                            <input [(ngModel)]="selectedMethod" value="CARD" name="CARD"  type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> 
-                                            <span class="custom-control-description">Card <img src="images/paypal.jpg" alt="" width="90"></span> </label>
-                                    </li>
-                                    <li>
-                                        <label class="custom-control custom-radio  m-b-10">
-                                            <input [(ngModel)]="selectedMethod" value="COD" name="COD" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> 
-                                            <span class="custom-control-description">Cash on Delivery</span></label>
-                                    </li>
-                                </ul>
-                                <p class="text-xs-center"> <a (click)="onCheckoutClick()" class="btn btn-outline-success btn-block">Pay now</a> </p>
+
+                                <div class="widget-delivery clearfix">
+                                    <form>
+                                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio4" type="radio" class="custom-control-input"
+                                                    [(ngModel)]="selectedMethod" value="CARD" name="CARD"> <span
+                                                    class="custom-control-indicator"></span> <span
+                                                    class="custom-control-description">CARD</span> </label>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio3" name="radio" type="radio"
+                                                    class="custom-control-input" [(ngModel)]="selectedMethod"
+                                                    value="COD" name="COD" type="radio"> <span
+                                                    class="custom-control-indicator"></span> <span
+                                                    class="custom-control-description">COD</span> </label>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <div *ngIf="selectedMethod == 'CARD'" style="padding: 10px;">
+                                    <app-stripe #stripeComponent></app-stripe>
+                                </div>
+
+                                <p class="text-xs-center"> <a (click)="onCheckoutClick()"
+                                        class="btn btn-outline-success btn-block">Pay now
+                                        <div class="spinner-border text-primary" role="status" *ngIf="isLoading">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </a> </p>
                             </div>
                         </div>
                     </div>

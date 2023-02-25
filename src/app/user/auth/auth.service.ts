@@ -101,7 +101,11 @@ export class AuthService {
 
   get userDisplayname(){
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && (user.firstName + ' ' + user.lastName)
+    return user !== null && (user.firstName + ' ' + user.lastName) || ""
+  }
+  get userEmail(){
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user !== null && (user.email) || ""
   }
 
   get userId(){
