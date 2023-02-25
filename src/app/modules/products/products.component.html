@@ -1,168 +1,180 @@
-
 <app-cart-filter (CartItemsEmit)="onloadPage($event)"></app-cart-filter>
 
 <div class="page-wrapper">
-    <!-- top Links -->
-    <div class="top-links">
-       <div class="container">
-          <ul class="row links">
-             <li class="col-xs-12 col-sm-3 link-item"><span>1</span><a routerLink="/">Choose Your Location</a></li>
-             <li class="col-xs-12 col-sm-3 link-item" routerLinkActive="active"><span>2</span><a routerLink="/products">Pick Your favorite food</a></li>
-             <li class="col-xs-12 col-sm-3 link-item"><span>3</span><a >Order and Pay online</a></li>
-          </ul>
-       </div>
-    </div>
-    <!-- end:Top links -->
-    <!-- start: Inner page hero -->
-    <section class="inner-page-hero bg-image" style="background: url('assets/images/profile-banner.jpg')" data-image-src="assets/images/profile-banner.jpg">
-       <div class="profile">
-          <div class="container">
-             <div class="row">
-                <div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 profile-img">
-                   <div class="image-wrap">
-                      <figure><img [src]="businessInfo.businessLogo" alt="Profile Image"></figure>
-                   </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 profile-desc">
-                   <div class="pull-left right-text white-txt">
-                      <h6><a routerLink="/">{{businessInfo.businessName}}</a></h6>
-                      <a class="btn btn-small btn-green">Open</a>
-                      <p>Burgers, American, Sandwiches, Fast Food, BBQ</p>
-                      <ul class="nav nav-inline">
-                         <li class="nav-item"> <a class="nav-link active" href="#"><i class="fa fa-check"></i> Min $ {{businessInfo.MinOrderAmount | currency:'GBP'}}</a> </li>
-                         <li class="nav-item"> <a class="nav-link" href="#"><i class="fa fa-motorcycle"></i> {{businessInfo.DeliveryTime}} min</a> </li>
-                         <li class="nav-item ratings">
-                            <a class="nav-link" href="#"> <span>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                            </span> </a>
-                         </li>
-                      </ul>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
-    </section>
-    <!-- end:Inner page hero -->
-    <div class="breadcrumb">
-       <div class="container">
-          <ul>
-             <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-             <li><a routerLink="/products" routerLinkActive="active">Search results</a></li>
-          </ul>
-       </div>
-    </div>
-    <div class="container m-t-30">
-       <div class="row">
-          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-             <div class="sidebar clearfix m-b-20">
-                <div class="main-block">
-                   <div class="sidebar-title white-txt">
-                      <h6>Choose Cusine</h6>
-                      <i class="fa fa-cutlery pull-right"></i> 
-                   </div>
-                   <ul>
-                      <li *ngFor="let cate of categorylist;index as i">
-                        <a (click)="onScroll('#target-'+cate.categoryId)" class="scroll active">{{cate.categoryName}}</a>
+   <!-- top Links -->
+   <div class="top-links">
+      <div class="container">
+         <ul class="row links">
+            <li class="col-xs-12 col-sm-3 link-item"><span>1</span><a routerLink="/">Choose Your Location</a></li>
+            <li class="col-xs-12 col-sm-3 link-item" routerLinkActive="active"><span>2</span><a
+                  routerLink="/products">Pick Your favorite food</a></li>
+            <li class="col-xs-12 col-sm-3 link-item"><span>3</span><a>Order and Pay online</a></li>
+         </ul>
+      </div>
+   </div>
+   <!-- end:Top links -->
+   <!-- start: Inner page hero -->
+   <section class="inner-page-hero bg-image" style="background: url('assets/images/profile-banner.jpg')"
+      data-image-src="assets/images/profile-banner.jpg">
+      <div class="profile">
+         <div class="container">
+            <div class="row">
+               <div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 profile-img">
+                  <div class="image-wrap">
+                     <figure><img [src]="businessInfo.businessLogo" alt="Profile Image"></figure>
+                  </div>
+               </div>
+               <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 profile-desc">
+                  <div class="pull-left right-text white-txt">
+                     <h6><a routerLink="/">{{businessInfo.businessName}}</a></h6>
+                     <a class="btn btn-small btn-green">Open</a>
+                     <p>Burgers, American, Sandwiches, Fast Food, BBQ</p>
+                     <ul class="nav nav-inline">
+                        <li class="nav-item"> <a class="nav-link active" href="#"><i class="fa fa-check"></i> Min $
+                              {{businessInfo.MinOrderAmount | currency:'GBP'}}</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="#"><i class="fa fa-motorcycle"></i>
+                              {{businessInfo.DeliveryTime}} min</a> </li>
+                        <li class="nav-item ratings">
+                           <a class="nav-link" href="#"> <span>
+                                 <i class="fa fa-star"></i>
+                                 <i class="fa fa-star"></i>
+                                 <i class="fa fa-star"></i>
+                                 <i class="fa fa-star"></i>
+                                 <i class="fa fa-star-o"></i>
+                              </span> </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- end:Inner page hero -->
+   <div class="breadcrumb">
+      <div class="container">
+         <ul>
+            <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+            <li><a routerLink="/products" routerLinkActive="active">Search results</a></li>
+         </ul>
+      </div>
+   </div>
+   <div class="container m-t-30">
+      <div class="row">
+         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+            <div class="sidebar clearfix m-b-20">
+               <div class="main-block">
+                  <div class="sidebar-title white-txt">
+                     <h6>Choose Cusine</h6>
+                     <i class="fa fa-cutlery pull-right"></i>
+                  </div>
+                  <ul>
+                     <li *ngFor="let cate of categorylist;index as i">
+                        <a (click)="onScroll('#target-'+cate.categoryId)"
+                           class="scroll active">{{cate.categoryName}}</a>
                      </li>
-                   </ul>
-                   <ul *ngIf="categorylist.length == 0">
-                      <li>
+                  </ul>
+                  <ul *ngIf="categorylist.length == 0">
+                     <li>
                         <a class="scroll">No Category added yet.</a>
                      </li>
-                   </ul>
-                   <div class="clearfix"></div>
-                </div>
-                <!-- end:Sidebar nav -->
-             </div>
-        
-          </div>
-          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-5">
-             <div class="menu-widget m-b-30" *ngFor="let cate of categorylist;index as i">
-                <div class="widget-heading">
-                   <h3 class="widget-title text-dark">
-                     {{cate.categoryName}} <a class="btn btn-link pull-right" (click)="cate.isOpen = !cate.isOpen " data-toggle="collapse" href="#{{cate.categoryName}}" [attr.aria-expanded]="!cate.isOpen">
-                      <i class="fa fa-angle-right pull-right"></i>
-                      <i class="fa fa-angle-down pull-right"></i>
-                      </a>
-                   </h3>
-                   <div class="clearfix"></div>
-                </div>
-                <div class="collapse in" [class.in]="!cate.isOpen"  id="target-{{cate.categoryId}}">
-                   <div class="food-item" [class.white]="i%2 == 0" *ngFor="let item of menulist | filterMenu:cate.categoryId; index as i">
-                      <div class="row">
-                         <div class="col-xs-12 col-sm-12 col-lg-8">
-                            <div class="rest-logo pull-left">
-                               <!-- <a class="restaurant-logo pull-left"><img [src]="item.productImageUrl" alt="Food logo"></a> -->
-                            </div>
-                            <!-- end:Logo -->
-                            <div class="rest-descr">
-                               <h6>{{item.productName}}</h6>
-                               <p> {{item.productDescription}}</p>
-                            </div>
-                            <!-- end:Description -->
-                         </div>
-                         <!-- end:col -->
-                         <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">{{item.productDeliveryPrice | mycurrency}}</span> <a (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" >&#43;</a> </div>
-                      </div>
-                      <!-- end:row -->
-                   </div>
-                   <!-- end:Food item -->
-                </div>
-                <!-- end:Collapse -->
-             </div>
-             <div class="menu-widget m-b-30" *ngIf="categorylist.length == 0">
+                  </ul>
+                  <div class="clearfix"></div>
+               </div>
+               <!-- end:Sidebar nav -->
+            </div>
+
+         </div>
+         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-5">
+            <div class="menu-widget m-b-30" *ngFor="let cate of categorylist;index as i">
+               <div class="widget-heading">
+                  <h3 class="widget-title text-dark">
+                     {{cate.categoryName}} <a class="btn btn-link pull-right" (click)="cate.isOpen = !cate.isOpen "
+                        data-toggle="collapse" href="#{{cate.categoryName}}" [attr.aria-expanded]="!cate.isOpen">
+                        <i class="fa fa-angle-right pull-right"></i>
+                        <i class="fa fa-angle-down pull-right"></i>
+                     </a>
+                  </h3>
+                  <div class="clearfix"></div>
+               </div>
+               <div class="collapse in" [class.in]="!cate.isOpen" id="target-{{cate.categoryId}}">
+                  <div class="food-item" [class.white]="i%2 == 0"
+                     *ngFor="let item of menulist | filterMenu:cate.categoryId; index as i">
+                     <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-8">
+                           <div class="rest-logo pull-left">
+                              <!-- <a class="restaurant-logo pull-left"><img [src]="item.productImageUrl" alt="Food logo"></a> -->
+                           </div>
+                           <!-- end:Logo -->
+                           <div class="rest-descr">
+                              <h6>{{item.productName}}</h6>
+                              <p> {{item.productDescription}}</p>
+                           </div>
+                           <!-- end:Description -->
+                        </div>
+                        <!-- end:col -->
+                        <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span
+                              class="price pull-left">{{item.deliveryPrice | mycurrency}}</span> <a
+                              (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right"
+                              data-toggle="modal">&#43;</a> </div>
+                     </div>
+                     <!-- end:row -->
+                  </div>
+                  <!-- end:Food item -->
+               </div>
+               <!-- end:Collapse -->
+            </div>
+            <div class="menu-widget m-b-30" *ngIf="categorylist.length == 0">
                <div class="widget-heading">
                   <h3 class="widget-title text-dark">
                      No Category added yet.
-                    <a class="btn btn-link pull-right" data-toggle="collapse" aria-expanded="false">
-                     <i class="fa fa-angle-right pull-right"></i>
-                     <i class="fa fa-angle-down pull-right"></i>
+                     <a class="btn btn-link pull-right" data-toggle="collapse" aria-expanded="false">
+                        <i class="fa fa-angle-right pull-right"></i>
+                        <i class="fa fa-angle-down pull-right"></i>
                      </a>
                   </h3>
                   <div class="clearfix"></div>
                </div>
                <div class="collapse in">
-                  
+
                   <!-- end:Food item -->
                </div>
                <!-- end:Collapse -->
             </div>
-          </div>
-          <!-- end:Bar -->
-          <div class="col-xs-12 col-md-12 col-lg-4">
-             <div class="sidebar-wrap">
-                <div class="widget widget-cart">
-                   <div class="widget-heading">
-                      <h3 class="widget-title text-dark">
-                         Your Shopping Cart
-                      </h3>
-                      <div class="clearfix"></div>
-                   </div>
-                   <div class="widget-body">
+         </div>
+         <!-- end:Bar -->
+         <div class="col-xs-12 col-md-12 col-lg-4">
+            <div class="sidebar-wrap">
+               <div class="widget widget-cart">
+                  <div class="widget-heading">
+                     <h3 class="widget-title text-dark">
+                        Your Shopping Cart
+                     </h3>
+                     <div class="clearfix"></div>
+                  </div>
+                  <div class="widget-body">
                      <div class="price-wrap text-xs-center">
                         <div class="panel">
                            <div class="panel-heading">
-                             <h4 class="panel-title">
-                               <a (click)="openAllergyModal(allergyPop)"><i class="fa fa-info-circle" aria-hidden="true"></i>
-                                 Click here if you or someone you are ordering for has a food allergy
-                              </a>
-                             </h4>
+                              <h4 class="panel-title">
+                                 <a (click)="openAllergyModal(allergyPop)"><i class="fa fa-info-circle"
+                                       aria-hidden="true"></i>
+                                    Click here if you or someone you are ordering for has a food allergy
+                                 </a>
+                              </h4>
                            </div>
-                         </div>
+                        </div>
                      </div>
                   </div>
-                   <div class="order-row" [class.bg-white]="i%2 != 0" *ngFor="let product of CartInputs.products;index as i">
-                      <div class="widget-body">
-                         <div class="title-row" >
-                            <span class="badge badge-dark"> {{product.quantity}} </span>
-                            <span class="product-name"> {{product.productName}} </span>
+                  <div class="order-row" [class.bg-white]="i%2 != 0"
+                     *ngFor="let product of CartInputs.products;index as i">
+                     <div class="widget-body">
+                        <div class="title-row">
+                           <span class="badge badge-dark"> {{product.quantity}} </span>
+                           <span class="product-name"> {{product.productName}} </span>
                            <span class="pull-right"> {{product.productTotalAmount | mycurrency}}</span>
-                           <a (click)="onRemoveProduct(product.cartId || 0);"><i class="fa fa-trash pull-right mr-1"></i></a>
+                           <a (click)="onRemoveProduct(product.cartId || 0);"><i
+                                 class="fa fa-trash pull-right mr-1"></i></a>
                            <div class="form-group row no-gutter container">
                               <div class="col-xs-8">
                                  <ul>
@@ -171,145 +183,166 @@
                               </div>
                            </div>
                         </div>
-                      </div>
-                   </div>
-                   <div class="widget-delivery clearfix">
-                      <form>
-                         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
-                            <label class="custom-control custom-radio">
-                            <input id="radio4" name="radio" type="radio" class="custom-control-input" [(ngModel)]="CartInputs.orderType" value="Delivery" (change)="onOrderTypeChange($event)"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Delivery</span> </label>
-                         </div>
-                         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
-                            <label class="custom-control custom-radio">
-                            <input id="radio3" name="radio" type="radio" class="custom-control-input" [(ngModel)]="CartInputs.orderType" value="PickUp"  (change)="onOrderTypeChange($event)"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Takeout</span> </label>
-                         </div>
-                      </form>
-                   </div> 
-                   <div class="widget-body">
-                      <div class="price-wrap text-xs-center">
-                         <p>SUB TOTAL</p>
-                         <h3 class="value"><strong>{{CartInputs.totalAmount | mycurrency}}</strong></h3>
-                         <button routerLink="/checkout" type="button" class="btn theme-btn btn-lg" [disabled]="CartInputs.products.length === 0">Checkout</button>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-          <!-- end:Right Sidebar -->
-       </div>
-       <!-- end:row -->
-    </div>
- </div>
-
-
- <ng-template #template>
-   <div class="modal-content">
-     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onModalDismiss()"> <span aria-hidden="true"  (click)="onModalDismiss()">&times;</span> </button>
-     <div class="modal-body cart-addon">
-       <div class="food-item white">
-         <div class="row">
-           <div class="col-xs-12 col-sm-12 col-lg-12" style="text-align:center ;">
-             <div class="item-img">
-               <a class="restaurant-logo" href="#">
-               <img [src]="selectedProduct.productImageUrl" alt="Food logo">
-               </a>
-             </div>
-             <div class="">
-               <h6 class="product-title">{{selectedProduct.productName}}</h6>
-             </div>
-           </div>
+                     </div>
+                  </div>
+                  <div class="widget-delivery clearfix">
+                     <form>
+                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
+                           <label class="custom-control custom-radio">
+                              <input id="radio4" name="radio" type="radio" class="custom-control-input"
+                                 [(ngModel)]="CartInputs.orderType" value="Delivery"
+                                 (change)="onOrderTypeChange($event)"> <span class="custom-control-indicator"></span>
+                              <span class="custom-control-description">Delivery</span> </label>
+                        </div>
+                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
+                           <label class="custom-control custom-radio">
+                              <input id="radio3" name="radio" type="radio" class="custom-control-input"
+                                 [(ngModel)]="CartInputs.orderType" value="PickUp" (change)="onOrderTypeChange($event)">
+                              <span class="custom-control-indicator"></span> <span
+                                 class="custom-control-description">Takeout</span> </label>
+                        </div>
+                     </form>
+                  </div>
+                  <div class="widget-body">
+                     <div class="price-wrap text-xs-center">
+                        <p>SUB TOTAL</p>
+                        <h3 class="value"><strong>{{CartInputs.totalAmount | mycurrency}}</strong></h3>
+                        <button routerLink="/checkout" type="button" class="btn theme-btn btn-lg"
+                           [disabled]="CartInputs.products.length === 0">Checkout</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
          </div>
+         <!-- end:Right Sidebar -->
+      </div>
+      <!-- end:row -->
+   </div>
+</div>
+
+
+<ng-template #template>
+   <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onModalDismiss()"> <span
+            aria-hidden="true" (click)="onModalDismiss()">&times;</span> </button>
+      <div class="modal-body cart-addon">
+         <div class="food-item white">
+            <div class="row">
+               <div class="col-xs-12 col-sm-12 col-lg-12" style="text-align:center ;">
+                  <div class="item-img">
+                     <a class="restaurant-logo" href="#">
+                        <img [src]="selectedProduct.productImageUrl" alt="Food logo">
+                     </a>
+                  </div>
+                  <div class="">
+                     <h6 class="product-title">{{selectedProduct.productName}}</h6>
+                  </div>
+               </div>
+            </div>
+            <div class="form-group row cart-actions">
+               <div class="col-xs-12 col-sm-12 col-lg-12 text-xs-center">
+                  <span class="price">{{selectedProduct.deliveryPrice | mycurrency}}</span>
+               </div>
+            </div>
+         </div>
+         <div class="selections" style="padding-bottom: 5rem;" *ngIf="selectedProduct.productVariants.length > 0">
+            <div class="shadow border-0 pt-2 ">
+               <div class="c-itemSelector-section-heading">
+                  Select One
+               </div>
+               <ul class="list-group list-group-horizontal-xl mx-auto"
+                  *ngFor="let productVariant of selectedProduct.productVariants;">
+                  <li class="list-group-item rounded-0">
+                     <div class="custom-control custom-radio">
+                        <input class="custom-control-input" id="customCheck-{{productVariant.variantId}}" type="radio"
+                           name="variant" (change)="isAllSelected($event,productVariant)">
+                        <label
+                           class="cursor-pointer font-italic d-block custom-control-label c-itemSelector-section-label"
+                           for="customCheck-{{productVariant.variantId}}">
+                           {{productVariant.variationName}}
+                           <span class="badge badge-light pull-right"> {{productVariant.variationPrice |
+                              mycurrency}}</span>
+                        </label>
+                     </div>
+                  </li>
+               </ul>
+               <div class="card-body">
+               </div>
+            </div>
+         </div>
+
+         <div class="selections" style="padding-top: 5rem;" *ngIf="selections.length > 0">
+            <div class="shadow border-0 pt-2 " *ngFor="let selection of selections;">
+               <div class="c-itemSelector-section-heading">
+                  <span class="col-md-6">
+                     {{selection.selectionName}}
+                  </span>
+                  <span class="col-md-6">
+                     <span class="badge badge-primary badge-pill pull-right"> {{selection.maximumSelection > 0 ?
+                        'Required':''}}</span>
+                  </span>
+
+               </div>
+               <div class="c-itemSelector-section-heading">
+
+               </div>
+               <ul class="list-group list-group-horizontal-xl mx-auto"
+                  *ngFor="let choice of selection.selectionChoices">
+                  <li class="list-group-item rounded-0">
+                     <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" id="customCheck-{{choice.choicesId}}" type="checkbox"
+                           (change)="onItemChange($event,choice,selection)" [disabled]="choice.isChecked">
+                        <label
+                           class="cursor-pointer font-italic d-block custom-control-label c-itemSelector-section-label"
+                           for="customCheck-{{choice.choicesId}}">
+                           {{choice.choiceName}}
+                           <span class="badge badge-light pull-right"> {{choice.choicePrice | mycurrency}}</span>
+                        </label>
+                     </div>
+                  </li>
+               </ul>
+               <div class="card-body">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal-footer">
          <div class="form-group row cart-actions">
-           <div class="col-xs-12 col-sm-12 col-lg-12 text-xs-center"> 
-             <span class="price">{{selectedProduct.productDeliveryPrice | mycurrency}}</span>
-           </div>
-         </div>
-       </div>
-       <div class="selections" style="padding-bottom: 5rem;" *ngIf="selectedProduct.productVariants.length > 0">
-         <div class="shadow border-0 pt-2 ">
-           <div class="c-itemSelector-section-heading">
-             Select One
-           </div>
-           <ul class="list-group list-group-horizontal-xl mx-auto"  *ngFor="let productVariant of selectedProduct.productVariants;">
-             <li class="list-group-item rounded-0">
-               <div class="custom-control custom-radio">
-                 <input class="custom-control-input" id="customCheck-{{productVariant.variantId}}" type="radio" name="variant" (change)="isAllSelected($event,productVariant)">
-                 <label class="cursor-pointer font-italic d-block custom-control-label c-itemSelector-section-label" for="customCheck-{{productVariant.variantId}}">
-                  {{productVariant.variationName}}
-                  <span class="badge badge-light pull-right"> {{productVariant.variationPrice | mycurrency}}</span>
-               </label>
+            <div class="btn-group">
+               <div class="col-xs-4 col-sm-2 col-lg-4">
+                  <span class="minus-action" (click)="onQuantityUpdate('decrease');"><i
+                        class="fa fa-minus theme-btn"></i></span>
                </div>
-             </li>
-           </ul>
-           <div class="card-body">
-           </div>
-         </div>
-       </div>
-
-       <div class="selections" style="padding-top: 5rem;" *ngIf="selections.length > 0">
-         <div class="shadow border-0 pt-2 " *ngFor="let selection of selections;">
-           <div class="c-itemSelector-section-heading">
-             <span class="col-md-6">
-                {{selection.selectionName}}
-               </span>
-               <span class="col-md-6">
-                  <span class="badge badge-primary badge-pill pull-right"> {{selection.maximumSelection > 0 ? 'Required':''}}</span>
-               </span>
-             
-           </div>
-           <div class="c-itemSelector-section-heading">
-             
-           </div>
-           <ul class="list-group list-group-horizontal-xl mx-auto" *ngFor="let choice of selection.selectionChoices">
-             <li class="list-group-item rounded-0"> 
-               <div class="custom-control custom-checkbox">
-                 <input class="custom-control-input" id="customCheck-{{choice.choicesId}}" type="checkbox" (change)="onItemChange($event,choice,selection)"  [disabled]="choice.isChecked">
-                 <label class="cursor-pointer font-italic d-block custom-control-label c-itemSelector-section-label" for="customCheck-{{choice.choicesId}}">
-                  {{choice.choiceName}}
-                  <span class="badge badge-light pull-right"> {{choice.choicePrice | mycurrency}}</span>
-               </label>
+               <div class="col-xs-4 col-sm-2 col-lg-4">
+                  <span class="quantity">{{selectedProduct.quantity}}</span>
                </div>
-             </li>
-           </ul>
-           <div class="card-body">
-           </div>
+               <div class="col-xs-4 col-sm-2 col-lg-4">
+                  <span class="plus-action" (click)="onQuantityUpdate('increase');"><i
+                        class="fa fa-plus theme-btn"></i></span>
+               </div>
+            </div>
          </div>
-       </div>
-     </div>
-     <div class="modal-footer">
-      <div class="form-group row cart-actions">
-         <div class="btn-group">
-           <div class="col-xs-4 col-sm-2 col-lg-4">
-             <span class="minus-action" (click)="onQuantityUpdate('decrease');"><i class="fa fa-minus theme-btn"></i></span>
-           </div>
-           <div class="col-xs-4 col-sm-2 col-lg-4">
-             <span class="quantity">{{selectedProduct.quantity}}</span>
-           </div>
-           <div class="col-xs-4 col-sm-2 col-lg-4">
-             <span class="plus-action" (click)="onQuantityUpdate('increase');"><i class="fa fa-plus theme-btn"></i></span>
-           </div>
-         </div>
-       </div>
 
-       <button type="button" class="btn theme-btn w-100" (click)="OnAddToCart();">
-       <span  class="pull-left">Add to cart</span> 
-       <span class="pull-right">{{selectedProduct.productPrice  | mycurrency}}</span></button>
-     </div>
+         <button type="button" class="btn theme-btn w-100" (click)="OnAddToCart();">
+            <span class="pull-left">Add to cart</span>
+            <span class="pull-right">{{selectedProduct.productPrice | mycurrency}}</span></button>
+      </div>
    </div>
- </ng-template>
+</ng-template>
 
- <ng-template #allergyPop>
+<ng-template #allergyPop>
    <div class="modal-content">
-     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onModalDismiss()"><span aria-hidden="true" (click)="onModalDismiss()">&times;</span></button>
-     <div class="modal-header allergy-header">
-       Do you have a food allergy?
-     </div>
-     <div class="modal-body">If you have a food allergy or intolerance (or someone you're ordering for has), phone the restaurant on <strong>xxxx</strong> . Do not order if you cannot get the allergy information you need.</div>
-     <div class="modal-footer">
-       <button type="button" class="btn theme-btn w-100" (click)="onModalDismiss();">
-         Close
-       </button>
-     </div>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onModalDismiss()"><span
+            aria-hidden="true" (click)="onModalDismiss()">&times;</span></button>
+      <div class="modal-header allergy-header">
+         Do you have a food allergy?
+      </div>
+      <div class="modal-body">If you have a food allergy or intolerance (or someone you're ordering for has), phone the
+         restaurant on <strong>xxxx</strong> . Do not order if you cannot get the allergy information you need.</div>
+      <div class="modal-footer">
+         <button type="button" class="btn theme-btn w-100" (click)="onModalDismiss();">
+            Close
+         </button>
+      </div>
    </div>
- </ng-template>
- 
+</ng-template>

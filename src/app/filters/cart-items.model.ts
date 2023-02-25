@@ -46,8 +46,8 @@ export class CartItems {
       }
 
       if (product.productVariants.length === 0) {
-        this.totalAmount += product.productDeliveryPrice * product.quantity;
-        productAmount += product.productDeliveryPrice * product.quantity;
+        this.totalAmount += product.deliveryPrice * product.quantity;
+        productAmount += product.deliveryPrice * product.quantity;
       }
       product.productTotalAmount = productAmount;
       

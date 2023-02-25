@@ -14,7 +14,7 @@ export class Product {
   productTableVat: number;
   productPickupPrice: number;
   productPickupVat: number;
-  productDeliveryPrice: number;
+  deliveryPrice: number;
   productDeliveryVat: number;
   productSortBy: number;
   productQuantity: number;

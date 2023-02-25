@@ -38,12 +38,12 @@ export class CartService {
   
   onQuantityIncrease(product: Product):void{
     product.quantity > 0 ? product.quantity++ : 1;
-    product.productPrice = product.productDeliveryPrice;
+    product.productPrice = product.deliveryPrice;
   }
 
   onQuantityDecrease(product: Product):void {
     product.quantity > 1 ? product.quantity-- : 1;
-    product.productPrice = product.productDeliveryPrice;
+    product.productPrice = product.deliveryPrice;
   }
 
   onRemoveProduct(productId: number) {
@@ -103,7 +103,7 @@ export class CartService {
       const selectedVariationProduct = product.productVariants.find(prod => prod.checked);
       if(selectedVariationProduct){
         product.productName = selectedVariationProduct?.variationName;
-        product.productDeliveryPrice = selectedVariationProduct.variationPrice;
+        product.deliveryPrice = selectedVariationProduct.variationPrice;
       }
     }
   }
@@ -174,7 +174,7 @@ export class CartService {
       orderDetails.ProductHaveSelection = product && product.selectionChoices && product.selectionChoices.length > 0;
       orderDetails.ProductId = product.productId;
       orderDetails.ProductName = product.productName;
-      orderDetails.ProductPrice = product.productDeliveryPrice;
+      orderDetails.ProductPrice = product.deliveryPrice;
       orderDetails.ProductQuantity = product.quantity;
       orderDetails.VariantId = product.productVariants && product.productVariants.length > 0 ? product.productVariants[0].variantId : 0;
       orderDetails.productVariants = this.createOrderVariants(product);

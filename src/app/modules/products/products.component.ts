@@ -61,7 +61,7 @@ export class ProductsComponent implements OnInit {
     switch (type) {
       case 'increase':
         this.selectedProduct.quantity > 0 ? this.selectedProduct.quantity++ : 1;
-        this.selectedProduct.productPrice = this.selectedProduct.productDeliveryPrice;
+        this.selectedProduct.productPrice = this.selectedProduct.deliveryPrice;
         this.selectedProduct.productPrice *= this.selectedProduct.quantity;
         this.getTheSumOfSelectedChoices();
         break;
@@ -69,7 +69,7 @@ export class ProductsComponent implements OnInit {
           if(this.selectedProduct.quantity == 1)
             return;
         this.selectedProduct.quantity > 0 ? this.selectedProduct.quantity-- : 1;
-        this.selectedProduct.productPrice = this.selectedProduct.productDeliveryPrice;
+        this.selectedProduct.productPrice = this.selectedProduct.deliveryPrice;
         this.selectedProduct.productPrice *= this.selectedProduct.quantity;
         this.getTheSumOfSelectedChoices();
         break;
