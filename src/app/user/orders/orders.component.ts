@@ -54,16 +54,16 @@ export class OrdersComponent implements OnInit, OnDestroy {
     field: 'orderStatus'
   }, {
     headerName: 'Total Price',
-    field: 'orderTotalAmount',
+    field: 'totalAmount',
     valueGetter:(params:any) => {
       const business = this.localStorageService.getBusinessDetails();
-      return business.businessCurrency+ '' + params.data.orderTotalAmount
+      return business.businessCurrency+ '' + params.data.totalAmount
     }
   }, {
     headerName: 'Date',
-    field: 'creationDate',
+    field: 'createdDate',
     cellRenderer: (data: any) => {
-      return moment(data.data.creationDate).format('MMM d, y, h:mm:ss a')
+      return moment(data.data.createdDate).format("MM-DD-YYYY hh:mm:ss a")
     }
   }]
 

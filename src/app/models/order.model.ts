@@ -1,31 +1,29 @@
-import { OrderDetails } from "./orderDetails.model";
-
 export class Order {
+    orderId?: number;
     businessId: number;
-    isDeleted: boolean;
-    active: boolean;
     customerId: number;
     orderInvoiceNumber: string;
     orderType: string;
     orderTableId: number;
     orderStatus: string;
-    orderServiceCharges: number;
-    orderDiscount: number;
-    orderVoucherId: number;
-    orderVoucherDiscountAmount: number;
-    orderTotalAmount: number;
-    orderVatAmount: number;
-    orderVatPercentage: number;
+    serviceChargeAmount: number;
+    discountAmount: number;
+    voucherId: number;
+    voucherDiscountAmount: number;
+    totalAmount: number;
+    vatAmount: number;
+    vatPercentage: number;
     vatType: string;
-    orderPaymentStatus: string;
-    orderPaymentMethod: string;
-    averageOrderPreprationTime: number;
-    orderComments: string;
-    orderDeliveryTime: number;
+    paymentStatus: string;
+    paymentMethod: string;
+    averagePreparationTime: number;
+    comments: string;
+    deliveryTime: number;
     customerDeliveryId: number;
-    orderCompletedBy: string;
-    OrderDetails: OrderDetails[];
-    creationDate?: string;
-    
-    constructor(){}
-}
+    completedBy: string;
+    deliveryCharges: number;
+    cardPaymentId: string;
+    createdDate?: string;
+    modifiedDate?: Date;
+    isDeleted: boolean;
+    }
