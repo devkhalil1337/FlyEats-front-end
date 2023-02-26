@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
 import { CartItems } from 'src/app/filters/cart-items.model';
 import { orderDeatils } from 'src/app/mock-api/order-details';
@@ -24,6 +25,7 @@ export class CheckoutComponent implements OnInit {
   selectedAddress: number = 0;
   isLoading:boolean = false;
   selectedMethod: string = PaymentMethods.COD;
+  OrderTypes:any;
   @ViewChild('stripeComponent') stripeComponent: StripeComponent;
   constructor(private cartService: CartService, private checkoutService: CheckoutService,
     private addressesService: AddressesService,
@@ -32,6 +34,7 @@ export class CheckoutComponent implements OnInit {
     private stripe:StripeComponent) {
     this.CartInputs = new CartItems();
     this.addressList = new Array<Address>()
+    this.OrderTypes = OrderTypes;
   }
 
   ngOnInit(): void {

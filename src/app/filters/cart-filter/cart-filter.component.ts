@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnChanges,SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { CartService } from 'src/app/modules/shared/cart.service';
 import { CartItems } from '../cart-items.model';
 
@@ -17,7 +18,7 @@ export class CartFilterComponent implements OnChanges {
   @Input("deliveryCharges") deliveryCharges: number = 0;
   @Input("minimumOrder") minimumOrder: number = 0;
   @Input("vat") vat: number = 0;
-  @Input("orderType") orderType:string;
+  @Input("orderType") orderType:string = OrderTypes.Delivery;
   @Output("CartItemsEmit") CartItemsEmit = new EventEmitter();
 
   constructor(private cartService:CartService) {

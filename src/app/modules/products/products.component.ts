@@ -23,7 +23,7 @@ export class ProductsComponent implements OnInit {
   categorylist: Array<Category> = [];
   menulist: any[] = [];
   modelRef: any;
-
+  isLoading:boolean = false;
   constructor(
     private modalService: NgbModal,
     private cartService: CartService,
@@ -39,12 +39,17 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {}
 
   getUnitSubscribe() {
+    this.isLoading = true;
     forkJoin(
       this.productService.getProductsList(),
       this.productService.getCategoriesList()
     ).subscribe(([productResponse, categoryResponse]) => {
       this.categorylist = categoryResponse;
       this.menulist = productResponse;
+      this.isLoading = false;
+    },(error) => {
+      this.isLoading = false;
+      console.log(error);
     });
   }
 
@@ -168,6 +173,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onOrderTypeChange(orderType:any){
+    this.isLoading = true;
    switch(orderType.target.value){
       case OrderTypes.Delivery:
         this.CartInputs.orderType = OrderTypes.Delivery;
@@ -177,7 +183,13 @@ export class ProductsComponent implements OnInit {
         this.CartInputs.orderType = OrderTypes.PickUp;
         this.cartService.setOrderType(OrderTypes.PickUp);
         break;
+      case OrderTypes.Table:
+        this.CartInputs.orderType = OrderTypes.Table;
+        this.cartService.setOrderType(OrderTypes.Table);
+        break;
     }
+    setTimeout(() => this.isLoading = false,1000)
+    this.CartInputs.clearCart();
   }
 
   private getTheSumOfSelectedChoices(){
@@ -198,6 +210,7 @@ export class ProductsComponent implements OnInit {
 
   onloadPage($event: any){
     this.CartInputs = new CartItems();
+    console.log(this.CartInputs)
     this.CartInputs = $event;
     this.cartService.setCartItems($event);
   }

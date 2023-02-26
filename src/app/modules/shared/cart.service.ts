@@ -143,7 +143,7 @@ export class CartService {
     order.serviceChargeAmount = 0;
     order.discountAmount = 0;
     order.voucherId = 0;
-    order.voucherDiscountAmount = 5;
+    order.voucherDiscountAmount = 0;
     order.totalAmount = this.cartItems.totalAmountInclVatDelivery;
     order.vatAmount = 0;
     order.vatPercentage = 0;

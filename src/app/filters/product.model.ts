@@ -10,11 +10,14 @@ export class Product {
   productImage: string;
   productName: string;
   productDescription: string;
-  productTablePrice: number;
+  isTableProduct:boolean;
   productTableVat: number;
+  productTablePrice: number; 
+  isPickupProduct:boolean;
   productPickupPrice: number;
   productPickupVat: number;
   deliveryPrice: number;
+  isDeliveryProduct:boolean;
   productDeliveryVat: number;
   productSortBy: number;
   productQuantity: number;

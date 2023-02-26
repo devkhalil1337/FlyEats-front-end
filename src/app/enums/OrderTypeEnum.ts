@@ -1,4 +1,5 @@
 export enum OrderTypes {
    Delivery = "Delivery",
-   PickUp = "PickUp"
+   PickUp = "PickUp",
+   Table = "Table"
 }

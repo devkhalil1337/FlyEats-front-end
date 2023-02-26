@@ -53,7 +53,8 @@
                             </div>
 
                             <!-- on Collecton -->
-                            <div class="card p-1" *ngIf="CartInputs.orderType == 'PickUp'">
+                            <div class="card p-1"
+                                *ngIf="CartInputs.orderType == OrderTypes.PickUp || CartInputs.orderType == OrderTypes.Table">
                                 <div class="card-title">
                                     <div>
                                         <span>{{ BusinessDetails.businessName }}</span>

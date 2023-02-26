@@ -3,24 +3,27 @@ import { Product } from './product.model';
 import { SelectionChoices } from './selections.model';
 import { Variants } from './variants.model';
 import { Voucher } from "../models/voucher"
+import { OrderTypes } from '../enums/OrderTypeEnum';
 @Injectable({
   providedIn: 'root',
 })
 export class CartItems {
   cartItemId: number;
-  products: Array<Product>;
+  products: Array<Product> = [];
   totalAmount: number = 0;
   totalAmountInclVatDelivery: number = 0;
   deliveryCharges: number = 0;
   minimumOrder: number = 0;
   vat: number = 0;
-  orderType:string = '';
+  orderType:string = "";
   voucherAmount:number = 0;
-  isVoucherApplied:boolean = true;
+  isVoucherApplied:boolean = false;
   voucher:Voucher
   constructor() { }
 
   updateTotalAmount() {
+    if(!this.products)
+      return;
     this.totalAmount = 0;
     this.totalAmountInclVatDelivery = 0;
     for (let i = 0; i < this.products.length; i++) {
@@ -68,6 +71,13 @@ export class CartItems {
     if(this.voucherAmount > 0){
       this.totalAmount -= this.voucherAmount;
     }
+  }
+
+  clearCart(){
+    this.products = new Array<Product>();
+    this.totalAmount = 0;
+    this.totalAmountInclVatDelivery = 0;
+    localStorage.removeItem("CartInputs")
   }
 
 

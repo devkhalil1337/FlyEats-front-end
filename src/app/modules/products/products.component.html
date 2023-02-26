@@ -97,9 +97,13 @@
                   </h3>
                   <div class="clearfix"></div>
                </div>
-               <div class="collapse in" [class.in]="!cate.isOpen" id="target-{{cate.categoryId}}">
+               <!-- Add this HTML code for loader -->
+               <div class="loader" style="text-align: center;" *ngIf="isLoading">
+                  <img src="assets/images/Spinner-2.gif" alt="Loading...">
+               </div>
+               <div class="collapse in" [class.in]="!cate.isOpen" id="target-{{cate.categoryId}}" *ngIf="!isLoading">
                   <div class="food-item" [class.white]="i%2 == 0"
-                     *ngFor="let item of menulist | filterMenu:cate.categoryId; index as i">
+                     *ngFor="let item of menulist | filterMenu:cate.categoryId:CartInputs.orderType; index as i">
                      <div class="row">
                         <div class="col-xs-12 col-sm-12 col-lg-8">
                            <div class="rest-logo pull-left">
@@ -187,28 +191,36 @@
                   </div>
                   <div class="widget-delivery clearfix">
                      <form>
-                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
+                        <div class="col-xs-4 col-sm-12 col-md-4 col-lg-4 b-t-0">
                            <label class="custom-control custom-radio">
                               <input id="radio4" name="radio" type="radio" class="custom-control-input"
                                  [(ngModel)]="CartInputs.orderType" value="Delivery"
                                  (change)="onOrderTypeChange($event)"> <span class="custom-control-indicator"></span>
                               <span class="custom-control-description">Delivery</span> </label>
                         </div>
-                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
+                        <div class="col-xs-4 col-sm-12 col-md-4 col-lg-4 b-t-0">
                            <label class="custom-control custom-radio">
                               <input id="radio3" name="radio" type="radio" class="custom-control-input"
                                  [(ngModel)]="CartInputs.orderType" value="PickUp" (change)="onOrderTypeChange($event)">
                               <span class="custom-control-indicator"></span> <span
-                                 class="custom-control-description">Takeout</span> </label>
+                                 class="custom-control-description">Takeaway</span> </label>
+                        </div>
+                        <div class="col-xs-4 col-sm-12 col-md-4 col-lg-4 b-t-0">
+                           <label class="custom-control custom-radio">
+                              <input id="radio3" name="radio" type="radio" class="custom-control-input"
+                                 [(ngModel)]="CartInputs.orderType" value="Table" (change)="onOrderTypeChange($event)">
+                              <span class="custom-control-indicator"></span> <span
+                                 class="custom-control-description">Table</span> </label>
                         </div>
                      </form>
                   </div>
                   <div class="widget-body">
                      <div class="price-wrap text-xs-center">
-                        <p>SUB TOTAL</p>
+                        <p>SUB TOTAL </p>
                         <h3 class="value"><strong>{{CartInputs.totalAmount | mycurrency}}</strong></h3>
                         <button routerLink="/checkout" type="button" class="btn theme-btn btn-lg"
-                           [disabled]="CartInputs.products.length === 0">Checkout</button>
+                           [disabled]="CartInputs && CartInputs.products && CartInputs.products.length === 0">Checkout
+                        </button>
                      </div>
                   </div>
                </div>
