@@ -60,7 +60,7 @@ export class StripeComponent implements AfterViewInit {
       if (error) {
         console.error(error.message);
         this.errorMessage = error.message || "";
-        this.paymentResponse = error;
+        this.paymentResponse = null;
       } else {
         this.paymentResponse = paymentIntent;
         console.log(paymentIntent);

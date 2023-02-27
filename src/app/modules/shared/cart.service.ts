@@ -155,7 +155,7 @@ export class CartService {
     order.deliveryTime = 60;
     order.completedBy = '';
     order.deliveryCharges = this.cartItems.deliveryCharges || 0;
-    order.cardPaymentId = paymentResponse?.paymentId ?? '';
+    order.cardPaymentId = paymentResponse?.id ?? '';
     order.customerDeliveryId = selectedAddress || 0;
     order.createdDate = this.getDateTime();
     // order.modifiedDate = this.getDateTime();

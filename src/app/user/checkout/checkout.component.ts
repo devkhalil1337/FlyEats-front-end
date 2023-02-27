@@ -53,6 +53,10 @@ export class CheckoutComponent implements OnInit {
     let paymentResponse = {};
     if(this.selectedMethod == PaymentMethods.CARD){
       paymentResponse = await this.stripeComponent.submit(this.CartInputs.totalAmountInclVatDelivery);
+      if(paymentResponse == null){
+        this.isLoading = false;
+        return;
+      }
     }
     const orderId = this.cartService.createUniqueString()
     const order = this.cartService.CreateOrder(orderId, this.selectedAddress,this.selectedMethod,paymentResponse);
