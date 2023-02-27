@@ -19,6 +19,7 @@ export class CartItems {
   voucherAmount:number = 0;
   isVoucherApplied:boolean = false;
   voucher:Voucher
+  tableNumber:string;
   constructor() { }
 
   updateTotalAmount() {
@@ -78,6 +79,10 @@ export class CartItems {
     this.totalAmount = 0;
     this.totalAmountInclVatDelivery = 0;
     localStorage.removeItem("CartInputs")
+  }
+
+  clearTable(){
+    this.tableNumber = '';
   }
 
 

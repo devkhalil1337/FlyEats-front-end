@@ -19,6 +19,7 @@ export class CartFilterComponent implements OnChanges {
   @Input("minimumOrder") minimumOrder: number = 0;
   @Input("vat") vat: number = 0;
   @Input("orderType") orderType:string = OrderTypes.Delivery;
+  @Input("tableNumber") tableNumber:string = '0';
   @Output("CartItemsEmit") CartItemsEmit = new EventEmitter();
 
   constructor(private cartService:CartService) {
@@ -31,6 +32,7 @@ export class CartFilterComponent implements OnChanges {
       this.minimumOrder = sessionCart.minimumOrder;
       this.vat = sessionCart.vat;
       this.orderType =  sessionCart.orderType || 'Delivery'
+      this.tableNumber =  sessionCart.tableNumber;
     }
     this.CartItems = new CartItems();
    }
@@ -43,6 +45,7 @@ export class CartFilterComponent implements OnChanges {
     this.CartItems.minimumOrder = this.minimumOrder;
     this.CartItems.vat = this.vat;
     this.CartItems.orderType = this.orderType;
+    this.CartItems.tableNumber = this.tableNumber;
     this.CartItems.updateTotalAmount();
     this.CartItemsEmit.emit(this.CartItems);
     }

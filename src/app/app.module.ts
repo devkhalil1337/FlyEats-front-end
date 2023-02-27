@@ -25,6 +25,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { CartFilterComponent } from './filters/cart-filter/cart-filter.component';
 import { RouterlinkrendererComponent } from './shared/components/routerlinkrenderer/routerlinkrenderer.component';
 import { StripeComponent } from './shared/stripe/stripe.component';
+import { TableNumberComponent } from './shared/components/table-number/table-number.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { StripeComponent } from './shared/stripe/stripe.component';
     GalleryComponent,
     CartFilterComponent,
     RouterlinkrendererComponent,
-    StripeComponent
+    StripeComponent,
+    TableNumberComponent
   ],
   imports: [
     BrowserModule,

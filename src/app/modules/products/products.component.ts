@@ -24,6 +24,8 @@ export class ProductsComponent implements OnInit {
   menulist: any[] = [];
   modelRef: any;
   isLoading:boolean = false;
+
+
   constructor(
     private modalService: NgbModal,
     private cartService: CartService,
@@ -31,8 +33,6 @@ export class ProductsComponent implements OnInit {
     private productService: ProductsService
   ) {
     this.businessInfo = this.localStorageServcice.getBusinessDetails();
-    // this.CartInputs = new CartItems();
-    // console.log("this.CartInputs",this.CartInputs)
     this.getUnitSubscribe();
   }
 
@@ -178,10 +178,12 @@ export class ProductsComponent implements OnInit {
       case OrderTypes.Delivery:
         this.CartInputs.orderType = OrderTypes.Delivery;
         this.cartService.setOrderType(OrderTypes.Delivery);
+        this.CartInputs.clearTable();
         break;
       case OrderTypes.PickUp:
         this.CartInputs.orderType = OrderTypes.PickUp;
         this.cartService.setOrderType(OrderTypes.PickUp);
+        this.CartInputs.clearTable();
         break;
       case OrderTypes.Table:
         this.CartInputs.orderType = OrderTypes.Table;
@@ -210,9 +212,16 @@ export class ProductsComponent implements OnInit {
 
   onloadPage($event: any){
     this.CartInputs = new CartItems();
-    console.log(this.CartInputs)
     this.CartInputs = $event;
     this.cartService.setCartItems($event);
   }
+
+  onTableNumber($event:any){
+    this.CartInputs.tableNumber = $event;
+    this.onModalDismiss();
+  }
+
+
+  
   
 }

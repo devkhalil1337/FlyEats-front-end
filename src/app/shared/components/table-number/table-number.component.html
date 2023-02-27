@@ -1,0 +1,27 @@
+<div class="jumbotron col-xl-4 col-xl-offset-4 col-md-6 col-md-offset-3 p-x-3 p-y-3 col-xs-12 bg-inverse"
+    style="width: 100%;">
+    <div class="input-group input-group-lg col-xs-4">
+        <input class="form-control text-xs-right" id="numberscreen" type="text" [(ngModel)]="numberscreen"
+            style="width: 56%;" />
+    </div>
+    <div class="col-xs-7">
+        <button class="btn btn-danger col-xs-4 numbers" (click)="clearScreen()" type="button">CE</button>
+        <button class="btn btn-danger col-xs-4 numbers" (click)="removeLast()" type="button">C</button>
+    </div>
+    <div class="col-xs-7 calc__numberpad p-a-0">
+        <button class="btn btn-lg btn-secondary col-xs-4 numbers" (click)="addNumber('7')" type="button">7</button>
+        <button class="btn btn-lg btn-secondary col-xs-4 numbers" (click)="addNumber('8')" type="button">8</button>
+        <button class="btn btn-lg btn-secondary col-xs-4 numbers" (click)="addNumber('9')" type="button">9</button>
+        <button class="btn btn-lg btn-secondary col-xs-4 numbers" (click)="addNumber('4')" type="button">4</button>
+        <button class="btn btn-lg btn-secondary col-xs-4 numbers" (click)="addNumber('5')" type="button">5</button>
+        <button class="btn btn-lg btn-secondary col-xs-4 numbers" (click)="addNumber('6')" type="button">6</button>
+        <button class="btn btn-lg btn-secondary col-xs-4 numbers" (click)="addNumber('1')" type="button">1</button>
+        <button class="btn btn-lg btn-secondary col-xs-4 numbers" (click)="addNumber('2')" type="button">2</button>
+        <button class="btn btn-lg btn-secondary col-xs-4 numbers" (click)="addNumber('3')" type="button">3</button>
+        <!-- <button class="btn btn-lg btn-secondary col-xs-8 numbers" (click)="addNumber('0')" type="button">0</button> -->
+        <button class="btn btn-lg btn-primary col-xs-8" id="squareroot" func="√" type="button"
+            (click)="calculate();">√</button>
+    </div>
+    <div class="col-xs-5 calc__operatorpad p-a-0">
+    </div>
+</div>

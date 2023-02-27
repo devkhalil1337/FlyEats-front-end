@@ -138,7 +138,7 @@ export class CartService {
     order.customerId = this.authService.userId;
     order.orderInvoiceNumber = orderId;
     order.orderType = this.cartItems.orderType;
-    order.orderTableId = 0;
+    order.orderTableId = Number(this.cartItems.tableNumber);
     order.orderStatus = "open";
     order.serviceChargeAmount = 0;
     order.discountAmount = 0;
