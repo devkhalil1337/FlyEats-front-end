@@ -4,8 +4,8 @@ import { Product } from 'src/app/filters/product.model';
 import { Selections } from 'src/app/filters/selections.model';
 import { Variants } from 'src/app/filters/variants.model';
 import { Category } from 'src/app/models/category.model';
-import { ApiService } from '../shared/api.service';
-import { BusinessId, imagesPathUrl } from '../shared/config.service';
+import { ApiService } from '@shared//api.service';
+import { BusinessId, imagesPathUrl } from '@shared//config.service';
 
 @Injectable({
   providedIn: 'root'

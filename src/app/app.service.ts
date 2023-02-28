@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { ApiService } from './modules/shared/api.service';
-import { imagesPathUrl } from './modules/shared/config.service';
+import { ApiService } from '@shared/api.service';
+import { imagesPathUrl } from '@shared/config.service';
 
 @Injectable({
   providedIn: 'root'

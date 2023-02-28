@@ -21,11 +21,11 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './modules/core/core.module';
-import { SharedModule } from './modules/shared/shared.module';
 import { CartFilterComponent } from './filters/cart-filter/cart-filter.component';
-import { RouterlinkrendererComponent } from './shared/components/routerlinkrenderer/routerlinkrenderer.component';
-import { StripeComponent } from './shared/stripe/stripe.component';
-import { TableNumberComponent } from './shared/components/table-number/table-number.component';
+import { RouterlinkrendererComponent } from '@shared/components/routerlinkrenderer/routerlinkrenderer.component';
+import { StripeComponent } from '@shared/stripe/stripe.component';
+import { TableNumberComponent } from '@shared/components/table-number/table-number.component';
+import { SharedModule } from '@shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,

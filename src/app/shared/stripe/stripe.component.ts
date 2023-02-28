@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Stripe, StripeElements, StripeCardElement, StripeCardElementOptions } from '@stripe/stripe-js';
-import { ApiService } from 'src/app/modules/shared/api.service';
+import { ApiService } from '@shared/api.service';
 import { AuthService } from 'src/app/user/auth/auth.service';
 
 @Component({

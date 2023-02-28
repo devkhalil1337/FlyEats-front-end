@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CartService } from '../shared/cart.service';
-import { LocalStorageService } from '../shared/local-storage.service';
+import { CartService } from '@shared//cart.service';
+import { LocalStorageService } from '@shared//local-storage.service';
 import { ProductsService } from './products.service';
 import { forkJoin } from 'rxjs';
 import { Category } from 'src/app/models/category.model';

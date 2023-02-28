@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
-import { LocalStorageService } from './modules/shared/local-storage.service';
+import { LocalStorageService } from '@shared/local-storage.service';
 
 @Component({
   selector: 'app-root',

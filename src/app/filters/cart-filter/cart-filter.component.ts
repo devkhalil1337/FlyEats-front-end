@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges,SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
-import { CartService } from 'src/app/modules/shared/cart.service';
+import { CartService } from '@shared/cart.service';
 import { CartItems } from '../cart-items.model';
 
 import { Product } from '../product.model';

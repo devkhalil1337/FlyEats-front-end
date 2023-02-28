@@ -6,8 +6,8 @@ import { CartItems } from 'src/app/filters/cart-items.model';
 import { orderDeatils } from 'src/app/mock-api/order-details';
 import { Address } from 'src/app/models/address';
 import { OrderDetails } from 'src/app/models/orderDetails.model';
-import { CartService } from 'src/app/modules/shared/cart.service';
-import { LocalStorageService } from 'src/app/modules/shared/local-storage.service';
+import { CartService } from '@shared/cart.service';
+import { LocalStorageService } from '@shared/local-storage.service';
 import { StripeComponent } from 'src/app/shared/stripe/stripe.component';
 import { AddressesService } from '../addresses/addresses.service';
 import { AuthService } from '../auth/auth.service';
@@ -83,9 +83,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   onApplyVoucher() {
-    this.checkoutService.onVoucherApply(this.voucherCode, this.authService.userId, this.CartInputs.totalAmount).subscribe(response => {
+    this.checkoutService.onVoucherApply(this.voucherCode, this.authService.userId, this.CartInputs.totalAmount).subscribe((response:any) => {
       console.log({ response });
-    }, error => {
+    }, (error:any) => {
       console.log({ error });
     });
   }

@@ -5,8 +5,8 @@ import { GridOptions } from 'ag-grid-community';
 import * as moment from 'moment';
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { LocalStorageService } from 'src/app/modules/shared/local-storage.service';
-import { RouterlinkrendererComponent } from 'src/app/shared/components/routerlinkrenderer/routerlinkrenderer.component';
+import { LocalStorageService } from '@shared/local-storage.service';
+import { RouterlinkrendererComponent } from '@shared/components/routerlinkrenderer/routerlinkrenderer.component';
 
 @Component({
   selector: 'app-orders',

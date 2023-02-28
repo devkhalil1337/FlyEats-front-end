@@ -30,7 +30,7 @@ export class AddEditAddressComponent implements OnInit {
 
   
   getAddressById(){
-    this.addressService.getAddressById(this.selectedAddressId).subscribe(response => {
+    this.addressService.getAddressById(this.selectedAddressId).subscribe((response:any) => {
       console.log(response);
       this.selectedAddress = response;
       console.log(this.selectedAddress)
@@ -39,12 +39,12 @@ export class AddEditAddressComponent implements OnInit {
 
   onAddressSave(){
     if(this.selectedAddressId){
-      this.addressService.EditAddress(this.selectedAddress).subscribe(response => {
+      this.addressService.EditAddress(this.selectedAddress).subscribe((response:any) => {
         console.log(response);
         this.router.navigate(['/user/addresses'])
       })
     }else{
-      this.addressService.AddAddress(this.selectedAddress).subscribe(response => {
+      this.addressService.AddAddress(this.selectedAddress).subscribe((response:any) => {
         console.log(response);
         this.router.navigate(['/user/addresses'])
       })
