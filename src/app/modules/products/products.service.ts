@@ -4,8 +4,8 @@ import { Product } from 'src/app/filters/product.model';
 import { Selections } from 'src/app/filters/selections.model';
 import { Variants } from 'src/app/filters/variants.model';
 import { Category } from 'src/app/models/category.model';
-import { ApiService } from '@shared//api.service';
-import { BusinessId, imagesPathUrl } from '@shared//config.service';
+import { ApiService } from '@shared/api.service';
+import { BusinessId, imagesPathUrl } from '@shared/config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ProductsService {
 
 
   getProductsList(){
-    return this.apiService.request("get",`Products/GetAllProducts?businessId=${BusinessId}`).pipe(map((response:any) => {
+    return this.apiService.request("get",`Products/GetAllProducts`).pipe(map((response:any) => {
       return response && response.map((elm:Product) =>{
         return {
           ...elm,
@@ -28,7 +28,7 @@ export class ProductsService {
   }
 
   getCategoriesList(){
-    return this.apiService.request("get",`Categories/GetAllCategories?businessId=${BusinessId}`).pipe(map((response:Array<Category>) => {
+    return this.apiService.request("get",`Categories/GetAllCategories`).pipe(map((response:Array<Category>) => {
       return response && response.filter((elm:any) => elm.active) || [];
     }));
   }
