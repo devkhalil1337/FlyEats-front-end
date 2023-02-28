@@ -155,7 +155,9 @@
                         Your Shopping Cart
 
                         <br>
-                        <p *ngIf="CartInputs.tableNumber != '0'">Table Number: {{CartInputs.tableNumber}}</p>
+                        <p *ngIf="CartInputs.tableNumber > '0'">Table Number: <a style="cursor: pointer;"
+                              (click)="openAllergyModal(tableSelection)">
+                              {{CartInputs.tableNumber}}</a></p>
                      </h3>
                      <div class="clearfix"></div>
                   </div>
@@ -364,5 +366,5 @@
 </ng-template>
 
 <ng-template #tableSelection>
-   <app-table-number (tableNumber)="onTableNumber($event)"></app-table-number>
+   <app-table-number (tableNumber)="onTableNumber($event)" [tableNumber]="CartInputs.tableNumber"></app-table-number>
 </ng-template>

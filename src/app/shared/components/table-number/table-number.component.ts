@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-table-number',
@@ -6,33 +6,41 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./table-number.component.css']
 })
 export class TableNumberComponent implements OnInit {
-
-
+  @Input("tableNumber") selectedNumber:string;
   @Output("tableNumber") tableNumber = new EventEmitter();
+
+
+  numberscreen = '';
+
 
   constructor() { }
 
   ngOnInit(): void {
+    this.numberscreen = this.selectedNumber == '0' ? '1': String(this.selectedNumber);
   }
 
-  public numberscreen = '';
 
-  public addNumber(num: string) {
+  addNumber(num: string) {
     this.numberscreen += num;
   }
 
-  public clearScreen() {
+  clearScreen() {
     this.numberscreen = '';
   }
 
-  public removeLast() {
+  removeLast() {
     if (this.numberscreen.length > 0) {
       this.numberscreen = this.numberscreen.slice(0, -1);
+      if(this.numberscreen.length == 0){
+        this.numberscreen = '1'
+      }
     }
+
   }
 
-  public calculate() {
+  calculate() {
     try {
+      let number = String(Number(this.numberscreen))
       this.numberscreen = eval(this.numberscreen);
       this.tableNumber.emit(this.numberscreen);
     } catch (error) {
