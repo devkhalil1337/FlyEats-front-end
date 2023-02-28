@@ -5,7 +5,18 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
 
-  constructor() { }
+  constructor() { 
+    window.addEventListener('storage', this.storageEventListener.bind(this));
+  }
+
+
+  storageEventListener(event: StorageEvent) {
+    if (event.storageArea === localStorage) {
+      localStorage.clear();
+      window.location.href = '/'; 
+      // Handle the changes to the local storage here
+    }
+  }
 
   setBusinessDetails(business:any){
     localStorage.setItem("business",JSON.stringify(business));
