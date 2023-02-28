@@ -15,8 +15,7 @@ export class AppService {
 
 
   getBussiness(): Observable<any> {
-    const BusinessId = environment.BusinessId;
-    return this.http.request("get",`BusinessInfo/GetBusinessUnitById?BusinessId=${BusinessId}`).pipe(map(response => {
+    return this.http.request("get",`BusinessInfo/GetBusinessUnitById`).pipe(map(response => {
       return response && response.map((elm:any) =>{
         return {
           ...elm,
@@ -26,8 +25,7 @@ export class AppService {
     }));
   }
   getBussinessSettings(): Observable<any> {
-    const BusinessId = environment.BusinessId;
-    return this.http.request("get",`Settings/GetSettingsById?BusinessId=${BusinessId}`).pipe(map(response => {
+    return this.http.request("get",`Settings/GetSettingsById`).pipe(map(response => {
       return response && response[0] || {}
     }));
   }
