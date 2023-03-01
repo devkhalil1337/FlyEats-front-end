@@ -10,6 +10,7 @@ import { Product } from 'src/app/filters/product.model';
 import { CartItems } from 'src/app/filters/cart-items.model';
 import { Variants } from 'src/app/filters/variants.model';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
+import { ConfigService } from '@shared/config.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -17,6 +18,7 @@ import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 })
 export class ProductsComponent implements OnInit {
   businessInfo: any;
+  businessSettings: any;
   CartInputs: CartItems;
   selectedProduct: Product;
   selections: any;
@@ -30,9 +32,11 @@ export class ProductsComponent implements OnInit {
     private modalService: NgbModal,
     private cartService: CartService,
     private localStorageServcice: LocalStorageService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private configService: ConfigService
   ) {
-    this.businessInfo = this.localStorageServcice.getBusinessDetails();
+    this.businessInfo = this.configService.BusinessDetails;
+    this.businessSettings = this.configService.BusinessSettings;
     this.getUnitSubscribe();
   }
 

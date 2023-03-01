@@ -19,6 +19,10 @@ export class ConfigService {
     return businessDetails;
   }
 
+  get BusinessSettings(){
+    return JSON.parse(localStorage.getItem("businessSettings") || "{}");
+  }
+
 }
 
 

@@ -30,12 +30,12 @@
                      <a class="btn btn-small btn-green">Open</a>
                      <p>Burgers, American, Sandwiches, Fast Food, BBQ</p>
                      <ul class="nav nav-inline">
-                        <li class="nav-item"> <a class="nav-link active" href="#"><i class="fa fa-check"></i> Min $
-                              {{businessInfo.MinOrderAmount | currency:'GBP'}}</a> </li>
+                        <li class="nav-item"> <a class="nav-link active" href="#"><i class="fa fa-check"></i> Min
+                              {{businessSettings.minimumOrder | mycurrency}}</a> </li>
                         <li class="nav-item"> <a class="nav-link" href="#"><i class="fa fa-motorcycle"></i>
-                              {{businessInfo.DeliveryTime}} min</a> </li>
+                              {{businessSettings.deliveryTime}} min</a> </li>
                         <li class="nav-item ratings">
-                           <a class="nav-link" href="#"> <span>
+                           <a class="nav-link"> <span>
                                  <i class="fa fa-star"></i>
                                  <i class="fa fa-star"></i>
                                  <i class="fa fa-star"></i>
@@ -55,7 +55,7 @@
       <div class="container">
          <ul>
             <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-            <li><a routerLink="/products" routerLinkActive="active">Search results</a></li>
+            <li><a routerLink="/products" routerLinkActive="active">Products</a></li>
          </ul>
       </div>
    </div>
@@ -356,7 +356,8 @@
          Do you have a food allergy?
       </div>
       <div class="modal-body">If you have a food allergy or intolerance (or someone you're ordering for has), phone the
-         restaurant on <strong>xxxx</strong> . Do not order if you cannot get the allergy information you need.</div>
+         restaurant on <strong>{{businessInfo.businessContact}}</strong> . Do not order if you cannot get the allergy
+         information you need.</div>
       <div class="modal-footer">
          <button type="button" class="btn theme-btn w-100" (click)="onModalDismiss();">
             Close
