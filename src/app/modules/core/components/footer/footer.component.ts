@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ConfigService} from "@shared/config.service"
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  BusinessDetails:any;
+  constructor(private ConfigService: ConfigService) { 
+    this.BusinessDetails = this.ConfigService.BusinessDetails;
+  }
 
   ngOnInit(): void {
   }

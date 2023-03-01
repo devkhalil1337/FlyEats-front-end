@@ -14,6 +14,11 @@ export class ConfigService {
     return businessCurrency;
   }
 
+  get BusinessDetails(){
+    const businessDetails = JSON.parse(localStorage.getItem("business") || "{}");
+    return businessDetails;
+  }
+
 }
 
 
