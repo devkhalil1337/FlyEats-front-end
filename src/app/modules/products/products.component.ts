@@ -11,6 +11,7 @@ import { CartItems } from 'src/app/filters/cart-items.model';
 import { Variants } from 'src/app/filters/variants.model';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { ConfigService } from '@shared/config.service';
+import { BusinessTimeService } from '@shared/business-time.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -26,21 +27,29 @@ export class ProductsComponent implements OnInit {
   menulist: any[] = [];
   modelRef: any;
   isLoading:boolean = false;
-
+  isBusinessOn:boolean = false;
 
   constructor(
     private modalService: NgbModal,
     private cartService: CartService,
     private localStorageServcice: LocalStorageService,
     private productService: ProductsService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private businessTimeService: BusinessTimeService
   ) {
     this.businessInfo = this.configService.BusinessDetails;
     this.businessSettings = this.configService.BusinessSettings;
     this.getUnitSubscribe();
+    this.businessTimeService.checkIsOpen();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.businessTimeService.getIsOpen().subscribe(isopen => this.isBusinessOn = isopen);
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from the isOpen$ observable when the component is destroyed
+  }
 
   getUnitSubscribe() {
     this.isLoading = true;

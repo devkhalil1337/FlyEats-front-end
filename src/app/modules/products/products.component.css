@@ -81,3 +81,7 @@
 .cart-addon{
     height: 400px;
 }
+
+.profile-desc .btn-danger{
+    background-color: #ef3b0e;
+}
