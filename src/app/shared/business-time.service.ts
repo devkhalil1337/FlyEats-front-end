@@ -1,0 +1,60 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+import { ApiService } from './api.service';
+import * as moment from 'moment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BusinessTimeService {
+
+  public isOpen = false;
+  private isOpenSubject = new BehaviorSubject<boolean>(this.isOpen);
+  weekDays = ['Sunday','Monday','Tuesday','Wednesday','Thuresday','Friday','Saturday'];
+  currentDay:any;
+  constructor(private apiService: ApiService) {
+
+    this.currentDay = new Date().getDay(); // 0-6, Sunday = 0
+   }
+
+  getIsOpen(): Observable<boolean> {
+    return this.isOpenSubject.asObservable();
+  }
+
+  checkIsOpen(): void {
+    // Call the API to check if the business is open
+    // and set the value of isOpen accordingly
+    this.apiService.request("get","BusinessHours/GetBusinessHours").pipe(
+      tap((isOpen:any) =>{
+        let foundDay = isOpen.find((el:any) => el.weekDayName == this.weekDays[this.currentDay])
+        if(foundDay){
+          this.isOpenSubject.next(this.isBusinessOpen(foundDay))
+        }
+      })
+    ).subscribe();
+  }
+
+  isBusinessOpen(day:any):boolean {
+    const now = new Date();
+    // Find the business day object for today
+    const businessDay = day;//this.businessHours.find((day:any) => day.weekDayName === weekDays[today]);
+    // If the business is closed today, return false
+    if (!businessDay || !businessDay.active) {
+      return false;
+    }
+    debugger
+    return businessDay.businessTimes.some((time:any) => {
+      if (businessDay) {
+        const startTime = moment(time.startDate, 'HH:mm');
+        const endTime = moment(time.endDate, 'HH:mm');
+        const nowTime = moment(now, 'HH:mm');
+        return nowTime.isBetween(startTime, endTime);
+      }
+      return false;
+    });
+    
+  }
+}
