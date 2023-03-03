@@ -19,6 +19,10 @@ export class AppComponent {
       this.localStorageService.setBusinessSettings(response);
     })
 
+    this.appService.getBussinessHours().subscribe(response => {
+      this.localStorageService.setBusinessHours(response);
+    })
+
    }
 
 

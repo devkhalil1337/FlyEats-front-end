@@ -30,6 +30,14 @@ export class LocalStorageService {
     localStorage.setItem("businessSettings",JSON.stringify(business));
   }
 
+  setBusinessHours(business:any){
+    localStorage.setItem("businessHours",JSON.stringify(business));
+  }
+
+  getBusinessHours(){
+    return JSON.parse(localStorage.getItem("businessHours") || '{}')
+  }
+
   getBusinessSettings(){
     return JSON.parse(localStorage.getItem("businessSettings") || '{}')
   }

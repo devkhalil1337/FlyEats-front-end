@@ -22,6 +22,10 @@ export class ConfigService {
   get BusinessSettings(){
     return JSON.parse(localStorage.getItem("businessSettings") || "{}");
   }
+  
+  get BusinessHours(){
+    return JSON.parse(localStorage.getItem("businessHours") || "{}");
+  }
 
 }
 

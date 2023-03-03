@@ -24,10 +24,15 @@ export class AppService {
       })[0] || [];
     }));
   }
+
   getBussinessSettings(): Observable<any> {
     return this.http.request("get",`Settings/GetSettingsById`).pipe(map(response => {
       return response && response[0] || {}
     }));
+  }
+
+  getBussinessHours(): Observable<any> {
+    return this.http.request("get",`BusinessHours/GetBusinessHours`);
   }
 
 }

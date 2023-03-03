@@ -84,7 +84,15 @@
                 </div>
                 <div class="col-xs-12 col-sm-5 additional-info color-gray">
                     <h5>Addition informations</h5>
-                    <p>Join the thousands of other restaurants who benefit from having their menus on TakeOff</p>
+                    <div *ngFor="let day of businessHours">
+                        <span *ngIf="day.weekDayName == weekDays[currentDay]">
+                            <h2>{{day.weekDayName}}</h2>
+                            <!-- <p>Open: {{day.businessTimes[0].startDate | date:'hh:mm a'}}</p>
+                            <p>Close: {{day.businessTimes[0].endDate | date:'hh:mm a'}}</p> -->
+                            <p *ngIf="isBusinessOpen(day)">Business is currently open</p>
+                            <p *ngIf="!isBusinessOpen(day)">Business is currently closed</p>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
