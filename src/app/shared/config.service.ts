@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { BusinessDay } from '../models/businessDay.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,11 @@ export class ConfigService {
   }
   
   get BusinessHours(){
-    return JSON.parse(localStorage.getItem("businessHours") || "{}");
+    let businessHours = JSON.parse(localStorage.getItem("businessHours") || "{}");
+    if(!businessHours || Object.entries(businessHours).length == 0){
+      businessHours = new Array<BusinessDay>()
+    }
+    return businessHours
   }
 
 }

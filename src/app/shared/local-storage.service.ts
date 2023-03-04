@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BusinessDay } from '../models/businessDay.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class LocalStorageService {
     localStorage.setItem("businessSettings",JSON.stringify(business));
   }
 
-  setBusinessHours(business:any){
+  setBusinessHours(business:BusinessDay[]){
     localStorage.setItem("businessHours",JSON.stringify(business));
   }
 

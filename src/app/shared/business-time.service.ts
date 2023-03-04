@@ -5,6 +5,8 @@ import { tap } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 import * as moment from 'moment';
+import { LocalStorageService } from './local-storage.service';
+import { BusinessDay } from '../models/businessDay.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class BusinessTimeService {
   private isOpenSubject = new BehaviorSubject<boolean>(this.isOpen);
   weekDays = ['Sunday','Monday','Tuesday','Wednesday','Thuresday','Friday','Saturday'];
   currentDay:any;
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,private localStorageService: LocalStorageService) {
 
     this.currentDay = new Date().getDay(); // 0-6, Sunday = 0
    }
@@ -28,8 +30,9 @@ export class BusinessTimeService {
     // Call the API to check if the business is open
     // and set the value of isOpen accordingly
     this.apiService.request("get","BusinessHours/GetBusinessHours").pipe(
-      tap((isOpen:any) =>{
-        let foundDay = isOpen.find((el:any) => el.weekDayName == this.weekDays[this.currentDay])
+      tap((businessResponse:BusinessDay[]) =>{
+        this.localStorageService.setBusinessHours(businessResponse);
+        let foundDay = businessResponse.find((el:BusinessDay) => el.weekDayName == this.weekDays[this.currentDay])
         if(foundDay){
           this.isOpenSubject.next(this.isBusinessOpen(foundDay))
         }
@@ -37,7 +40,7 @@ export class BusinessTimeService {
     ).subscribe();
   }
 
-  isBusinessOpen(day:any):boolean {
+  isBusinessOpen(day:BusinessDay):boolean {
     const now = new Date();
     // Find the business day object for today
     const businessDay = day;//this.businessHours.find((day:any) => day.weekDayName === weekDays[today]);
