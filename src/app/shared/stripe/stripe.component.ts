@@ -39,6 +39,10 @@ export class StripeComponent implements AfterViewInit {
     this.isLoading = true;
   
     try {
+
+      // this.apiService.request("post",'Order/CreatePaymentIntent',{amount:amount}).subscribe(response => {
+
+      // })
       const response = await fetch('http://localhost:5112/api/Order/CreatePaymentIntent?amount=' + amount, {
         method: 'POST'
       });

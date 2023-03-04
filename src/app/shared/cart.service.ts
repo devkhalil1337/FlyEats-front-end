@@ -8,6 +8,7 @@ import { OrderDetails } from 'src/app/models/orderDetails.model';
 import { OrderVariants } from 'src/app/models/orderVariants.model';
 import { AuthService } from 'src/app/user/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { OrderStatus } from '@enums/OrderStatusEnum';
 
 @Injectable({
   providedIn: 'root',
@@ -139,7 +140,7 @@ export class CartService {
     order.orderInvoiceNumber = orderId;
     order.orderType = this.cartItems.orderType;
     order.orderTableId = Number(this.cartItems.tableNumber);
-    order.orderStatus = "open";
+    order.orderStatus = OrderStatus.Open;
     order.serviceChargeAmount = 0;
     order.discountAmount = 0;
     order.voucherId = 0;

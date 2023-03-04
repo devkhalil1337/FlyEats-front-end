@@ -23,7 +23,8 @@
     "suppressImplicitAnyIndexErrors": true,
     "strictPropertyInitialization": false,
     "paths": {
-      "@shared/*": ["src/app/shared/*"]
+      "@shared/*": ["src/app/shared/*"],
+      "@enums/*": ["src/app/enums/*"]
     }
   },
   "angularCompilerOptions": {

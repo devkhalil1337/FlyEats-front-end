@@ -7,6 +7,7 @@ import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { LocalStorageService } from '@shared/local-storage.service';
 import { RouterlinkrendererComponent } from '@shared/components/routerlinkrenderer/routerlinkrenderer.component';
+import { OrderStatus } from '@enums/OrderStatusEnum';
 
 @Component({
   selector: 'app-orders',
@@ -51,7 +52,21 @@ export class OrdersComponent implements OnInit, OnDestroy {
     cellRenderer:RouterlinkrendererComponent
   }, {
     headerName: 'Status',
-    field: 'orderStatus'
+    field: 'orderStatus',
+    cellRenderer: (params:any) => {
+      switch(params.value.toUpperCase()){
+        case OrderStatus.Open:
+          return `<span class="badge badge-primary">${params.value.toUpperCase()}</span>`;
+        case OrderStatus.OnTheWay:
+          return `<span class="badge badge-primary">${params.value.toUpperCase()}</span>`;
+        case OrderStatus.Cancelled:
+          return `<span class="badge badge-danger">${params.value.toUpperCase()}</span>`;
+        case OrderStatus.Completed:
+          return `<span class="badge badge-success">${params.value.toUpperCase()}</span>`;
+        default:
+          return `<span class="badge badge-primary">${params.value.toUpperCase()}</span>`;
+        }
+    }
   }, {
     headerName: 'Total Price',
     field: 'totalAmount',
