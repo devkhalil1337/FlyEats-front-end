@@ -31,9 +31,9 @@
                      <a class="btn btn-small btn-danger" *ngIf="!isBusinessOn">Close</a>
                      <p>Burgers, American, Sandwiches, Fast Food, BBQ</p>
                      <ul class="nav nav-inline">
-                        <li class="nav-item"> <a class="nav-link active" href="#"><i class="fa fa-check"></i> Min
+                        <li class="nav-item"> <a class="nav-link active"><i class="fa fa-check"></i> Min
                               {{businessSettings.minimumOrder | mycurrency}}</a> </li>
-                        <li class="nav-item"> <a class="nav-link" href="#"><i class="fa fa-motorcycle"></i>
+                        <li class="nav-item"> <a class="nav-link"><i class="fa fa-motorcycle"></i>
                               {{businessSettings.deliveryTime}} min</a> </li>
                         <li class="nav-item ratings">
                            <a class="nav-link"> <span>
@@ -113,7 +113,7 @@
                            <div class="col-sm-12 col-md-12 col-lg-4 text-xs-center">
                               <div class="right-review">
                                  <div class="entry-logo">
-                                    <a class="img-fluid" href="#"><img
+                                    <a class="img-fluid"><img
                                           src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-1617996277.jpg"
                                           alt="Food logo"></a>
                                  </div>
@@ -168,7 +168,7 @@
                            <div class="col-sm-12 col-md-12 col-lg-4 text-xs-center">
                               <div class="right-review">
                                  <div class="entry-logo">
-                                    <a class="img-fluid" href="#"><img
+                                    <a class="img-fluid"><img
                                           src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-1617996277.jpg"
                                           alt="Food logo"></a>
                                  </div>
@@ -312,8 +312,8 @@
          <div class="food-item white">
             <div class="row">
                <div class="col-xs-12 col-sm-12 col-lg-12" style="text-align:center ;">
-                  <div class="item-img">
-                     <a class="restaurant-logo" href="#">
+                  <div class="item-img" *ngIf="selectedProduct.productImageUrl">
+                     <a class="restaurant-logo">
                         <img [src]="selectedProduct.productImageUrl" alt="Food logo">
                      </a>
                   </div>
