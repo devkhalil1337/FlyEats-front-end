@@ -87,6 +87,58 @@
 
          </div>
          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-5">
+            <div class="menu-widget m-b-30">
+               <div class="widget-heading">
+                  <h3 class="widget-title text-dark">
+                     Feature
+                     <a class="btn btn-link pull-right" data-toggle="collapse" aria-expanded="false">
+                        <i class="fa fa-angle-right pull-right"></i>
+                        <i class="fa fa-angle-down pull-right"></i>
+                     </a>
+                  </h3>
+                  <div class="clearfix"></div>
+               </div>
+               <div class="collapse in">
+
+                  <div class="food-item" [class.white]="i%2 == 0"
+                     *ngFor="let item of menulist | featureProducts:CartInputs.orderType;; index as i">
+                     <div class="bg-gray restaurant-entry">
+                        <div class="row">
+                           <div class="col-sm-12 col-md-12 col-lg-8 text-xs-center text-sm-left">
+                              <div class="entry-dscr" (click)="openModal(template,item)">
+                                 <h5>{{item.productName}}</h5>
+                                 <span>{{item.productDescription}}</span>
+                              </div>
+                           </div>
+                           <div class="col-sm-12 col-md-12 col-lg-4 text-xs-center">
+                              <div class="right-review">
+                                 <div class="entry-logo">
+                                    <a class="img-fluid" href="#"><img
+                                          src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-1617996277.jpg"
+                                          alt="Food logo"></a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-12 col-md-12 col-lg-4">
+                              <ul class="list-inline">
+                                 <li class="list-inline-item" *ngIf="item.hasVariations">
+                                    <span class="badge
+                                    badge-light">{{item.productPrice |
+                                       mycurrency}}</span>
+                                 </li>
+                                 <li class="list-inline-item" *ngIf="!item.hasVariations">
+                                    <span class="badge
+                                       badge-light">{{item.deliveryPrice |
+                                       mycurrency}}</span>
+                              </ul>
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- end:Collapse -->
+            </div>
             <div class="menu-widget m-b-30" *ngFor="let cate of categorylist;index as i">
                <div class="widget-heading">
                   <h3 class="widget-title text-dark">
