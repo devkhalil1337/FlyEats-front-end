@@ -105,33 +105,41 @@
                <div class="collapse in" [class.in]="!cate.isOpen" id="target-{{cate.categoryId}}" *ngIf="!isLoading">
                   <div class="food-item" [class.white]="i%2 == 0"
                      *ngFor="let item of menulist | filterMenu:cate.categoryId:CartInputs.orderType; index as i">
-                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-lg-8">
-                           <div class="rest-logo pull-left">
-                              <!-- <a class="restaurant-logo pull-left"><img [src]="item.productImageUrl" alt="Food logo"></a> -->
+                     <div class="bg-gray restaurant-entry">
+                        <div class="row">
+                           <div class="col-sm-12 col-md-12 col-lg-8 text-xs-center text-sm-left">
+                              <div class="entry-dscr" (click)="openModal(template,item)">
+                                 <h5>{{item.productName}}</h5>
+                                 <span>{{item.productDescription}}</span>
+                              </div>
                            </div>
-                           <!-- end:Logo -->
-                           <div class="rest-descr">
-                              <h6>{{item.productName}}</h6>
-                              <p> {{item.productDescription}}</p>
+                           <div class="col-sm-12 col-md-12 col-lg-4 text-xs-center">
+                              <div class="right-review">
+                                 <div class="entry-logo">
+                                    <a class="img-fluid" href="#"><img
+                                          src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-1617996277.jpg"
+                                          alt="Food logo"></a>
+                                 </div>
+                              </div>
                            </div>
-                           <!-- end:Description -->
-                        </div>
-                        <!-- end:col -->
-                        <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info">
-                           <span *ngIf="item.hasVariations" class="price pull-left">{{item.productPrice |
-                              mycurrency}}</span>
-                           <span *ngIf="!item.hasVariations" class="price pull-left">{{item.deliveryPrice |
-                              mycurrency}}</span>
-                           <a (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right"
-                              data-toggle="modal">&#43;</a>
+                           <div class="col-sm-12 col-md-12 col-lg-4">
+                              <ul class="list-inline">
+                                 <li class="list-inline-item" *ngIf="item.hasVariations">
+                                    <span class="badge
+                                    badge-light">{{item.productPrice |
+                                       mycurrency}}</span>
+                                 </li>
+                                 <li class="list-inline-item" *ngIf="!item.hasVariations">
+                                    <span class="badge
+                                       badge-light">{{item.deliveryPrice |
+                                       mycurrency}}</span>
+                              </ul>
+
+                           </div>
                         </div>
                      </div>
-                     <!-- end:row -->
                   </div>
-                  <!-- end:Food item -->
                </div>
-               <!-- end:Collapse -->
             </div>
             <div class="menu-widget m-b-30" *ngIf="categorylist.length == 0">
                <div class="widget-heading">

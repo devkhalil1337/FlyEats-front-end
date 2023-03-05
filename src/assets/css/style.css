@@ -1769,7 +1769,7 @@ footer li a {
     padding: 0px 24px;
 }
 
-.widget-delivery .col-xs-6 {
+.widget-delivery .col-xs-6,.col-xs-4 {
     padding: 25px 15px 20px;
     background: #fff;
     border-right: 1px solid #eaebeb;
