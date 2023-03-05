@@ -118,10 +118,14 @@
                            <!-- end:Description -->
                         </div>
                         <!-- end:col -->
-                        <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span
-                              class="price pull-left">{{item.deliveryPrice | mycurrency}}</span> <a
-                              (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right"
-                              data-toggle="modal">&#43;</a> </div>
+                        <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info">
+                           <span *ngIf="item.hasVariations" class="price pull-left">{{item.productPrice |
+                              mycurrency}}</span>
+                           <span *ngIf="!item.hasVariations" class="price pull-left">{{item.deliveryPrice |
+                              mycurrency}}</span>
+                           <a (click)="openModal(template,item)" class="btn btn-small btn btn-secondary pull-right"
+                              data-toggle="modal">&#43;</a>
+                        </div>
                      </div>
                      <!-- end:row -->
                   </div>
@@ -260,7 +264,7 @@
             </div>
             <div class="form-group row cart-actions">
                <div class="col-xs-12 col-sm-12 col-lg-12 text-xs-center">
-                  <span class="price">{{selectedProduct.deliveryPrice | mycurrency}}</span>
+                  <span class="price">{{selectedProduct.productPrice | mycurrency}}</span>
                </div>
             </div>
          </div>
@@ -274,7 +278,8 @@
                   <li class="list-group-item rounded-0">
                      <div class="custom-control custom-radio">
                         <input class="custom-control-input" id="customCheck-{{productVariant.variantId}}" type="radio"
-                           name="variant" (change)="isAllSelected($event,productVariant)">
+                           name="variant" (change)="onVariantItemSelect($event,productVariant)"
+                           [attr.checked]="productVariant.checked">
                         <label
                            class="cursor-pointer font-italic d-block custom-control-label c-itemSelector-section-label"
                            for="customCheck-{{productVariant.variantId}}">
@@ -310,7 +315,7 @@
                   <li class="list-group-item rounded-0">
                      <div class="custom-control custom-checkbox">
                         <input class="custom-control-input" id="customCheck-{{choice.choicesId}}" type="checkbox"
-                           (change)="onItemChange($event,choice,selection)" [disabled]="choice.isChecked">
+                           (change)="onChoiceItemSelect($event,choice,selection)" [disabled]="choice.isChecked">
                         <label
                            class="cursor-pointer font-italic d-block custom-control-label c-itemSelector-section-label"
                            for="customCheck-{{choice.choicesId}}">

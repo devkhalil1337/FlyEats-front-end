@@ -107,8 +107,15 @@ export class ProductsComponent implements OnInit {
 
   openModal(template: any, product: Product) {
     this.selectedProduct = new Product();
-    console.log(this.selectedProduct.productPrice)
+    console.log({product})
     this.selectedProduct = { ...product };
+    if(product.productVariants.length > 0){
+      this.selectedProduct.productVariants[0].checked = true;
+      // this.selectedProduct.productPrice = product.productVariants[0].variationPrice;
+    }else{
+      this.selectedProduct.productPrice = product.deliveryPrice;
+    }
+    console.log(this.selectedProduct)
     this.selections = new Array<Selections>();
     if (product.selectionId && product.selectionId.length > 0) {
       this.productService
@@ -144,7 +151,7 @@ export class ProductsComponent implements OnInit {
     this.modelRef.close();
   }
 
-  onItemChange($event: any, selectedChoice: SelectionChoices, selection: Selections) {
+  onChoiceItemSelect($event: any, selectedChoice: SelectionChoices, selection: Selections) {
     selectedChoice.checked = $event.target.checked;
     let selectedChoicesLen = selection.selectionChoices.reduce((acc: any, cur: SelectionChoices) => (cur.checked ? ++acc : acc), 0);
     const choices = selection.selectionChoices
@@ -168,9 +175,9 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  isAllSelected($event: any, selectedVariant: Variants) {
+  onVariantItemSelect($event: any, selectedVariant: Variants) {
     selectedVariant.checked = $event.target.checked;
-    this.selectedProduct.productPrice = selectedVariant.variationPrice;
+    this.selectedProduct.productPrice = selectedVariant.variationPrice * this.selectedProduct.quantity;
     this.selectedProduct.productName = selectedVariant.variationName;
     const variations = this.selectedProduct.productVariants;
     variations.filter((vari:Variants) =>{
@@ -203,7 +210,7 @@ export class ProductsComponent implements OnInit {
         this.cartService.setOrderType(OrderTypes.Table);
         break;
     }
-    setTimeout(() => this.isLoading = false,1000)
+    setTimeout(() => this.isLoading = false,100)
     this.CartInputs.clearCart();
   }
 
@@ -216,9 +223,8 @@ export class ProductsComponent implements OnInit {
       });
       return acc;
     }, 0);
-    console.log({checkedChoicesSumAmount})
     if(checkedChoicesSumAmount > 0){
-      // this.selectedProduct.productPrice += checkedChoicesSumAmount;
+      this.selectedProduct.productPrice += checkedChoicesSumAmount;
     }
   }
 

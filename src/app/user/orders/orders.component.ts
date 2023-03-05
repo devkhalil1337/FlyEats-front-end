@@ -45,7 +45,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
   columnDefs = [{
     headerName: '#',
     field: '',
-    valueGetter: (params: any) => Number(params.node?.rowIndex) + 1
+    valueGetter: (params: any) => Number(params.node?.rowIndex) + 1,
+    maxWidth:100,
   }, {
     headerName: 'Order Number',
     field: 'orderInvoiceNumber',
@@ -53,18 +54,19 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }, {
     headerName: 'Status',
     field: 'orderStatus',
+    maxWidth:150,
     cellRenderer: (params:any) => {
       switch(params.value.toUpperCase()){
         case OrderStatus.Open:
-          return `<span class="badge badge-primary">${params.value.toUpperCase()}</span>`;
+          return `<span class="badge badge-primary p-1 w-100">${params.value.toUpperCase()}</span>`;
         case OrderStatus.OnTheWay:
-          return `<span class="badge badge-primary">${params.value.toUpperCase()}</span>`;
+          return `<span class="badge badge-primary p-1 w-100">${params.value.toUpperCase()}</span>`;
         case OrderStatus.Cancelled:
-          return `<span class="badge badge-danger">${params.value.toUpperCase()}</span>`;
+          return `<span class="badge badge-danger p-1 w-100">${params.value.toUpperCase()}</span>`;
         case OrderStatus.Completed:
-          return `<span class="badge badge-success">${params.value.toUpperCase()}</span>`;
+          return `<span class="badge badge-success p-1 w-100">${params.value.toUpperCase()}</span>`;
         default:
-          return `<span class="badge badge-primary">${params.value.toUpperCase()}</span>`;
+          return `<span class="badge badge-primary p-1 w-100">${params.value.toUpperCase()}</span>`;
         }
     }
   }, {
