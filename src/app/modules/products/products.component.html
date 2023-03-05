@@ -102,10 +102,10 @@
 
                   <div class="food-item" [class.white]="i%2 == 0"
                      *ngFor="let item of menulist | featureProducts:CartInputs.orderType;; index as i">
-                     <div class="bg-gray restaurant-entry">
+                     <div class="bg-gray restaurant-entry" (click)="openModal(template,item)">
                         <div class="row">
                            <div class="col-sm-12 col-md-12 col-lg-8 text-xs-center text-sm-left">
-                              <div class="entry-dscr" (click)="openModal(template,item)">
+                              <div class="entry-dscr">
                                  <h5>{{item.productName}}</h5>
                                  <span>{{item.productDescription}}</span>
                               </div>
@@ -157,10 +157,10 @@
                <div class="collapse in" [class.in]="!cate.isOpen" id="target-{{cate.categoryId}}" *ngIf="!isLoading">
                   <div class="food-item" [class.white]="i%2 == 0"
                      *ngFor="let item of menulist | filterMenu:cate.categoryId:CartInputs.orderType; index as i">
-                     <div class="bg-gray restaurant-entry">
+                     <div class="bg-gray restaurant-entry" (click)="openModal(template,item)">
                         <div class="row">
                            <div class="col-sm-12 col-md-12 col-lg-8 text-xs-center text-sm-left">
-                              <div class="entry-dscr" (click)="openModal(template,item)">
+                              <div class="entry-dscr">
                                  <h5>{{item.productName}}</h5>
                                  <span>{{item.productDescription}}</span>
                               </div>
