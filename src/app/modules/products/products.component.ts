@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from '@shared/cart.service';
 import { LocalStorageService } from '@shared/local-storage.service';
@@ -18,6 +18,9 @@ import { BusinessTimeService } from '@shared/business-time.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
+
+  @ViewChild('productModal') productModal: ElementRef
+  
   businessInfo: any;
   businessSettings: any;
   CartInputs: CartItems;
@@ -66,36 +69,8 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  OnAddToCart() {
-    this.CartInputs.products = this.cartService.onCartUpdate(
-      this.selectedProduct,
-      this.selections
-    );
-    this.onModalDismiss();
-    this.CartInputs.updateTotalAmount();
-  }
-
-  onQuantityUpdate(type: string) {
-    switch (type) {
-      case 'increase':
-        this.selectedProduct.quantity > 0 ? this.selectedProduct.quantity++ : 1;
-        this.selectedProduct.productPrice = this.selectedProduct.deliveryPrice;
-        this.selectedProduct.productPrice *= this.selectedProduct.quantity;
-        this.getTheSumOfSelectedChoices();
-        break;
-        case 'decrease':
-          if(this.selectedProduct.quantity == 1)
-            return;
-        this.selectedProduct.quantity > 0 ? this.selectedProduct.quantity-- : 1;
-        this.selectedProduct.productPrice = this.selectedProduct.deliveryPrice;
-        this.selectedProduct.productPrice *= this.selectedProduct.quantity;
-        this.getTheSumOfSelectedChoices();
-        break;
-    }
-  }
-
   onRemoveProduct(productId: number) {
-    this.CartInputs.products = this.cartService.onRemoveProduct(productId);
+    this.cartService.onRemoveProduct(productId);
     this.CartInputs.updateTotalAmount();
   }
 
@@ -105,9 +80,8 @@ export class ProductsComponent implements OnInit {
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
-  openModal(template: any, product: Product) {
+  openModal(product: Product) {
     this.selectedProduct = new Product();
-    console.log({product})
     this.selectedProduct = { ...product };
     if(product.productVariants.length > 0){
       this.selectedProduct.productVariants[0].checked = true;
@@ -115,19 +89,16 @@ export class ProductsComponent implements OnInit {
     }else{
       this.selectedProduct.productPrice = product.deliveryPrice;
     }
-    console.log(this.selectedProduct)
     this.selections = new Array<Selections>();
     if (product.selectionId && product.selectionId.length > 0) {
       this.productService
         .getSelections(product.selectionId)
         .subscribe((response) => {
-          if (this.cartService.isProductExists(this.selectedProduct)) {
-          }
           this.selections = response;
         });
     }
 
-    this.modelRef = this.modalService.open(template, {
+    this.modelRef = this.modalService.open(this.productModal, {
       size: 'md',
       backdropClass: 'in',
       windowClass: 'modal-holder in',
@@ -151,46 +122,6 @@ export class ProductsComponent implements OnInit {
     this.modelRef.close();
   }
 
-  onChoiceItemSelect($event: any, selectedChoice: SelectionChoices, selection: Selections) {
-    selectedChoice.checked = $event.target.checked;
-    let selectedChoicesLen = selection.selectionChoices.reduce((acc: any, cur: SelectionChoices) => (cur.checked ? ++acc : acc), 0);
-    const choices = selection.selectionChoices
-    choices.filter((element: SelectionChoices) => {
-      if(selection.maximumSelection === selectedChoicesLen) {
-        if(!element.checked) {
-          element.isChecked = true;
-        }
-      } else if(element.isChecked) {
-        element.isChecked = false;
-      }
-      if(selectedChoice.checked) {
-        if(selectedChoice.choicesId === element.choicesId) {
-          this.selectedProduct.productPrice += element.choicePrice;
-        }
-      } else if(selectedChoice.checked === false) {
-        if(selectedChoice.choicesId === element.choicesId) {
-          this.selectedProduct.productPrice -= element.choicePrice;
-        }
-      }
-    });
-  }
-
-  onVariantItemSelect($event: any, selectedVariant: Variants) {
-    selectedVariant.checked = $event.target.checked;
-    this.selectedProduct.productPrice = selectedVariant.variationPrice * this.selectedProduct.quantity;
-    this.selectedProduct.productName = selectedVariant.variationName;
-    const variations = this.selectedProduct.productVariants;
-    variations.filter((vari:Variants) =>{
-      if(selectedVariant.variantId != vari.variantId)
-        vari.checked = false;
-    });
-    this.getTheSumOfSelectedChoices();
-  }
-
-
-  getProductAmount(product:Product){
-    
-  }
 
   onOrderTypeChange(orderType:any){
     this.isLoading = true;
@@ -214,21 +145,6 @@ export class ProductsComponent implements OnInit {
     this.CartInputs.clearCart();
   }
 
-  private getTheSumOfSelectedChoices(){
-    const checkedChoicesSumAmount = this.selections.reduce((acc:any, curr:any) => {
-      curr.selectionChoices.forEach((choice:SelectionChoices) => {
-        if (choice.checked) {
-          acc += choice.choicePrice;
-        }
-      });
-      return acc;
-    }, 0);
-    if(checkedChoicesSumAmount > 0){
-      this.selectedProduct.productPrice += checkedChoicesSumAmount;
-    }
-  }
-
-
   onloadPage($event: any){
     this.CartInputs = new CartItems();
     this.CartInputs = $event;
@@ -240,7 +156,6 @@ export class ProductsComponent implements OnInit {
     this.onModalDismiss();
   }
 
-
-  
+ 
   
 }

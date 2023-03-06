@@ -1,0 +1,103 @@
+<div class="modal-content">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onModalDismiss();"><span
+            aria-hidden="true">&times;</span></button>
+    <div class="modal-body cart-addon">
+        <div class="food-item white">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-12" style="text-align: center;">
+                    <div class="item-img" *ngIf="selectedProduct.productImageUrl">
+                        <a class="restaurant-logo">
+                            <img [src]="selectedProduct.productImageUrl" alt="Food logo" />
+                        </a>
+                    </div>
+                    <div class="">
+                        <h6 class="product-title">{{selectedProduct.productName}}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row cart-actions">
+                <div class="col-xs-12 col-sm-12 col-lg-12 text-xs-center">
+                    <span class="price">{{selectedProduct.productPrice | mycurrency}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="selections" style="padding-bottom: 5rem;" *ngIf="selectedProduct.productVariants.length > 0">
+            <div class="shadow border-0 pt-2">
+                <div class="c-itemSelector-section-heading">
+                    Select One
+                </div>
+                <ul class="list-group list-group-horizontal-xl mx-auto"
+                    *ngFor="let productVariant of selectedProduct.productVariants;">
+                    <li class="list-group-item rounded-0">
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input" id="customCheck-{{productVariant.variantId}}"
+                                type="radio" name="variant" (change)="onVariantItemSelect($event,productVariant)"
+                                [attr.checked]="productVariant.checked" />
+                            <label
+                                class="cursor-pointer font-italic d-block custom-control-label c-itemSelector-section-label"
+                                for="customCheck-{{productVariant.variantId}}">
+                                {{productVariant.variationName}}
+                                <span class="badge badge-light pull-right"> {{productVariant.variationPrice |
+                                    mycurrency}}</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="card-body"></div>
+            </div>
+        </div>
+
+        <div class="selections" style="padding-top: 5rem;" *ngIf="selections.length > 0">
+            <div class="shadow border-0 pt-2" *ngFor="let selection of selections;">
+                <div class="c-itemSelector-section-heading">
+                    <span class="col-md-6">
+                        {{selection.selectionName}}
+                    </span>
+                    <span class="col-md-6">
+                        <span class="badge badge-primary badge-pill pull-right"> {{selection.maximumSelection > 0 ?
+                            'Required':''}}</span>
+                    </span>
+                </div>
+                <div class="c-itemSelector-section-heading"></div>
+                <ul class="list-group list-group-horizontal-xl mx-auto"
+                    *ngFor="let choice of selection.selectionChoices">
+                    <li class="list-group-item rounded-0">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" id="customCheck-{{choice.choicesId}}" type="checkbox"
+                                (change)="onChoiceItemSelect($event,choice,selection)" [disabled]="choice.isChecked" />
+                            <label
+                                class="cursor-pointer font-italic d-block custom-control-label c-itemSelector-section-label"
+                                for="customCheck-{{choice.choicesId}}">
+                                {{choice.choiceName}}
+                                <span class="badge badge-light pull-right"> {{choice.choicePrice | mycurrency}}</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="card-body"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group row cart-actions">
+            <div class="btn-group">
+                <div class="col-xs-4 col-sm-2 col-lg-4">
+                    <span class="minus-action" (click)="onQuantityUpdate('decrease');"><i
+                            class="fa fa-minus theme-btn"></i></span>
+                </div>
+                <div class="col-xs-4 col-sm-2 col-lg-4">
+                    <span class="quantity">{{selectedProduct.quantity}}</span>
+                </div>
+                <div class="col-xs-4 col-sm-2 col-lg-4">
+                    <span class="plus-action" (click)="onQuantityUpdate('increase');"><i
+                            class="fa fa-plus theme-btn"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn theme-btn w-100" (click)="OnAddToCart();" data-dismiss="modal">
+            <span class="pull-left">Add to cart</span>
+            <span class="pull-right">{{selectedProduct.productPrice | mycurrency}}</span>
+        </button>
+    </div>
+</div>

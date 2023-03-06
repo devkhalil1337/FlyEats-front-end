@@ -33,6 +33,9 @@ export class Product {
   selectionChoices: Array<SelectionChoices>;
   productPrice: number;
   productTotalAmount:number;
-  constructor() {}
+  constructor() {
+    this.selectionChoices = new Array<SelectionChoices>();
+    this.productVariants = new Array<Variants>();
+  }
   
 }
