@@ -89,14 +89,6 @@ export class ProductsComponent implements OnInit {
     }else{
       this.selectedProduct.productPrice = product.deliveryPrice;
     }
-    this.selections = new Array<Selections>();
-    if (product.selectionId && product.selectionId.length > 0) {
-      this.productService
-        .getSelections(product.selectionId)
-        .subscribe((response) => {
-          this.selections = response;
-        });
-    }
 
     this.modelRef = this.modalService.open(this.productModal, {
       size: 'md',

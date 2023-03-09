@@ -6,6 +6,7 @@ import { MycurrencyPipe } from './pipes/mycurrency.pipe';
 import { CartService } from './cart.service';
 import { FeatureProductsPipe } from './pipes/feature-products.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,6 +14,10 @@ import { ProductDetailsComponent } from './components/product-details/product-de
   declarations: [FilterMenuPipe, LazyLoadingDirective, MycurrencyPipe, FeatureProductsPipe, ProductDetailsComponent],
   imports: [
     CommonModule
+  ],
+  providers:[
+    FormsModule, 
+    ReactiveFormsModule
   ],
   exports:[FilterMenuPipe,LazyLoadingDirective,MycurrencyPipe,FeatureProductsPipe,ProductDetailsComponent]
 })

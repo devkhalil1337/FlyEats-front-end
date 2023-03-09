@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CartService } from '@shared/cart.service';
 import { Product } from 'src/app/filters/product.model';
 import { SelectionChoices, Selections } from 'src/app/filters/selections.model';
 import { Variants } from 'src/app/filters/variants.model';
+import { ProductsService } from 'src/app/modules/products/products.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,12 +16,58 @@ export class ProductDetailsComponent implements OnInit {
   @Input() selectedProduct:Product;
   @Input() selections:any;
   @Input() modelRef:any
-  constructor(private cartService:CartService) { 
+
+  productForm: FormGroup;
+
+  constructor(private cartService:CartService,private fb: FormBuilder,
+    private productService:ProductsService) { 
     this.selectedProduct = new Product();
+    this.selections = new Array<Selections>();
+    this.productForm = this.fb.group({
+      productId: [''],
+      businessId: [''],
+      categoryId: [''],
+      selectionId: [[]],
+      categoryName: [''],
+      productName: [''],
+      productDescription: [''],
+      productImage: [''],
+      productSortOrder: [0],
+      productQuantity: [0],
+      isTableProduct: [false],
+      tablePrice: [0],
+      tableVat: [0],
+      isPickupProduct: [false],
+      pickupPrice: [0],
+      pickupVat: [0],
+      isDeliveryProduct: [true],
+      deliveryPrice: [12],
+      deliveryVat: [0],
+      hasVariations: [true],
+      featured: [true],
+      quantity: [1],
+      productPrice: [12],
+      productVariants: [],
+      createDate: [''],
+      modifyDate: [''],
+      isDeleted: [false],
+      active: [true]
+    });
   }
 
   ngOnInit(): void {
-    console.log("Im product Details",this.selectedProduct)
+    this.getSelections();
+    this.productForm.patchValue(this.selectedProduct);
+  }
+
+  getSelections(){
+    if(this.selectedProduct.selectionId.length == 0)
+      return;
+    this.productService
+        .getSelections(this.selectedProduct.selectionId)
+        .subscribe((response) => {
+          this.selections = response;
+        });
   }
 
 

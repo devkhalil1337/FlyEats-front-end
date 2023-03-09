@@ -9,7 +9,7 @@ import { ProductsComponent } from './modules/products/products.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { RegisterComponent } from './modules/register/register.component';
 import { LoginComponent } from './modules/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdersComponent } from './user/orders/orders.component';
 import { AddEditAddressComponent } from './user/add-edit-address/add-edit-address.component';
 import { OrderDetailsComponent } from './user/order-details/order-details.component';
@@ -54,14 +54,15 @@ import { HttpInterceptorService } from '@shared/http-interceptor.service';
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    ReactiveFormsModule
   ],
   providers: [NavigationComponent,StripeComponent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

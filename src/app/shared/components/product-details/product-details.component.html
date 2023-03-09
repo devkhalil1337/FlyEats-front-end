@@ -21,14 +21,15 @@
                 </div>
             </div>
         </div>
-        <div class="selections" style="padding-bottom: 5rem;" *ngIf="selectedProduct.productVariants.length > 0">
+        <div class="selections" style="padding-bottom: 5rem;"
+            *ngIf="productForm.get('productVariants')?.value.length > 0">
             <div class="shadow border-0 pt-2">
                 <div class="c-itemSelector-section-heading">
                     Select One
                 </div>
                 <ul class="list-group list-group-horizontal-xl mx-auto"
-                    *ngFor="let productVariant of selectedProduct.productVariants;">
-                    <li class="list-group-item rounded-0">
+                    *ngFor="let productVariant of productForm.get('productVariants')?.value || []">
+                    <li class=" list-group-item rounded-0">
                         <div class="custom-control custom-radio">
                             <input class="custom-control-input" id="customCheck-{{productVariant.variantId}}"
                                 type="radio" name="variant" (change)="onVariantItemSelect($event,productVariant)"
