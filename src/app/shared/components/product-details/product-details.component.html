@@ -21,14 +21,12 @@
                 </div>
             </div>
         </div>
-        <div class="selections" style="padding-bottom: 5rem;"
-            *ngIf="productForm.get('productVariants')?.value.length > 0">
+        <div class="selections" style="padding-bottom: 5rem;" *ngIf="productVariants.length > 0">
             <div class="shadow border-0 pt-2">
                 <div class="c-itemSelector-section-heading">
                     Select One
                 </div>
-                <ul class="list-group list-group-horizontal-xl mx-auto"
-                    *ngFor="let productVariant of productForm.get('productVariants')?.value || []">
+                <ul class="list-group list-group-horizontal-xl mx-auto" *ngFor="let productVariant of productVariants">
                     <li class=" list-group-item rounded-0">
                         <div class="custom-control custom-radio">
                             <input class="custom-control-input" id="customCheck-{{productVariant.variantId}}"
@@ -48,8 +46,8 @@
             </div>
         </div>
 
-        <div class="selections" style="padding-top: 5rem;" *ngIf="selections.length > 0">
-            <div class="shadow border-0 pt-2" *ngFor="let selection of selections;">
+        <div class="selections" style="padding-top: 5rem;" *ngIf="productSelections.length > 0">
+            <div class="shadow border-0 pt-2" *ngFor="let selection of productSelections || [];">
                 <div class="c-itemSelector-section-heading">
                     <span class="col-md-6">
                         {{selection.selectionName}}

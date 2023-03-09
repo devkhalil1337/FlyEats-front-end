@@ -19,6 +19,15 @@ export class ProductDetailsComponent implements OnInit {
 
   productForm: FormGroup;
 
+
+  get productSelections():Array<Selections>{
+    return this.productForm.get("selections")?.value || [];
+  }
+
+  get productVariants():Array<Variants>{
+    return this.productForm.get("productVariants")?.value || [];
+  }
+
   constructor(private cartService:CartService,private fb: FormBuilder,
     private productService:ProductsService) { 
     this.selectedProduct = new Product();
@@ -48,6 +57,7 @@ export class ProductDetailsComponent implements OnInit {
       quantity: [1],
       productPrice: [12],
       productVariants: [],
+      selections:[],
       createDate: [''],
       modifyDate: [''],
       isDeleted: [false],
@@ -66,7 +76,10 @@ export class ProductDetailsComponent implements OnInit {
     this.productService
         .getSelections(this.selectedProduct.selectionId)
         .subscribe((response) => {
-          this.selections = response;
+          // this.selections = response;
+          this.productForm.patchValue({
+            selections:response
+          });
         });
   }
 
@@ -74,7 +87,7 @@ export class ProductDetailsComponent implements OnInit {
   OnAddToCart() {
     this.cartService.onCartUpdate(
       this.selectedProduct,
-      this.selections
+      this.productSelections
     );
     this.modelRef.close();
   }
@@ -136,7 +149,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   private getTheSumOfSelectedChoices(){
-    const checkedChoicesSumAmount = this.selections.reduce((acc:any, curr:any) => {
+    const checkedChoicesSumAmount = this.productSelections.reduce((acc:any, curr:any) => {
       curr.selectionChoices.forEach((choice:SelectionChoices) => {
         if (choice.checked) {
           acc += choice.choicePrice;
