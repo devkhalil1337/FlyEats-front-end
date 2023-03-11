@@ -48,7 +48,6 @@ export class BusinessTimeService {
     if (!businessDay || !businessDay.active) {
       return false;
     }
-    debugger
     return businessDay.businessTimes.some((time:any) => {
       if (businessDay) {
         const startTime = moment(time.startDate, 'HH:mm');
