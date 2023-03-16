@@ -12,6 +12,7 @@ import { Variants } from 'src/app/filters/variants.model';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { ConfigService } from '@shared/config.service';
 import { BusinessTimeService } from '@shared/business-time.service';
+import { ModalService } from '@shared/modal.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -33,7 +34,8 @@ export class ProductsComponent implements OnInit {
   isBusinessOn:boolean = false;
 
   constructor(
-    private modalService: NgbModal,
+    private modalService: ModalService,
+
     private cartService: CartService,
     private localStorageServcice: LocalStorageService,
     private productService: ProductsService,
@@ -90,28 +92,19 @@ export class ProductsComponent implements OnInit {
       this.selectedProduct.productPrice = product.deliveryPrice;
     }
 
-    this.modelRef = this.modalService.open(this.productModal, {
-      size: 'md',
-      backdropClass: 'in',
-      windowClass: 'modal-holder in',
-      modalDialogClass: 'modal-dialog-centered',
-    });
+    this.modelRef = this.modalService.openModal(this.productModal,'md',false,false,'modal-holder in');
   }
 
   openAllergyModal(template: any) {
-    this.modelRef = this.modalService.open(template, {
-      windowClass: 'modal-holder in',
-      backdropClass: 'in',
-      modalDialogClass: 'modal-dialog-centered',
-    });
+    this.modelRef = this.modalService.openModal(template,'md',true,true,'modal-holder in');
   }
 
-  onModalAction(results: any) {
-    console.log(results);
+  onModalAction(modalVar:any){
+    modalVar();
   }
 
-  onModalDismiss() {
-    this.modelRef.close();
+  onModalDismiss(modalVar?:any) {
+    modalVar();
   }
 
 

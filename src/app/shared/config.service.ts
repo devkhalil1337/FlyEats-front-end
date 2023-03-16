@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
 import { BusinessDay } from '../models/businessDay.model';
 
@@ -30,6 +31,18 @@ export class ConfigService {
       businessHours = new Array<BusinessDay>()
     }
     return businessHours
+  }
+
+  getNgbModalOptions(size: 'sm' | 'md' | 'lg' | 'llg' | 'xl' | 'xxl' = 'md', easyClose: boolean = false): NgbModalOptions {
+    const config: NgbModalOptions = {
+      backdrop: easyClose || 'static',
+      keyboard: easyClose,
+    };
+    if (size !== 'md') {
+      config.size = size as any;
+    }
+
+    return config;
   }
 
 }

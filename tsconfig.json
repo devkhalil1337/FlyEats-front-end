@@ -22,6 +22,12 @@
     ],
     "suppressImplicitAnyIndexErrors": true,
     "strictPropertyInitialization": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "jquery"
+    ],
     "paths": {
       "@shared/*": ["src/app/shared/*"],
       "@enums/*": ["src/app/enums/*"]

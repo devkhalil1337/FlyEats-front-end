@@ -308,9 +308,9 @@
    <app-product-details [selectedProduct]="selectedProduct" [modelRef]="modelRef"></app-product-details>
 </ng-template>
 
-<ng-template #allergyPop>
+<ng-template #allergyPop let-c="close" let-d="dismiss">
    <div class="modal-content">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onModalDismiss()"><span
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onModalDismiss(d)"><span
             aria-hidden="true" (click)="onModalDismiss()">&times;</span></button>
       <div class="modal-header allergy-header">
          Do you have a food allergy?
@@ -319,13 +319,13 @@
          restaurant on <strong>{{businessInfo.businessContact}}</strong> . Do not order if you cannot get the allergy
          information you need.</div>
       <div class="modal-footer">
-         <button type="button" class="btn theme-btn w-100" (click)="onModalDismiss();">
+         <button type="button" class="btn theme-btn w-100" (click)="onModalDismiss(d);" data-dismiss="modal">
             Close
          </button>
       </div>
    </div>
 </ng-template>
 
-<ng-template #tableSelection>
+<ng-template #tableSelection let-c="close" let-d="dismiss">
    <app-table-number (tableNumber)="onTableNumber($event)" [tableNumber]="CartInputs.tableNumber"></app-table-number>
 </ng-template>

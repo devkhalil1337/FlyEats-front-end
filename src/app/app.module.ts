@@ -27,6 +27,7 @@ import { StripeComponent } from '@shared/stripe/stripe.component';
 import { TableNumberComponent } from '@shared/components/table-number/table-number.component';
 import { SharedModule } from '@shared/shared.module';
 import { HttpInterceptorService } from '@shared/http-interceptor.service';
+import { ModalService } from '@shared/modal.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +64,7 @@ import { HttpInterceptorService } from '@shared/http-interceptor.service';
       useClass: HttpInterceptorService,
       multi: true
     },
+    ModalService 
   ],
   bootstrap: [AppComponent]
 })
