@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ApiService {
-  private path = environment.apiUrl;
+  path = environment.apiUrl;
 
   constructor(private router: Router, private http: HttpClient) {}
 
