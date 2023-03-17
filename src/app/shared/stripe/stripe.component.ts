@@ -56,8 +56,7 @@ export class StripeComponent implements AfterViewInit {
     payment.amount = amount;
     try {
       const response = await this.apiService.request("post",'PaymentGateways/CreatePaymentIntent',payment).toPromise();
-      const data = await response.json();
-      const { paymentIntent, error } = await this.stripe.confirmCardPayment(data.client_secret, {
+      const { paymentIntent, error } = await this.stripe.confirmCardPayment(response.client_secret, {
         payment_method: {
           card: this.cardElement,
           billing_details: {
@@ -74,10 +73,9 @@ export class StripeComponent implements AfterViewInit {
         this.paymentResponse = null;
       } else {
         this.paymentResponse = paymentIntent;
-        console.log(paymentIntent);
       }
     } catch (error:any) {
-      this.errorMessage = error && error.error && error.error.message  || "";
+      this.errorMessage = error && error.error && error.error.message  || "there is something problem";
       this.paymentResponse = null;
       this.isLoading = false;
     }
@@ -88,7 +86,6 @@ export class StripeComponent implements AfterViewInit {
 
 
   private async loadStripe(key:string): Promise<Stripe> {
-    console.log("Im in")
     const stripe = await import('@stripe/stripe-js');
     const stripeInstance = await stripe.loadStripe(key);
     if (stripeInstance === null) {
