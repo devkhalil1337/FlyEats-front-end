@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Stripe, StripeElements, StripeCardElement, StripeCardElementOptions } from '@stripe/stripe-js';
 import { ApiService } from '@shared/api.service';
 import { AuthService } from 'src/app/user/auth/auth.service';
+import { PaymentChargePayload } from 'src/app/models/paymentChargePayload';
 
 @Component({
   selector: 'app-stripe',
@@ -28,44 +29,34 @@ export class StripeComponent implements AfterViewInit {
   }
 
   async ngAfterViewInit() {
-    this.apiService.request("get","PaymentGateways/GetPaymentGatewaysKeysByBusinessId").subscribe(async response => {
-      let stripe = response.find((payment:any) => payment.gatewayName == 'stripe');
-      if(stripe){
-        this.stripe = await this.loadStripe(stripe.apiKey);
-        this.elements = this.stripe.elements();
-        const cardElementOptions: StripeCardElementOptions = {
-          style: {
-            base: {
-              fontSize: '16px',
-              color: '#32325d',
-            },
+    let response = await this.apiService.request("get","PaymentGateways/GetPaymentGatewaysKeysByBusinessId").toPromise() 
+    let stripe = response.find((payment:any) => payment.gatewayName == 'stripe');
+    if(stripe){
+      this.stripe = await this.loadStripe(stripe.apiKey);
+      this.elements = this.stripe.elements();
+      const cardElementOptions: StripeCardElementOptions = {
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#32325d',
           },
-        };
-        this.cardElement = this.elements.create('card', cardElementOptions);
-        this.cardElement.mount(this.cardElementRef.nativeElement);
-        this.isLoading = false;
-      }
-    },error => {
-
-      console.log(error);
-    });
+        },
+      };
+      this.cardElement = this.elements.create('card', cardElementOptions);
+      this.cardElement.mount(this.cardElementRef.nativeElement);
+      this.isLoading = false;
+    }
   }
 
   async submit(amount:number) {
     this.paymentResponse = null;
+    this.errorMessage = "";
     this.isLoading = true;
-  
+    let payment = new PaymentChargePayload();
+    payment.amount = amount;
     try {
-
-      // this.apiService.request("post",'Order/CreatePaymentIntent',{amount:amount}).subscribe(response => {
-
-      // })
-      const response = await fetch(`${this.apiService.path}Order/CreatePaymentIntent?amount=` + amount, {
-        method: 'POST'
-      });
-  
+      const response = await this.apiService.request("post",'PaymentGateways/CreatePaymentIntent',payment).toPromise();
       const data = await response.json();
-  
       const { paymentIntent, error } = await this.stripe.confirmCardPayment(data.client_secret, {
         payment_method: {
           card: this.cardElement,
@@ -75,7 +66,6 @@ export class StripeComponent implements AfterViewInit {
           }
         }
       });
-  
       this.isLoading = false;
   
       if (error) {
@@ -87,8 +77,8 @@ export class StripeComponent implements AfterViewInit {
         console.log(paymentIntent);
       }
     } catch (error:any) {
-      this.errorMessage = error && error.message || "";
-      this.paymentResponse = error;
+      this.errorMessage = error && error.error && error.error.message  || "";
+      this.paymentResponse = null;
       this.isLoading = false;
     }
 
