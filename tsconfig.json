@@ -30,7 +30,7 @@
     ],
     "paths": {
       "@shared/*": ["src/app/shared/*"],
-      "@enums/*": ["src/app/enums/*"],
+      "@enums": ["src/app/enums"],
       "@models": ["src/app/models"]
     }
   },

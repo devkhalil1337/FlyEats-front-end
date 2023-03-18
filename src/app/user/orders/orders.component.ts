@@ -6,7 +6,7 @@ import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { LocalStorageService } from '@shared/local-storage.service';
 import { RouterlinkrendererComponent } from '@shared/components/routerlinkrenderer/routerlinkrenderer.component';
-import { OrderStatus } from '@enums/OrderStatusEnum';
+import { OrderStatus } from '@enums';
 
 @Component({
   selector: 'app-orders',

@@ -3,8 +3,7 @@ import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
 import { Product,Variants,CartItems,Order,OrderDetails,OrderVariants } from '@models';
 import { AuthService } from 'src/app/user/auth/auth.service';
 import { environment } from 'src/environments/environment';
-import { OrderStatus } from '@enums/OrderStatusEnum';
-import { OrderTypes } from '@enums/OrderTypeEnum';
+import { OrderStatus,OrderTypes } from '@enums';
 
 @Injectable({
   providedIn: 'root',
