@@ -45,6 +45,9 @@ export class ConfigService {
     return config;
   }
 
+  get BusinessId():number{
+     return environment.BusinessId;
+  }
 }
 
 

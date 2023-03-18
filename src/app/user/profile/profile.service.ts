@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '@models';
-import { ApiService } from '@shared/api.service';
-import { AuthService } from '../auth/auth.service';
+import { ApiService,AuthService } from '@shared';
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,7 @@ import { GridOptions } from 'ag-grid-community';
 import * as moment from 'moment';
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { LocalStorageService } from '@shared/local-storage.service';
+import { LocalStorageService } from '@shared';
 import { RouterlinkrendererComponent } from '@shared/components/routerlinkrenderer/routerlinkrenderer.component';
 import { OrderStatus } from '@enums';
 

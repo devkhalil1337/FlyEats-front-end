@@ -20,7 +20,7 @@ import { StripeComponent } from '@shared/stripe/stripe.component';
 import { TableNumberComponent } from '@shared/components/table-number/table-number.component';
 import { SharedModule } from '@shared/shared.module';
 import { HttpInterceptorService } from '@shared/http-interceptor.service';
-import { ModalService } from '@shared/modal.service';
+import { ModalService } from '@shared';
 import { CoreModule } from './core/core.module';
 import { NavigationComponent } from './core/components/navigation/navigation.component';
 @NgModule({

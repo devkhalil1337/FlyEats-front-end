@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Product,Selections,Variants,Category } from '@models';
-import { ApiService } from '@shared/api.service';
-import { BusinessId, imagesPathUrl } from '@shared/config.service';
+import { Product,Selections,Category } from '@models';
+import { ApiService } from '@shared';
 
 @Injectable({
   providedIn: 'root'

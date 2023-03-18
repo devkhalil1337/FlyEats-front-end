@@ -6,7 +6,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { ApiService } from '@shared/api.service';
+import { ApiService } from '@shared';
 import { User } from '@models';
 
 @Injectable({

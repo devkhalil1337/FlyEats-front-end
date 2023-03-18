@@ -1,9 +1,8 @@
-import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
-import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
+import { Injectable} from '@angular/core';
+import { PaymentMethods} from 'src/app/enums/PaymentMethodsEnum';
 import { Product,Variants,CartItems,Order,OrderDetails,OrderVariants } from '@models';
-import { AuthService } from 'src/app/user/auth/auth.service';
-import { environment } from 'src/environments/environment';
-import { OrderStatus,OrderTypes } from '@enums';
+import { OrderStatus,OrderTypes} from '@enums';
+import { AuthService,ConfigService} from '@shared';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +25,7 @@ export class CartService {
     localStorage.setItem("CartInputs",JSON.stringify(session));
   }
 
-  constructor(private authService:AuthService) {}
+  constructor(private authService:AuthService,private configService:ConfigService) {}
 
   onUpdateAmount(){
     this.cartItems.updateTotalAmount();
@@ -129,7 +128,7 @@ export class CartService {
   
   CreateOrder(orderId:string,selectedAddress:number,selectedMethod:string,paymentResponse?:any):Order{
     const order = new Order();
-    order.businessId = environment.BusinessId;
+    order.businessId = this.configService.BusinessId;
     order.isDeleted = false;
     order.customerId = this.authService.userId;
     order.orderInvoiceNumber = orderId;

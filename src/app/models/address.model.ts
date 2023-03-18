@@ -1,4 +1,4 @@
-import { AuthService } from "../user/auth/auth.service";
+import { AuthService } from "../shared/auth/auth.service";
 
 export class Address {
      active: boolean;

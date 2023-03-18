@@ -3,11 +3,9 @@ import { forkJoin } from 'rxjs';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
 import { Address,CartItems } from '@models';
-import { CartService } from '@shared/cart.service';
-import { LocalStorageService } from '@shared/local-storage.service';
+import { CartService,LocalStorageService,AuthService } from '@shared';
 import { StripeComponent } from 'src/app/shared/stripe/stripe.component';
 import { AddressesService } from '../addresses/addresses.service';
-import { AuthService } from '../auth/auth.service';
 import { CheckoutService } from './checkout.service';
 
 @Component({

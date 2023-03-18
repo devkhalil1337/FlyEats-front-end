@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CartService } from '@shared/cart.service';
+import { CartService } from '@shared';
 import { Product,SelectionChoices, Selections,Variants } from '@models';
 import { ProductsService } from 'src/app/modules/products/products.service';
 

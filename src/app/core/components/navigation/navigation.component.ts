@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/user/auth/auth.service';
-import { CustomService } from '@shared/custom.service';
+import { AuthService,CustomService } from '@shared';
 
 @Component({
   selector: 'app-navigation',

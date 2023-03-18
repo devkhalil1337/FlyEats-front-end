@@ -1,14 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CartService } from '@shared/cart.service';
-import { LocalStorageService } from '@shared/local-storage.service';
 import { ProductsService } from './products.service';
 import { forkJoin } from 'rxjs';
-import { Product,SelectionChoices, Selections,Variants,CartItems,Category } from '@models';
+import { Product,CartItems,Category } from '@models';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
-import { ConfigService } from '@shared/config.service';
-import { BusinessTimeService } from '@shared/business-time.service';
-import { ModalService } from '@shared/modal.service';
+import { ConfigService,ModalService,LocalStorageService,CartService,BusinessTimeService } from '@shared';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',

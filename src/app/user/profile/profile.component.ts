@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '@models';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../shared/auth/auth.service';
 import { ProfileService } from './profile.service';
 
 @Component({

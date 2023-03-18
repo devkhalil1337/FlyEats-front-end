@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@models';
-import { AuthService } from 'src/app/user/auth/auth.service';
-import { CustomService } from '@shared/custom.service';
+import { AuthService,CustomService } from '@shared';
 
 @Component({
   selector: 'app-register',
