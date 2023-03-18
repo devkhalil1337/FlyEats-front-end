@@ -51,7 +51,6 @@ export class CheckoutComponent implements OnInit,AfterViewInit {
   }
 
   subscribeAddress(){
-    console.log(this.CartInputs)
     if(this.CartInputs.orderType == OrderTypes.Delivery){
       this.addressesService.getActiveAddressesByUserId(this.authService.userId).subscribe((response:Address[]) => {
         this.addressList = response;

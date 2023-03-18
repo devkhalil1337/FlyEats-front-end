@@ -1,1 +1,0 @@
-export const gallryImages = ['food1.jpg','food2.jpg','food3.jpg','food4.jpg','food5.jpg','food6.jpg','food7.jpg']
