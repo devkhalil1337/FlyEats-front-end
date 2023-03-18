@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class TableNumberComponent implements OnInit {
   @Input("tableNumber") selectedNumber:string;
   @Output("tableNumber") tableNumber = new EventEmitter();
-
+  @Input() modelRef:any
 
   numberscreen = '';
 
@@ -46,6 +46,11 @@ export class TableNumberComponent implements OnInit {
     } catch (error) {
       this.numberscreen = 'Error';
     }
+    this.onModalDismiss();
+  }
+
+  onModalDismiss() {
+    this.modelRef.close();
   }
 
 }

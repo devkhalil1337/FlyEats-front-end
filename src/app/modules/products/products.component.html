@@ -326,6 +326,7 @@
    </div>
 </ng-template>
 
-<ng-template #tableSelection let-c="close" let-d="dismiss">
-   <app-table-number (tableNumber)="onTableNumber($event)" [tableNumber]="CartInputs.tableNumber"></app-table-number>
+<ng-template #tableSelection>
+   <app-table-number (tableNumber)="onTableNumber($event)" [tableNumber]="CartInputs.tableNumber"
+      [modelRef]="modelRef"></app-table-number>
 </ng-template>

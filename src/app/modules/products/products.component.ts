@@ -96,7 +96,7 @@ export class ProductsComponent implements OnInit {
   }
 
   openAllergyModal(template: any) {
-    this.modelRef = this.modalService.openModal(template,'md',true,true,'modal-holder in');
+    this.modelRef = this.modalService.openModal(template,'md',false,false,'modal-holder in');
   }
 
   onModalAction(modalVar:any){
@@ -109,7 +109,6 @@ export class ProductsComponent implements OnInit {
 
 
   onOrderTypeChange(orderType:any){
-    this.isLoading = true;
    switch(orderType.target.value){
       case OrderTypes.Delivery:
         this.CartInputs.orderType = OrderTypes.Delivery;
@@ -126,7 +125,6 @@ export class ProductsComponent implements OnInit {
         this.cartService.setOrderType(OrderTypes.Table);
         break;
     }
-    setTimeout(() => this.isLoading = false,100)
     this.CartInputs.clearCart();
   }
 
