@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './modules/home/home.component';
+import { HomeComponent } from '@modules';
 import { AuthGuard } from './user/auth/authguard';
 const routes: Routes = [{
 	path: "",

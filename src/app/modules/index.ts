@@ -1,0 +1,7 @@
+export * from "./contact/contact.component"
+export * from "./gallery/gallery.component"
+export * from "./home/home.component"
+export * from "./login/login.component"
+export * from "./menu/menu.component"
+export * from "./products/products.component"
+export * from "./register/register.component"

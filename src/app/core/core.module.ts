@@ -4,12 +4,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { RouterModule, Routes } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-import { ProductsComponent } from '../modules/products/products.component';
-import { ContactComponent } from '../modules/contact/contact.component';
-import { GalleryComponent } from '../modules/gallery/gallery.component';
-import { LoginComponent } from '../modules/login/login.component';
-import { MenuComponent } from '../modules/menu/menu.component';
-import { RegisterComponent } from '../modules/register/register.component';
+import { ContactComponent, GalleryComponent, LoginComponent, MenuComponent, ProductsComponent, RegisterComponent } from '@modules';
 
 const routes: Routes = [
   {
