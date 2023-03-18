@@ -1,41 +1,45 @@
 <div class="page-wrapper">
-    <section class="contact-page inner-page">
-       <div class="container">
-          <div class="row">
-             <!-- REGISTER -->
-             <div class="col-md-8">
-                <div class="widget">
-                    <div class="login-icon">
-                        <img src="assets/images/login.png" alt="" class="img-fluid">
-                    </div>
-                   <div class="widget-body">
-                      <form #loginForm = "ngForm">
-                         <div class="row">
-                            <div class="form-group col-sm-6">
-                               <label for="email">Email address / Phone Number</label>
-                               <input type="text" class="form-control" id="username" name="email" placeholder="Enter email / Phone Number" [(ngModel)]="user.email" required> 
-                            </div>
-                            <div class="form-group col-sm-6">
-                               <label for="password">Password</label>
-                               <input type="password" class="form-control" id="password" name="password" placeholder="password" [(ngModel)]="user.password" required> 
-                            </div>
-                         </div>
-                         <span class="error text-danger" *ngIf="error">{{error.message}}</span>
-                         <div class="row">
-                            <div class="form-group col-sm-12 login-btn gap-2">
-                               <div class="btn-group" data-toggle="buttons">
-                                   <button class="btn theme-btn mr-2 mb-2" name="register" routerLink="/register" > Register </button>
-                                   <button class="btn theme-btn" name="login" (click)="login();" [disabled]="loginForm.invalid">Login </button>
-                               </div>
-                            </div>
-                         </div>
-                      </form>
-                   </div>
-                   <!-- end: Widget -->
-                </div>
-                <!-- /REGISTER -->
-             </div>
-          </div>
-       </div>
-    </section>
- </div>
+   <section class="contact-page inner-page">
+      <div class="container">
+         <div class="row">
+            <!-- REGISTER -->
+            <div class="col-md-8">
+               <div class="widget">
+                  <div class="login-icon">
+                     <img src="assets/images/login.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="widget-body">
+                     <form #loginForm="ngForm">
+                        <div class="row">
+                           <div class="form-group col-sm-6">
+                              <label for="email">Email address / Phone Number</label>
+                              <input type="text" class="form-control" id="username" name="email"
+                                 placeholder="Enter email / Phone Number" [(ngModel)]="user.email" required>
+                           </div>
+                           <div class="form-group col-sm-6">
+                              <label for="password">Password</label>
+                              <input type="password" class="form-control" id="password" name="password"
+                                 placeholder="password" [(ngModel)]="user.password" required>
+                           </div>
+                        </div>
+                        <span class="error text-danger" *ngIf="error">{{error.message}}</span>
+                        <div class="row">
+                           <div class="form-group col-sm-12 login-btn gap-2">
+                              <div class="btn-group" data-toggle="buttons">
+                                 <button class="btn theme-btn mr-2 mb-2" name="login" (click)="login();"
+                                    [disabled]="loginForm.invalid">Login </button>
+                                 <button class="btn theme-btn" name="register" routerLink="/register"> Register
+                                 </button>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+                  <!-- end: Widget -->
+               </div>
+               <!-- /REGISTER -->
+            </div>
+         </div>
+      </div>
+   </section>
+</div>
