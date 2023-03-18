@@ -31,7 +31,7 @@
     "paths": {
       "@shared/*": ["src/app/shared/*"],
       "@enums/*": ["src/app/enums/*"],
-      "@models/*": ["src/app/models/*"]
+      "@models": ["src/app/models"]
     }
   },
   "angularCompilerOptions": {

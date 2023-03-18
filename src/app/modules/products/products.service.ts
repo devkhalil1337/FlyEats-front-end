@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Product } from '@models/product.model';
-import { Selections } from '@models/selections.model';
-import { Variants } from '@models/variants.model';
-import { Category } from 'src/app/models/category.model';
+import { Product,Selections,Variants,Category } from '@models';
 import { ApiService } from '@shared/api.service';
 import { BusinessId, imagesPathUrl } from '@shared/config.service';
 

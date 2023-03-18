@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Address } from 'src/app/models/address';
+import { Address } from '@models';
 import { AuthService } from '../auth/auth.service';
 import { AddressService } from './address.service';
 

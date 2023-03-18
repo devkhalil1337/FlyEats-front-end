@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Address } from 'src/app/models/address';
+import { Address } from '@models';
 import { ApiService } from '@shared/api.service';
 
 @Injectable({

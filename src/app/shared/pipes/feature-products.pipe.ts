@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { OrderTypes } from '@enums/OrderTypeEnum';
-import { Product } from '@models/product.model';
+import { Product } from '@models';
 
 @Pipe({
   name: 'featureProducts'

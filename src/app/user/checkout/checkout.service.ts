@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OrderDetails } from 'src/app/models/orderDetails.model';
+import { OrderDetails } from '@models';
 import { ApiService } from '@shared/api.service';
 
 @Injectable({
