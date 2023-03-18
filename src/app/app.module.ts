@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './modules/home/home.component';
-import { NavigationComponent } from './modules/core/components/navigation/navigation.component';
 import { ProductsComponent } from './modules/products/products.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { RegisterComponent } from './modules/register/register.component';
@@ -20,7 +18,6 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CoreModule } from './modules/core/core.module';
 import { CartFilterComponent } from './filters/cart-filter/cart-filter.component';
 import { RouterlinkrendererComponent } from '@shared/components/routerlinkrenderer/routerlinkrenderer.component';
 import { StripeComponent } from '@shared/stripe/stripe.component';
@@ -28,6 +25,8 @@ import { TableNumberComponent } from '@shared/components/table-number/table-numb
 import { SharedModule } from '@shared/shared.module';
 import { HttpInterceptorService } from '@shared/http-interceptor.service';
 import { ModalService } from '@shared/modal.service';
+import { CoreModule } from './core/core.module';
+import { NavigationComponent } from './core/components/navigation/navigation.component';
 @NgModule({
   declarations: [
     AppComponent,
