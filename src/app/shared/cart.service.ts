@@ -1,8 +1,8 @@
 import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
 import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
-import { CartItems } from 'src/app/filters/cart-items.model';
-import { Product } from 'src/app/filters/product.model';
-import { Variants } from 'src/app/filters/variants.model';
+import { CartItems } from 'src/app/models/cart-items.model';
+import { Product } from '@models/product.model';
+import { Variants } from '@models/variants.model';
 import { Order } from 'src/app/models/order.model';
 import { OrderDetails } from 'src/app/models/orderDetails.model';
 import { OrderVariants } from 'src/app/models/orderVariants.model';

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { gallryImages } from 'src/app/mock-api/gallery-data';
 
 @Component({
   selector: 'app-gallery',
@@ -10,9 +9,7 @@ export class GalleryComponent implements OnInit {
 
 
   galleryList:String[]
-  constructor() { 
-    this.galleryList = gallryImages
-  }
+  constructor() {}
 
   ngOnInit(): void {
   }

@@ -2,7 +2,7 @@ import { Component, Injectable, Input, OnChanges, SimpleChanges } from '@angular
 import { Product } from './product.model';
 import { SelectionChoices } from './selections.model';
 import { Variants } from './variants.model';
-import { Voucher } from "../models/voucher"
+import { Voucher } from "./voucher"
 import { OrderTypes } from '../enums/OrderTypeEnum';
 @Injectable({
   providedIn: 'root',

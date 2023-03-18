@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Product } from 'src/app/filters/product.model';
-import { Selections } from 'src/app/filters/selections.model';
-import { Variants } from 'src/app/filters/variants.model';
+import { Product } from '@models/product.model';
+import { Selections } from '@models/selections.model';
+import { Variants } from '@models/variants.model';
 import { Category } from 'src/app/models/category.model';
 import { ApiService } from '@shared/api.service';
 import { BusinessId, imagesPathUrl } from '@shared/config.service';

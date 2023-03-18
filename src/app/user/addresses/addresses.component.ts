@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { address } from 'src/app/mock-api/address';
 import { AuthService } from '../auth/auth.service';
 import { AddressesService } from './addresses.service';
 

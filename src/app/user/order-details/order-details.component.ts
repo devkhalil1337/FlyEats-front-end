@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { orderDeatils } from 'src/app/mock-api/order-details';
 import { OrderDetailsService } from './order-details.service';
 
 @Component({

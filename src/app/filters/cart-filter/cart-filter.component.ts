@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, OnChanges,SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { CartService } from '@shared/cart.service';
-import { CartItems } from '../cart-items.model';
+import { CartItems } from '../../models/cart-items.model';
+import { Product } from 'src/app/models/product.model';
 
-import { Product } from '../product.model';
 
 @Component({
   selector: 'app-cart-filter',

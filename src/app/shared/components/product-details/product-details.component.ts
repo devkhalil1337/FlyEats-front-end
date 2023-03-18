@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CartService } from '@shared/cart.service';
-import { Product } from 'src/app/filters/product.model';
-import { SelectionChoices, Selections } from 'src/app/filters/selections.model';
-import { Variants } from 'src/app/filters/variants.model';
+import { Product } from '@models/product.model';
+import { SelectionChoices, Selections } from '@models/selections.model';
+import { Variants } from '@models/variants.model';
 import { ProductsService } from 'src/app/modules/products/products.service';
 
 @Component({

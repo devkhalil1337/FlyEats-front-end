@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
-import { Product } from 'src/app/filters/product.model';
+import { Product } from '@models/product.model';
 
 @Pipe({
   name: 'filterMenu'

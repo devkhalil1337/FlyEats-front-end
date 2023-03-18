@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { orders } from 'src/app/mock-api/orders';
 import { OrdersService } from './orders.service';
 import { GridOptions } from 'ag-grid-community';
 import * as moment from 'moment';
