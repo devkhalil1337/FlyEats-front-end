@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,AfterViewInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
@@ -18,7 +18,7 @@ import { CheckoutService } from './checkout.service';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit,AfterViewInit {
   orderDetails: any;
   CartInputs: CartItems;
   addressList: Address[]
@@ -26,25 +26,40 @@ export class CheckoutComponent implements OnInit {
   isLoading:boolean = false;
   selectedMethod: string = PaymentMethods.COD;
   OrderTypes:any;
+  fieldVisible = false;
+  voucherCode: string;
   @ViewChild('stripeComponent') stripeComponent: StripeComponent;
   constructor(private cartService: CartService, private checkoutService: CheckoutService,
     private addressesService: AddressesService,
     private authService: AuthService,
-    private localStorageService: LocalStorageService,
-    private stripe:StripeComponent) {
+    private localStorageService: LocalStorageService) {
     this.CartInputs = new CartItems();
     this.addressList = new Array<Address>()
     this.OrderTypes = OrderTypes;
   }
 
   ngOnInit(): void {
-    this.addressesService.getActiveAddressesByUserId(this.authService.userId).subscribe(response => {
-      this.addressList = response;
-    });
+ 
+  }
+
+  ngAfterViewInit(){
+    this.subscribeAddress();
   }
 
   onAddressSelection(index: number) {
     this.selectedAddress = index;
+  }
+
+  subscribeAddress(){
+    console.log(this.CartInputs)
+    if(this.CartInputs.orderType == OrderTypes.Delivery){
+      this.addressesService.getActiveAddressesByUserId(this.authService.userId).subscribe((response:Address[]) => {
+        this.addressList = response;
+        if(response && response.length > 0){ 
+          this.selectedAddress = response[0].addressId //select first address by default
+        }
+      });
+    }
   }
 
 
@@ -76,8 +91,6 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  fieldVisible = false;
-  voucherCode: string;
   showField() {
     this.fieldVisible = !this.fieldVisible;
   }
@@ -96,7 +109,6 @@ export class CheckoutComponent implements OnInit {
 
   onloadPage($event?: any) {
     this.CartInputs = $event;
-    console.log({ $event })
     this.cartService.setCartItems($event);
   }
 

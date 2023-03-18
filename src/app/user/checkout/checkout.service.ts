@@ -11,11 +11,11 @@ export class CheckoutService {
 
 
   onSendOrder(Order:any){
-    return this.apiService.request("post",`Order/AddNewOrder`,Order);
+    return this.apiService.request("post",`Order/AddNewOrder`,Order).toPromise();
   }
   
   onSendOrderDetails(Order:OrderDetails[]){
-    return this.apiService.request("post",`OrderDetails/AddNewOrderDetails`,Order);
+    return this.apiService.request("post",`OrderDetails/AddNewOrderDetails`,Order).toPromise();
   }
   
   

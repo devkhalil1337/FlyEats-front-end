@@ -9,6 +9,7 @@ import { OrderVariants } from 'src/app/models/orderVariants.model';
 import { AuthService } from 'src/app/user/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { OrderStatus } from '@enums/OrderStatusEnum';
+import { OrderTypes } from '@enums/OrderTypeEnum';
 
 @Injectable({
   providedIn: 'root',
@@ -155,7 +156,8 @@ export class CartService {
     order.comments = "Special Request No onions";
     order.deliveryTime = 60;
     order.completedBy = '';
-    order.deliveryCharges = this.cartItems.deliveryCharges || 0;
+    if(this.cartItems.orderType == OrderTypes.Delivery)
+      order.deliveryCharges = this.cartItems.deliveryCharges || 0;
     order.cardPaymentId = paymentResponse?.id ?? '';
     order.customerDeliveryId = selectedAddress || 0;
     order.createdDate = this.getDateTime();

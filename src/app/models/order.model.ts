@@ -26,4 +26,9 @@ export class Order {
     createdDate?: string;
     modifiedDate?: Date;
     isDeleted: boolean;
+    constructor(){
+        this.vatPercentage = 0;
+        this.customerId = 0;
+        this.deliveryCharges = 0;
     }
+}
