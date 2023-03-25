@@ -261,21 +261,24 @@
                   </div>
                   <div class="widget-delivery clearfix">
                      <form>
-                        <div class="col-xs-4 col-sm-12 col-md-4 col-lg-4 b-t-0">
+                        <div class="col-xs-4 col-sm-12 col-md-4 col-lg-4 b-t-0"
+                           *ngIf="businessSettings.isDeliveryOrderActive">
                            <label class="custom-control custom-radio">
                               <input id="radio4" name="radio" type="radio" class="custom-control-input"
                                  [(ngModel)]="CartInputs.orderType" value="Delivery"
                                  (change)="onOrderTypeChange($event)"> <span class="custom-control-indicator"></span>
                               <span class="custom-control-description">Delivery</span> </label>
                         </div>
-                        <div class="col-xs-4 col-sm-12 col-md-4 col-lg-4 b-t-0">
+                        <div class="col-xs-4 col-sm-12 col-md-4 col-lg-4 b-t-0"
+                           *ngIf="businessSettings.isCollectionOrderActive">
                            <label class="custom-control custom-radio">
                               <input id="radio3" name="radio" type="radio" class="custom-control-input"
                                  [(ngModel)]="CartInputs.orderType" value="PickUp" (change)="onOrderTypeChange($event)">
                               <span class="custom-control-indicator"></span> <span
                                  class="custom-control-description">Takeaway</span> </label>
                         </div>
-                        <div class="col-xs-4 col-sm-12 col-md-4 col-lg-4 b-t-0">
+                        <div class="col-xs-4 col-sm-12 col-md-4 col-lg-4 b-t-0"
+                           *ngIf="businessSettings.isTableOrderActive">
                            <label class="custom-control custom-radio">
                               <input id="radio3" name="radio" type="radio" class="custom-control-input"
                                  [(ngModel)]="CartInputs.orderType" value="Table" (change)="onOrderTypeChange($event)"

@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductsService } from './products.service';
 import { forkJoin } from 'rxjs';
-import { Product,CartItems,Category } from '@models';
+import { Product,CartItems,Category, Settings } from '@models';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { ConfigService,ModalService,LocalStorageService,CartService,BusinessTimeService } from '@shared';
+// import { Settings } from '@angular/fire/compat/firestore';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -14,7 +15,7 @@ export class ProductsComponent implements OnInit {
   @ViewChild('productModal') productModal: ElementRef
   
   businessInfo: any;
-  businessSettings: any;
+  businessSettings: Settings;
   CartInputs: CartItems;
   selectedProduct: Product;
   selections: any;

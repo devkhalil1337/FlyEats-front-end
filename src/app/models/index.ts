@@ -11,3 +11,4 @@ export * from "./selections.model";
 export * from "./user.model";
 export * from "./variants.model";
 export * from "./voucher.model";
+export * from "./Settings.model";

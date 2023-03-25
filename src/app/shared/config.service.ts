@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Settings } from '@models';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
 import { BusinessDay } from '../models/businessDay.model';
@@ -21,8 +22,11 @@ export class ConfigService {
     return businessDetails;
   }
 
-  get BusinessSettings(){
-    return JSON.parse(localStorage.getItem("businessSettings") || "{}");
+  get BusinessSettings():Settings{
+    let details = JSON.parse(localStorage.getItem("businessSettings") || "{}")
+    if(!details || Object.entries(details).length == 0)
+       details =  new Settings();
+    return details;
   }
   
   get BusinessHours(){
