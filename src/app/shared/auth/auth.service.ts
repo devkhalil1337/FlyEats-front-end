@@ -135,11 +135,15 @@ export class AuthService {
       });
   }
   
-  LoginUser(user: User) {
+  LoginUser(user: User,returnUrl?:string) {
     return this.apiService.request("post", `User/LoginUser`, user).subscribe(
       (response: User) => {
         this.ngZone.run(() => {
-          this.router.navigate(['products']);
+          if(returnUrl){
+            this.router.navigateByUrl(returnUrl);
+          }else{
+            this.router.navigate(['products']);
+          }
         });
         this.SetUserData(response);
       },

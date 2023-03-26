@@ -13,6 +13,7 @@ export class AddEditAddressComponent implements OnInit {
 
   selectedAddressId:string;
   selectedAddress:Address;
+  returnUrl:string;
   constructor(private addressService:AddressService, private activatedRoute: ActivatedRoute,
     private router: Router,
     private authService:AuthService) { 
@@ -26,6 +27,7 @@ export class AddEditAddressComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
   }
 
   
@@ -40,13 +42,20 @@ export class AddEditAddressComponent implements OnInit {
   onAddressSave(){
     if(this.selectedAddressId){
       this.addressService.EditAddress(this.selectedAddress).subscribe((response:any) => {
-        console.log(response);
-        this.router.navigate(['/user/addresses'])
+        if(this.returnUrl){
+          this.router.navigate([this.returnUrl])
+        }else{
+          this.router.navigate(['/user/addresses'])
+        }
       })
     }else{
       this.addressService.AddAddress(this.selectedAddress).subscribe((response:any) => {
-        console.log(response);
-        this.router.navigate(['/user/addresses'])
+        if(this.returnUrl){
+          this.router.navigate([this.returnUrl])
+        }else{
+          this.router.navigate(['/user/addresses'])
+        }
+
       })
     }
   }

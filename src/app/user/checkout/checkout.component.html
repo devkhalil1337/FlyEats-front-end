@@ -30,8 +30,9 @@
                                 <div class="card-title">
                                     <div>
                                         <span>Delivery</span>
-                                        <span class="pull-right"><a routerLink="/user/addresses"><i
-                                                    class="fa fa-plus"></i> Add address</a></span>
+                                        <span class="pull-right"><a [routerLink]="['/user/address/add']"
+                                                [queryParams]="{returnUrl:'checkout'}"><i class="fa fa-plus"></i> Add
+                                                address</a></span>
                                     </div>
                                 </div>
                                 <div class="card-body p-1"
