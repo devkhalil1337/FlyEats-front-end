@@ -137,7 +137,11 @@ export class AuthService {
   
   LoginUser(user: User,returnUrl?:string) {
     return this.apiService.request("post", `User/LoginUser`, user).subscribe(
-      (response: User) => {
+      (response: any) => {
+        if(response && response.message){
+          window.alert(response?.message);
+          return;
+        }
         this.ngZone.run(() => {
           if(returnUrl){
             this.router.navigateByUrl(returnUrl);
@@ -149,7 +153,7 @@ export class AuthService {
       },
       (error: any) => {
         console.log(error);
-        window.alert("An error occurred while logging in. Please try again later.");
+        window.alert(error);
       }
     );
   }
