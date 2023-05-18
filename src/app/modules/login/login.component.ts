@@ -26,6 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.LoginUser(this.user,this.returnUrl)
+    this.authService.LoginUser(this.user,this.returnUrl);
   }
 }

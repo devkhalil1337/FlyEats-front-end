@@ -139,7 +139,8 @@ export class AuthService {
     return this.apiService.request("post", `User/LoginUser`, user).subscribe(
       (response: any) => {
         if(response && response.message){
-          window.alert(response?.message);
+          this.error = response.message
+          window.alert(response.message);
           return;
         }
         this.ngZone.run(() => {
