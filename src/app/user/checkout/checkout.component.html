@@ -96,8 +96,8 @@
                                             </ul>
                                         </td>
                                         <td>{{order.quantity}}</td>
-                                        <td>${{order.deliveryPrice}}</td>
-                                        <td>${{order.quantity*order.deliveryPrice}}</td>
+                                        <td>{{order.deliveryPrice | mycurrency}}</td>
+                                        <td>{{order.quantity*order.deliveryPrice | mycurrency}}</td>
                                     </tr>
                                 </tbody>
                             </table>
