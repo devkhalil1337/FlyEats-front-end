@@ -21,12 +21,16 @@
             <div class="row">
                <div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 profile-img">
                   <div class="image-wrap">
-                     <figure><img [src]="businessInfo.businessLogo" alt="Profile Image"></figure>
+                     <figure>
+                        <img [src]="businessInfo.businessLogo" alt="Profile Image" *ngIf="businessInfo?.businessLogo">
+                        <img src="assets/images/No_picture_available.png" alt="Profile Image"
+                           *ngIf="!businessInfo?.businessLogo">
+                     </figure>
                   </div>
                </div>
                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 profile-desc">
                   <div class="pull-left right-text white-txt">
-                     <h6><a routerLink="/">{{businessInfo.businessName}}</a></h6>
+                     <h6><a routerLink="/">{{businessInfo.businessName}} {{businessInfo.businessLogo}}</a></h6>
                      <a class="btn btn-small btn-green" *ngIf="isBusinessOn">Open</a>
                      <a class="btn btn-small btn-danger" *ngIf="!isBusinessOn">Close</a>
                      <p>Burgers, American, Sandwiches, Fast Food, BBQ</p>
