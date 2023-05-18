@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   password:string;
   user:User;
   returnUrl: string;
+  errorMessage:string;
   get error(){
     return this.authService.error;
   }
@@ -26,6 +27,13 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.LoginUser(this.user,this.returnUrl);
+    this.errorMessage = "";
+    this.authService.LoginUser(this.user,this.returnUrl).then((response:any) => {
+      if(response.message){
+        this.errorMessage = response.message
+      }
+    },(error) => {
+      this.errorMessage = error;
+    });
   }
 }

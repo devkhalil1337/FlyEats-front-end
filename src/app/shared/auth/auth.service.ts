@@ -136,27 +136,30 @@ export class AuthService {
   }
   
   LoginUser(user: User,returnUrl?:string) {
-    return this.apiService.request("post", `User/LoginUser`, user).subscribe(
-      (response: any) => {
-        if(response && response.message){
-          this.error = response.message
-          window.alert(response.message);
-          return;
-        }
-        this.ngZone.run(() => {
-          if(returnUrl){
-            this.router.navigateByUrl(returnUrl);
-          }else{
-            this.router.navigate(['products']);
+    var promise = new Promise((resolve,reject) => {
+      this.apiService.request("post", `User/LoginUser`, user).subscribe(
+        (response: any) => {
+          if(response && response.message){
+            this.error = response.message
+            return;
           }
-        });
-        this.SetUserData(response);
-      },
-      (error: any) => {
-        console.log(error);
-        window.alert(error);
-      }
-    );
+          this.ngZone.run(() => {
+            if(returnUrl){
+              this.router.navigateByUrl(returnUrl);
+            }else{
+              this.router.navigate(['products']);
+            }
+          });
+          this.SetUserData(response);
+          resolve(response);
+        },
+        (error: any) => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+    return promise;
   }
   
   

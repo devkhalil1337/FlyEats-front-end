@@ -22,7 +22,7 @@
                                  placeholder="password" [(ngModel)]="user.password" required>
                            </div>
                         </div>
-                        <span class="error text-danger">{{errorMessage}}</span>
+                        <span class="error text-danger" *ngIf="errorMessage">{{errorMessage}}</span>
                         <div class="row">
                            <div class="form-group col-sm-12 login-btn gap-2">
                               <div class="btn-group" data-toggle="buttons">
