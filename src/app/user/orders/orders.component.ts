@@ -69,6 +69,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
         }
     }
   }, {
+    headerName: 'Payment Method',
+    field: 'paymentMethod'
+  }, {
     headerName: 'Total Price',
     field: 'totalAmount',
     valueGetter:(params:any) => {
