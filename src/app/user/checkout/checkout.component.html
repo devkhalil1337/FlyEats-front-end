@@ -23,7 +23,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="widget-body">
-                <form method="post" action="#">
+                <form [formGroup]="checkoutForm" (ngSubmit)="onCheckoutClick()">
                     <div class="row">
                         <div class="col-sm-6 margin-b-30">
                             <div class="card p-1" *ngIf="CartInputs.orderType == 'Delivery'">
@@ -34,6 +34,12 @@
                                                 [queryParams]="{returnUrl:'checkout'}"><i class="fa fa-plus"></i> Add
                                                 address</a></span>
                                     </div>
+                                    <span class="error text-danger"
+                                        *ngIf="addressList.length > 0 && !checkoutForm.get('isAddressSelected')?.value">
+                                        Select a delivery address*</span>
+                                    <span class="error text-danger" *ngIf="addressList.length == 0">Add a delivery
+                                        address*</span>
+
                                 </div>
                                 <div class="card-body p-1"
                                     [ngStyle]="{'border': (selectedAddress === address.addressId) ? '1px solid #f30' : ''}"
@@ -158,7 +164,8 @@
                                         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
                                             <label class="custom-control custom-radio">
                                                 <input id="radio4" type="radio" class="custom-control-input"
-                                                    [(ngModel)]="selectedMethod" value="CARD" name="CARD"> <span
+                                                    [(ngModel)]="selectedMethod" value="CARD" name="CARD"
+                                                    (ngModelChange)="onModelChange()"> <span
                                                     class="custom-control-indicator"></span> <span
                                                     class="custom-control-description">CARD</span> </label>
                                         </div>
@@ -166,8 +173,8 @@
                                             <label class="custom-control custom-radio">
                                                 <input id="radio3" name="radio" type="radio"
                                                     class="custom-control-input" [(ngModel)]="selectedMethod"
-                                                    value="COD" name="COD" type="radio"> <span
-                                                    class="custom-control-indicator"></span> <span
+                                                    (ngModelChange)="onModelChange()" value="COD" name="COD"
+                                                    type="radio"> <span class="custom-control-indicator"></span> <span
                                                     class="custom-control-description">COD</span> </label>
                                         </div>
                                     </form>
@@ -178,12 +185,12 @@
                                     <app-stripe #stripeComponent></app-stripe>
                                 </div>
 
-                                <p class="text-xs-center"> <a (click)="onCheckoutClick()"
-                                        class="btn btn-outline-success btn-block">Order Now
+                                <p class="text-xs-center"> <button class="btn btn-outline-success btn-block"
+                                        [disabled]="checkoutForm.invalid" type="submit">Order Now
                                         <div class="spinner-border text-primary" role="status" *ngIf="isLoading">
                                             <span class="sr-only">Loading...</span>
                                         </div>
-                                    </a> </p>
+                                    </button> </p>
                             </div>
                         </div>
                     </div>

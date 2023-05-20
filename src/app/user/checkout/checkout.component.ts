@@ -7,6 +7,7 @@ import { CartService,LocalStorageService,AuthService } from '@shared';
 import { StripeComponent } from 'src/app/shared/stripe/stripe.component';
 import { AddressesService } from '../addresses/addresses.service';
 import { CheckoutService } from './checkout.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -14,6 +15,8 @@ import { CheckoutService } from './checkout.service';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit,AfterViewInit {
+  @ViewChild('stripeComponent') stripeComponent: StripeComponent;
+ 
   orderDetails: any;
   CartInputs: CartItems;
   addressList: Address[]
@@ -23,18 +26,22 @@ export class CheckoutComponent implements OnInit,AfterViewInit {
   OrderTypes:any;
   fieldVisible = false;
   voucherCode: string;
-  @ViewChild('stripeComponent') stripeComponent: StripeComponent;
+  checkoutForm: FormGroup;
+ 
   constructor(private cartService: CartService, private checkoutService: CheckoutService,
     private addressesService: AddressesService,
     private authService: AuthService,
-    private localStorageService: LocalStorageService) {
+    private localStorageService: LocalStorageService,
+    private formBuilder: FormBuilder) {
     this.CartInputs = new CartItems();
     this.addressList = new Array<Address>()
     this.OrderTypes = OrderTypes;
   }
 
   ngOnInit(): void {
- 
+    this.checkoutForm = this.formBuilder.group({
+      isAddressSelected: ['', Validators.required]
+    });
   }
 
   ngAfterViewInit(){
@@ -43,6 +50,7 @@ export class CheckoutComponent implements OnInit,AfterViewInit {
 
   onAddressSelection(index: number) {
     this.selectedAddress = index;
+    this.checkoutForm.controls['isAddressSelected'].setValue(true); 
   }
 
   subscribeAddress(){
@@ -51,6 +59,9 @@ export class CheckoutComponent implements OnInit,AfterViewInit {
         this.addressList = response;
         if(response && response.length > 0){ 
           this.selectedAddress = response[0].addressId //select first address by default
+          this.checkoutForm.controls['isAddressSelected'].setValue(true);         
+        }else{
+          this.checkoutForm.controls['isAddressSelected'].setValue(null);
         }
       });
     }
@@ -101,9 +112,15 @@ export class CheckoutComponent implements OnInit,AfterViewInit {
     return this.localStorageService.getBusinessDetails();
   }
 
+
+  onModelChange(){}
+
   onloadPage($event?: any) {
     this.CartInputs = $event;
     this.cartService.setCartItems($event);
+    if(this.CartInputs.orderType !== OrderTypes.Delivery){
+      this.checkoutForm.controls['isAddressSelected'].setValidators(null);
+    }
   }
 
 }
