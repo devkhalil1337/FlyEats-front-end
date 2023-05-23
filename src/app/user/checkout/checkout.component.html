@@ -186,7 +186,8 @@
                                 </div>
 
                                 <p class="text-xs-center"> <button class="btn btn-outline-success btn-block"
-                                        [disabled]="checkoutForm.invalid" type="submit">Order Now
+                                        [disabled]="checkoutForm.invalid || checkoutPageValidation" type="submit">Order
+                                        Now
                                         <div class="spinner-border text-primary" role="status" *ngIf="isLoading">
                                             <span class="sr-only">Loading...</span>
                                         </div>

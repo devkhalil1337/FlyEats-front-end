@@ -9,6 +9,9 @@ import { BusinessDay } from '../models/businessDay.model';
 })
 export class ConfigService {
 
+
+  isBusinessOn:Boolean = false;
+
   constructor() { }
 
 
@@ -37,6 +40,15 @@ export class ConfigService {
     return businessHours
   }
 
+  get BusinessId():number{
+    return environment.BusinessId;
+  }
+
+  get IsBusinessOn(): boolean{
+    return !!this.isBusinessOn
+  }
+
+
   getNgbModalOptions(size: 'sm' | 'md' | 'lg' | 'llg' | 'xl' | 'xxl' = 'md', easyClose: boolean = false): NgbModalOptions {
     const config: NgbModalOptions = {
       backdrop: easyClose || 'static',
@@ -49,9 +61,13 @@ export class ConfigService {
     return config;
   }
 
-  get BusinessId():number{
-     return environment.BusinessId;
+  
+  setIsBusinessOn(isBusinessOn:boolean){
+    this.isBusinessOn = isBusinessOn
   }
+
+  
+
 }
 
 

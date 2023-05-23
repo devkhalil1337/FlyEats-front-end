@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
-import { LocalStorageService } from '@shared';
+import { ConfigService, LocalStorageService } from '@shared';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { LocalStorageService } from '@shared';
 export class AppComponent {
   title = 'Foodpicky';
 
-  constructor(private appService:AppService, private localStorageService:LocalStorageService) {
+  constructor(private appService:AppService, private localStorageService:LocalStorageService, private configService:ConfigService) {
 
     this.appService.getBussiness().subscribe(response => {
       this.localStorageService.setBusinessDetails(response);
@@ -18,11 +18,6 @@ export class AppComponent {
     this.appService.getBussinessSettings().subscribe(response => {
       this.localStorageService.setBusinessSettings(response);
     })
-
-    this.appService.getBussinessHours().subscribe(response => {
-      this.localStorageService.setBusinessHours(response);
-    })
-
    }
 
 

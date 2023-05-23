@@ -4,6 +4,8 @@ import { forkJoin } from 'rxjs';
 import { Product,CartItems,Category, Settings } from '@models';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { ConfigService,ModalService,LocalStorageService,CartService,BusinessTimeService } from '@shared';
+import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 // import { Settings } from '@angular/fire/compat/firestore';
 @Component({
   selector: 'app-products',
@@ -25,6 +27,13 @@ export class ProductsComponent implements OnInit {
   isLoading:boolean = false;
   isBusinessOn:boolean = false;
 
+  
+ get checkoutPageValidation(){
+  if(this.CartInputs?.products?.length === 0)
+      return true;
+    return false;
+  }
+
   constructor(
     private modalService: ModalService,
 
@@ -32,16 +41,16 @@ export class ProductsComponent implements OnInit {
     private localStorageServcice: LocalStorageService,
     private productService: ProductsService,
     private configService: ConfigService,
-    private businessTimeService: BusinessTimeService
+    private businessTimeService: BusinessTimeService,
+    private router : Router
   ) {
     this.businessInfo = this.configService.BusinessDetails;
     this.businessSettings = this.configService.BusinessSettings;
     this.getUnitSubscribe();
-    this.businessTimeService.checkIsOpen();
+    this.checkIsBusinesson();
   }
 
   ngOnInit(): void {
-    this.businessTimeService.getIsOpen().subscribe(isopen => this.isBusinessOn = isopen);
   }
 
   ngOnDestroy() {
@@ -129,8 +138,32 @@ export class ProductsComponent implements OnInit {
   onTableNumber($event:any){
     this.CartInputs.tableNumber = $event;
     this.onModalDismiss();
+  }  
+
+
+  async checkIsBusinesson():Promise<void> {
+    try {
+      await this.businessTimeService.checkIsOpen();
+      const res = await this.businessTimeService.getIsOpen().pipe(first()).toPromise();
+      console.log({res})
+      this.isBusinessOn = res;
+    } catch (error) {
+      this.isBusinessOn = false;
+      console.log(error);
+    }
   }
 
- 
+
+  async checkoutSubmit(){
+    if(this.checkoutPageValidation)
+      return;
+    await this.checkIsBusinesson()
+    if(!this.isBusinessOn){
+      alert("Restaurant is closed")
+      return;
+    }
+    this.router.navigate(['/checkout'])
+  }
   
+
 }

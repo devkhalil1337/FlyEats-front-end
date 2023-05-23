@@ -23,21 +23,24 @@ export class BusinessTimeService {
    }
 
   getIsOpen(): Observable<boolean> {
-    return this.isOpenSubject.asObservable();
+    return this.isOpenSubject.asObservable()
   }
 
-  checkIsOpen(): void {
+  async checkIsOpen(): Promise<void> {
     // Call the API to check if the business is open
     // and set the value of isOpen accordingly
-    this.apiService.request("get","BusinessHours/GetBusinessHours").pipe(
+    await  this.apiService.request("get","BusinessHours/GetBusinessHours").pipe(
       tap((businessResponse:BusinessDay[]) =>{
         this.localStorageService.setBusinessHours(businessResponse);
         let foundDay = businessResponse.find((el:BusinessDay) => el.weekDayName == this.weekDays[this.currentDay])
         if(foundDay){
-          this.isOpenSubject.next(this.isBusinessOpen(foundDay))
+          const isBusinessOn = this.isBusinessOpen(foundDay);
+          this.isOpen = isBusinessOn;
+          this.isOpenSubject.next(isBusinessOn)
+
         }
       })
-    ).subscribe();
+    ).toPromise();
   }
 
   isBusinessOpen(day:BusinessDay):boolean {
@@ -59,4 +62,6 @@ export class BusinessTimeService {
     });
     
   }
+  
+
 }

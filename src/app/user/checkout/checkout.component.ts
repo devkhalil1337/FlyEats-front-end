@@ -3,11 +3,12 @@ import { forkJoin } from 'rxjs';
 import { OrderTypes } from 'src/app/enums/OrderTypeEnum';
 import { PaymentMethods } from 'src/app/enums/PaymentMethodsEnum';
 import { Address,CartItems } from '@models';
-import { CartService,LocalStorageService,AuthService } from '@shared';
+import { CartService,LocalStorageService,AuthService, BusinessTimeService } from '@shared';
 import { StripeComponent } from 'src/app/shared/stripe/stripe.component';
 import { AddressesService } from '../addresses/addresses.service';
 import { CheckoutService } from './checkout.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-checkout',
@@ -27,12 +28,21 @@ export class CheckoutComponent implements OnInit,AfterViewInit {
   fieldVisible = false;
   voucherCode: string;
   checkoutForm: FormGroup;
- 
+  isBusinessOn:boolean = false;
+
+  get checkoutPageValidation(){
+    if(this.CartInputs?.products?.length === 0)
+      return true;
+
+    return false;
+  }
+  
   constructor(private cartService: CartService, private checkoutService: CheckoutService,
     private addressesService: AddressesService,
     private authService: AuthService,
     private localStorageService: LocalStorageService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private businessTimeService:BusinessTimeService) {
     this.CartInputs = new CartItems();
     this.addressList = new Array<Address>()
     this.OrderTypes = OrderTypes;
@@ -69,6 +79,15 @@ export class CheckoutComponent implements OnInit,AfterViewInit {
 
 
   async onCheckoutClick() {
+    
+    if(this.checkoutPageValidation)
+      return;
+    await this.checkIsBusinesson()
+    if(!this.isBusinessOn){
+      alert("Restaurant is closed")
+      return;
+    }
+
     this.isLoading = true;
     let paymentResponse = {};
     if(this.selectedMethod == PaymentMethods.CARD){
@@ -120,6 +139,17 @@ export class CheckoutComponent implements OnInit,AfterViewInit {
     this.cartService.setCartItems($event);
     if(this.CartInputs.orderType !== OrderTypes.Delivery){
       this.checkoutForm.controls['isAddressSelected'].setValidators(null);
+    }
+  }
+
+  async checkIsBusinesson():Promise<void> {
+    try {
+      await this.businessTimeService.checkIsOpen();
+      const res = await this.businessTimeService.getIsOpen().pipe(first()).toPromise();
+      this.isBusinessOn = res;
+    } catch (error) {
+      this.isBusinessOn = false;
+      console.log(error);
     }
   }
 

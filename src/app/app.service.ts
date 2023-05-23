@@ -29,8 +29,4 @@ export class AppService {
     }));
   }
 
-  getBussinessHours(): Observable<any> {
-    return this.http.request("get",`BusinessHours/GetBusinessHours`);
-  }
-
 }
