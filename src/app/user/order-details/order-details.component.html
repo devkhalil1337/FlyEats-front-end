@@ -22,29 +22,9 @@
   </div>
   <section class="contact-page inner-page">
     <div class="container">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Item</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-            <th scope="col">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orderDetails">
-            <td>{{order.productName}}
-              <ul>
-                <li *ngFor="let selection of order.productVariants"> - {{selection.choiceName}}</li>
-              </ul>
-            </td>
-            <td>{{order.productQuantity}}</td>
-            <td>{{order.productPrice | mycurrency}}</td>
-            <td>{{order.productQuantity*order.productPrice | mycurrency}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div>
+      <ag-grid-angular style="width: 100%;" [gridOptions]="gridOptions" class="ag-theme-material" [rowData]="rowData"
+        [columnDefs]="columnDefs"></ag-grid-angular>
+      <div class="pt-2">
         <p class="order-price"> <a class="btn theme-btn" style="width: 15%">VAT: {{order?.vatAmount | mycurrency}}</a>
         </p>
         <p class="order-price"> <a class="btn theme-btn" style="width: 15%">Delivery: {{order?.deliveryCharges |
