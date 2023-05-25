@@ -39,15 +39,18 @@
               </ul>
             </td>
             <td>{{order.productQuantity}}</td>
-            <td>${{order.productPrice}}</td>
-            <td>${{order.productQuantity*order.productPrice}}</td>
+            <td>{{order.productPrice | mycurrency}}</td>
+            <td>{{order.productQuantity*order.productPrice | mycurrency}}</td>
           </tr>
         </tbody>
       </table>
-      <div class="widget-body">
-        <p class="order-price"> <a class="btn theme-btn">VAT: ${{order?.vatAmount}}</a> </p>
-        <p class="order-price"> <a class="btn theme-btn">Delivery: ${{order?.deliveryCharges}}</a> </p>
-        <p class="order-price"> <a class="btn theme-btn">Total Price: ${{order?.totalAmount}}</a> </p>
+      <div>
+        <p class="order-price"> <a class="btn theme-btn" style="width: 15%">VAT: {{order?.vatAmount | mycurrency}}</a>
+        </p>
+        <p class="order-price"> <a class="btn theme-btn" style="width: 15%">Delivery: {{order?.deliveryCharges |
+            mycurrency}}</a> </p>
+        <p class="order-price"> <a class="btn theme-btn" style="width: 15%">Total Price: {{order?.totalAmount |
+            mycurrency}}</a> </p>
       </div>
 
     </div>
