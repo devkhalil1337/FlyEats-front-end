@@ -51,7 +51,9 @@
                                                 (change)="onAddressSelection(address.addressId)">
                                             <span class="custom-control-description text-color">
                                                 <strong>{{address.addressType}}</strong>
-                                                <p>{{address.addressLine1}}</p>
+                                                <p>{{address.addressLine1 + ' ' + address.addressLine2 + ' ' +
+                                                    address.city + ' ' + address.zipPostalCode + ' ' + address.country}}
+                                                </p>
                                             </span>
                                         </label>
                                     </div>
