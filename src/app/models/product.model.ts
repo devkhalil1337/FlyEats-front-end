@@ -32,10 +32,11 @@ export class Product {
   isItemsExists?: boolean;
   selectionChoices: Array<SelectionChoices>;
   productPrice: number;
-  productTotalAmount:number;
+  productTotalAmount:number = 0;
   constructor() {
     this.selectionChoices = new Array<SelectionChoices>();
     this.productVariants = new Array<Variants>();
+    this.productTotalAmount = 0;
   }
   
 }

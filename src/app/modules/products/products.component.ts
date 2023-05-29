@@ -88,9 +88,10 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = { ...product };
     if(product.productVariants.length > 0){
       this.selectedProduct.productVariants[0].checked = true;
-      // this.selectedProduct.productPrice = product.productVariants[0].variationPrice;
+      this.selectedProduct.productTotalAmount = product.productVariants[0].variationPrice;
     }else{
       this.selectedProduct.productPrice = product.deliveryPrice;
+      this.selectedProduct.productTotalAmount = product.deliveryPrice;
     }
 
     this.modelRef = this.modalService.openModal(this.productModal,'md',false,false,'modal-holder in');
